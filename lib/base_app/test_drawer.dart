@@ -1,6 +1,8 @@
+import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
-import 'master_page.dart';
+import 'important_information.dart';
+import 'master_drawer.dart';
 
 class DrawerLandingPage extends StatefulWidget {
   DrawerLandingPage({Key key}) : super(key: key);
@@ -20,20 +22,9 @@ class _DrawerLandingPageState extends State<DrawerLandingPage> {
         child: Master(),
       ),
       endDrawer: Drawer(
-        child: ListView(
-          children: [
-            Text('tille 1'),
-            Text('tille 2'),
-            Text('tille 3'),
-            Text('tille 4'),
-            Text('tille 5'),
-            Text('tille 6'),
-          ],
-        ),
+        child: ImportantInformationSlide(),
       ),
-      body: Center(
-        child: Text('body'),
-      ),
+      body: LandingPage(),
     );
   }
 }

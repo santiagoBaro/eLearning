@@ -20,8 +20,17 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
+            name: 'Mis Cursos',
+            icon: Icons.school,
+            children: ['Proyecto', '.NET', 'BD No-SQL', 'TCT'],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          GroupTile(
             name: 'Mensajes',
             icon: Icons.mail_outline,
+            children: ['profesor', 'grupo', 'companero', 'companero'],
           ),
           SizedBox(
             height: 10,
@@ -29,6 +38,7 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Inscripciones',
             icon: Icons.assignment,
+            children: ['curso', 'examen', 'evento', 'competencia'],
           ),
           SizedBox(
             height: 10,
@@ -36,6 +46,7 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Organizacion',
             icon: Icons.domain,
+            children: ['bedelias', 'Inco', 'decano', 'consejo estudiantil'],
           ),
           SizedBox(
             height: 10,
@@ -43,6 +54,12 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Consultas',
             icon: Icons.help_outline,
+            children: [
+              'plan de estudio',
+              'previaturas',
+              'calendario lectivo',
+              'escolaridad'
+            ],
           ),
 
           SizedBox(
@@ -59,8 +76,14 @@ class GroupTile extends StatelessWidget {
   final Widget redirect;
   final String name;
   final IconData icon;
-  const GroupTile({Key key, this.name = 'Group Name', this.redirect, this.icon})
-      : super(key: key);
+  final List<String> children;
+  const GroupTile({
+    Key key,
+    this.name = 'Group Name',
+    this.redirect,
+    this.icon,
+    this.children,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +110,7 @@ class GroupTile extends StatelessWidget {
                   name,
                   overflow: TextOverflow.clip,
                   style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
                 ),
@@ -102,16 +126,16 @@ class GroupTile extends StatelessWidget {
           color: Colors.black12,
         ),
         ElementTile(
-          text: 'profesor',
+          text: children[0],
         ),
         ElementTile(
-          text: 'estudiante',
+          text: children[1],
         ),
         ElementTile(
-          text: 'profesor',
+          text: children[2],
         ),
         ElementTile(
-          text: 'estudiante',
+          text: children[3],
         ),
       ],
     );
@@ -130,7 +154,7 @@ class ElementTile extends StatelessWidget {
         children: [
           SizedBox(
             width: 60,
-            height: 30,
+            height: 40,
           ),
           Text(
             text,
