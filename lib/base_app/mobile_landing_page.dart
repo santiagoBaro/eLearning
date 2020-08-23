@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'important_information.dart';
 import 'master_drawer.dart';
 
-class DrawerLandingPage extends StatefulWidget {
-  DrawerLandingPage({Key key}) : super(key: key);
+class MoblieLandingPage extends StatefulWidget {
+  MoblieLandingPage({Key key}) : super(key: key);
 
   @override
-  _DrawerLandingPageState createState() => _DrawerLandingPageState();
+  _MoblieLandingPageState createState() => _MoblieLandingPageState();
 }
 
-class _DrawerLandingPageState extends State<DrawerLandingPage> {
+class _MoblieLandingPageState extends State<MoblieLandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

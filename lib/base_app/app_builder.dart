@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:elearning/base_app/onboarding_page.dart';
 import 'package:elearning/base_app/tabbed_login_page.dart';
-import 'package:elearning/base_app/test_drawer.dart';
+import 'package:elearning/base_app/mobile_landing_page.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base_app_values.dart';
+import 'desktop_landing_page.dart';
 
 class BaseApp extends StatefulWidget {
   BaseApp({Key key}) : super(key: key);
@@ -85,8 +86,23 @@ class _BaseAppState extends State<BaseApp> {
           return TabbedLoginPage();
         }
         //* IF IT IS LOGGED IN
-        return DrawerLandingPage();
+        return LandingPageLayoutBuilder();
       },
     );
+  }
+}
+
+class LandingPageLayoutBuilder extends StatelessWidget {
+  const LandingPageLayoutBuilder({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      if (constraints.maxWidth >= 500.0) {
+        return DesktopLandingPage();
+      } else {
+        return MoblieLandingPage();
+      }
+    });
   }
 }

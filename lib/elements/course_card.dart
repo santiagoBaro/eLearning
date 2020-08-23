@@ -85,7 +85,7 @@ class CourseCard extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Icon(
                       Icons.trip_origin,
-                      color: Colors.grey[300],
+                      color: Colors.grey[200],
                       size: 40,
                     ),
                   ),
