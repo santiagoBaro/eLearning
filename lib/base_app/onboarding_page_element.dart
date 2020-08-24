@@ -129,7 +129,7 @@ class ActiveIndicator extends StatelessWidget {
           alignment: Alignment.center,
           child: Icon(
             Icons.trip_origin,
-            color: myAppTheme['ShadowColor'],
+            color: Colors.white12,
             size: 30,
           ),
         ),
@@ -158,7 +158,7 @@ class InactiveIndicator extends StatelessWidget {
       alignment: Alignment.center,
       child: Icon(
         Icons.trip_origin,
-        color: myAppTheme['ShadowColor'],
+        color: Colors.white12,
         size: 30,
       ),
     );

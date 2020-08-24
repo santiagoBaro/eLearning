@@ -22,7 +22,12 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Mis Cursos',
             icon: Icons.school,
-            children: ['Proyecto', '.NET', 'BD No-SQL', 'TCT'],
+            children: [
+              'Proyecto',
+              '.NET',
+              'BD No-SQL',
+              'TCT',
+            ],
           ),
           SizedBox(
             height: 10,
@@ -30,7 +35,12 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Mensajes',
             icon: Icons.mail_outline,
-            children: ['profesor', 'grupo', 'companero', 'companero'],
+            children: [
+              'profesor',
+              'grupo',
+              'companero',
+              'companero',
+            ],
           ),
           SizedBox(
             height: 10,
@@ -38,7 +48,12 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Inscripciones',
             icon: Icons.assignment,
-            children: ['curso', 'examen', 'evento', 'competencia'],
+            children: [
+              'curso',
+              'examen',
+              'evento',
+              'competencia',
+            ],
           ),
           SizedBox(
             height: 10,
@@ -46,7 +61,12 @@ class Master extends StatelessWidget {
           GroupTile(
             name: 'Organizacion',
             icon: Icons.domain,
-            children: ['bedelias', 'Inco', 'decano', 'consejo estudiantil'],
+            children: [
+              'bedelias',
+              'Inco',
+              'decano',
+              'consejo estudiantil',
+            ],
           ),
           SizedBox(
             height: 10,
@@ -65,6 +85,7 @@ class Master extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
+          //* FOOTER
           MsterFooter(),
         ],
       ),
@@ -91,6 +112,7 @@ class GroupTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
+          //* GROUP NAME
           onTap: () {},
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -102,7 +124,10 @@ class GroupTile extends StatelessWidget {
                   width: 30,
                   height: 30,
                 ),
-                Icon(icon),
+                Icon(
+                  icon,
+                  color: Colors.grey[600],
+                ),
                 SizedBox(
                   width: 10,
                 ),
@@ -112,6 +137,7 @@ class GroupTile extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
+                    color: Colors.grey[600],
                   ),
                 ),
               ],
@@ -125,6 +151,7 @@ class GroupTile extends StatelessWidget {
           ),
           color: Colors.black12,
         ),
+        //* LIST EL ELEMENTS
         ElementTile(
           text: children[0],
         ),
@@ -158,7 +185,10 @@ class ElementTile extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey,
+            ),
           ),
         ],
       ),
@@ -173,36 +203,49 @@ class MasterHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        //* BACKGROUND IMAGE
         Image.asset(
           'assets/images/background_mountains.jpg',
-          width: 310,
+          width: 300,
           height: 250,
           fit: BoxFit.fitWidth,
         ),
         Positioned(
           bottom: 60,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 0.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5.0,
+            ),
             child: Row(
               children: [
+                //* USER'S IMAGE
                 CircleAvatar(
                   radius: 50,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //* USER'S NAME
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Nombre Usuario',
-                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
                       ),
                     ),
+                    //* USER'S TAG
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         'carrera',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
                       ),
                     )
                   ],
@@ -211,6 +254,7 @@ class MasterHeader extends StatelessWidget {
             ),
           ),
         ),
+        //* HOME BUTTON
         Positioned(
           bottom: 8,
           left: 100,

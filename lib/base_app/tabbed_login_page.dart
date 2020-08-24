@@ -125,7 +125,7 @@ class LoginTab extends StatelessWidget {
               padding: tabbedLoginPagging,
               child: TextFormField(
                 controller: usernameController,
-                style: onboardingMessageTextStyle,
+                style: tabbedLoginInputTextStyle,
                 decoration: InputDecoration(
                   hintText: 'Username',
                   contentPadding: const EdgeInsets.all(15),
@@ -153,7 +153,7 @@ class LoginTab extends StatelessWidget {
                       child: TextFormField(
                         controller: passwordContrller,
                         obscureText: true,
-                        style: onboardingMessageTextStyle,
+                        style: tabbedLoginInputTextStyle,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.transparent,
@@ -174,7 +174,7 @@ class LoginTab extends StatelessWidget {
                   FlatButton(
                     child: Text(
                       'Login',
-                      style: onboardingMessageTextStyle,
+                      style: tabbedLoginInputTextStyle,
                     ),
                     shape: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -257,7 +257,7 @@ class SignUpTab extends StatelessWidget {
                 padding: tabbedLoginPagging,
                 child: TextFormField(
                   controller: usernameController,
-                  style: onboardingMessageTextStyle,
+                  style: tabbedLoginInputTextStyle,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.transparent,
@@ -318,7 +318,7 @@ class SignUpTab extends StatelessWidget {
                         child: TextFormField(
                           controller: phoneController,
                           obscureText: true,
-                          style: onboardingMessageTextStyle,
+                          style: tabbedLoginInputTextStyle,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
@@ -346,7 +346,7 @@ class SignUpTab extends StatelessWidget {
                 child: TextFormField(
                   controller: passwordContrller,
                   obscureText: true,
-                  style: onboardingMessageTextStyle,
+                  style: tabbedLoginInputTextStyle,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.transparent,
@@ -376,7 +376,7 @@ class SignUpTab extends StatelessWidget {
                         child: TextFormField(
                           controller: passwordCheckContrller,
                           obscureText: true,
-                          style: onboardingMessageTextStyle,
+                          style: tabbedLoginInputTextStyle,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent,
@@ -397,7 +397,7 @@ class SignUpTab extends StatelessWidget {
                     FlatButton(
                       child: Text(
                         'SignUp',
-                        style: onboardingMessageTextStyle,
+                        style: tabbedLoginInputTextStyle,
                       ),
                       shape: OutlineInputBorder(
                         borderSide: BorderSide(

@@ -40,7 +40,8 @@ TextStyle primaryMessageTextStyle = TextStyle(
 
 TextStyle onboardingTextStyle = TextStyle(
   fontFamily: 'NatureBeauty',
-  fontSize: 30,
+  height: 2.5,
+  fontSize: 40,
   shadows: [
     textShadow,
     textHilight,
@@ -74,6 +75,7 @@ TextStyle accentTextStyle = TextStyle(
 
 TextStyle titleTextStyle = TextStyle(
   fontSize: 30,
+  height: 2,
   color: myAppTheme['PrimaryTextColor'],
   shadows: [
     textShadow,
@@ -115,8 +117,9 @@ TextStyle postTitleTextStyle = TextStyle(
   ],
 );
 
-TextStyle onboardingMessageTextStyle = TextStyle(
+TextStyle tabbedLoginInputTextStyle = TextStyle(
   fontSize: 18,
+  height: 2,
   color: myAppTheme['SecondaryTextColor'],
   shadows: [
     textShadow,

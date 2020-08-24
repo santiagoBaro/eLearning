@@ -24,6 +24,7 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
         children: [
           Container(
             width: 300,
+            color: Colors.grey[200],
             child: Master(),
           ),
           Expanded(
@@ -31,6 +32,7 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
           ),
           Container(
             width: 300,
+            color: Colors.grey[200],
             child: ImportantInformationSlide(),
           ),
         ],

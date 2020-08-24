@@ -69,7 +69,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 right: 20,
                               ),
                               child: Text(
-                                "La Mejor Manera De Aprender",
+                                "La Mejor Manera De Aprender ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -111,7 +111,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 360.0),
                               child: Text(
-                                "No Importa El Lugar",
+                                "No Importa El Lugar ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -153,7 +153,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 300.0),
                               child: Text(
-                                "Sigue El Progreso",
+                                "Sigue El Progreso ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -165,7 +165,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             width: 120,
                             child: RaisedButton(
                               child: Text(
-                                "Sign Up",
+                                "Sign Up ",
                                 style: TextStyle(
                                   color: myAppTheme['HighlightTextColor'],
                                   fontSize: 20,
@@ -221,12 +221,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: <Widget>[
                     Text(
                       'Already have an account?',
-                      style: onboardingMessageTextStyle,
+                      style: tabbedLoginInputTextStyle,
                     ),
                     FlatButton(
                       child: Text(
-                        'Login',
-                        style: onboardingMessageTextStyle,
+                        'Login ',
+                        style: tabbedLoginInputTextStyle,
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(
@@ -276,7 +276,7 @@ class ActiveIndicator extends StatelessWidget {
           alignment: Alignment.center,
           child: Icon(
             Icons.trip_origin,
-            color: myAppTheme['ShadowColor'],
+            color: Colors.grey[300],
             size: 30,
           ),
         ),
@@ -305,7 +305,7 @@ class InactiveIndicator extends StatelessWidget {
       alignment: Alignment.center,
       child: Icon(
         Icons.trip_origin,
-        color: myAppTheme['ShadowColor'],
+        color: Colors.grey[300],
         size: 30,
       ),
     );
