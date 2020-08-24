@@ -286,7 +286,7 @@ class SignUpTab extends StatelessWidget {
                       child: CountryPickerDropdown(
                         underline: Container(
                           height: 2,
-                          color: Colors.red,
+                          color: Colors.blueGrey,
                         ),
                         onTap: () =>
                             FocusScope.of(context).requestFocus(FocusNode()),

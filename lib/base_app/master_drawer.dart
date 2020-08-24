@@ -208,13 +208,13 @@ class MasterHeader extends StatelessWidget {
           'assets/images/background_mountains.jpg',
           width: 300,
           height: 250,
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
         Positioned(
           bottom: 60,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 5.0,
+              horizontal: 8.0,
             ),
             child: Row(
               children: [
@@ -230,6 +230,8 @@ class MasterHeader extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Nombre Usuario',
+                        maxLines: 2,
+                        overflow: TextOverflow.fade,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
@@ -288,6 +290,7 @@ class MsterFooter extends StatelessWidget {
           color: myAppTheme['InfoColor'],
           onPressed: () {},
           child: Text(
+            //* HELP BUTTONF
             'Ayuda',
             style: TextStyle(
               color: Colors.white,
@@ -296,8 +299,34 @@ class MsterFooter extends StatelessWidget {
           ),
         ),
         FlatButton(
+          //* LOG-OUT BUTTON
           color: Colors.black12,
-          onPressed: () {},
+          onPressed: () {
+            //* LOG-OUT  BUTTON PRESSED POP-UP
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Column(
+                      children: [
+                        Text('Seguro que quieres cerrar sesion?'),
+                        Row(
+                          children: [
+                            FlatButton(
+                              onPressed: () {},
+                              child: Text('Cancelar'),
+                            ),
+                            FlatButton(
+                              onPressed: () {},
+                              child: Text('Si'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          },
           child: Text(
             'Cerrar Sesion',
             style: TextStyle(

@@ -98,7 +98,7 @@ class LandingPageLayoutBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      if (constraints.maxWidth >= 800.0) {
+      if (constraints.maxWidth >= 900.0) {
         //* IF THE SCREENS WIDTH IS LARGER THAN 600
         return DesktopLandingPage();
       } else {
