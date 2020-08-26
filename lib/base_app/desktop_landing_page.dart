@@ -17,13 +17,19 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SvgPicture.asset(
-              'assets/images/LogoSappio.svg',
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Image.asset(
+                'assets/images/LogoSappio.png',
+                height: 40,
+              ),
             ),
             Text('Sappio'),
           ],
-        ), //Text('Sappio'),
+        ),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

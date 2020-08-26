@@ -9,8 +9,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("assets/images/LogoSappio.png"), context);
+    precacheImage(
+        AssetImage("assets/images/background_mountains.jpg"), context);
+    precacheImage(AssetImage("assets/images/huevo.png"), context);
+    precacheImage(AssetImage("assets/images/mente.png"), context);
+    precacheImage(AssetImage("assets/images/transporte.png"), context);
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sappio',
       theme: ThemeData(
         fontFamily: 'AvenirNextLTPro',
         primarySwatch: Colors.blueGrey,

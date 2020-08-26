@@ -236,9 +236,9 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          'NombreUsuariosdasdadasdsad',
+                          'Nombre Apellido',
                           overflow: TextOverflow.fade,
-                          maxLines: 1,
+                          maxLines: 2,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -251,7 +251,7 @@ class MasterHeader extends StatelessWidget {
                             'carrera',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.white70,
                               fontSize: 18,
                             ),
                           ),

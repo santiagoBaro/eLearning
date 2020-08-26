@@ -1,4 +1,5 @@
 import 'package:elearning/elements/calendar_element.dart';
+import 'package:elearning/elements/pending_task_card.dart';
 import 'package:elearning/elements/pending_tasks_element.dart';
 import 'package:elearning/elements/schedule_element.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,13 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
           Schedule(),
           Calendar(),
           PendingTasks(),
+          PendingTaskCard(),
+          PendingTaskCard(),
+          PendingTaskCard(),
+          PendingTaskCard(),
+          PendingTaskCard(),
+          PendingTaskCard(),
+          PendingTaskCard(),
         ],
       ),
     );

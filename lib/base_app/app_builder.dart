@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/pages/desktop_landing_page.dart';
-import 'package:elearning/pages/mobile_landing_page.dart';
+import 'package:elearning/base_app/desktop_landing_page.dart';
+import 'package:elearning/base_app/mobile_landing_page.dart';
 import 'package:elearning/pages/onboarding_page.dart';
 import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';

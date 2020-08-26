@@ -43,6 +43,15 @@ class _CalendarState extends State<Calendar> {
         padding: const EdgeInsets.all(8.0),
         child: TableCalendar(
           calendarController: _calendarController,
+          calendarStyle: CalendarStyle(
+            selectedColor: Colors.blueGrey,
+            weekendStyle: TextStyle(
+              color: Colors.blueGrey[200],
+            ),
+            holidayStyle: TextStyle(
+              color: Colors.blueGrey[200],
+            ),
+          ),
         ),
       ),
     );
