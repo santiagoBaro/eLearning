@@ -1,11 +1,10 @@
+import 'package:elearning/base_app/base_app_values.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/elements/onboarding_page_element.dart';
+import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:gooey_carousel/gooey_carrousel.dart';
+import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:elearning/base_app/tabbed_login_page.dart';
-import 'tools/visual_assets.dart';
-
-import 'base_app_values.dart';
-import 'onboarding_page_element.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key}) : super(key: key);

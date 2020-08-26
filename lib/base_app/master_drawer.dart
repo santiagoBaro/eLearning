@@ -1,7 +1,7 @@
+import 'package:elearning/base_app/base_app_values.dart';
 import 'package:flutter/material.dart';
 
-import 'base_app_values.dart';
-import 'tools/theme.dart';
+import 'package:elearning/tools/visual_assets.dart';
 
 class Master extends StatelessWidget {
   const Master({Key key}) : super(key: key);
@@ -206,7 +206,7 @@ class MasterHeader extends StatelessWidget {
         //* BACKGROUND IMAGE
         Image.asset(
           'assets/images/background_mountains.jpg',
-          width: 300,
+          width: 305,
           height: 250,
           fit: BoxFit.cover,
         ),
@@ -214,45 +214,53 @@ class MasterHeader extends StatelessWidget {
           bottom: 60,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
+              horizontal: 10.0,
             ),
-            child: Row(
-              children: [
-                //* USER'S IMAGE
-                CircleAvatar(
-                  radius: 50,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //* USER'S NAME
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Nombre Usuario',
-                        maxLines: 2,
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
+            child: Container(
+              width: 280,
+              child: Row(
+                children: [
+                  //* USER'S IMAGE
+                  CircleAvatar(
+                    radius: 50,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    width: 175,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //* USER'S NAME
+                        Text(
+                          'NombreUsuariosdasdadasdsad',
+                          overflow: TextOverflow.fade,
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
                         ),
-                      ),
+                        //* USER'S TAG
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            'carrera',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                    //* USER'S TAG
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        'carrera',
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

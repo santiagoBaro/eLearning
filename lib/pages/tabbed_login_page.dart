@@ -1,11 +1,10 @@
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_picker_dropdown.dart';
 import 'package:country_pickers/utils/utils.dart';
-import 'package:elearning/base_app/mobile_landing_page.dart';
+import 'package:elearning/base_app/app_builder.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
-import 'app_builder.dart';
-import 'tools/visual_assets.dart';
 
 class TabbedLoginPage extends StatefulWidget {
   final int initialIndex;

@@ -1,8 +1,7 @@
-import 'tools/visual_assets.dart';
+import 'package:elearning/base_app/base_app_values.dart';
+import 'package:elearning/pages/tabbed_login_page.dart';
+import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
-
-import 'base_app_values.dart';
-import 'tabbed_login_page.dart';
 
 class OnboardingPageSlide extends StatelessWidget {
   final String imgUrl;

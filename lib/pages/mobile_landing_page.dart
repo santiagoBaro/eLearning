@@ -1,8 +1,8 @@
+import 'package:elearning/base_app/important_information.dart';
+import 'package:elearning/base_app/master_drawer.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
-
-import 'important_information.dart';
-import 'master_drawer.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MoblieLandingPage extends StatefulWidget {
   MoblieLandingPage({Key key}) : super(key: key);
@@ -16,7 +16,14 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('eLearning'),
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/LogoSappio.svg',
+            ),
+            Text('Sappio'),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: Master(),

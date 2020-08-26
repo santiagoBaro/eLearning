@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'tools/visual_assets.dart';
+import 'package:elearning/tools/visual_assets.dart';
 
 final BaseAppValues myAppValues = BaseAppValues(
   appName: 'eLearning',
