@@ -245,23 +245,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
     );
   }
-
-//* this method returns a list of OnboardingSlides using BaseApp info
-  List<Widget> _getOnboardingSlides() {
-    List<Widget> returnList = List<Widget>();
-    int leangth = myAppValues.onboarding.length;
-
-    for (var i = 0; i < leangth; i++) {
-      returnList.add(
-        OnboardingPageSlide(
-          currentIndex: i,
-          imgUrl: myAppValues.onboarding[i].imgUrl,
-          maxIndex: leangth,
-          message: myAppValues.onboarding[i].message,
-        ),
-      );
-    }
-  }
 }
 
 class ActiveIndicator extends StatelessWidget {

@@ -2,11 +2,14 @@ import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class PendingTaskCard extends StatelessWidget {
-  const PendingTaskCard({Key key}) : super(key: key);
+  const PendingTaskCard({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(maxWidth: 600),
       margin: EdgeInsets.symmetric(
         vertical: 10,
         horizontal: 30,

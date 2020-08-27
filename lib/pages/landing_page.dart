@@ -1,7 +1,6 @@
 import 'package:elearning/elements/course_carrousell.dart';
 import 'package:elearning/elements/notification_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class LandingPage extends StatefulWidget {
   LandingPage({Key key}) : super(key: key);
