@@ -15,13 +15,11 @@ class CourseInformationCard extends StatelessWidget {
         right: 20,
         top: 5,
       ),
+      constraints: BoxConstraints(
+        maxWidth: 900,
+      ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: eLearningMainGradient,
-          stops: stops2colors,
-          begin: Alignment.topLeft,
-          end: Alignment.center,
-        ),
+        color: Colors.blueGrey,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
@@ -66,7 +64,7 @@ class CourseInformationCard extends StatelessWidget {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(left: 20.0),
+              margin: EdgeInsets.only(left: 15.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -75,7 +73,12 @@ class CourseInformationCard extends StatelessWidget {
                 color: Colors.white24,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                  top: 5,
+                  left: 8,
+                  right: 8,
+                  bottom: 2,
+                ),
                 child: Text(
                   'Comentario',
                   style: informationTextStyle,
