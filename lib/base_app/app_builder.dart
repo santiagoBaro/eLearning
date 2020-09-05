@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base_app_values.dart';
+import 'tablet_landing_page.dart';
 
 class BaseApp extends StatefulWidget {
   BaseApp({Key key}) : super(key: key);
@@ -98,13 +99,15 @@ class LandingPageLayoutBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      if (constraints.maxWidth >= 900.0) {
-        //* IF THE SCREENS WIDTH IS LARGER THAN 600
+      if (constraints.maxWidth >= 1100.0) {
+        //* IF THE SCREENS WIDTH IS LARGER THAN 1100
         return DesktopLandingPage();
-      } else {
-        //* IF THE SCREENS WIDTH IS SMALLER THAN 600
-        return MoblieLandingPage();
+      } else if (constraints.maxWidth >= 650.0) {
+        //* IF THE SCREENS WIDTH IS LARGER THAN 650 AND SMALLER THAN 1000
+        return TabletLandingPage();
       }
+      //* IF THE SCREENS WIDTH IS SMALLER THAN 650
+      return MoblieLandingPage();
     });
   }
 }

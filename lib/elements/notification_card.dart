@@ -25,9 +25,9 @@ class _NotificationCardState extends State<NotificationCard> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            spreadRadius: 3,
+            blurRadius: 5,
+            offset: Offset(0, 1),
           ),
         ],
       ),

@@ -76,6 +76,7 @@ class CourseContentCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: nameTextStyle),
                     ),
+                    SizedBox(height: 10),
                     //* INDEXES
                     Row(
                       children: [
