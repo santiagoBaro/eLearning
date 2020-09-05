@@ -1,6 +1,7 @@
 import 'package:elearning/base_app/important_information.dart';
 import 'package:elearning/base_app/master_drawer.dart';
 import 'package:elearning/pages/course_page.dart';
+import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class DesktopLandingPage extends StatefulWidget {
@@ -11,6 +12,9 @@ class DesktopLandingPage extends StatefulWidget {
 }
 
 class _DesktopLandingPageState extends State<DesktopLandingPage> {
+  Widget _body = LandingPage();
+  // CoursePage(),
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +41,15 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
           Container(
             width: 300,
             color: Colors.grey[200],
-            child: Master(),
+            child: Master(
+              onElementSelected: (Widget val) => setState(() {
+                print('llego al change body');
+                _body = val;
+              }),
+            ),
           ),
           Expanded(
-            child: CoursePage(), //LandingPage(),
+            child: _body,
           ),
           Container(
             width: 300,

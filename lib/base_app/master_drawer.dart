@@ -1,10 +1,15 @@
 import 'package:elearning/base_app/base_app_values.dart';
+import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:elearning/tools/visual_assets.dart';
 
 class Master extends StatelessWidget {
-  const Master({Key key}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const Master({
+    Key key,
+    @required this.onElementSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +18,16 @@ class Master extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //* HEADER
-          MasterHeader(),
+          MasterHeader(
+            onElementSelected: (Widget val) => onElementSelected,
+          ),
           //* LIST OF ELEMENTS
           //* GROUP
           SizedBox(
             height: 10,
           ),
           GroupTile(
+            onElementSelected: (Widget val) => onElementSelected,
             name: 'Mis Cursos',
             icon: Icons.school,
             children: [
@@ -33,6 +41,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
+            onElementSelected: (Widget val) => onElementSelected,
             name: 'Mensajes',
             icon: Icons.mail_outline,
             children: [
@@ -46,6 +55,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
+            onElementSelected: (Widget val) => onElementSelected,
             name: 'Inscripciones',
             icon: Icons.assignment,
             children: [
@@ -59,6 +69,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
+            onElementSelected: (Widget val) => onElementSelected,
             name: 'Organizacion',
             icon: Icons.domain,
             children: [
@@ -72,6 +83,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
+            onElementSelected: (Widget val) => onElementSelected,
             name: 'Consultas',
             icon: Icons.help_outline,
             children: [
@@ -98,12 +110,14 @@ class GroupTile extends StatelessWidget {
   final String name;
   final IconData icon;
   final List<String> children;
+  final Function(Widget) onElementSelected;
   const GroupTile({
     Key key,
     this.name = 'Group Name',
     this.redirect,
     this.icon,
     this.children,
+    this.onElementSelected,
   }) : super(key: key);
 
   @override
@@ -113,7 +127,7 @@ class GroupTile extends StatelessWidget {
       children: [
         InkWell(
           //* GROUP NAME
-          onTap: () {},
+          onTap: () => onElementSelected(EmptyWidget(text: name)),
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 10,
@@ -153,15 +167,19 @@ class GroupTile extends StatelessWidget {
         ),
         //* LIST EL ELEMENTS
         ElementTile(
+          onElementSelected: (Widget val) => onElementSelected,
           text: children[0],
         ),
         ElementTile(
+          onElementSelected: (Widget val) => onElementSelected,
           text: children[1],
         ),
         ElementTile(
+          onElementSelected: (Widget val) => onElementSelected,
           text: children[2],
         ),
         ElementTile(
+          onElementSelected: (Widget val) => onElementSelected,
           text: children[3],
         ),
       ],
@@ -171,12 +189,17 @@ class GroupTile extends StatelessWidget {
 
 class ElementTile extends StatelessWidget {
   final String text;
-  const ElementTile({Key key, this.text = 'element  name'}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const ElementTile({
+    Key key,
+    this.text = 'element  name',
+    this.onElementSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => onElementSelected(EmptyWidget(text: text)),
       child: Row(
         children: [
           SizedBox(
@@ -197,7 +220,8 @@ class ElementTile extends StatelessWidget {
 }
 
 class MasterHeader extends StatelessWidget {
-  const MasterHeader({Key key}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const MasterHeader({Key key, this.onElementSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -270,7 +294,7 @@ class MasterHeader extends StatelessWidget {
           left: 100,
           child: FlatButton(
             color: Colors.blueGrey,
-            onPressed: () {},
+            onPressed: () => onElementSelected(LandingPage()),
             child: Text(
               'Home',
               style: TextStyle(

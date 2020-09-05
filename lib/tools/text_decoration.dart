@@ -119,7 +119,7 @@ TextStyle postTitleTextStyle = TextStyle(
 
 TextStyle tabbedLoginInputTextStyle = TextStyle(
   fontSize: 18,
-  height: 2,
+  height: 1.2,
   color: myAppTheme['SecondaryTextColor'],
   shadows: [
     textShadow,

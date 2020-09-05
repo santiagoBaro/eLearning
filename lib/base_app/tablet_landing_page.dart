@@ -1,11 +1,20 @@
 import 'package:elearning/pages/course_page.dart';
+import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import 'important_information.dart';
 import 'master_drawer.dart';
 
-class TabletLandingPage extends StatelessWidget {
-  const TabletLandingPage({Key key}) : super(key: key);
+class TabletLandingPage extends StatefulWidget {
+  TabletLandingPage({Key key}) : super(key: key);
+
+  @override
+  _TabletLandingPageState createState() => _TabletLandingPageState();
+}
+
+class _TabletLandingPageState extends State<TabletLandingPage> {
+  Widget _body = LandingPage();
+  // CoursePage(),
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +36,19 @@ class TabletLandingPage extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        child: Master(),
+        child: Master(
+          onElementSelected: (Widget val) => setState(() {
+            print('llego al change body');
+            _body = val;
+          }),
+        ),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: CoursePage(), //LandingPage(),
+            child: _body,
           ),
           Container(
             width: 300,

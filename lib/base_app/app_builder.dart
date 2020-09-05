@@ -102,8 +102,8 @@ class LandingPageLayoutBuilder extends StatelessWidget {
       if (constraints.maxWidth >= 1100.0) {
         //* IF THE SCREENS WIDTH IS LARGER THAN 1100
         return DesktopLandingPage();
-      } else if (constraints.maxWidth >= 650.0) {
-        //* IF THE SCREENS WIDTH IS LARGER THAN 650 AND SMALLER THAN 1000
+      } else if (constraints.maxWidth >= 770.0) {
+        //* IF THE SCREENS WIDTH IS LARGER THAN 770 AND SMALLER THAN 1000
         return TabletLandingPage();
       }
       //* IF THE SCREENS WIDTH IS SMALLER THAN 650
