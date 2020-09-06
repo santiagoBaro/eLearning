@@ -19,7 +19,7 @@ class Master extends StatelessWidget {
         children: [
           //* HEADER
           MasterHeader(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
           ),
           //* LIST OF ELEMENTS
           //* GROUP
@@ -27,7 +27,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Mis Cursos',
             icon: Icons.school,
             children: [
@@ -41,7 +41,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Mensajes',
             icon: Icons.mail_outline,
             children: [
@@ -55,7 +55,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Inscripciones',
             icon: Icons.assignment,
             children: [
@@ -69,7 +69,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Organizacion',
             icon: Icons.domain,
             children: [
@@ -83,7 +83,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected,
+            onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Consultas',
             icon: Icons.help_outline,
             children: [
@@ -167,19 +167,19 @@ class GroupTile extends StatelessWidget {
         ),
         //* LIST EL ELEMENTS
         ElementTile(
-          onElementSelected: (Widget val) => onElementSelected,
+          onElementSelected: (Widget val) => onElementSelected(val),
           text: children[0],
         ),
         ElementTile(
-          onElementSelected: (Widget val) => onElementSelected,
+          onElementSelected: (Widget val) => onElementSelected(val),
           text: children[1],
         ),
         ElementTile(
-          onElementSelected: (Widget val) => onElementSelected,
+          onElementSelected: (Widget val) => onElementSelected(val),
           text: children[2],
         ),
         ElementTile(
-          onElementSelected: (Widget val) => onElementSelected,
+          onElementSelected: (Widget val) => onElementSelected(val),
           text: children[3],
         ),
       ],

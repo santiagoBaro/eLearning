@@ -14,6 +14,11 @@ class DesktopLandingPage extends StatefulWidget {
 class _DesktopLandingPageState extends State<DesktopLandingPage> {
   Widget _body = LandingPage();
   // CoursePage(),
+  _setBody(Widget val) {
+    setState(() {
+      _body = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +47,7 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
             width: 300,
             color: Colors.grey[200],
             child: Master(
-              onElementSelected: (Widget val) => setState(() {
-                print('llego al change body');
-                _body = val;
-              }),
+              onElementSelected: (Widget val) => _setBody(val),
             ),
           ),
           Expanded(

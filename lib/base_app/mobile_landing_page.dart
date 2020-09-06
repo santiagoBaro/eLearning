@@ -13,7 +13,12 @@ class MoblieLandingPage extends StatefulWidget {
 
 class _MoblieLandingPageState extends State<MoblieLandingPage> {
   Widget _body = LandingPage();
-  // CoursePage(),
+  //Widget _body = CoursePage();
+  _setBody(Widget val) {
+    setState(() {
+      _body = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +41,7 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
       ),
       drawer: Drawer(
         child: Master(
-          onElementSelected: (Widget val) => setState(() {
-            print('llego al change body');
-            _body = val;
-          }),
+          onElementSelected: (Widget val) => _setBody(val),
         ),
       ),
       endDrawer: Drawer(

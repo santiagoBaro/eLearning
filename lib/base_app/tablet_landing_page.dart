@@ -15,6 +15,11 @@ class TabletLandingPage extends StatefulWidget {
 class _TabletLandingPageState extends State<TabletLandingPage> {
   Widget _body = LandingPage();
   // CoursePage(),
+  _setBody(Widget val) {
+    setState(() {
+      _body = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +42,7 @@ class _TabletLandingPageState extends State<TabletLandingPage> {
       ),
       drawer: Drawer(
         child: Master(
-          onElementSelected: (Widget val) => setState(() {
-            print('llego al change body');
-            _body = val;
-          }),
+          onElementSelected: (Widget val) => _setBody(val),
         ),
       ),
       body: Row(
