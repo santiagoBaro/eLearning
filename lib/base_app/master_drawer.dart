@@ -1,4 +1,5 @@
 import 'package:elearning/base_app/base_app_values.dart';
+import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(val),
+            onElementSelected: (Widget val) => onElementSelected(CoursePage()),
             name: 'Mis Cursos',
             icon: Icons.school,
             children: [
