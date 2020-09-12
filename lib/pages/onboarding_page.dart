@@ -1,6 +1,4 @@
-import 'package:elearning/base_app/base_app_values.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/elements/onboarding_page_element.dart';
 import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:gooey_carousel/gooey_carrousel.dart';
 import 'package:elearning/tools/visual_assets.dart';

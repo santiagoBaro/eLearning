@@ -1,5 +1,4 @@
 import 'package:elearning/pages/book_page.dart';
-import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +13,7 @@ class TabletLandingPage extends StatefulWidget {
 }
 
 class _TabletLandingPageState extends State<TabletLandingPage> {
-  Widget _body = LandingPage();
+  Widget _body = BookPage(); //LandingPage();
   // CoursePage(),
   _setBody(Widget val) {
     setState(() {

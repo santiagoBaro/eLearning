@@ -1,7 +1,6 @@
 import 'package:elearning/base_app/important_information.dart';
 import 'package:elearning/base_app/master_drawer.dart';
 import 'package:elearning/pages/book_page.dart';
-import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,7 @@ class DesktopLandingPage extends StatefulWidget {
 }
 
 class _DesktopLandingPageState extends State<DesktopLandingPage> {
-  Widget _body = LandingPage();
+  Widget _body = BookPage(); //LandingPage();
   // CoursePage(),
   _setBody(Widget val) {
     setState(() {

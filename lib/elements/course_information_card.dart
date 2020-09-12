@@ -1,4 +1,3 @@
-import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 import 'course_contact_info_element.dart';
