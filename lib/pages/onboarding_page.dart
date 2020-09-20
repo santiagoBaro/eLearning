@@ -66,7 +66,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 right: 20,
                               ),
                               child: Text(
-                                "La Mejor Manera De Aprender ",
+                                "La Mejor Manera De Aprenderrr ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),

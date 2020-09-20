@@ -3,6 +3,7 @@ import 'package:country_pickers/country_picker_dropdown.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:elearning/base_app/app_builder.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/pages/admin_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
@@ -196,6 +197,37 @@ class LoginTab extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => LandingPageLayoutBuilder(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(
+                      'Soy Admin',
+                      style: tabbedLoginInputTextStyle,
+                    ),
+                    shape: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: myAppTheme['AccentColor'],
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    textColor: myAppTheme['PrimaryActionButtonColor'],
+                    onPressed: () {
+                      // //TODO do separate function with checks
+                      if (_loginFormKey.currentState.validate()) {
+                        storedUserCredentials
+                            .setNickname(usernameController.text);
+                        storedUserCredentials
+                            .setPassword(passwordContrller.text);
+                        saveUserCredentials();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminPage(),
                           ),
                         );
                       }
