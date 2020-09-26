@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 
+const List<String> defaultList = [
+  'Rempel, Huels and Nitzsche',
+  'Abshire - Cartwright',
+  'Upton, Bruen and Kassulke'
+      'Kreiger, Lind and Lind'
+];
+
 class MultiplechoiceBookElement extends StatefulWidget {
   final String question;
   final List<String> options;
   final int answer;
-  MultiplechoiceBookElement({Key key, this.question, this.options, this.answer})
-      : super(key: key);
+  MultiplechoiceBookElement({
+    Key key,
+    this.question = 'Molestiae omnis qui?',
+    this.options = defaultList,
+    this.answer = 2,
+  }) : super(key: key);
 
   @override
   _MultiplechoiceBookElementState createState() =>

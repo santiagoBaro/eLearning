@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 
+List<String> defaultList = [
+  'Rempel, Huels and Nitzsche',
+  'Abshire - Cartwright',
+  'Upton, Bruen and Kassulke'
+      'Kreiger, Lind and Lind'
+];
+
 class ListBookElement extends StatelessWidget {
   final String title;
   final List<String> elements;
-  const ListBookElement({Key key, this.title, this.elements}) : super(key: key);
+  const ListBookElement({
+    Key key,
+    this.title,
+    this.elements,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -37,6 +37,7 @@ dependencies:
   gooey_carousel: ^0.1.2
   indexed_list_view: ^1.0.9
   json_annotation: ^3.0.0
+  just_audio: ^0.4.3
   responsive_scaffold: ^1.3.0+2
   shared_preferences: ^0.5.1+2
   table_calendar: ^2.2.3

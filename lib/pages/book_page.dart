@@ -1,3 +1,11 @@
+import 'package:elearning/elements/bool_elements/image_book_element.dart';
+import 'package:elearning/elements/bool_elements/list_book_element.dart';
+import 'package:elearning/elements/bool_elements/multiple_choice_book_element.dart';
+import 'package:elearning/elements/bool_elements/paragraph_book_element.dart';
+import 'package:elearning/elements/bool_elements/question_book_element.dart';
+import 'package:elearning/elements/bool_elements/subtitle_book_element.dart';
+import 'package:elearning/elements/bool_elements/title_book_element.dart';
+import 'package:elearning/elements/bool_elements/video_book_element.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:indexed_list_view/indexed_list_view.dart';
@@ -116,18 +124,170 @@ class _BookPageState extends State<BookPage> {
 
   Function itemBuilder() {
     //
-    final List<double> heights = new List<double>.generate(
-        527, (i) => Random().nextInt(200).toDouble() + 30.0);
 
     return (BuildContext context, int index) {
       //
-      return Card(
-        child: Container(
-          height: heights[index % 527],
-          color: (index == 0) ? Colors.red : Colors.green,
-          child: Center(child: Text('ITEM $index')),
-        ),
-      );
+      switch (testBook[index].type) {
+        case ElementType.image:
+          return Card(
+            child: Container(
+              child: ImageBookElement(),
+            ),
+          );
+          break;
+        case ElementType.list:
+          return Card(
+            child: Container(
+              child: ListBookElement(),
+            ),
+          );
+          break;
+        case ElementType.multiple_choise:
+          return Card(
+            child: Container(
+              child: MultiplechoiceBookElement(),
+            ),
+          );
+          break;
+        case ElementType.paragraph:
+          return Card(
+            child: Container(
+              child: ParagraphBookElement(),
+            ),
+          );
+          break;
+        case ElementType.question:
+          return Card(
+            child: Container(
+              child: QuestionBookElement(),
+            ),
+          );
+          break;
+        case ElementType.subtitle:
+          return Card(
+            child: Container(
+              child: SubtitleBookElement(),
+            ),
+          );
+          break;
+        case ElementType.title:
+          return Card(
+            child: Container(
+              child: TitleBookElement(),
+            ),
+          );
+          break;
+        case ElementType.video:
+          return Card(
+            child: Container(
+              child: VideoBookElement(),
+            ),
+          );
+          break;
+        default:
+      }
     };
   }
 }
+
+class BookElement {
+  final ElementType type;
+  final List<String> elements;
+
+  BookElement({
+    @required this.type,
+    @required this.elements,
+  });
+}
+
+enum ElementType {
+  image,
+  audio,
+  list,
+  multiple_choise,
+  paragraph,
+  question,
+  title,
+  subtitle,
+  table,
+  video
+}
+
+List<BookElement> testBook = [
+  BookElement(
+    elements: ['Bienvenidos al curso de Calculo'],
+    type: ElementType.title,
+  ),
+  BookElement(
+    elements: [
+      'Enim sit quia enim sed et explicabo vitae est. Cupiditate aut perferendis eius harum. Temporibus hic tenetur. Qui neque et eveniet dolorem delectus ab libero ea quasi. At et quisquam commodi dicta eius.'
+    ],
+    type: ElementType.paragraph,
+  ),
+  BookElement(
+    elements: [
+      'Est nihil velit ut ab et velit consectetur et. Aliquam ut dolorem veritatis repudiandae explicabo. Eos iure facilis laudantium omnis aperiam eos qui debitis et. Quia quia explicabo debitis delectus autem tempora.'
+    ],
+    type: ElementType.paragraph,
+  ),
+  BookElement(
+    elements: ['Bienvenidos al curso de Calculo'],
+    type: ElementType.image,
+  ),
+  BookElement(
+    elements: [
+      'natus repellendus doloremque',
+      'tempore quas eaque',
+      'possimus ut reiciendis',
+      'quos harum nobis'
+    ],
+    type: ElementType.list,
+  ),
+  BookElement(
+    elements: ['9942343825', 'Aliquid repellendus distinctio sit dolores?'],
+    type: ElementType.question,
+  ),
+  BookElement(
+    elements: ['Autem est sunt nobis cum est perferendis.'],
+    type: ElementType.subtitle,
+  ),
+  BookElement(
+    elements: ['Bienvenidos al curso de Calculo'],
+    type: ElementType.video,
+  ),
+  BookElement(
+    elements: [
+      'Earum consequatur dolores possimus. Non molestiae quos. Iure quas vel reprehenderit voluptatem atque aut ex. Eos eos omnis. Sit voluptas tenetur quas ducimus mollitia alias laboriosam corrupti. Quia sint dolor omnis qui error mollitia. Consequatur maiores autem. Consequatur et voluptas quo reprehenderit non. Earum nihil quo.Sed dolores qui id reprehenderit sed dolores facere consequatur. Consequatur ut fugit possimus eos quia. Rerum provident rerum saepe repellat nesciunt dignissimos cupiditate laudantium voluptas. Consequatur omnis et necessitatibus. Necessitatibus rerum pariatur et. Asperiores quis iste eligendi qui laborum odit ab culpa at.'
+    ],
+    type: ElementType.paragraph,
+  ),
+  BookElement(
+    elements: [
+      '2',
+      'Quia quod illum voluptatem autem molestiae et ducimus',
+      'Enim fugit nulla alias odio voluptas quam',
+      'natus aut soluta',
+      'Quibusdam qui nisi.',
+      'Iusto aut quas.'
+    ],
+    type: ElementType.multiple_choise,
+  ),
+  BookElement(
+    elements: ['Bienvenidos al curso de Calculo'],
+    type: ElementType.image,
+  ),
+  BookElement(
+    elements: ['Bienvenidos al curso de Calculo'],
+    type: ElementType.title,
+  ),
+  BookElement(
+    elements: [
+      'Necessitatibus cum voluptas consequatur quas. Omnis perspiciatis quo. Sint atque sint.'
+    ],
+    type: ElementType.paragraph,
+  ),
+  BookElement(
+    elements: ['Voluptatem et nemo a consequatur voluptates?'],
+    type: ElementType.question,
+  ),
+];

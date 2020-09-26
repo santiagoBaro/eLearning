@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+const String defaultVideo = 'https://youtu.be/2XWejSaiwNE';
+
 class VideoBookElement extends StatefulWidget {
   final String videoUrl;
-  VideoBookElement({Key key, this.videoUrl}) : super(key: key);
+  VideoBookElement({
+    Key key,
+    this.videoUrl = defaultVideo,
+  }) : super(key: key);
 
   @override
   _VideoBookElementState createState() => _VideoBookElementState();
