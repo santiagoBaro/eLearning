@@ -9,6 +9,7 @@ import 'package:elearning/elements/bool_elements/video_book_element.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:indexed_list_view/indexed_list_view.dart';
+import 'package:video_player/video_player.dart';
 
 class BookPage extends StatefulWidget {
   BookPage({Key key}) : super(key: key);
@@ -18,8 +19,8 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  static IndexedScrollController controller =
-      IndexedScrollController(initialIndex: 75);
+  // static IndexedScrollController controller =
+  //     IndexedScrollController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,9 @@ class _BookPageState extends State<BookPage> {
         children: [
           Container(
             height: (MediaQuery.of(context).size.height - 100),
-            child: IndexedListView.builder(
-              controller: controller,
+            child: ListView.builder(
+              //controller: controller,
+              itemCount: testBook.length,
               itemBuilder: itemBuilder(),
             ),
           ),
@@ -42,64 +44,30 @@ class _BookPageState extends State<BookPage> {
                     horizontal: 20.0,
                     vertical: 10,
                   ),
-                  child: Text('INDEX'),
+                  child: Text(
+                    'INDEX',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-
-                // ---
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    button(
-                        "jumpToIndex(-42)", () => controller.jumpToIndex(-42)),
-                    button("jumpToIndex(750000)",
-                        () => controller.jumpToIndex(750000)),
+                    FlatButton(onPressed: () {}, child: Text('Title 1')),
+                    FlatButton(onPressed: () {}, child: Text('Title 2'))
                   ],
                 ),
-                // ---
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    button("animateToIndex(-42)",
-                        () => controller.animateToIndex(-42)),
-                    button("animateToIndex(750000)",
-                        () => controller.animateToIndex(750000)),
+                    FlatButton(onPressed: () {}, child: Text('Title 1')),
+                    FlatButton(onPressed: () {}, child: Text('Title 2'))
                   ],
                 ),
-                // ---
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    button("jumpTo(-15)", () => controller.jumpTo(-15)),
-                    button("jumpTo(0)", () => controller.jumpTo(0)),
-                    button("jumpTo(50)", () => controller.jumpTo(50)),
-                  ],
-                ),
-                // ---
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    button("animateTo(-30)", () => controller.animateTo(-30)),
-                    button("animateTo(50)", () => controller.animateTo(50)),
-                  ],
-                ),
-                // ---
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    button("jumpToRelative(-250)",
-                        () => controller.jumpToRelative(-250)),
-                    button("jumpToRelative(40)",
-                        () => controller.jumpToRelative(40)),
-                  ],
-                ),
-                // ---
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    button("animateToRelative(-250)",
-                        () => controller.animateToRelative(-250)),
-                    button("animateToRelative(40)",
-                        () => controller.animateToRelative(40)),
+                    FlatButton(onPressed: () {}, child: Text('Title 1')),
+                    FlatButton(onPressed: () {}, child: Text('Title 2'))
                   ],
                 ),
               ],
@@ -129,58 +97,54 @@ class _BookPageState extends State<BookPage> {
       //
       switch (testBook[index].type) {
         case ElementType.image:
-          return Card(
-            child: Container(
-              child: ImageBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ImageBookElement(),
           );
           break;
         case ElementType.list:
-          return Card(
-            child: Container(
-              child: ListBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ListBookElement(),
           );
           break;
         case ElementType.multiple_choise:
-          return Card(
-            child: Container(
-              child: MultiplechoiceBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: MultiplechoiceBookElement(),
           );
           break;
         case ElementType.paragraph:
-          return Card(
-            child: Container(
-              child: ParagraphBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ParagraphBookElement(),
           );
           break;
         case ElementType.question:
-          return Card(
-            child: Container(
-              child: QuestionBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: QuestionBookElement(),
           );
           break;
         case ElementType.subtitle:
-          return Card(
-            child: Container(
-              child: SubtitleBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SubtitleBookElement(),
           );
           break;
         case ElementType.title:
-          return Card(
-            child: Container(
-              child: TitleBookElement(),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TitleBookElement(),
           );
           break;
         case ElementType.video:
-          return Card(
-            child: Container(
-              child: VideoBookElement(),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: VideoBookElement(
+              videoPlayerController: VideoPlayerController.network(
+                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              ),
             ),
           );
           break;
@@ -234,15 +198,15 @@ List<BookElement> testBook = [
     elements: ['Bienvenidos al curso de Calculo'],
     type: ElementType.image,
   ),
-  BookElement(
-    elements: [
-      'natus repellendus doloremque',
-      'tempore quas eaque',
-      'possimus ut reiciendis',
-      'quos harum nobis'
-    ],
-    type: ElementType.list,
-  ),
+  // BookElement(
+  //   elements: [
+  //     'natus repellendus doloremque',
+  //     'tempore quas eaque',
+  //     'possimus ut reiciendis',
+  //     'quos harum nobis'
+  //   ],
+  //   type: ElementType.list,
+  // ),
   BookElement(
     elements: ['9942343825', 'Aliquid repellendus distinctio sit dolores?'],
     type: ElementType.question,
@@ -261,17 +225,17 @@ List<BookElement> testBook = [
     ],
     type: ElementType.paragraph,
   ),
-  BookElement(
-    elements: [
-      '2',
-      'Quia quod illum voluptatem autem molestiae et ducimus',
-      'Enim fugit nulla alias odio voluptas quam',
-      'natus aut soluta',
-      'Quibusdam qui nisi.',
-      'Iusto aut quas.'
-    ],
-    type: ElementType.multiple_choise,
-  ),
+  // BookElement(
+  //   elements: [
+  //     '2',
+  //     'Quia quod illum voluptatem autem molestiae et ducimus',
+  //     'Enim fugit nulla alias odio voluptas quam',
+  //     'natus aut soluta',
+  //     'Quibusdam qui nisi.',
+  //     'Iusto aut quas.'
+  //   ],
+  //   type: ElementType.multiple_choise,
+  // ),
   BookElement(
     elements: ['Bienvenidos al curso de Calculo'],
     type: ElementType.image,

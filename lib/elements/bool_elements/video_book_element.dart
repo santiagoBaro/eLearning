@@ -1,13 +1,14 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-const String defaultVideo = 'https://youtu.be/2XWejSaiwNE';
-
 class VideoBookElement extends StatefulWidget {
-  final String videoUrl;
+  // This will contain the URL/asset path which we want to play
+  final VideoPlayerController videoPlayerController;
+
   VideoBookElement({
     Key key,
-    this.videoUrl = defaultVideo,
+    @required this.videoPlayerController,
   }) : super(key: key);
 
   @override
@@ -15,50 +16,46 @@ class VideoBookElement extends StatefulWidget {
 }
 
 class _VideoBookElementState extends State<VideoBookElement> {
-  VideoPlayerController _controller;
+  ChewieController _chewieController;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl)
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
+    // Wrapper on top of the videoPlayerController
+    _chewieController = ChewieController(
+      videoPlayerController: widget.videoPlayerController,
+      aspectRatio: 16 / 9,
+      // Prepare the video to be played and display the first frame
+      autoInitialize: false,
+      looping: false,
+      // Errors can occur for example when trying to play a video
+      // from a non-existent URL
+      errorBuilder: (context, errorMessage) {
+        return Center(
+          child: Text(
+            errorMessage,
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Chewie(
+        controller: _chewieController,
+      ),
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //* VIDEO VIEWER
-        Center(
-          child: _controller.value.initialized
-              ? AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                )
-              : Container(),
-        ),
-        //* PLAY PAUSE BUTTON
-        FlatButton(
-            child: Icon(
-              _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-            ),
-            onPressed: () {
-              setState(() {
-                _controller.value.isPlaying
-                    ? _controller.pause()
-                    : _controller.play();
-              });
-            }),
-      ],
-    );
+    // IMPORTANT to dispose of all the used resources
+    widget.videoPlayerController.dispose();
+    _chewieController.dispose();
   }
 }

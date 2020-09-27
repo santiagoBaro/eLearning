@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-List<String> defaultList = [
+const List<String> defaultList = [
   'Rempel, Huels and Nitzsche',
   'Abshire - Cartwright',
-  'Upton, Bruen and Kassulke'
-      'Kreiger, Lind and Lind'
+  'Upton, Bruen and Kassulke',
+  'Kreiger, Lind and Lind'
 ];
 
 class ListBookElement extends StatelessWidget {
@@ -12,8 +12,8 @@ class ListBookElement extends StatelessWidget {
   final List<String> elements;
   const ListBookElement({
     Key key,
-    this.title,
-    this.elements,
+    this.title = 'consequatur corrupti voluptas',
+    this.elements = defaultList,
   }) : super(key: key);
 
   @override
@@ -30,32 +30,38 @@ class ListBookElement extends StatelessWidget {
         ),
         //* LIST
 
-        ListView.builder(
-          itemCount: elements.length,
-          itemBuilder: (context, i) {
-            return Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Icon(
-                    Icons.brightness_1,
-                    size: 15,
-                    color: Colors.grey[300],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Text(elements[i]),
-                ),
-              ],
-            );
-          },
+        Expanded(
+          child: Container(
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: elements.length,
+              itemBuilder: (BuildContext ctxt, int index) {
+                return new Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: Icon(
+                        Icons.brightness_1,
+                        size: 15,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: Text(elements[index]),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
         ),
       ],
     );

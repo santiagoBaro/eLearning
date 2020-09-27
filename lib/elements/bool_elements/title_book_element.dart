@@ -11,10 +11,10 @@ class TitleBookElement extends StatelessWidget {
     return Column(
       children: [
         //* TITLE
-        Padding(
-          padding: const EdgeInsets.only(left: 60.0),
+        Center(
           child: Text(
             title,
+            textAlign: TextAlign.center,
             style: nameTextStyle,
           ),
         ),

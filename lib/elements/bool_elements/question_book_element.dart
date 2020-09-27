@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const String defaultQuestion =
-    'Odit in natus eum sed vel debitis omnis dolores nam. Architecto minima eum. Vero quis atque dolor voluptatem tempora ut doloribus. Recusandae consequuntur exercitationem quia illo quia reiciendis dolores autem. Repellat qui earum est voluptate. Ex hic ut asperiores et nostrum?';
+    'Recusandae consequuntur exercitationem quia illo quia reiciendis dolores autem. Repellat qui earum est voluptate. Ex hic ut asperiores et nostrum?';
 
 class QuestionBookElement extends StatefulWidget {
   final String question;
@@ -37,21 +37,30 @@ class _QuestionBookElementState extends State<QuestionBookElement> {
           widget.question,
           style: _textStyle,
         ),
-        TextField(
-          controller: _controller,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Respuesta',
-          ),
+        SizedBox(
+          height: 5,
         ),
-        Container(
-          width: 75,
-          child: FlatButton(
-            child: Text('Enviar respuesta'),
-            onPressed: () {
-              //TODO enviar respuesta
-            },
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Respuesta',
+                ),
+              ),
+            ),
+            Container(
+              width: 75,
+              child: FlatButton(
+                child: Text('Enviar'),
+                onPressed: () {
+                  //TODO enviar respuesta
+                },
+              ),
+            ),
+          ],
         ),
       ],
     );

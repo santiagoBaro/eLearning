@@ -8,14 +8,13 @@ class SubtitleBookElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         //* TITLE
-        Padding(
-          padding: const EdgeInsets.only(left: 60.0),
-          child: Text(
-            subTitle,
-            style: nameTextStyle,
-          ),
+        Text(
+          subTitle,
+          textAlign: TextAlign.left,
+          style: nameTextStyle,
         ),
         //* SEPARATOR
         Container(
