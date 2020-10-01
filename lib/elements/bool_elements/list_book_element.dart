@@ -10,7 +10,8 @@ const List<String> defaultList = [
 class ListBookElement extends StatelessWidget {
   final String title;
   final List<String> elements;
-  const ListBookElement({
+  ScrollController controller = ScrollController();
+  ListBookElement({
     Key key,
     this.title = 'consequatur corrupti voluptas',
     this.elements = defaultList,
@@ -22,7 +23,7 @@ class ListBookElement extends StatelessWidget {
       children: [
         //* TITLE
         Padding(
-          padding: const EdgeInsets.only(left: 60.0),
+          padding: const EdgeInsets.all(20.0),
           child: Text(
             title,
             style: titleTextStyle,
@@ -30,14 +31,16 @@ class ListBookElement extends StatelessWidget {
         ),
         //* LIST
 
-        Expanded(
-          child: Container(
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: elements.length,
-              itemBuilder: (BuildContext ctxt, int index) {
-                return new Row(
+        Container(
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: elements.length,
+            controller: controller,
+            itemBuilder: (BuildContext ctxt, int index) {
+              return Container(
+                height: 50,
+                child: Row(
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -55,12 +58,16 @@ class ListBookElement extends StatelessWidget {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      child: Text(elements[index]),
+                      child: Text(
+                        elements[index],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 20,
+                      ),
                     ),
                   ],
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ],

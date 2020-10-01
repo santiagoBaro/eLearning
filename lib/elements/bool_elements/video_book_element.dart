@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoBookElement extends StatefulWidget {
-  // This will contain the URL/asset path which we want to play
-  final VideoPlayerController videoPlayerController;
+  // This will contain the URL/asset path which we want to play\
+  VideoPlayerController videoPlayerController = VideoPlayerController.network(
+      'https://flutter.github.io/assets-for-api-docs/videos/butterfly.mp4');
 
   VideoBookElement({
     Key key,
-    @required this.videoPlayerController,
   }) : super(key: key);
 
   @override
@@ -25,19 +25,17 @@ class _VideoBookElementState extends State<VideoBookElement> {
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
       aspectRatio: 16 / 9,
-      // Prepare the video to be played and display the first frame
-      autoInitialize: false,
+      autoPlay: true,
+      autoInitialize: true,
       looping: false,
-      // Errors can occur for example when trying to play a video
-      // from a non-existent URL
-      errorBuilder: (context, errorMessage) {
-        return Center(
-          child: Text(
-            errorMessage,
-            style: TextStyle(color: Colors.white),
-          ),
-        );
-      },
+      // errorBuilder: (context, errorMessage) {
+      //   return Center(
+      //     child: Text(
+      //       errorMessage,
+      //       style: TextStyle(color: Colors.white),
+      //     ),
+      //   );
+      // },
     );
   }
 
@@ -45,8 +43,11 @@ class _VideoBookElementState extends State<VideoBookElement> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Chewie(
-        controller: _chewieController,
+      child: Container(
+        color: Colors.amber,
+        child: Chewie(
+          controller: _chewieController,
+        ),
       ),
     );
   }
@@ -54,8 +55,8 @@ class _VideoBookElementState extends State<VideoBookElement> {
   @override
   void dispose() {
     super.dispose();
-    // IMPORTANT to dispose of all the used resources
     widget.videoPlayerController.dispose();
+    // IMPORTANT to dispose of all the used resources
     _chewieController.dispose();
   }
 }

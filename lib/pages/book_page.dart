@@ -21,20 +21,25 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   // static IndexedScrollController controller =
   //     IndexedScrollController(initialIndex: 0);
+  ScrollController primary_controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
+          //* BODY
           Container(
             height: (MediaQuery.of(context).size.height - 100),
             child: ListView.builder(
-              //controller: controller,
+              shrinkWrap: true,
+              controller: primary_controller,
               itemCount: testBook.length,
               itemBuilder: itemBuilder(),
             ),
           ),
+
+          //* INDEX
           Container(
             color: Colors.grey[800],
             child: Column(
@@ -141,11 +146,7 @@ class _BookPageState extends State<BookPage> {
         case ElementType.video:
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: VideoBookElement(
-              videoPlayerController: VideoPlayerController.network(
-                'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              ),
-            ),
+            child: VideoBookElement(),
           );
           break;
         default:
@@ -198,15 +199,15 @@ List<BookElement> testBook = [
     elements: ['Bienvenidos al curso de Calculo'],
     type: ElementType.image,
   ),
-  // BookElement(
-  //   elements: [
-  //     'natus repellendus doloremque',
-  //     'tempore quas eaque',
-  //     'possimus ut reiciendis',
-  //     'quos harum nobis'
-  //   ],
-  //   type: ElementType.list,
-  // ),
+  BookElement(
+    elements: [
+      'natus repellendus doloremque',
+      'tempore quas eaque',
+      'possimus ut reiciendis',
+      'quos harum nobis'
+    ],
+    type: ElementType.list,
+  ),
   BookElement(
     elements: ['9942343825', 'Aliquid repellendus distinctio sit dolores?'],
     type: ElementType.question,
@@ -225,17 +226,17 @@ List<BookElement> testBook = [
     ],
     type: ElementType.paragraph,
   ),
-  // BookElement(
-  //   elements: [
-  //     '2',
-  //     'Quia quod illum voluptatem autem molestiae et ducimus',
-  //     'Enim fugit nulla alias odio voluptas quam',
-  //     'natus aut soluta',
-  //     'Quibusdam qui nisi.',
-  //     'Iusto aut quas.'
-  //   ],
-  //   type: ElementType.multiple_choise,
-  // ),
+  BookElement(
+    elements: [
+      '2',
+      'Quia quod illum voluptatem autem molestiae et ducimus',
+      'Enim fugit nulla alias odio voluptas quam',
+      'natus aut soluta',
+      'Quibusdam qui nisi.',
+      'Iusto aut quas.'
+    ],
+    type: ElementType.multiple_choise,
+  ),
   BookElement(
     elements: ['Bienvenidos al curso de Calculo'],
     type: ElementType.image,

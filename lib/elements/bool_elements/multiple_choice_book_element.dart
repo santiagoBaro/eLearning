@@ -38,42 +38,63 @@ class _MultiplechoiceBookElementState extends State<MultiplechoiceBookElement> {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController controller = ScrollController();
+
     return Column(
       children: [
-        Text(
-          widget.question,
-          style: _textStyle,
+        //* TITLE
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            widget.question,
+            style: _textStyle,
+          ),
         ),
+
+        //* OPTIOPNS LIST
         ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          controller: controller,
           itemCount: widget.options.length,
-          itemBuilder: (context, i) {
-            return Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return Container(
+              height: 50,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 10,
+                    ),
+                    child: FlatButton(
+                      minWidth: 60,
+                      child: Text('${index.toString()}'),
+                      onPressed: () {
+                        //TODO enviar respuesta
+                        if (index == widget.answer) {
+                          // show the answer is correct
+                        } else {
+                          // show the answer wrong
+                        }
+                      },
+                    ),
                   ),
-                  child: FlatButton(
-                    child: Text('${i.toString()}'),
-                    onPressed: () {
-                      //TODO enviar respuesta
-                      if (i == widget.answer) {
-                        // show the answer is correct
-                      } else {
-                        // show the answer wrong
-                      }
-                    },
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 10,
+                    ),
+                    child: Container(
+                      child: Text(
+                        widget.options[index],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 20,
+                      ),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Text(widget.options[i]),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),
