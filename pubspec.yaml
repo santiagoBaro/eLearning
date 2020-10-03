@@ -47,6 +47,7 @@ dependencies:
       ref: 6bfbad649c896ea6fa53ccdc72b0b74b02c90f4b
   chewie: ^0.9.7
   video_player: ^0.10.12+2
+  #video_player_web: ^0.1.4
 
 dev_dependencies:
   flutter_test:
