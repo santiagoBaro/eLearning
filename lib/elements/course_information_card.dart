@@ -8,104 +8,108 @@ class CourseInformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
+    return Padding(
+      padding: const EdgeInsets.only(
         left: 20,
         right: 20,
         top: 5,
       ),
-      constraints: BoxConstraints(
-        maxWidth: 900,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blueGrey,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: 900,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+        decoration: BoxDecoration(
+          color: Colors.blueGrey,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
           ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 5,
-              ),
-              child: Text('INFO',
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 5,
+                ),
+                child: Text(
+                  'INFO',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
-                  )),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ContactInfo(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Score(),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                color: Colors.white24,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 5,
-                  left: 8,
-                  right: 8,
-                  bottom: 2,
-                ),
-                child: Text(
-                  'Comentario',
-                  style: informationTextStyle,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.white24,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ContactInfo(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Score(),
+                  ),
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                  bottom: 10,
+              Container(
+                margin: EdgeInsets.only(left: 15.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  color: Colors.white24,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.only(
+                    top: 5,
+                    left: 8,
+                    right: 8,
+                    bottom: 2,
+                  ),
                   child: Text(
-                    'Autem dolor sint enim tempora dolorem reprehenderit reprehenderit. Et quos voluptate dignissimos. Quia beatae itaque nihil sed quis nisi rem sed eveniet. Pariatur aliquid reprehenderit. Illum molestias ut ipsum facilis aliquam consectetur aut dolorum.',
-                    maxLines: 8,
+                    'Comentario',
                     style: informationTextStyle,
                   ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white24,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                    bottom: 10,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'Autem dolor sint enim tempora dolorem reprehenderit reprehenderit. Et quos voluptate dignissimos. Quia beatae itaque nihil sed quis nisi rem sed eveniet. Pariatur aliquid reprehenderit. Illum molestias ut ipsum facilis aliquam consectetur aut dolorum.',
+                      maxLines: 8,
+                      style: informationTextStyle,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

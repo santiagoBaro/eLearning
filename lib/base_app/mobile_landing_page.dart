@@ -4,6 +4,8 @@ import 'package:elearning/pages/book_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
+import 'new_master_drawer.dart';
+
 class MoblieLandingPage extends StatefulWidget {
   MoblieLandingPage({Key key}) : super(key: key);
 
@@ -40,9 +42,7 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
         ),
       ),
       drawer: Drawer(
-        child: Master(
-          onElementSelected: (Widget val) => _setBody(val),
-        ),
+        child: MasterDrawer(),
       ),
       endDrawer: Drawer(
         child: ImportantInformationSlide(),

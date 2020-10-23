@@ -1,6 +1,8 @@
 import 'package:elearning/base_app/base_app_values.dart';
+import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
+import 'package:elearning/pages/messages_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:elearning/tools/visual_assets.dart';
@@ -42,7 +44,8 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(val),
+            onElementSelected: (Widget val) =>
+                onElementSelected(MessagesListPage()),
             name: 'Mensajes',
             icon: Icons.mail_outline,
             children: [
@@ -56,7 +59,8 @@ class Master extends StatelessWidget {
             height: 10,
           ),
           GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(val),
+            onElementSelected: (Widget val) =>
+                onElementSelected(BedeliasPage()),
             name: 'Inscripciones',
             icon: Icons.assignment,
             children: [

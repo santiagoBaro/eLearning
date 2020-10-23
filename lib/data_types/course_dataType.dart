@@ -4,7 +4,7 @@ import 'notificacions_dataType.dart';
 class Course {
   String id;
   String name;
-  List<CourseElement> book;
+  List<CourseElement> books;
   int bookTab;
   List<CourseElement> exercises;
   int exercisesTab;

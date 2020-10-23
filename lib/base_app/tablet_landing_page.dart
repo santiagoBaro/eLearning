@@ -1,9 +1,13 @@
+import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/book_page.dart';
 import 'package:elearning/pages/landing_page.dart';
+import 'package:elearning/pages/message_page.dart';
+import 'package:elearning/pages/messages_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'important_information.dart';
 import 'master_drawer.dart';
+import 'new_master_drawer.dart';
 
 class TabletLandingPage extends StatefulWidget {
   TabletLandingPage({Key key}) : super(key: key);
@@ -13,7 +17,7 @@ class TabletLandingPage extends StatefulWidget {
 }
 
 class _TabletLandingPageState extends State<TabletLandingPage> {
-  Widget _body = BookPage(); //LandingPage();
+  Widget _body = MessagePage(); //BookPage(); //LandingPage();
   // CoursePage(),
   _setBody(Widget val) {
     setState(() {
@@ -41,9 +45,7 @@ class _TabletLandingPageState extends State<TabletLandingPage> {
         ),
       ),
       drawer: Drawer(
-        child: Master(
-          onElementSelected: (Widget val) => _setBody(val),
-        ),
+        child: MasterDrawer(),
       ),
       body: Row(
         mainAxisSize: MainAxisSize.max,

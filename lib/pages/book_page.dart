@@ -30,6 +30,7 @@ class _BookPageState extends State<BookPage> {
         children: [
           //* BODY
           Container(
+            constraints: BoxConstraints(maxWidth: 800),
             height: (MediaQuery.of(context).size.height - 100),
             child: ListView.builder(
               shrinkWrap: true,
