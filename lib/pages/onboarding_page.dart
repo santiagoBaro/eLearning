@@ -162,7 +162,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             width: 120,
                             child: RaisedButton(
                               child: Text(
-                                "Sign Up ",
+                                "Login",
                                 style: TextStyle(
                                   color: myAppTheme['HighlightTextColor'],
                                   fontSize: 20,
@@ -181,9 +181,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => TabbedLoginPage(
-                                      initialIndex: 1,
-                                    ),
+                                    builder: (context) => TabbedLoginPage(),
                                   ),
                                 );
                               },

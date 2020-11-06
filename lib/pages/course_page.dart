@@ -3,7 +3,8 @@ import 'package:elearning/elements/course_information_card.dart';
 import 'package:flutter/material.dart';
 
 class CoursePage extends StatelessWidget {
-  const CoursePage({Key key}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const CoursePage({Key key, this.onElementSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,9 @@ class CoursePage extends StatelessWidget {
         children: [
           Container(
             height: (MediaQuery.of(context).size.height - 100),
-            child: CoursePageBody(),
+            child: CoursePageBody(
+              onElementSelected: (Widget val) => onElementSelected(val),
+            ),
           ),
           CourseInformationCard(),
         ],

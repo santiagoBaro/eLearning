@@ -1,5 +1,5 @@
 import 'package:elearning/base_app/important_information.dart';
-import 'package:elearning/pages/message_page.dart';
+import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import 'new_master_drawer.dart';
@@ -12,7 +12,9 @@ class DesktopLandingPage extends StatefulWidget {
 }
 
 class _DesktopLandingPageState extends State<DesktopLandingPage> {
-  Widget _body = MessagePage(); //LandingPage();
+  Widget _body = LandingPage(
+    onElementSelected: (Widget val) => onElementSelected(val),
+  );
   // CoursePage(),
   _setBody(Widget val) {
     setState(() {
@@ -46,7 +48,9 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
           Container(
             width: 300,
             color: Colors.grey[200],
-            child: MasterDrawer(),
+            child: MasterDrawer(
+              onElementSelected: (Widget val) => _setBody(val),
+            ),
           ),
           Expanded(
             child: _body,
@@ -60,4 +64,6 @@ class _DesktopLandingPageState extends State<DesktopLandingPage> {
       ),
     );
   }
+
+  static onElementSelected(Widget val) {}
 }

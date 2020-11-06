@@ -31,11 +31,39 @@ class _NotificationCardState extends State<NotificationCard> {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          NotificationCardHeader(),
-          NitificationCardBody(),
-        ],
+      child: InkWell(
+        onTap: () {
+          //* LOG-OUT  BUTTON PRESSED POP-UP
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: Column(
+                    children: [
+                      Text('Foro'),
+                      Row(
+                        children: [
+                          FlatButton(
+                            onPressed: () {},
+                            child: Text('Cancelar'),
+                          ),
+                          FlatButton(
+                            onPressed: () {},
+                            child: Text('Si'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              });
+        },
+        child: Column(
+          children: [
+            NotificationCardHeader(),
+            NitificationCardBody(),
+          ],
+        ),
       ),
     );
   }

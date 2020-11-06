@@ -1,4 +1,3 @@
-import 'package:elearning/base_app/base_app_values.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -132,7 +131,7 @@ class GroupTile extends StatelessWidget {
       children: [
         InkWell(
           //* GROUP NAME
-          onTap: () => onElementSelected(EmptyWidget(text: name)),
+          onTap: () => onElementSelected(Container()),
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 10,
@@ -204,7 +203,7 @@ class ElementTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onElementSelected(EmptyWidget(text: text)),
+      onTap: () => onElementSelected(Container()),
       child: Row(
         children: [
           SizedBox(
@@ -376,105 +375,6 @@ class MsterFooter extends StatelessWidget {
     );
   }
 }
-
-final List<MasterGroup> eLearningMasterList = [
-  MasterGroup(
-    name: 'Mensajes',
-    redirect: EmptyWidget(text: 'Mensajes'),
-    elements: [
-      MasterElement(
-        name: 'profesor',
-        redirect: EmptyWidget(text: 'Mensajes = profesor'),
-      ),
-      MasterElement(
-        name: 'grupo',
-        redirect: EmptyWidget(text: 'Mensajes = profesor'),
-      ),
-      MasterElement(
-        name: 'companero',
-        redirect: EmptyWidget(text: 'Mensajes = profesor'),
-      ),
-    ],
-  ),
-  MasterGroup(
-    name: 'Inscripciones',
-    redirect: EmptyWidget(text: 'Inscripciones'),
-    elements: [
-      MasterElement(
-        name: 'curso',
-        redirect: EmptyWidget(text: 'Inscripciones = curso'),
-      ),
-      MasterElement(
-        name: 'examen',
-        redirect: EmptyWidget(text: 'Inscripciones = examen'),
-      ),
-      MasterElement(
-        name: 'evento',
-        redirect: EmptyWidget(text: 'Inscripciones = evento'),
-      ),
-      MasterElement(
-        name: 'compreticion',
-        redirect: EmptyWidget(text: 'Inscripciones = compreticion'),
-      ),
-      MasterElement(
-        name: 'carrera',
-        redirect: EmptyWidget(text: 'Inscripciones = carrera'),
-      ),
-    ],
-  ),
-  MasterGroup(
-    name: 'Organizacion',
-    redirect: EmptyWidget(text: 'Organizacion'),
-    elements: [
-      MasterElement(
-        name: 'bedelias',
-        redirect: EmptyWidget(text: 'Organizacion = bedelias'),
-      ),
-      MasterElement(
-        name: 'decano',
-        redirect: EmptyWidget(text: 'Organizacion = decano'),
-      ),
-      MasterElement(
-        name: 'evenconsejo estudiantil',
-        redirect: EmptyWidget(text: 'Organizacion = evenconsejo estudiantil'),
-      ),
-      MasterElement(
-        name: 'inco',
-        redirect: EmptyWidget(text: 'Organizacion = inco'),
-      ),
-      MasterElement(
-        name: 'bibloteca',
-        redirect: EmptyWidget(text: 'Organizacion = bibloteca'),
-      ),
-      MasterElement(
-        name: 'secretaria',
-        redirect: EmptyWidget(text: 'Organizacion = secretaria'),
-      ),
-    ],
-  ),
-  MasterGroup(
-    name: 'Consultas',
-    redirect: EmptyWidget(text: 'Consultas'),
-    elements: [
-      MasterElement(
-        name: 'planes de estudio',
-        redirect: EmptyWidget(text: 'Consultas = planes de estudio'),
-      ),
-      MasterElement(
-        name: 'previaturas',
-        redirect: EmptyWidget(text: 'Consultas = previaturas'),
-      ),
-      MasterElement(
-        name: 'calendario',
-        redirect: EmptyWidget(text: 'Consultas = calendario'),
-      ),
-      MasterElement(
-        name: 'escolaridad',
-        redirect: EmptyWidget(text: 'Consultas = escolaridad'),
-      ),
-    ],
-  ),
-];
 
 class CenterdText extends StatelessWidget {
   final String text;

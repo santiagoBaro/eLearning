@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/base_app/desktop_landing_page.dart';
 import 'package:elearning/base_app/mobile_landing_page.dart';
+import 'package:elearning/pages/landing_page.dart';
 import 'package:elearning/pages/onboarding_page.dart';
 import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'base_app_values.dart';
 import 'tablet_landing_page.dart';
 
 class BaseApp extends StatefulWidget {
@@ -17,6 +17,8 @@ class BaseApp extends StatefulWidget {
   @override
   _BaseAppState createState() => _BaseAppState();
 }
+
+Widget baseWidget = LandingPage();
 
 class _BaseAppState extends State<BaseApp> {
   TextEditingController nameController = TextEditingController();
@@ -28,8 +30,7 @@ class _BaseAppState extends State<BaseApp> {
 
   Future<Null> autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String savedPreferencesString =
-        prefs.getString(BaseAppValues().appName);
+    final String savedPreferencesString = prefs.getString("Sapio");
     if (savedPreferencesString == null || savedPreferencesString == '') {
       storedUserCredentials = emptyUser;
       print('enterd string == null : ' +
@@ -43,7 +44,7 @@ class _BaseAppState extends State<BaseApp> {
 
   Future<Null> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(BaseAppValues().appName, logedOffUser.toJson().toString());
+    prefs.setString("Sapio", logedOffUser.toJson().toString());
 
     setState(() {
       storedUserCredentials = logedOffUser;
@@ -52,11 +53,10 @@ class _BaseAppState extends State<BaseApp> {
 
   Future<Null> loginUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(BaseAppValues().appName, nameController.text);
+    prefs.setString("Sapio", nameController.text);
 
     setState(() {
       storedUserCredentials.setNickname('newNickname');
-      storedUserCredentials.setPassword('newPassword');
       storedUserCredentials.setToken('newToken');
       storedUserCredentials.isNewUser = false;
     });

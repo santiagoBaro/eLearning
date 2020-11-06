@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/couse_element_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
+import 'package:http/http.dart' as http;
 
-const String baseUrl = "";
+const String baseUrl = "http://localhost:8080";
 // var client = ApiClient();
 
 class ApiClient {
@@ -14,8 +18,24 @@ class ApiClient {
 
   ApiClient._internal();
 
-  String login(String username, String password) {}
-  String getUserInformation(String token) {}
+  Future<String> login(String username, String password) async {    
+    var dio = Dio();
+    var response = await dio.post(baseUrl + '/login/',
+        data: {"username": username, "password": password});
+    print(response.data);
+    if (response.data != null) {
+      // login = true;
+    }
+  }
+
+  Future<String> getUserInformation(String token) async {
+    var response = await http.get(
+      baseUrl + '',
+      headers: {HttpHeaders.authorizationHeader: "Basic your_api_token_here"},
+    );
+    if (response.statusCode == 200) {}
+  }
+
   Course getCourse(String token, String courseId) {}
   List<CourseElement> getContent(String token, String contentId) {}
 

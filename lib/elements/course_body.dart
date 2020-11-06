@@ -1,3 +1,4 @@
+import 'package:elearning/pages/book_page.dart';
 import 'package:flutter/material.dart';
 
 import 'course_content_card.dart';
@@ -6,7 +7,11 @@ import 'notification_card.dart';
 import 'pending_task_card.dart';
 
 class CoursePageBody extends StatelessWidget {
-  const CoursePageBody({Key key}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const CoursePageBody({
+    Key key,
+    this.onElementSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +24,22 @@ class CoursePageBody extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CourseContentCard(
-                  icon: Icons.cancel_outlined,
-                  name: 'Teorico',
-                  bkgColor: Colors.green[300],
+                InkWell(
+                  onTap: () => onElementSelected(BookPage()),
+                  child: CourseContentCard(
+                    icon: Icons.cancel_outlined,
+                    name: 'Teorico',
+                    bkgColor: Colors.green[300],
+                  ),
                 ),
-                CourseContentCard(
-                  name: 'Practico',
-                  bkgColor: Colors.lime[400],
-                  currentIndex: '20',
-                  targetIndex: '25',
+                InkWell(
+                  onTap: () => onElementSelected(BookPage()),
+                  child: CourseContentCard(
+                    name: 'Practico',
+                    bkgColor: Colors.lime[400],
+                    currentIndex: '20',
+                    targetIndex: '25',
+                  ),
                 ),
               ],
             ),

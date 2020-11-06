@@ -13,7 +13,7 @@ class Score extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    '8.32',
+                    '8.3',
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.white,

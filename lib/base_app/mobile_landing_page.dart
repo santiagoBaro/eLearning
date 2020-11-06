@@ -1,6 +1,4 @@
 import 'package:elearning/base_app/important_information.dart';
-import 'package:elearning/base_app/master_drawer.dart';
-import 'package:elearning/pages/book_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +12,9 @@ class MoblieLandingPage extends StatefulWidget {
 }
 
 class _MoblieLandingPageState extends State<MoblieLandingPage> {
-  Widget _body = BookPage(); //LandingPage();
+  Widget _body = LandingPage(
+    onElementSelected: (Widget val) => onElementSelected(val),
+  );
   //Widget _body = CoursePage();
   _setBody(Widget val) {
     setState(() {
@@ -42,7 +42,9 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
         ),
       ),
       drawer: Drawer(
-        child: MasterDrawer(),
+        child: MasterDrawer(
+          onElementSelected: (Widget val) => _setBody(val),
+        ),
       ),
       endDrawer: Drawer(
         child: ImportantInformationSlide(),
@@ -50,4 +52,6 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
       body: _body,
     );
   }
+
+  static onElementSelected(Widget val) {}
 }

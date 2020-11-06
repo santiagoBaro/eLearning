@@ -1,9 +1,16 @@
+import 'package:elearning/pages/bedelias_page.dart';
+import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
+import 'package:elearning/pages/message_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class MasterDrawer extends StatelessWidget {
-  const MasterDrawer({Key key}) : super(key: key);
+  final Function(Widget) onElementSelected;
+  const MasterDrawer({
+    Key key,
+    @required this.onElementSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,38 +19,54 @@ class MasterDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //* HEADER
-          MasterHeader(),
+          MasterHeader(
+            onElementSelected: (Widget val) => onElementSelected(val),
+          ),
 
-          MasterTitle(
-            text: "Cursos",
-            icon: Icons.school_outlined,
+          InkWell(
+            onTap: () => onElementSelected(
+              CoursePage(
+                  onElementSelected: (Widget val) => onElementSelected(val)),
+            ),
+            child: MasterTitle(
+              text: "Cursos",
+              icon: Icons.school_outlined,
+            ),
           ),
           MasterSubtitle(text: "proyecto"),
           MasterSubtitle(text: ".net"),
           MasterSubtitle(text: "BD no-sql"),
           MasterSubtitle(text: "tct"),
 
-          MasterTitle(
-            text: "Mensajes",
-            icon: Icons.message_outlined,
+          InkWell(
+            onTap: () => onElementSelected(MessagePage()),
+            child: MasterTitle(
+              text: "Mensajes",
+              icon: Icons.message_outlined,
+            ),
           ),
           MasterSubtitle(text: "profesor"),
           MasterSubtitle(text: "grupo"),
           MasterSubtitle(text: "companero"),
           MasterSubtitle(text: "companero"),
 
-          MasterTitle(
-            text: "Inscripciones",
-            icon: Icons.assignment,
+          InkWell(
+            onTap: () => onElementSelected(BedeliasPage()),
+            child: MasterTitle(
+              text: "Inscripciones",
+              icon: Icons.assignment,
+            ),
           ),
           MasterSubtitle(text: "curso"),
           MasterSubtitle(text: "examen"),
           MasterSubtitle(text: "evento"),
-          MasterSubtitle(text: "competencia"),
 
-          MasterTitle(
-            text: "Organizacion",
-            icon: Icons.domain,
+          InkWell(
+            onTap: () => onElementSelected(CoursePage()),
+            child: MasterTitle(
+              text: "Organizacion",
+              icon: Icons.domain,
+            ),
           ),
           MasterSubtitle(text: "bedelias"),
           MasterSubtitle(text: "inco"),
@@ -59,11 +82,10 @@ class MasterDrawer extends StatelessWidget {
           MasterSubtitle(text: "calendario lectivo"),
           MasterSubtitle(text: "escolaridad"),
 
-          SizedBox(
-            height: 30,
-          ),
+          SizedBox(height: 30),
           //* FOOTER
           MsterFooter(),
+          SizedBox(height: 15),
         ],
       ),
     );
@@ -145,7 +167,8 @@ class MasterHeader extends StatelessWidget {
           left: 100,
           child: FlatButton(
             color: Colors.blueGrey,
-            onPressed: () => onElementSelected(LandingPage()),
+            onPressed: () => onElementSelected(LandingPage(
+                onElementSelected: (Widget val) => onElementSelected(val))),
             child: Text(
               'Home',
               style: TextStyle(

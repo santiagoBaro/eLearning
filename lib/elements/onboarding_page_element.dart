@@ -1,4 +1,3 @@
-import 'package:elearning/base_app/base_app_values.dart';
 import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,7 @@ class OnboardingPageSlide extends StatelessWidget {
             ),
             child: Text(
               message,
-              style: myAppValues.onboardingTextStyle,
+              //style: myAppValues.onboardingTextStyle,
               textAlign: TextAlign.center,
             ),
           ),
@@ -80,9 +79,7 @@ class OnboardingPageSlide extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TabbedLoginPage(
-                      initialIndex: 1,
-                    ),
+                    builder: (context) => TabbedLoginPage(),
                   ),
                 );
               },
