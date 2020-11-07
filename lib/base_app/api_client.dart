@@ -35,6 +35,8 @@ class ApiClient {
       storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
       storedUserCredentials
           .setNickname(jsonDecode(response.body)["usuario"]["nombre"]);
+      storedUserCredentials
+          .setCarrera(jsonDecode(response.body)["usuario"]["carrera"]);
       print(storedUserCredentials.getNickname());
       saveUserCredentials();
       return true;
@@ -53,20 +55,10 @@ class ApiClient {
   Future<bool> recuperarPassword(String mail) async {
     String recuperarPass = baseUrl + "/usuarios/recuperarContra/";
 
-    //var resupuesta = await http.post(urlAutenticar,
-    //  body: {"username": username, "password": password});
-    //print(resupuesta.body);
     recuperarPass += mail;
     print("link recuperarpass" + recuperarPass);
     var dio = Dio();
     Response response = await dio.post(recuperarPass);
-    /*  Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TabbedLoginPage(),
-        ),
-      );
-      */
   }
 
   Course getCourse(String token, String courseId) {}

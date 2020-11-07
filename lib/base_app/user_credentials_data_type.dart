@@ -31,15 +31,17 @@ class UserCredentials {
   String token;
   List<String> searchedTerms;
   bool isNewUser;
+  String carrera;
 
-  UserCredentials({
-    this.isNewUser,
-    this.nickName,
-    this.token,
-  });
+  UserCredentials({this.isNewUser, this.nickName, this.token, this.carrera});
 
   setNickname(String newNickname) {
     nickName = encrypter.encrypt(newNickname, iv: iv).base64;
+    saveUserCredentials();
+  }
+
+  setCarrera(String newCarrera) {
+    carrera = encrypter.encrypt(newCarrera, iv: iv).base64;
     saveUserCredentials();
   }
 
@@ -54,6 +56,10 @@ class UserCredentials {
 
   String getToken() {
     return encrypter.decrypt64(token, iv: iv);
+  }
+
+  String getCarrera() {
+    return encrypter.decrypt64(carrera, iv: iv);
   }
 
   addSearch(String searchTearm) {

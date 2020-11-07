@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -225,10 +226,12 @@ class ElementTile extends StatelessWidget {
 
 class MasterHeader extends StatelessWidget {
   final Function(Widget) onElementSelected;
+
   const MasterHeader({Key key, this.onElementSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String nombre = storedUserCredentials.getNickname();
     return Stack(
       children: [
         //* BACKGROUND IMAGE
@@ -264,7 +267,7 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          'Nombre Apellido',
+                          " Hskjdfn",
                           overflow: TextOverflow.fade,
                           maxLines: 2,
                           style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -133,7 +134,7 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          'Nombre Apellido',
+                          storedUserCredentials.getNickname(),
                           overflow: TextOverflow.fade,
                           maxLines: 2,
                           style: TextStyle(
@@ -145,7 +146,7 @@ class MasterHeader extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            'carrera',
+                            storedUserCredentials.getCarrera(),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white70,
