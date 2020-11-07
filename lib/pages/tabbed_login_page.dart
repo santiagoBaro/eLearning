@@ -153,12 +153,12 @@ class LoginTab extends StatelessWidget {
                 controller: usernameController,
                 style: tabbedLoginInputTextStyle,
                 decoration: InputDecoration(
-                  hintText: 'e-Mail',
+                  hintText: 'E-Mail',
                   contentPadding: const EdgeInsets.all(15),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Por favor ingrese su e-Mail';
+                    return 'Por favor ingrese su E-Mail';
                   }
                   return null;
                 },
@@ -238,14 +238,7 @@ class LoginTab extends StatelessWidget {
               height: 20,
             ),
             //* LOGIN WITH GOOGLE BUTTON
-            FlatButton(
-              color: Colors.black,
-              onPressed: () {},
-              child: Text(
-                "Login With Google",
-                style: hilightTextStyle,
-              ),
-            ),
+
             SizedBox(
               height: 20,
             ),
@@ -263,27 +256,10 @@ class RecuperarPasswordTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final usernameController = TextEditingController();
-/*
-    Future<bool> recuperarPassword(String mail) async {
-      String recuperarPass = "http://localhost:8080/usuarios/recuperarContra/";
 
-      //var resupuesta = await http.post(urlAutenticar,
-      //  body: {"username": username, "password": password});
-      //print(resupuesta.body);
-      recuperarPass += mail;
-      print("link recuperarpass" + recuperarPass);
-      var dio = Dio();
-      Response response = await dio.post(recuperarPass);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TabbedLoginPage(),
-        ),
-      );
-    }
-*/
     return Container(
       child: Form(
+        key: _signupFormKey,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -344,10 +320,22 @@ class RecuperarPasswordTab extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(15),
                       textColor: myAppTheme['PrimaryActionButtonColor'],
-                      onPressed: () {
+                      onPressed: () async {
                         //TODO do separate function with checks
                         if (_signupFormKey.currentState.validate()) {
                           //   recuperarPassword(usernameController.text);
+                          print("justo despues de apretar boton" +
+                              usernameController.text);
+                          var client = ApiClient();
+                          await client.recuperarPassword(
+                            usernameController.text,
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TabbedLoginPage(),
+                            ),
+                          );
                         }
                       },
                     ),

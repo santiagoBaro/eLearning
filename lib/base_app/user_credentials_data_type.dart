@@ -61,10 +61,17 @@ class UserCredentials {
     searchedTerms.add(searchTearm);
   }
 
-  UserCredentials.fromJson(Map<String, dynamic> json) {
+/*  UserCredentials.fromJson(Map<String, dynamic> json) {
     nickName = json['nickName'];
     token = json['token'];
     isNewUser = json['isNewUser'];
+  }
+  */
+  factory UserCredentials.fromJson(Map<String, dynamic> json) {
+    return UserCredentials(nickName: json['nickName'], token: json['token']
+        // isNewUser = json['isNewUser'],
+
+        );
   }
 
   Map<String, dynamic> toJson() => {
