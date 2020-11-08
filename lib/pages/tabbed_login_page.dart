@@ -1,6 +1,7 @@
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_picker_dropdown.dart';
 import 'package:country_pickers/utils/utils.dart';
+import 'package:elearning/base_app/Inscripcion.dart';
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/app_builder.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
@@ -221,6 +222,7 @@ class LoginTab extends StatelessWidget {
                           password: passwordContrller.text,
                         );
                         if (valid) {
+                          client.getInscripciones();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:elearning/base_app/Inscripcion.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/couse_element_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
@@ -37,7 +38,10 @@ class ApiClient {
           .setNickname(jsonDecode(response.body)["usuario"]["nombre"]);
       storedUserCredentials
           .setCarrera(jsonDecode(response.body)["usuario"]["carrera"]);
+
+      storedUserCredentials.setId(jsonDecode(response.body)["usuario"]["_id"]);
       print(storedUserCredentials.getNickname());
+      print(" id es : " + storedUserCredentials.getId().toString());
       saveUserCredentials();
       return true;
     }
@@ -59,6 +63,32 @@ class ApiClient {
     print("link recuperarpass" + recuperarPass);
     var dio = Dio();
     Response response = await dio.post(recuperarPass);
+  }
+
+  Future<bool> getInscripciones() async {
+    print("entre acaaaaaaa");
+    var response = await http.get(
+      '$baseUrl/inscripciones/',
+      headers: {
+        HttpHeaders.authorizationHeader:
+            "Bearer ${storedUserCredentials.getToken()}",
+        "Content-Type": "application/json",
+      },
+    );
+    if (response.statusCode == 200) {
+      print("response ok");
+      var jsonResponse = json.decode(response.body);
+      List<Inscripcion> inscripciones = List<Inscripcion>();
+      int cantResponse = 0;
+      for (var i = 0; i < jsonResponse.length; i++) {
+        // userList.add(Inscripcion().fromJson(jsonResponse[i]));
+        cantResponse++;
+      }
+      print("cant response= " + cantResponse.toString());
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Course getCourse(String token, String courseId) {}

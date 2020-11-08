@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:elearning/base_app/Inscripcion.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,11 +33,24 @@ class UserCredentials {
   List<String> searchedTerms;
   bool isNewUser;
   String carrera;
+  int id;
+  List<Inscripcion> inscripciones;
 
-  UserCredentials({this.isNewUser, this.nickName, this.token, this.carrera});
+  UserCredentials(
+      {this.isNewUser,
+      this.nickName,
+      this.token,
+      this.carrera,
+      this.id,
+      this.inscripciones});
 
   setNickname(String newNickname) {
     nickName = encrypter.encrypt(newNickname, iv: iv).base64;
+    saveUserCredentials();
+  }
+
+  setId(int newId) {
+    id = newId;
     saveUserCredentials();
   }
 
@@ -60,6 +74,10 @@ class UserCredentials {
 
   String getCarrera() {
     return encrypter.decrypt64(carrera, iv: iv);
+  }
+
+  int getId() {
+    return this.id;
   }
 
   addSearch(String searchTearm) {
