@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:elearning/base_app/Inscripcion.dart';
+import 'package:elearning/data_types/Curso.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +36,8 @@ class UserCredentials {
   String carrera;
   int id;
   List<Inscripcion> inscripciones;
+  String mail;
+  List<Curso> cursos;
 
   UserCredentials(
       {this.isNewUser,
@@ -42,10 +45,20 @@ class UserCredentials {
       this.token,
       this.carrera,
       this.id,
-      this.inscripciones});
+      this.inscripciones,
+      this.mail});
+
+  setCursos(List<Curso> cursos) {
+    this.cursos = cursos;
+  }
 
   setNickname(String newNickname) {
     nickName = encrypter.encrypt(newNickname, iv: iv).base64;
+    saveUserCredentials();
+  }
+
+  setMail(String newMail) {
+    mail = encrypter.encrypt(newMail, iv: iv).base64;
     saveUserCredentials();
   }
 
@@ -64,8 +77,16 @@ class UserCredentials {
     saveUserCredentials();
   }
 
+  List<Curso> getCursos() {
+    return this.cursos;
+  }
+
   String getNickname() {
     return encrypter.decrypt64(nickName, iv: iv);
+  }
+
+  String getMail() {
+    return encrypter.decrypt64(mail, iv: iv);
   }
 
   String getToken() {

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:elearning/base_app/Inscripcion.dart';
+import 'package:elearning/data_types/Curso.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/couse_element_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
@@ -29,6 +30,7 @@ class ApiClient {
       body: jsonEncode(<String, String>{
         "username": username,
         "password": password,
+        "token": ""
       }),
       headers: {"Content-Type": "application/json"},
     );
@@ -38,7 +40,8 @@ class ApiClient {
           .setNickname(jsonDecode(response.body)["usuario"]["nombre"]);
       storedUserCredentials
           .setCarrera(jsonDecode(response.body)["usuario"]["carrera"]);
-
+      storedUserCredentials
+          .setMail(jsonDecode(response.body)["usuario"]["mail"]);
       storedUserCredentials.setId(jsonDecode(response.body)["usuario"]["_id"]);
       print(storedUserCredentials.getNickname());
       print(" id es : " + storedUserCredentials.getId().toString());
@@ -65,10 +68,10 @@ class ApiClient {
     Response response = await dio.post(recuperarPass);
   }
 
-  Future<bool> getInscripciones() async {
+  Future<bool> getCursos() async {
     print("entre acaaaaaaa");
     var response = await http.get(
-      '$baseUrl/inscripciones/',
+      '$baseUrl/cursos/obtenerCursosByUsuario/${storedUserCredentials.getMail()}',
       headers: {
         HttpHeaders.authorizationHeader:
             "Bearer ${storedUserCredentials.getToken()}",
@@ -78,10 +81,17 @@ class ApiClient {
     if (response.statusCode == 200) {
       print("response ok");
       var jsonResponse = json.decode(response.body);
-      List<Inscripcion> inscripciones = List<Inscripcion>();
+      List<Curso> cursos = List<Curso>();
       int cantResponse = 0;
       for (var i = 0; i < jsonResponse.length; i++) {
-        // userList.add(Inscripcion().fromJson(jsonResponse[i]));
+        Curso c = new Curso();
+
+        c.setNombre(jsonDecode(response.body)["nombre"]);
+        c.setDescripcion(jsonDecode(response.body)["descripcion"]);
+        // print("nombre curso " + c.getNombre());
+        cursos.add(c);
+        storedUserCredentials.setCursos(cursos);
+        saveUserCredentials();
         cantResponse++;
       }
       print("cant response= " + cantResponse.toString());

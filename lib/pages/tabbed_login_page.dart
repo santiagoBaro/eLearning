@@ -222,7 +222,7 @@ class LoginTab extends StatelessWidget {
                           password: passwordContrller.text,
                         );
                         if (valid) {
-                          client.getInscripciones();
+                          client.getCursos();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

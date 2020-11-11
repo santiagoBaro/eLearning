@@ -1,4 +1,5 @@
 import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/data_types/Curso.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -15,6 +16,7 @@ class MasterDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Curso> cursos = storedUserCredentials.getCursos();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +36,7 @@ class MasterDrawer extends StatelessWidget {
               icon: Icons.school_outlined,
             ),
           ),
-          MasterSubtitle(text: "proyecto"),
-          MasterSubtitle(text: ".net"),
+
           MasterSubtitle(text: "BD no-sql"),
           MasterSubtitle(text: "tct"),
 
