@@ -29,11 +29,11 @@ class Curso {
   }
 
   setNombre(String nombre) {
-    nombre = nombre;
+    this.nombre = nombre;
   }
 
   setDescripcion(String descripcion) {
-    descripcion = descripcion;
+    this.descripcion = descripcion;
   }
 
   setCreditos(int creditos) {

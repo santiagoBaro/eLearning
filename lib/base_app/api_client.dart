@@ -85,15 +85,16 @@ class ApiClient {
       int cantResponse = 0;
       for (var i = 0; i < jsonResponse.length; i++) {
         Curso c = new Curso();
-
-        c.setNombre(jsonDecode(response.body)["nombre"]);
-        c.setDescripcion(jsonDecode(response.body)["descripcion"]);
-        // print("nombre curso " + c.getNombre());
+        //c.setNombre("hola como andas");
+        c.setNombre(jsonDecode(response.body)[i]["nombre"]);
+        c.setDescripcion(jsonDecode(response.body)[i]["descripcion"]);
+        print("nombre curso " + c.getNombre());
         cursos.add(c);
-        storedUserCredentials.setCursos(cursos);
-        saveUserCredentials();
+
         cantResponse++;
       }
+      storedUserCredentials.setCursos(cursos);
+      saveUserCredentials();
       print("cant response= " + cantResponse.toString());
       return true;
     } else {

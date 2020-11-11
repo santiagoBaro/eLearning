@@ -17,6 +17,7 @@ class MasterDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Curso> cursos = storedUserCredentials.getCursos();
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +38,7 @@ class MasterDrawer extends StatelessWidget {
             ),
           ),
 
-          MasterSubtitle(text: "BD no-sql"),
+          //MasterSubtitle(text: cursos[0].getNombre()),
           MasterSubtitle(text: "tct"),
 
           InkWell(
