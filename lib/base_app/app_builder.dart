@@ -56,7 +56,7 @@ class _BaseAppState extends State<BaseApp> {
     prefs.setString("Sapio", nameController.text);
 
     setState(() {
-      storedUserCredentials.setNickname('newNickname');
+      storedUserCredentials.setName('newNickname');
       storedUserCredentials.setToken('newToken');
       storedUserCredentials.isNewUser = false;
     });

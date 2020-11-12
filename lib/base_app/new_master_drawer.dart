@@ -1,3 +1,5 @@
+import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -5,13 +7,15 @@ import 'package:elearning/pages/message_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
+import 'api_client.dart';
+
 class MasterDrawer extends StatelessWidget {
   final Function(Widget) onElementSelected;
-  const MasterDrawer({
+  MasterDrawer({
     Key key,
     @required this.onElementSelected,
   }) : super(key: key);
-
+  var client = ApiClient();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -25,30 +29,62 @@ class MasterDrawer extends StatelessWidget {
 
           InkWell(
             onTap: () => onElementSelected(
-              CoursePage(
-                  onElementSelected: (Widget val) => onElementSelected(val)),
+              CoursePage(),
             ),
             child: MasterTitle(
               text: "Cursos",
-              icon: Icons.school_outlined,
+              icon: Icons.school,
             ),
           ),
-          MasterSubtitle(text: "proyecto"),
-          MasterSubtitle(text: ".net"),
-          MasterSubtitle(text: "BD no-sql"),
-          MasterSubtitle(text: "tct"),
+          FutureBuilder<List<Course>>(
+            future: client.getCourseList(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data.length == 0) {
+                  return MasterSubtitle(text: "no hay cursos disponibles");
+                }
+                return ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                          onTap: () {},
+                          child: MasterSubtitle(
+                              text: snapshot.data[index].nombre));
+                    });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),
+          // InkWell(
+          //   onTap: () => onElementSelected(
+          //     CoursePage(
+          //         onElementSelected: (Widget val) => onElementSelected(val)),
+          //   ),
+          //   child: MasterTitle(
+          //     text: "Cursos",
+          //     icon: Icons.school_outlined,
+          //   ),
+          // ),
+          // MasterSubtitle(text: "proyecto"),
+          // MasterSubtitle(text: ".net"),
+          // MasterSubtitle(text: "BD no-sql"),
+          // MasterSubtitle(text: "tct"),
 
-          InkWell(
-            onTap: () => onElementSelected(MessagePage()),
-            child: MasterTitle(
-              text: "Mensajes",
-              icon: Icons.message_outlined,
-            ),
-          ),
-          MasterSubtitle(text: "profesor"),
-          MasterSubtitle(text: "grupo"),
-          MasterSubtitle(text: "companero"),
-          MasterSubtitle(text: "companero"),
+          // InkWell(
+          //   onTap: () => onElementSelected(MessagePage()),
+          //   child: MasterTitle(
+          //     text: "Mensajes",
+          //     icon: Icons.message_outlined,
+          //   ),
+          // ),
+          // MasterSubtitle(text: "profesor"),
+          // MasterSubtitle(text: "grupo"),
+          // MasterSubtitle(text: "companero"),
+          // MasterSubtitle(text: "companero"),
 
           InkWell(
             onTap: () => onElementSelected(BedeliasPage()),
@@ -133,7 +169,7 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          'Nombre Apellido',
+                          storedUserCredentials.userData.nombre,
                           overflow: TextOverflow.fade,
                           maxLines: 2,
                           style: TextStyle(
@@ -145,7 +181,7 @@ class MasterHeader extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            'carrera',
+                            storedUserCredentials.userData.carrera,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white70,
@@ -213,22 +249,25 @@ class MsterFooter extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    content: Column(
-                      children: [
-                        Text('Seguro que quieres cerrar sesion?'),
-                        Row(
-                          children: [
-                            FlatButton(
-                              onPressed: () {},
-                              child: Text('Cancelar'),
-                            ),
-                            FlatButton(
-                              onPressed: () {},
-                              child: Text('Si'),
-                            ),
-                          ],
-                        ),
-                      ],
+                    content: Container(
+                      height: 150,
+                      child: Column(
+                        children: [
+                          Text('Seguro que quieres cerrar sesion?'),
+                          Row(
+                            children: [
+                              FlatButton(
+                                onPressed: () {},
+                                child: Text('Cancelar'),
+                              ),
+                              FlatButton(
+                                onPressed: () {},
+                                child: Text('Si'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 });

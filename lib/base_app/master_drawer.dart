@@ -1,3 +1,5 @@
+import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -5,6 +7,8 @@ import 'package:elearning/pages/messages_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:elearning/tools/visual_assets.dart';
+
+import 'api_client.dart';
 
 class Master extends StatelessWidget {
   final Function(Widget) onElementSelected;
@@ -15,6 +19,7 @@ class Master extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var client = ApiClient();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,38 +30,40 @@ class Master extends StatelessWidget {
           ),
           //* LIST OF ELEMENTS
           //* GROUP
-          SizedBox(
-            height: 10,
+          InkWell(
+            onTap: () => onElementSelected(
+              CoursePage(),
+            ),
+            child: MasterTitle(
+              text: "Cursos",
+              icon: Icons.school,
+            ),
           ),
-          GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(CoursePage()),
-            name: 'Mis Cursos',
-            icon: Icons.school,
-            children: [
-              'Proyecto',
-              '.NET',
-              'BD No-SQL',
-              'TCT',
-            ],
+          FutureBuilder<List<Course>>(
+            future: client.getCourseList(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                          onTap: () {},
+                          child: MasterSubtitle(
+                              text: snapshot.data[index].nombre));
+                    });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           ),
-          SizedBox(
-            height: 10,
-          ),
-          GroupTile(
-            onElementSelected: (Widget val) =>
-                onElementSelected(MessagesListPage()),
-            name: 'Mensajes',
-            icon: Icons.mail_outline,
-            children: [
-              'profesor',
-              'grupo',
-              'companero',
-              'companero',
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
+
+          // InkWell(
+          //     onTap: () {}, child: MasterSubtitle(text: "matricular docente")),
+
+          SizedBox(height: 10),
           GroupTile(
             onElementSelected: (Widget val) =>
                 onElementSelected(BedeliasPage()),
@@ -69,9 +76,7 @@ class Master extends StatelessWidget {
               'competencia',
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           GroupTile(
             onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Organizacion',
@@ -83,9 +88,7 @@ class Master extends StatelessWidget {
               'consejo estudiantil',
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           GroupTile(
             onElementSelected: (Widget val) => onElementSelected(val),
             name: 'Consultas',
@@ -98,9 +101,7 @@ class Master extends StatelessWidget {
             ],
           ),
 
-          SizedBox(
-            height: 30,
-          ),
+          SizedBox(height: 30),
           //* FOOTER
           MsterFooter(),
         ],
@@ -264,7 +265,7 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          'Nombre Apellido',
+                          storedUserCredentials.userData.nombre,
                           overflow: TextOverflow.fade,
                           maxLines: 2,
                           style: TextStyle(
@@ -276,7 +277,7 @@ class MasterHeader extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            'carrera',
+                            storedUserCredentials.userData.carrera,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white70,
@@ -384,6 +385,81 @@ class CenterdText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(text),
+    );
+  }
+}
+
+class MasterTitle extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  const MasterTitle({Key key, this.text, this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 30,
+                height: 30,
+              ),
+              Icon(
+                icon,
+                color: Colors.grey[600],
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                text,
+                overflow: TextOverflow.clip,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.grey[600],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: 1,
+          margin: EdgeInsets.symmetric(
+            horizontal: 30,
+          ),
+          color: Colors.black12,
+        ),
+      ],
+    );
+  }
+}
+
+class MasterSubtitle extends StatelessWidget {
+  final String text;
+  const MasterSubtitle({Key key, this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 60,
+          height: 40,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.grey,
+          ),
+        ),
+      ],
     );
   }
 }

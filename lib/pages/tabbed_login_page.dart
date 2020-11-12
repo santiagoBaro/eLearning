@@ -1,7 +1,9 @@
+import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/app_builder.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class TabbedLoginPage extends StatefulWidget {
   TabbedLoginPage({Key key}) : super(key: key);
@@ -125,18 +127,37 @@ class LoginTab extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.all(15),
                     textColor: myAppTheme['PrimaryActionButtonColor'],
-                    onPressed: () {
+                    onPressed: () async {
                       // //TODO do separate function with checks
                       if (_loginFormKey.currentState.validate()) {
-                        storedUserCredentials
-                            .setNickname(usernameController.text);
-                        saveUserCredentials();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LandingPageLayoutBuilder(),
-                          ),
+                        bool valid = false;
+                        var client = ApiClient();
+                        valid = await client.login(
+                          username: usernameController.text,
+                          password: passwordContrller.text,
                         );
+                        if (valid) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LandingPageLayoutBuilder(),
+                            ),
+                          );
+                        } else {
+                          showToast('mail o contrasena incorrectos',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                        }
                       }
                     },
                   ),
@@ -144,15 +165,44 @@ class LoginTab extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             //* RECOVER PASSWORD
             FlatButton(
               color: Colors.black,
-              onPressed: () {
-                if (_loginFormKey.currentState.validate()) {
-                  storedUserCredentials.setNickname(usernameController.text);
-                  saveUserCredentials();
+              onPressed: () async {
+                if (usernameController.text != "") {
+                  bool valid = false;
+                  var client = ApiClient();
+                  valid = await client.recoverPassword(
+                      email: usernameController.text);
+                  if (valid) {
+                    showToast('revise su correo',
+                        context: context,
+                        animation: StyledToastAnimation.slideFromBottom,
+                        reverseAnimation: StyledToastAnimation.slideToBottom,
+                        startOffset: Offset(0.0, 3.0),
+                        reverseEndOffset: Offset(0.0, 3.0),
+                        position: StyledToastPosition.bottom,
+                        duration: Duration(seconds: 4),
+                        //Animation duration   animDuration * 2 <= duration
+                        animDuration: Duration(seconds: 1),
+                        curve: Curves.elasticOut,
+                        reverseCurve: Curves.fastOutSlowIn);
+                  } else {
+                    showToast('Error al enviar correo',
+                        context: context,
+                        animation: StyledToastAnimation.slideFromBottom,
+                        reverseAnimation: StyledToastAnimation.slideToBottom,
+                        startOffset: Offset(0.0, 3.0),
+                        reverseEndOffset: Offset(0.0, 3.0),
+                        position: StyledToastPosition.bottom,
+                        duration: Duration(seconds: 4),
+                        //Animation duration   animDuration * 2 <= duration
+                        animDuration: Duration(seconds: 1),
+                        curve: Curves.elasticOut,
+                        reverseCurve: Curves.fastOutSlowIn);
+                  }
                 }
               },
               child: Text(

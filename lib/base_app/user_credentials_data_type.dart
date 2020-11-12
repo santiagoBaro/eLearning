@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:elearning/data_types/user_dataType.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,31 +16,33 @@ Future<Null> saveUserCredentials() async {
 }
 
 final UserCredentials emptyUser = UserCredentials(
-  nickName: encrypter.encrypt("empty", iv: iv).base64,
+  name: encrypter.encrypt("empty", iv: iv).base64,
   token: encrypter.encrypt("empty", iv: iv).base64,
   isNewUser: true,
 );
 
 final UserCredentials logedOffUser = UserCredentials(
-  nickName: encrypter.encrypt("empty", iv: iv).base64,
+  name: encrypter.encrypt("empty", iv: iv).base64,
   token: encrypter.encrypt("empty", iv: iv).base64,
   isNewUser: false,
 );
 
 class UserCredentials {
-  String nickName;
+  String name;
+  String image;
   String token;
+  User userData;
   List<String> searchedTerms;
   bool isNewUser;
 
   UserCredentials({
     this.isNewUser,
-    this.nickName,
+    this.name,
     this.token,
   });
 
-  setNickname(String newNickname) {
-    nickName = encrypter.encrypt(newNickname, iv: iv).base64;
+  setName(String newNickname) {
+    name = encrypter.encrypt(newNickname, iv: iv).base64;
     saveUserCredentials();
   }
 
@@ -49,7 +52,7 @@ class UserCredentials {
   }
 
   String getNickname() {
-    return encrypter.decrypt64(nickName, iv: iv);
+    return encrypter.decrypt64(name, iv: iv);
   }
 
   String getToken() {
@@ -62,13 +65,13 @@ class UserCredentials {
   }
 
   UserCredentials.fromJson(Map<String, dynamic> json) {
-    nickName = json['nickName'];
+    name = json['nickName'];
     token = json['token'];
     isNewUser = json['isNewUser'];
   }
 
   Map<String, dynamic> toJson() => {
-        'nickName': nickName,
+        'nickName': name,
         'token': token,
         'isNewUser': isNewUser,
       };
