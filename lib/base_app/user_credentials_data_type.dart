@@ -74,5 +74,6 @@ class UserCredentials {
         'nickName': name,
         'token': token,
         'isNewUser': isNewUser,
+        'user': userData.toJson()
       };
 }

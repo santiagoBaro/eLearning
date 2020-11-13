@@ -1,11 +1,14 @@
+import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 class PendingTaskCard extends StatelessWidget {
+  final Task task;
   const PendingTaskCard({
     Key key,
+    @required this.task,
   }) : super(key: key);
 
   @override
@@ -38,7 +41,9 @@ class PendingTaskCard extends StatelessWidget {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Entrega'),
+                      Text(task.titulo),
+                      Text(task.instructions),
+                      Text(task.date),
                       Row(
                         children: [
                           FlatButton(
@@ -78,7 +83,7 @@ class PendingTaskCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '4/9',
+                    task.date,
                     style: mainTextStyle,
                   ),
                   Text(
@@ -105,12 +110,12 @@ class PendingTaskCard extends StatelessWidget {
               children: [
                 //* TASK NAME
                 Text(
-                  'Cuestionario',
+                  task.titulo,
                   style: mainTextStyle,
                 ),
                 //* COURSE NAME
                 Text(
-                  'proyecto',
+                  task.course,
                   style: secondaryTextStyle,
                 ),
               ],

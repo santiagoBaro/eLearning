@@ -1,3 +1,4 @@
+import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/elements/course_carrousell.dart';
 import 'package:elearning/elements/notification_card.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +23,15 @@ class LandingPage extends StatelessWidget {
             height: 1,
             color: Colors.black12,
           ),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
+          NotificationCard(foro: formRelleno),
         ],
       ),
     );

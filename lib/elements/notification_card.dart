@@ -1,8 +1,10 @@
+import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class NotificationCard extends StatefulWidget {
-  NotificationCard({Key key}) : super(key: key);
+  final Forum foro;
+  NotificationCard({Key key, @required this.foro}) : super(key: key);
 
   @override
   _NotificationCardState createState() => _NotificationCardState();
@@ -40,7 +42,7 @@ class _NotificationCardState extends State<NotificationCard> {
                 return AlertDialog(
                   content: Column(
                     children: [
-                      Text('Foro'),
+                      Text(widget.foro.title ?? ""),
                       Row(
                         children: [
                           FlatButton(
@@ -60,7 +62,7 @@ class _NotificationCardState extends State<NotificationCard> {
         },
         child: Column(
           children: [
-            NotificationCardHeader(),
+            NotificationCardHeader(foro: widget.foro),
             NitificationCardBody(),
           ],
         ),
@@ -70,7 +72,8 @@ class _NotificationCardState extends State<NotificationCard> {
 }
 
 class NotificationCardHeader extends StatelessWidget {
-  const NotificationCardHeader({Key key}) : super(key: key);
+  final Forum foro;
+  const NotificationCardHeader({Key key, this.foro}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,14 +97,14 @@ class NotificationCardHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //* COURSE NAME
+                //* FORUM TITLE
                 Text(
-                  'Nombre Curso',
+                  foro.title,
                   style: courseNameTextStyle,
                 ),
-                //* USER NAME
+                //* FORUM TYPE
                 Text(
-                  'Nombre usuario',
+                  foro.type,
                   style: userNameTextStyle,
                 ),
               ],
@@ -109,7 +112,7 @@ class NotificationCardHeader extends StatelessWidget {
           ),
           //* DATE
           Text(
-            '26/8',
+            foro.date,
             style: courseNameTextStyle,
           ),
           SizedBox(

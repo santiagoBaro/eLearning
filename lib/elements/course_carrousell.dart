@@ -35,6 +35,7 @@ class CourseCarrousel extends StatelessWidget {
                     onTap: () {},
                     child: InkWell(
                       onTap: () => onElementSelected(CoursePage(
+                        curso: courseRelleno,
                         onElementSelected: (Widget val) =>
                             onElementSelected(val),
                       )),
@@ -52,50 +53,6 @@ class CourseCarrousel extends StatelessWidget {
         }
         return Center(child: CircularProgressIndicator());
       },
-    );
-
-    SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () => onElementSelected(CoursePage(
-              onElementSelected: (Widget val) => onElementSelected(val),
-            )),
-            child: CourseCard(
-              name: 'Proyecto',
-              color: Colors.blueGrey,
-            ),
-          ),
-          InkWell(
-            onTap: () => onElementSelected(CoursePage(
-              onElementSelected: (Widget val) => onElementSelected(val),
-            )),
-            child: CourseCard(
-              name: '.NET',
-              color: Colors.amberAccent,
-            ),
-          ),
-          InkWell(
-            onTap: () => onElementSelected(CoursePage(
-              onElementSelected: (Widget val) => onElementSelected(val),
-            )),
-            child: CourseCard(
-              name: 'BD No-SQL',
-              color: Colors.yellowAccent,
-            ),
-          ),
-          InkWell(
-            onTap: () => onElementSelected(CoursePage(
-              onElementSelected: (Widget val) => onElementSelected(val),
-            )),
-            child: CourseCard(
-              name: 'Proyecto',
-              color: Colors.blueAccent,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

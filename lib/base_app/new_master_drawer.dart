@@ -29,7 +29,7 @@ class MasterDrawer extends StatelessWidget {
 
           InkWell(
             onTap: () => onElementSelected(
-              CoursePage(),
+              CoursePage(curso: courseRelleno),
             ),
             child: MasterTitle(
               text: "Cursos",
@@ -98,7 +98,7 @@ class MasterDrawer extends StatelessWidget {
           MasterSubtitle(text: "evento"),
 
           InkWell(
-            onTap: () => onElementSelected(CoursePage()),
+            onTap: () => onElementSelected(CoursePage(curso: courseRelleno)),
             child: MasterTitle(
               text: "Organizacion",
               icon: Icons.domain,
@@ -202,13 +202,13 @@ class MasterHeader extends StatelessWidget {
           bottom: 8,
           left: 100,
           child: FlatButton(
-            color: Colors.blueGrey,
+            color: Color(0xFFFB6107),
             onPressed: () => onElementSelected(LandingPage(
                 onElementSelected: (Widget val) => onElementSelected(val))),
             child: Text(
               'Home',
               style: TextStyle(
-                color: Colors.black54,
+                color: Colors.white,
                 fontSize: 18,
               ),
             ),

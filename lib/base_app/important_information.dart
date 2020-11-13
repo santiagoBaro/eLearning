@@ -1,3 +1,4 @@
+import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/elements/calendar_element.dart';
 import 'package:elearning/elements/pending_task_card.dart';
 import 'package:elearning/elements/pending_tasks_element.dart';
@@ -21,14 +22,13 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
         children: [
           Schedule(),
           Calendar(),
-          PendingTasks(),
-          PendingTaskCard(),
-          PendingTaskCard(),
-          PendingTaskCard(),
-          PendingTaskCard(),
-          PendingTaskCard(),
-          PendingTaskCard(),
-          PendingTaskCard(),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
+          PendingTaskCard(task: taskRelleno),
         ],
       ),
     );

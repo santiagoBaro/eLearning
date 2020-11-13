@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CourseHeader extends StatelessWidget {
-  const CourseHeader({Key key}) : super(key: key);
+  final String nombre;
+  final String grupo;
+  const CourseHeader({Key key, this.nombre, this.grupo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CourseHeader extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 60.0),
               child: Text(
-                'Nombre Curso',
+                nombre,
                 style: nameTextStyle,
               ),
             ),
@@ -33,7 +35,7 @@ class CourseHeader extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 60.0),
               child: Text(
-                'grupo',
+                grupo,
                 style: groupTextStyle,
               ),
             ),

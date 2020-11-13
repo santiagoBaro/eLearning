@@ -32,7 +32,7 @@ class Master extends StatelessWidget {
           //* GROUP
           InkWell(
             onTap: () => onElementSelected(
-              CoursePage(),
+              CoursePage(curso: courseRelleno),
             ),
             child: MasterTitle(
               text: "Cursos",

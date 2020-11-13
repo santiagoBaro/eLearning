@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^0.5.1+2
   table_calendar: ^2.3.0
   video_player: ^0.10.12+2
+  flutter_colorpicker: ^0.3.4
 
 dev_dependencies:
   flutter_test:
