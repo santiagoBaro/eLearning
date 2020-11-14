@@ -26,27 +26,30 @@ class CourseCarrousel extends StatelessWidget {
                   child: Text('Todavia no tienes ningur curso disponible')),
             );
           } else {
-            return ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: snapshot.data.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: InkWell(
-                      onTap: () => onElementSelected(CoursePage(
-                        curso: courseRelleno,
-                        onElementSelected: (Widget val) =>
-                            onElementSelected(val),
-                      )),
-                      child: CourseCard(
-                        name: snapshot.data[index].nombre,
-                        color: Colors.blueGrey,
+            return Container(
+              height: 140,
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: snapshot.data.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: InkWell(
+                        onTap: () => onElementSelected(CoursePage(
+                          curso: courseRelleno,
+                          onElementSelected: (Widget val) =>
+                              onElementSelected(val),
+                        )),
+                        child: CourseCard(
+                          name: snapshot.data[index].nombre,
+                          color: Colors.blueGrey,
+                        ),
                       ),
-                    ),
-                    //snapshot.data[index].nombre
-                  );
-                });
+                      //snapshot.data[index].nombre
+                    );
+                  }),
+            );
           }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");

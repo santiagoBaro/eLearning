@@ -11,13 +11,13 @@ class Forum {
   });
 
   Forum.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
+      : id = json['_id'],
         title = json['title'],
         date = json['date'],
         type = json['type'];
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        '_id': id,
         'title': title,
         'date': date,
         'type': type,

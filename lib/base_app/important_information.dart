@@ -3,6 +3,7 @@ import 'package:elearning/elements/calendar_element.dart';
 import 'package:elearning/elements/pending_task_card.dart';
 import 'package:elearning/elements/pending_tasks_element.dart';
 import 'package:elearning/elements/schedule_element.dart';
+import 'package:elearning/elements/user_task_listing.dart';
 import 'package:flutter/material.dart';
 
 class ImportantInformationSlide extends StatefulWidget {
@@ -22,13 +23,7 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
         children: [
           Schedule(),
           Calendar(),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
-          PendingTaskCard(task: taskRelleno),
+          UserTaskListing(),
         ],
       ),
     );

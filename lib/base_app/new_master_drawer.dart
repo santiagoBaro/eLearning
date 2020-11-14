@@ -36,55 +36,32 @@ class MasterDrawer extends StatelessWidget {
               icon: Icons.school,
             ),
           ),
-          FutureBuilder<List<Course>>(
-            future: client.getCourseList(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data.length == 0) {
-                  return MasterSubtitle(text: "no hay cursos disponibles");
+          Container(
+            height: 200,
+            child: FutureBuilder<List<Course>>(
+              future: client.getCourseList(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data.length == 0) {
+                    return MasterSubtitle(text: "no hay cursos disponibles");
+                  }
+                  return ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                            onTap: () {},
+                            child: MasterSubtitle(
+                                text: snapshot.data[index].nombre));
+                      });
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
                 }
-                return ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                          onTap: () {},
-                          child: MasterSubtitle(
-                              text: snapshot.data[index].nombre));
-                    });
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return Center(child: CircularProgressIndicator());
-            },
+                return Center(child: CircularProgressIndicator());
+              },
+            ),
           ),
-          // InkWell(
-          //   onTap: () => onElementSelected(
-          //     CoursePage(
-          //         onElementSelected: (Widget val) => onElementSelected(val)),
-          //   ),
-          //   child: MasterTitle(
-          //     text: "Cursos",
-          //     icon: Icons.school_outlined,
-          //   ),
-          // ),
-          // MasterSubtitle(text: "proyecto"),
-          // MasterSubtitle(text: ".net"),
-          // MasterSubtitle(text: "BD no-sql"),
-          // MasterSubtitle(text: "tct"),
-
-          // InkWell(
-          //   onTap: () => onElementSelected(MessagePage()),
-          //   child: MasterTitle(
-          //     text: "Mensajes",
-          //     icon: Icons.message_outlined,
-          //   ),
-          // ),
-          // MasterSubtitle(text: "profesor"),
-          // MasterSubtitle(text: "grupo"),
-          // MasterSubtitle(text: "companero"),
-          // MasterSubtitle(text: "companero"),
 
           InkWell(
             onTap: () => onElementSelected(BedeliasPage()),
@@ -342,20 +319,22 @@ class MasterSubtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 60,
-          height: 40,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey,
+    return Container(
+      height: 40,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 60,
           ),
-        ),
-      ],
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

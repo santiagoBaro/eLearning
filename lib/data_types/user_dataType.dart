@@ -25,12 +25,12 @@ class User {
 
   User.fromJson(Map<String, dynamic> json)
       : id = json['_id'],
-        nombre = json['nombre'] != null ? json['nombre'] : "",
-        mail = json['mail'] != null ? json['mail'] : "",
-        direccion = json['direccion'] != null ? json['direccion'] : "",
-        imagen = json['imagen'] != null ? json['imagen'] : "",
-        descripcion = json['descripcion'] != null ? json['descripcion'] : "",
-        carrera = json['carrera'] != null ? json['carrera'] : "",
+        nombre = json['nombre'],
+        mail = json['mail'],
+        direccion = json['direccion'],
+        imagen = json['imagen'],
+        descripcion = json['descripcion'],
+        carrera = json['carrera'] ?? "",
         tipoDocumento = json['tipoDocumento'],
         documento = json['documento'],
         tipoUsu = json['tipoUsu'];
@@ -42,6 +42,18 @@ class User {
         'carrera': carrera,
         'tipoDocumento': tipoDocumento,
         'documento': documento,
+      };
+
+  Map<String, dynamic> toCompleteJson() => {
+        'id': id,
+        'nombre': nombre,
+        'mail': mail,
+        'imagen': imagen,
+        'direccion': direccion,
+        'carrera': carrera,
+        'tipoDocumento': tipoDocumento,
+        'documento': documento,
+        'tipoUsu': tipoUsu,
       };
   Map<String, dynamic> toNestedJson() => {
         "Usuario": {

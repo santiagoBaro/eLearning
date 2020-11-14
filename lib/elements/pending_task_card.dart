@@ -14,6 +14,7 @@ class PendingTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 120,
       constraints: BoxConstraints(maxWidth: 600),
       margin: EdgeInsets.symmetric(
         vertical: 10,
@@ -115,7 +116,7 @@ class PendingTaskCard extends StatelessWidget {
                 ),
                 //* COURSE NAME
                 Text(
-                  task.course,
+                  task.instructions,
                   style: secondaryTextStyle,
                 ),
               ],

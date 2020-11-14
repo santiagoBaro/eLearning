@@ -10,7 +10,9 @@ import 'content_form.dart';
 import 'course_content_card.dart';
 import 'course_content_carrousell.dart';
 import 'course_form.dart';
+import 'course_forum_list.dart';
 import 'course_header.dart';
+import 'course_task_listing.dart';
 import 'foro_form.dart';
 import 'notification_card.dart';
 import 'pending_task_card.dart';
@@ -35,6 +37,7 @@ class CoursePageBody extends StatelessWidget {
                 nombre: curso.nombre,
                 grupo: curso.descripcion,
               ),
+              //* CONTENT
               ContentCarrousell(
                 curso: curso,
                 onElementSelected: (Widget val) => onElementSelected(val),
@@ -51,19 +54,8 @@ class CoursePageBody extends StatelessWidget {
                   vertical: 20,
                 ),
               ),
-              PendingTaskCard(
-                task: taskRelleno,
-              ),
-              PendingTaskCard(
-                task: taskRelleno,
-              ),
-              PendingTaskCard(
-                task: taskRelleno,
-              ),
-              PendingTaskCard(
-                task: taskRelleno,
-              ),
-              //* NOTIFICATIONS
+              CourseTaskListing(curso: curso),
+              //* FORUMS
               Container(
                 height: 1,
                 constraints: BoxConstraints(
@@ -75,9 +67,7 @@ class CoursePageBody extends StatelessWidget {
                   vertical: 20,
                 ),
               ),
-              NotificationCard(foro: formRelleno),
-              NotificationCard(foro: formRelleno),
-              NotificationCard(foro: formRelleno),
+              // CourseFormListing(curso: curso),
             ],
           ),
           Visibility(

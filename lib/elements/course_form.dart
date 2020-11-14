@@ -1,5 +1,6 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
+import 'package:elearning/data_types/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -45,7 +46,8 @@ class _CursoFormState extends State<CursoForm> {
       nombreContrller.text = widget.curso.nombre;
       creditosContrller.text = widget.curso.creditos.toString();
       descripcionContrller.text = widget.curso.descripcion;
-      currentColor = widget.curso.color;
+      currentColor =
+          HexColor.fromHex(widget.curso.descripcion); //widget.curso.color;
     }
   }
 
@@ -155,7 +157,7 @@ class _CursoFormState extends State<CursoForm> {
                       Course nuevoCurso = Course(
                         creditos: int.parse(creditosContrller.text),
                         nombre: nombreContrller.text,
-                        color: currentColor,
+                        color: currentColor.toHex(),
                         descripcion: descripcionContrller.text,
                         fechaInicio:
                             DateFormat('yyyy-MM-dd').format(selectedDate),

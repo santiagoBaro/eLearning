@@ -32,7 +32,6 @@ class UserCredentials {
   String image;
   String token;
   User userData;
-  List<String> searchedTerms;
   bool isNewUser;
 
   UserCredentials({
@@ -57,11 +56,6 @@ class UserCredentials {
 
   String getToken() {
     return encrypter.decrypt64(token, iv: iv);
-  }
-
-  addSearch(String searchTearm) {
-    searchedTerms.remove(searchTearm);
-    searchedTerms.add(searchTearm);
   }
 
   UserCredentials.fromJson(Map<String, dynamic> json) {

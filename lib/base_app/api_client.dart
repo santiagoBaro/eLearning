@@ -44,9 +44,10 @@ class ApiClient {
           .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
       storedUserCredentials.image =
           jsonDecode(response.body)["usuario"]["imagen"] ?? "";
-      saveUserCredentials();
       storedUserCredentials.userData =
           User.fromJson(jsonDecode(response.body)["usuario"]);
+      saveUserCredentials();
+      print(storedUserCredentials.userData.toCompleteJson());
       return true; // TODO cambiar por la logica comentada
       // if (jsonDecode(response.body)["usuario"]["tipoUsu"] != "A") {
       //   return true;
@@ -156,25 +157,27 @@ class ApiClient {
   }
 
   //* TASKS
-  Future<List<Task>> getEventsByUser() async {
+  Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
-      '$baseUrl/login',
+      '$baseUrl/tareas/byUsuario/${storedUserCredentials.userData.id}',
       headers: authHeader,
     );
+    print('getTasksByUser.statusCode : ${response.statusCode}');
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
       List<Task> contentList = List<Task>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(Task.fromJson(jsonResponse[i]));
       }
+      print(contentList.length);
       return contentList;
     }
     return List<Task>();
   }
 
-  Future<List<Task>> getEventsByCourse(Course course) async {
+  Future<List<Task>> getTasksByCourse({Course curso}) async {
     var response = await http.get(
-      '$baseUrl/login',
+      '$baseUrl/tareas/byCurso/${curso.id}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {
@@ -225,6 +228,41 @@ class ApiClient {
   }
 
   //* FORO
+  Future<List<Forum>> getForumByCourse({Course curso}) async {
+    var response = await http.get(
+      '$baseUrl/foros/byCurso/${curso.id}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      List<Forum> contentList = List<Forum>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        contentList.add(Forum.fromJson(jsonResponse[i]));
+      }
+      return contentList;
+    }
+    return List<Forum>();
+  }
+
+  Future<List<Forum>> getforumByUser() async {
+    var response = await http.get(
+      // TODO cambiar endpoint
+      '$baseUrl/foros/byCurso/${storedUserCredentials.userData.id}',
+      headers: authHeader,
+    );
+    print('getforumByUser.statusCode : ${response.statusCode}');
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      List<Forum> contentList = List<Forum>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        contentList.add(Forum.fromJson(jsonResponse[i]));
+      }
+      print(contentList.length);
+      return contentList;
+    }
+    return List<Forum>();
+  }
+
   Future<bool> addForum({Forum foro, Course curso}) async {
     var response = await http.post(
       '$baseUrl/foros/altaForo/${curso.id}',
