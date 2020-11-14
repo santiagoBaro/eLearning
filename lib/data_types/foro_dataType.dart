@@ -1,8 +1,11 @@
+import 'message_dataType.dart';
+
 class Forum {
   int id;
   String title;
   String date;
   String type;
+  List<Message> mensajes;
   Forum({
     this.id,
     this.date,

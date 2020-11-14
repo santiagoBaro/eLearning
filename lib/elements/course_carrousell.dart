@@ -36,11 +36,13 @@ class CourseCarrousel extends StatelessWidget {
                     return InkWell(
                       onTap: () {},
                       child: InkWell(
-                        onTap: () => onElementSelected(CoursePage(
-                          curso: courseRelleno,
-                          onElementSelected: (Widget val) =>
-                              onElementSelected(val),
-                        )),
+                        onTap: () => onElementSelected(
+                          CoursePage(
+                            curso: snapshot.data[index],
+                            onElementSelected: (Widget val) =>
+                                onElementSelected(val),
+                          ),
+                        ),
                         child: CourseCard(
                           name: snapshot.data[index].nombre,
                           color: Colors.blueGrey,

@@ -14,7 +14,7 @@ class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 118,
+      height: 102,
       constraints: BoxConstraints(
         maxWidth: 800,
       ),

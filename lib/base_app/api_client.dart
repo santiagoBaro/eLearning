@@ -114,7 +114,7 @@ class ApiClient {
       var jsonResponse = json.decode(response.body);
       List<Content> contentList = List<Content>();
       for (var i = 0; i < jsonResponse.length; i++) {
-        contentList.add(Content.fromNestedJson(jsonResponse[i]));
+        contentList.add(Content.fromJson(jsonResponse[i]));
       }
       return contentList;
     }
@@ -244,10 +244,10 @@ class ApiClient {
     return List<Forum>();
   }
 
-  Future<List<Forum>> getforumByUser() async {
+  Future<List<Forum>> getForumByUser() async {
     var response = await http.get(
       // TODO cambiar endpoint
-      '$baseUrl/foros/byCurso/${storedUserCredentials.userData.id}',
+      '$baseUrl/foros/byUser/${storedUserCredentials.userData.id}',
       headers: authHeader,
     );
     print('getforumByUser.statusCode : ${response.statusCode}');

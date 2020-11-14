@@ -1,6 +1,7 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
+import 'package:elearning/data_types/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -29,7 +30,7 @@ class _ContentFormState extends State<ContentForm> {
     super.initState();
     if (widget.content != null) {
       nombreContrller.text = widget.content.titulo;
-      currentColor = widget.content.color;
+      currentColor = HexColor.fromHex(widget.content.color);
     }
   }
 
@@ -156,7 +157,7 @@ class _ContentFormState extends State<ContentForm> {
                       isSubmitEnabled = false;
                       bool valid = false;
                       Content nuevoContent = Content(
-                        color: currentColor,
+                        color: currentColor.toHex(),
                         titulo: nombreContrller.text,
                       );
                       var client = ApiClient();

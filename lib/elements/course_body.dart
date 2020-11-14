@@ -3,19 +3,13 @@ import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/elements/task_form.dart';
-import 'package:elearning/pages/book_page.dart';
 import 'package:flutter/material.dart';
 
 import 'content_form.dart';
-import 'course_content_card.dart';
 import 'course_content_carrousell.dart';
 import 'course_form.dart';
-import 'course_forum_list.dart';
 import 'course_header.dart';
-import 'course_task_listing.dart';
 import 'foro_form.dart';
-import 'notification_card.dart';
-import 'pending_task_card.dart';
 
 class CoursePageBody extends StatelessWidget {
   final Function(Widget) onElementSelected;
@@ -38,9 +32,12 @@ class CoursePageBody extends StatelessWidget {
                 grupo: curso.descripcion,
               ),
               //* CONTENT
-              ContentCarrousell(
-                curso: curso,
-                onElementSelected: (Widget val) => onElementSelected(val),
+              Container(
+                height: 200,
+                child: ContentCarrousell(
+                  curso: curso,
+                  onElementSelected: (Widget val) => onElementSelected(val),
+                ),
               ),
               //* TASKS
               Container(
@@ -54,7 +51,7 @@ class CoursePageBody extends StatelessWidget {
                   vertical: 20,
                 ),
               ),
-              CourseTaskListing(curso: curso),
+              // CourseTaskListing(curso: curso),
               //* FORUMS
               Container(
                 height: 1,
@@ -79,7 +76,7 @@ class CoursePageBody extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return _buildPopUp(curso, context);
+                        return _buildPopUp(courseRelleno, context);
                       });
                 },
                 label: Text('Modificar curso'),

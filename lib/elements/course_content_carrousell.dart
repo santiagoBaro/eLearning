@@ -25,28 +25,29 @@ class ContentCarrousell extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 150,
-              child: Center(
-                  child: Text('Todavia no tienes ningur curso disponible')),
+              child: Center(child: Text('Todavia no hay contenido disponible')),
             );
           } else {
-            return ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: snapshot.data.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: InkWell(
-                      onTap: () => onElementSelected(BookPage()),
-                      child: CourseContentCard(
-                        icon: Icons.cancel_outlined,
-                        name: snapshot.data[index].titulo,
-                        bkgColor: Colors.green[300],
+            return Container(
+              height: 200,
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: snapshot.data.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: InkWell(
+                        onTap: () => onElementSelected(BookPage()),
+                        child: CourseContentCard(
+                          icon: Icons.cancel_outlined,
+                          name: snapshot.data[index].titulo,
+                          bkgColor: Colors.green[300],
+                        ),
                       ),
-                    ),
-                    //snapshot.data[index].nombre
-                  );
-                });
+                    );
+                  }),
+            );
           }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");

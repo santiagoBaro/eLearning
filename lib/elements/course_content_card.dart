@@ -32,6 +32,7 @@ class CourseContentCard extends StatelessWidget {
         horizontal: 13,
       ),
       height: 200,
+      width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
@@ -53,8 +54,7 @@ class CourseContentCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 130,
-                width: 175,
+                height: 70,
                 decoration: BoxDecoration(
                   color: bkgColor,
                   borderRadius: BorderRadius.only(
@@ -100,7 +100,7 @@ class CourseContentCard extends StatelessWidget {
           //* ICON
           Positioned(
             right: 20,
-            bottom: 55,
+            top: 30,
             child: Container(
               child: Stack(
                 children: [

@@ -2,12 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'hex_color.dart';
-
 class Content {
   int id;
   String titulo;
-  Color color;
+  String color;
 
   Content({
     this.color,
@@ -15,32 +13,33 @@ class Content {
     this.titulo,
   });
 
-  Content.fromJson(Map<String, dynamic> json)
-      : id = json['"Libro"']['id'],
-        color = HexColor.fromHex(json['"Libro"']['color']),
+  Content.fromNestedJson(Map<String, dynamic> json)
+      : id = json['"Libro"']['_id'],
+        color = json['"Libro"']['color'],
         titulo = json['Libro']['titulo'];
 
-  Content.fromNestedJson(Map<String, dynamic> json)
-      : id = json['id'],
-        color = HexColor.fromHex(json['color']),
+  Content.fromJson(Map<String, dynamic> json)
+      : id = json['_id'],
+        color = json['color'],
         titulo = json['titulo'];
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        '_id': id,
         'titulo': titulo,
-        'color': color.toHex(),
+        'color': color,
       };
 
   Map<String, dynamic> toNestedJson() => {
         "Libro": {
           "titulo": titulo,
-          "color": color.toHex(),
+          "color": color,
+          "_id": id,
         }
       };
 }
 
 Content contenidoRelleno = Content(
-  color: Colors.amberAccent,
+  color: "0xFF005377",
   titulo: "Practico",
   id: 0,
 );
