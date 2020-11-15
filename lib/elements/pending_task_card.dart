@@ -14,7 +14,7 @@ class PendingTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
+      height: 100,
       constraints: BoxConstraints(maxWidth: 600),
       margin: EdgeInsets.symmetric(
         vertical: 10,
@@ -44,7 +44,7 @@ class PendingTaskCard extends StatelessWidget {
                     children: [
                       Text(task.titulo),
                       Text(task.instructions),
-                      Text(task.date),
+                      Text(task.date.split("T")[0]),
                       Row(
                         children: [
                           FlatButton(
@@ -72,19 +72,19 @@ class PendingTaskCard extends StatelessWidget {
             //* COLOR DECORATION
             Container(
               width: 4,
-              height: 80,
+              height: 70,
               color: Colors.amber,
             ),
             //* DATE
             Container(
-              width: 50,
+              width: 90,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    task.date,
+                    _buildDate(task.date),
                     style: mainTextStyle,
                   ),
                   Text(
@@ -115,9 +115,13 @@ class PendingTaskCard extends StatelessWidget {
                   style: mainTextStyle,
                 ),
                 //* COURSE NAME
-                Text(
-                  task.instructions,
-                  style: secondaryTextStyle,
+                Container(
+                  child: Text(
+                    task.instructions,
+                    style: secondaryTextStyle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
                 ),
               ],
             ),
@@ -149,4 +153,10 @@ Future<List<File>> getFile() async {
     // User canceled the picker
     return List<File>();
   }
+}
+
+String _buildDate(String date) {
+  String base = date.split("T")[0];
+  var elem = base.split("-");
+  return "${elem[1]}/${elem[2]}";
 }

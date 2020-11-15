@@ -237,8 +237,11 @@ class ApiClient {
       var jsonResponse = json.decode(response.body);
       List<Forum> contentList = List<Forum>();
       for (var i = 0; i < jsonResponse.length; i++) {
-        contentList.add(Forum.fromJson(jsonResponse[i]));
+        Forum instance = Forum.fromJson(jsonResponse[i]);
+        contentList.add(instance);
+        print(instance.toJson());
       }
+      print(contentList.length);
       return contentList;
     }
     return List<Forum>();

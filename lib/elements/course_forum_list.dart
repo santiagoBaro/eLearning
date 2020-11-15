@@ -20,10 +20,11 @@ class CourseFormListing extends StatelessWidget {
             return Text("no hay foros disponibles");
           }
           return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(8),
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              return NotificationCard(foro: formRelleno);
+              return NotificationCard(foro: snapshot.data[index]);
             },
           );
         } else if (snapshot.hasError) {

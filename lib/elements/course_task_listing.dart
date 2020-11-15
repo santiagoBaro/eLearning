@@ -18,14 +18,15 @@ class CourseTaskListing extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Text("no hay tareas pendentes");
           }
-          return ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return PendingTaskCard(
-                task: snapshot.data[index],
-              );
-            },
+          return Container(
+            height: 500,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return PendingTaskCard(task: snapshot.data[index]);
+              },
+            ),
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");

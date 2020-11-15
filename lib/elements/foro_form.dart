@@ -24,7 +24,7 @@ class _ForoFormState extends State<ForoForm> {
   void initState() {
     super.initState();
     if (widget.form != null) {
-      titleContrller.text = widget.form.title;
+      titleContrller.text = widget.form.name;
       typeContrller.text = widget.form.type;
     }
   }
@@ -101,7 +101,7 @@ class _ForoFormState extends State<ForoForm> {
                         valid = await client.delForum(foro: widget.form);
                         if (valid) {
                           showToast(
-                              'el foro ${widget.form.title ?? ""} fue eliminada correctamente',
+                              'el foro ${widget.form.name ?? ""} fue eliminada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -152,7 +152,7 @@ class _ForoFormState extends State<ForoForm> {
                         valid = await client.updForum(foro: nuevoForo);
                         if (valid) {
                           showToast(
-                              'el foro ${nuevoForo.title} fue editado correctamente',
+                              'el foro ${nuevoForo.name} fue editado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -185,7 +185,7 @@ class _ForoFormState extends State<ForoForm> {
                         valid = await client.addForum(foro: nuevoForo);
                         if (valid) {
                           showToast(
-                              'el foro ${nuevoForo.title} fue creada correctamente',
+                              'el foro ${nuevoForo.name} fue creada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:

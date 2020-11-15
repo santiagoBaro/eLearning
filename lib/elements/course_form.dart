@@ -46,8 +46,8 @@ class _CursoFormState extends State<CursoForm> {
       nombreContrller.text = widget.curso.nombre;
       creditosContrller.text = widget.curso.creditos.toString();
       descripcionContrller.text = widget.curso.descripcion;
-      currentColor =
-          HexColor.fromHex(widget.curso.descripcion); //widget.curso.color;
+      // currentColor =
+      //     HexColor.fromHex(widget.curso.descripcion); //widget.curso.color;
     }
   }
 

@@ -16,6 +16,7 @@ class _NotificationCardState extends State<NotificationCard> {
     return Container(
       height: 102,
       constraints: BoxConstraints(
+        minWidth: 300,
         maxWidth: 800,
       ),
       margin: EdgeInsets.symmetric(
@@ -43,7 +44,7 @@ class _NotificationCardState extends State<NotificationCard> {
                 return AlertDialog(
                   content: Column(
                     children: [
-                      Text(widget.foro.title ?? ""),
+                      Text(widget.foro.name ?? ""),
                       Row(
                         children: [
                           FlatButton(
@@ -82,17 +83,13 @@ class NotificationCardHeader extends StatelessWidget {
       height: 50,
       child: Row(
         children: [
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           //* IMAGE
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: CircleAvatar(),
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -100,12 +97,12 @@ class NotificationCardHeader extends StatelessWidget {
               children: [
                 //* FORUM TITLE
                 Text(
-                  foro.title,
+                  foro.name ?? "nombre vacio",
                   style: courseNameTextStyle,
                 ),
                 //* FORUM TYPE
                 Text(
-                  foro.type,
+                  foro.type ?? "tipo vacio",
                   style: userNameTextStyle,
                 ),
               ],
@@ -113,12 +110,10 @@ class NotificationCardHeader extends StatelessWidget {
           ),
           //* DATE
           Text(
-            foro.date,
+            _buildDate(foro.date),
             style: courseNameTextStyle,
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
         ],
       ),
     );
@@ -159,3 +154,9 @@ TextStyle userNameTextStyle = TextStyle(
 TextStyle bodyTextStyle = TextStyle(
   color: myAppTheme['SecondaryTextColor'],
 );
+
+String _buildDate(String date) {
+  String base = date.split("T")[0];
+  var elem = base.split("-");
+  return "${elem[1]}/${elem[2]}";
+}

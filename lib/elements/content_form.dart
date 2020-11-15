@@ -30,7 +30,7 @@ class _ContentFormState extends State<ContentForm> {
     super.initState();
     if (widget.content != null) {
       nombreContrller.text = widget.content.titulo;
-      currentColor = HexColor.fromHex(widget.content.color);
+      // currentColor = HexColor.fromHex(widget.content.color);
     }
   }
 

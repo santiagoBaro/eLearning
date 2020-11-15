@@ -22,3 +22,11 @@ class Message {
         user = User.fromJson(json['usuario']),
         idForo = json['foro'];
 }
+
+List<Message> fromJsonList(List<dynamic> json) {
+  List<Message> messageList = List<Message>();
+  for (var i = 0; i < json.length; i++) {
+    messageList.add(Message.fromJson(json[i]));
+  }
+  return messageList;
+}

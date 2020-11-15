@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'content_form.dart';
 import 'course_content_carrousell.dart';
 import 'course_form.dart';
+import 'course_forum_list.dart';
 import 'course_header.dart';
+import 'course_task_listing.dart';
 import 'foro_form.dart';
 
 class CoursePageBody extends StatelessWidget {
@@ -51,7 +53,9 @@ class CoursePageBody extends StatelessWidget {
                   vertical: 20,
                 ),
               ),
-              // CourseTaskListing(curso: curso),
+
+              CourseTaskListing(curso: curso),
+
               //* FORUMS
               Container(
                 height: 1,
@@ -64,7 +68,10 @@ class CoursePageBody extends StatelessWidget {
                   vertical: 20,
                 ),
               ),
-              // CourseFormListing(curso: curso),
+              Container(
+                height: 1000,
+                child: CourseFormListing(curso: curso),
+              ),
             ],
           ),
           Visibility(
@@ -76,10 +83,10 @@ class CoursePageBody extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return _buildPopUp(courseRelleno, context);
+                        return _buildPopUp(curso, context);
                       });
                 },
-                label: Text('Modificar curso'),
+                label: Text(_abMessage(context)),
                 icon: Icon(Icons.border_color),
                 backgroundColor: Color(0xFFFB6107),
               ),
@@ -142,55 +149,60 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      content: ContentForm(
-                                          content: contenidoRelleno));
-                                });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 15),
-                            child: Text("Practico",
-                                style: TextStyle(color: Colors.black45)),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.grey[200])),
-                        )),
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      content: ContentForm(
-                                          content: contenidoRelleno));
-                                });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 15),
-                            child: Text("Teorico",
-                                style: TextStyle(color: Colors.black45)),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.grey[200])),
-                        )),
-                  ],
+              Container(
+                height: 200,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        content: ContentForm(
+                                            content: contenidoRelleno));
+                                  });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 15),
+                              child: Text("Practico",
+                                  style: TextStyle(color: Colors.black45)),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.grey[200])),
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        content: ContentForm(
+                                            content: contenidoRelleno));
+                                  });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0, vertical: 15),
+                              child: Text("Teorico",
+                                  style: TextStyle(color: Colors.black45)),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.grey[200])),
+                          )),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 15),
@@ -230,57 +242,60 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                    content: TaskForm(
-                                        task: taskRelleno, curso: curso));
-                              });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15),
-                          child: Text("leer capitulo 3",
-                              style: TextStyle(color: Colors.black45)),
+              Container(
+                height: 200,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      content: TaskForm(
+                                          task: taskRelleno, curso: curso));
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 15),
+                            child: Text("leer capitulo 3",
+                                style: TextStyle(color: Colors.black45)),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey[200])),
                         ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey[200])),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                    content: TaskForm(
-                                        task: taskRelleno, curso: curso));
-                              });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15),
-                          child: Text("cuestionario 2",
-                              style: TextStyle(color: Colors.black45)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      content: TaskForm(
+                                          task: taskRelleno, curso: curso));
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 15),
+                            child: Text("cuestionario 2",
+                                style: TextStyle(color: Colors.black45)),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey[200])),
                         ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey[200])),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 15),
@@ -320,59 +335,70 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                    content: ForoForm(form: formRelleno));
-                              });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15),
-                          child: Text("leer capitulo 3",
-                              style: TextStyle(color: Colors.black45)),
+              Container(
+                height: 200,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      content: ForoForm(form: formRelleno));
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 15),
+                            child: Text("leer capitulo 3",
+                                style: TextStyle(color: Colors.black45)),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey[200])),
                         ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey[200])),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                    content: ForoForm(form: formRelleno));
-                              });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 15),
-                          child: Text("cuestionario 2",
-                              style: TextStyle(color: Colors.black45)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      content: ForoForm(form: formRelleno));
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 15),
+                            child: Text("cuestionario 2",
+                                style: TextStyle(color: Colors.black45)),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey[200])),
                         ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.grey[200])),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
         )),
   );
+}
+
+String _abMessage(BuildContext context) {
+  if (MediaQuery.of(context).size.width > 800) {
+    return "Modificar Curso";
+  } else {
+    return "";
+  }
 }

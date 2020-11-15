@@ -37,6 +37,7 @@ class CourseHeader extends StatelessWidget {
               child: Text(
                 grupo,
                 style: groupTextStyle,
+                maxLines: 5,
               ),
             ),
           ],
