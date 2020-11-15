@@ -51,7 +51,8 @@ class MasterDrawer extends StatelessWidget {
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(
-                            onTap: () {},
+                            onTap: () => onElementSelected(
+                                CoursePage(curso: snapshot.data[index])),
                             child: MasterSubtitle(
                                 text: snapshot.data[index].nombre));
                       });
