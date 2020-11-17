@@ -36,32 +36,35 @@ class MasterDrawer extends StatelessWidget {
               icon: Icons.school,
             ),
           ),
-          Container(
-            height: 200,
-            child: FutureBuilder<List<Course>>(
-              future: client.getCourseList(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data.length == 0) {
-                    return MasterSubtitle(text: "no hay cursos disponibles");
-                  }
-                  return ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                            onTap: () => onElementSelected(
-                                CoursePage(curso: snapshot.data[index])),
-                            child: MasterSubtitle(
-                                text: snapshot.data[index].nombre));
-                      });
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
+          FutureBuilder<List<Course>>(
+            future: client.getCourseList(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data.length == 0) {
+                  return MasterSubtitle(text: "no hay cursos disponibles");
                 }
-                return Center(child: CircularProgressIndicator());
-              },
-            ),
+                return ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                          onTap: () => onElementSelected(
+                                CoursePage(
+                                  curso: snapshot.data[index],
+                                  onElementSelected: (Widget val) =>
+                                      onElementSelected(val),
+                                ),
+                              ),
+                          child: MasterSubtitle(
+                              text: snapshot.data[index].nombre));
+                    });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           ),
 
           InkWell(

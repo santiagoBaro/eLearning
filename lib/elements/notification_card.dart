@@ -17,7 +17,7 @@ class _NotificationCardState extends State<NotificationCard> {
       height: 102,
       constraints: BoxConstraints(
         minWidth: 300,
-        maxWidth: 800,
+        maxWidth: 600,
       ),
       margin: EdgeInsets.symmetric(
         vertical: 15,
@@ -65,7 +65,9 @@ class _NotificationCardState extends State<NotificationCard> {
         child: Column(
           children: [
             NotificationCardHeader(foro: widget.foro),
-            NitificationCardBody(),
+            NitificationCardBody(
+              foro: widget.foro,
+            ),
           ],
         ),
       ),
@@ -121,7 +123,8 @@ class NotificationCardHeader extends StatelessWidget {
 }
 
 class NitificationCardBody extends StatelessWidget {
-  const NitificationCardBody({Key key}) : super(key: key);
+  final Forum foro;
+  const NitificationCardBody({Key key, this.foro}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +136,7 @@ class NitificationCardBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Text(
-          'Dolor sunt aliquid maxime voluptatem saepe vel quia culpa adipisci. Et cupiditate hic deleniti dignissimos vel ipsam. Vel repellat maiores ut accusamus iusto. Natus odit accusantium vitae vel blanditiis fuga.',
+          foro.messages[0].contenido ?? "",
           style: bodyTextStyle,
         ),
       ),

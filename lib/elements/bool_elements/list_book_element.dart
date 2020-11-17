@@ -13,8 +13,8 @@ class ListBookElement extends StatelessWidget {
   ScrollController controller = ScrollController();
   ListBookElement({
     Key key,
-    this.title = 'consequatur corrupti voluptas',
-    this.elements = defaultList,
+    @required this.title,
+    @required this.elements,
   }) : super(key: key);
 
   @override

@@ -20,6 +20,7 @@ class CourseFormListing extends StatelessWidget {
             return Text("no hay foros disponibles");
           }
           return ListView.builder(
+            shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(8),
             itemCount: snapshot.data.length,

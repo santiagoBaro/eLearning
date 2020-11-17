@@ -1,15 +1,13 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/pages/book_page.dart';
 import 'package:flutter/material.dart';
+import 'content_form.dart';
 
-import 'course_content_card.dart';
-
-class ContentCarrousell extends StatelessWidget {
+class ContentFormListing extends StatelessWidget {
   final Function(Widget) onElementSelected;
   final Course curso;
-  const ContentCarrousell({
+  const ContentFormListing({
     Key key,
     @required this.curso,
     this.onElementSelected,
@@ -29,22 +27,38 @@ class ContentCarrousell extends StatelessWidget {
             );
           } else {
             return Container(
-              height: 200,
+              height: 75,
               child: ListView.builder(
+                  shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
                   itemCount: snapshot.data.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: InkWell(
-                        onTap: () => onElementSelected(
-                          BookPage(content: snapshot.data[index]),
-                        ),
-                        child: CourseContentCard(
-                          icon: Icons.cancel_outlined,
-                          name: snapshot.data[index].titulo,
-                          bkgColor: Colors.green[300],
+                    return Container(
+                      width: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: ContentForm(
+                                      content: snapshot.data[index],
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 15),
+                            child: Text(snapshot.data[index].titulo,
+                                style: TextStyle(color: Colors.black45)),
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey[200])),
                         ),
                       ),
                     );

@@ -5,11 +5,11 @@ const String defaultQuestion =
 
 class QuestionBookElement extends StatefulWidget {
   final String question;
-  final String id;
+  final int id;
   QuestionBookElement({
     Key key,
-    this.question = defaultQuestion,
-    this.id = '1',
+    @required this.question,
+    @required this.id,
   }) : super(key: key);
 
   @override

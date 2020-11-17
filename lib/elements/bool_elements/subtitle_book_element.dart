@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class SubtitleBookElement extends StatelessWidget {
   final String subTitle;
-  const SubtitleBookElement({Key key, this.subTitle = 'empty subtitle'})
-      : super(key: key);
+  const SubtitleBookElement({
+    Key key,
+    @required this.subTitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

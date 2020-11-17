@@ -29,6 +29,7 @@ class CourseCarrousel extends StatelessWidget {
             return Container(
               height: 140,
               child: ListView.builder(
+                  shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
                   itemCount: snapshot.data.length,
                   scrollDirection: Axis.horizontal,

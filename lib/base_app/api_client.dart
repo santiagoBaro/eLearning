@@ -5,10 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/couse_element_dataType.dart';
+import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/user_dataType.dart';
+import 'package:elearning/pages/book_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -156,6 +157,9 @@ class ApiClient {
     return false;
   }
 
+  //* BOOK
+  Future<List<BookElement>> getBook({Content content}) async {}
+
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
@@ -240,6 +244,7 @@ class ApiClient {
         Forum instance = Forum.fromJson(jsonResponse[i]);
         contentList.add(instance);
         print(instance.toJson());
+        print("message list lenght: ${instance.messages.length}");
       }
       print(contentList.length);
       return contentList;

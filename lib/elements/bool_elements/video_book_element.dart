@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoBookElement extends StatefulWidget {
+  final String videoUrl;
   VideoBookElement({
     Key key,
+    @required this.videoUrl,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class _VideoBookElementState extends State<VideoBookElement> {
   @override
   void initState() {
     _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      widget.videoUrl,
     );
 
     _initializeVideoPlayerFuture = _controller.initialize();

@@ -5,8 +5,10 @@ const String defaultText =
 
 class ParagraphBookElement extends StatelessWidget {
   final String text;
-  const ParagraphBookElement({Key key, this.text = defaultText})
-      : super(key: key);
+  const ParagraphBookElement({
+    Key key,
+    @required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
