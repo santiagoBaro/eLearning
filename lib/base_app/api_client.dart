@@ -163,7 +163,7 @@ class ApiClient {
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
-      '$baseUrl/tareas/byUsuario/${storedUserCredentials.userData.id}',
+      '$baseUrl/tareas/byUsuario/${storedUserCredentials.userData.mail}',
       headers: authHeader,
     );
     print('getTasksByUser.statusCode : ${response.statusCode}');

@@ -18,6 +18,7 @@ class UserTaskListing extends StatelessWidget {
             return Text("no hay tareas pendentes");
           }
           return ListView.builder(
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {

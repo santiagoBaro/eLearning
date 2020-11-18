@@ -31,6 +31,7 @@ class ContentCarrousell extends StatelessWidget {
             return Container(
               height: 200,
               child: ListView.builder(
+                  shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
                   itemCount: snapshot.data.length,
                   scrollDirection: Axis.horizontal,

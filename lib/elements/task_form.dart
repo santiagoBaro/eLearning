@@ -29,7 +29,7 @@ class _TaskFormState extends State<TaskForm> {
     if (widget.task != null) {
       titleContrller.text = widget.task.titulo;
       instructionsContrller.text = widget.task.instructions;
-      isEntrega = widget.task.entrega;
+      isEntrega = widget.task.entregable;
     }
   }
 

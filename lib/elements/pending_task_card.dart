@@ -18,7 +18,7 @@ class PendingTaskCard extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: 600),
       margin: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 30,
+        horizontal: 10,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
@@ -67,7 +67,7 @@ class PendingTaskCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
             //* COLOR DECORATION
             Container(
@@ -77,7 +77,7 @@ class PendingTaskCard extends StatelessWidget {
             ),
             //* DATE
             Container(
-              width: 90,
+              width: 60,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
@@ -104,26 +104,31 @@ class PendingTaskCard extends StatelessWidget {
               height: 60,
               color: Colors.grey[300],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //* TASK NAME
-                Text(
-                  task.titulo,
-                  style: mainTextStyle,
+            Expanded(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //* TASK NAME
+                    Text(
+                      task.titulo,
+                      style: mainTextStyle,
+                      overflow: TextOverflow.fade,
+                    ),
+                    //* COURSE NAME
+                    Container(
+                      child: Text(
+                        task.instructions,
+                        style: secondaryTextStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      ),
+                    ),
+                  ],
                 ),
-                //* COURSE NAME
-                Container(
-                  child: Text(
-                    task.instructions,
-                    style: secondaryTextStyle,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),

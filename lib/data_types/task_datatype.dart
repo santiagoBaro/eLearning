@@ -1,6 +1,6 @@
 class Task {
   int id;
-  bool entrega;
+  bool entregable;
   String date;
   String titulo;
   String instructions;
@@ -8,7 +8,7 @@ class Task {
   Task({
     this.id,
     this.date,
-    this.entrega,
+    this.entregable,
     this.instructions,
     this.titulo,
   });
@@ -17,11 +17,12 @@ class Task {
       : id = json['_id'],
         titulo = json['titulo'],
         date = json['fechaLimite'],
+        entregable = json['entregable'],
         instructions = json['descripcion'];
 
   Map<String, dynamic> toJson() => {
         '_id': id,
-        'entrega': entrega,
+        'entregable': entregable,
         'titulo': titulo,
         'fechaLimite': date,
         'descripcion': instructions,
@@ -31,7 +32,7 @@ class Task {
 Task taskRelleno = Task(
   id: 1,
   date: "10-11",
-  entrega: true,
+  entregable: true,
   titulo: "los panes",
   instructions: "Vitae et quia corporis quia dignissimos dolor tenetur.",
 );

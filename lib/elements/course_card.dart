@@ -33,6 +33,8 @@ class CourseCard extends StatelessWidget {
             Container(
               height: 100,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     height: 20,
@@ -44,16 +46,17 @@ class CourseCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 80,
-                    child: Center(
-                      child: Text(
-                        name,
-                        textAlign: TextAlign.start,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          name,
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
