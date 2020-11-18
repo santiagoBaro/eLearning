@@ -108,6 +108,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
         ),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CursoForm(curso: curso),
               SizedBox(height: 15),

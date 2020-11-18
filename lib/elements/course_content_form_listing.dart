@@ -22,12 +22,13 @@ class ContentFormListing extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Container(
-              height: 150,
+              height: 75,
               child: Center(child: Text('Todavia no hay contenido disponible')),
             );
           } else {
             return Container(
               height: 75,
+              width: 400,
               child: ListView.builder(
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
@@ -35,7 +36,8 @@ class ContentFormListing extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      width: 50,
+                      width: 150,
+                      height: 50,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(

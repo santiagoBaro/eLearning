@@ -17,18 +17,24 @@ class CourseForumFormListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Forum>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
-            return Text("no hay foros disponibles");
+            return Container(
+              height: 75,
+              child: Center(child: Text("no hay foros disponibles")),
+            );
           }
           return Container(
             height: 75,
+            width: 400,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(8),
               itemCount: snapshot.data.length,
+              scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  width: 50,
+                  width: 150,
+                  height: 50,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
