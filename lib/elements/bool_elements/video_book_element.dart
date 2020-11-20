@@ -18,8 +18,11 @@ class _VideoBookElementState extends State<VideoBookElement> {
 
   @override
   void initState() {
+    var url =
+        "https://firebasestorage.googleapis.com/v0/b/push-notifications-ee58a.appspot.com/o/No%20Copyright%2C%20Copyright%20Free%20Videos%2C%20Motion%20Graphics%2C%20Background%2C%20Animation%2C%20Video%20Clips%2C%20Download-2Gg6Seob5Mg.mp4?alt=media&token=f9bc7412-f96f-49b9-af41-bc4c5ae86e16";
     _controller = VideoPlayerController.network(
-      widget.videoUrl,
+      url,
+      //widget.videoUrl,
     );
 
     _initializeVideoPlayerFuture = _controller.initialize();

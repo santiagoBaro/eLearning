@@ -185,7 +185,7 @@ class _ForoFormState extends State<ForoForm> {
                         valid = await client.addForum(foro: nuevoForo);
                         if (valid) {
                           showToast(
-                              'el foro ${nuevoForo.name} fue creada correctamente',
+                              'el foro ${nuevoForo.name ?? ""} fue creada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:

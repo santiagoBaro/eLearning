@@ -1,8 +1,10 @@
 import 'package:elearning/data_types/task_datatype.dart';
+import 'package:elearning/firebase/upload_files.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'dart:io';
+import 'package:elearning/firebase/fire_storage_service.dart';
+import 'package:universal_html/prefer_universal/html.dart' as html;
 
 class PendingTaskCard extends StatelessWidget {
   final Task task;
@@ -52,8 +54,18 @@ class PendingTaskCard extends StatelessWidget {
                             child: Text('Cancelar'),
                           ),
                           FlatButton(
-                            onPressed: () {
-                              getFile();
+                            onPressed: () async {
+                              html.File file = await getFile();
+                              FireStorageService
+                                  .uploadImageToFirebaseAndShareDownloadUrl(
+                                file,
+                              );
+                              // FireStorageService.uploadToStorage(
+                              //   context: context,
+                              //   file: file,
+                              //   fileName: "pruebita",
+                              //   type: fileType.image.toString(),
+                              // );
                             },
                             child: Text('subir archivo'),
                           ),
@@ -147,21 +159,23 @@ TextStyle secondaryTextStyle = TextStyle(
   color: myAppTheme['PrimaryTextColor'],
 );
 
-Future<List<File>> getFile() async {
-  FilePickerResult result =
-      await FilePicker.platform.pickFiles(allowMultiple: true);
-
+Future<html.File> getFile() async {
+  FilePickerResult result = await FilePicker.platform.pickFiles();
+  html.File file;
   if (result != null) {
-    List<File> files = result.paths.map((path) => File(path)).toList();
-    return files;
-  } else {
-    // User canceled the picker
-    return List<File>();
-  }
+    file = html.File(result.files.single.bytes, "test");
+  } else {}
+  return file;
 }
 
 String _buildDate(String date) {
   String base = date.split("T")[0];
   var elem = base.split("-");
   return "${elem[1]}/${elem[2]}";
+}
+
+enum fileType {
+  video,
+  image,
+  file,
 }

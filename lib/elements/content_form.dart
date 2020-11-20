@@ -112,7 +112,7 @@ class _ContentFormState extends State<ContentForm> {
                         // valid = await client.delUser(user: widget.usuario);
                         if (valid) {
                           showToast(
-                              'el contenido ${widget.content} fue eliminado',
+                              'el contenido ${widget.content ?? ""} fue eliminado',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
