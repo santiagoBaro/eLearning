@@ -11,7 +11,7 @@ class FireStorageService extends ChangeNotifier {
     throw ("Platform not found");
   }
 
-  static Future<Uri> uploadToStorage({
+  static Future<Uri> olduploadToStorage({
     BuildContext context,
     html.File file,
     String type,
@@ -24,4 +24,12 @@ class FireStorageService extends ChangeNotifier {
       html.File info) async {
     throw ("Platform not found");
   }
+}
+
+void uploadToStorage() {
+  throw ("Platform not found");
+}
+
+void uploadImage({@required Function(File file) onSelected}) {
+  throw ("Platform not found");
 }

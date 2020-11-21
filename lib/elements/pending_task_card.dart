@@ -55,11 +55,7 @@ class PendingTaskCard extends StatelessWidget {
                           ),
                           FlatButton(
                             onPressed: () async {
-                              html.File file = await getFile();
-                              FireStorageService
-                                  .uploadImageToFirebaseAndShareDownloadUrl(
-                                file,
-                              );
+                              uploadToStorage();
                               // FireStorageService.uploadToStorage(
                               //   context: context,
                               //   file: file,
