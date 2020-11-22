@@ -211,7 +211,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                    content: TaskForm(curso: curso));
+                                    content: ForoForm(curso: curso));
                               });
                         },
                         style: ButtonStyle(

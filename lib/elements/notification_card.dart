@@ -2,6 +2,9 @@ import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
+import 'forum_message.dart';
+import 'message_footer.dart';
+
 class NotificationCard extends StatefulWidget {
   final Forum foro;
   NotificationCard({Key key, @required this.foro}) : super(key: key);
@@ -41,25 +44,7 @@ class _NotificationCardState extends State<NotificationCard> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  content: Column(
-                    children: [
-                      Text(widget.foro.name ?? ""),
-                      Row(
-                        children: [
-                          FlatButton(
-                            onPressed: () {},
-                            child: Text('Cancelar'),
-                          ),
-                          FlatButton(
-                            onPressed: () {},
-                            child: Text('Si'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+                return _buildPopUp(foro: widget.foro);
               });
         },
         child: Column(
@@ -85,13 +70,7 @@ class NotificationCardHeader extends StatelessWidget {
       height: 50,
       child: Row(
         children: [
-          SizedBox(width: 10),
-          //* IMAGE
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: CircleAvatar(),
-          ),
-          SizedBox(width: 10),
+          SizedBox(width: 50),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -162,4 +141,40 @@ String _buildDate(String date) {
   String base = date.split("T")[0];
   var elem = base.split("-");
   return "${elem[1]}/${elem[2]}";
+}
+
+Widget _buildPopUp({@required Forum foro}) {
+  return AlertDialog(
+    content: Container(
+      constraints: BoxConstraints(
+        maxHeight: 700,
+        maxWidth: 500,
+        minHeight: 200,
+        minWidth: 200,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          NotificationCardHeader(foro: foro),
+          Expanded(
+            child: Container(
+              height: 500,
+              width: 400,
+              child: ListView.builder(
+                itemCount: foro.messages.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ForumMessage(
+                    message: foro.messages[index],
+                  );
+                },
+              ),
+            ),
+          ),
+          MessageFooter(foro: foro),
+        ],
+      ),
+    ),
+  );
 }

@@ -9,7 +9,8 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ContentForm extends StatefulWidget {
   final Content content;
-  ContentForm({Key key, this.content}) : super(key: key);
+  final Course curso;
+  ContentForm({Key key, this.content, this.curso}) : super(key: key);
 
   @override
   _ContentFormState createState() => _ContentFormState();
@@ -109,10 +110,11 @@ class _ContentFormState extends State<ContentForm> {
                         isDeleteEnabled = false;
                         bool valid = false;
                         var client = ApiClient();
-                        // valid = await client.delUser(user: widget.usuario);
+                        valid = await client.delContent(
+                            content: widget.content, curso: widget.curso);
                         if (valid) {
                           showToast(
-                              'el contenido ${widget.content} fue eliminado',
+                              'el contenido ${widget.content ?? ""} fue eliminado',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -161,38 +163,73 @@ class _ContentFormState extends State<ContentForm> {
                         titulo: nombreContrller.text,
                       );
                       var client = ApiClient();
-                      nuevoContent.id = widget.content.id;
-                      valid = await client.updContent(content: nuevoContent);
-                      if (valid) {
-                        showToast(
-                            'el contenido ${nuevoContent.titulo} fue editado correctamente',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                        Navigator.of(context).pop();
+                      if (widget.content != null) {
+                        nuevoContent.id = widget.content.id;
+                        valid = await client.updContent(content: nuevoContent);
+                        if (valid) {
+                          showToast(
+                              'el contenido ${nuevoContent.titulo} fue editado correctamente',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                          Navigator.of(context).pop();
+                        } else {
+                          showToast('Error al modificar el curso',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                        }
                       } else {
-                        showToast('Error al modificar el curso',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
+                        valid = await client.addContent(content: nuevoContent);
+                        if (valid) {
+                          showToast(
+                              'el contenido ${nuevoContent.titulo} fue agregado correctamente',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                          Navigator.of(context).pop();
+                        } else {
+                          showToast('Error al agregar el curso',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                        }
                       }
 
                       isSubmitEnabled = true;

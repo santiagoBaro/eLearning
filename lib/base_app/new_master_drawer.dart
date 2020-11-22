@@ -27,14 +27,9 @@ class MasterDrawer extends StatelessWidget {
             onElementSelected: (Widget val) => onElementSelected(val),
           ),
 
-          InkWell(
-            onTap: () => onElementSelected(
-              CoursePage(curso: courseRelleno),
-            ),
-            child: MasterTitle(
-              text: "Cursos",
-              icon: Icons.school,
-            ),
+          MasterTitle(
+            text: "Cursos",
+            icon: Icons.school,
           ),
           FutureBuilder<List<Course>>(
             future: client.getCourseList(),

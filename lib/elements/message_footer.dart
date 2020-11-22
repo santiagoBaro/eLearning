@@ -1,7 +1,9 @@
+import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
 
 class MessageFooter extends StatefulWidget {
-  MessageFooter({Key key}) : super(key: key);
+  final Forum foro;
+  MessageFooter({Key key, @required this.foro}) : super(key: key);
 
   @override
   _MessageFooterState createState() => _MessageFooterState();
@@ -11,7 +13,7 @@ class _MessageFooterState extends State<MessageFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black12,
+      color: Colors.blueGrey,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -31,7 +33,10 @@ class _MessageFooterState extends State<MessageFooter> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.send),
+              icon: Icon(
+                Icons.send,
+                color: Colors.white,
+              ),
               onPressed: () {},
             ),
           ],

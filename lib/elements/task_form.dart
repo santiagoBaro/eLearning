@@ -18,7 +18,7 @@ class _TaskFormState extends State<TaskForm> {
   DateTime selectedDate = DateTime.now();
   final titleContrller = TextEditingController();
   final instructionsContrller = TextEditingController();
-  bool isEntrega;
+  bool isEntrega = false;
 
   bool isSubmitEnabled = true;
   bool isDeleteEnabled = true;
@@ -60,7 +60,7 @@ class _TaskFormState extends State<TaskForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'entrega form',
+                  'foro form',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -113,39 +113,41 @@ class _TaskFormState extends State<TaskForm> {
                     onPressed: () async {
                       if (isDeleteEnabled) {
                         isDeleteEnabled = false;
-                        bool valid = false;
-                        var client = ApiClient();
-                        valid = await client.delTask(task: widget.task);
-                        if (valid) {
-                          showToast(
-                              'la entrega ${widget.task.titulo ?? ""} fue eliminada correctamente',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
-                          Navigator.of(context).pop();
-                        } else {
-                          showToast('Error al eliminar la entrega',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
+                        if (widget.task != null) {
+                          bool valid = false;
+                          var client = ApiClient();
+                          valid = await client.delTask(task: widget.task);
+                          if (valid) {
+                            showToast(
+                                'la entrega ${widget.task.titulo ?? ""} fue eliminada correctamente',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                            Navigator.of(context).pop();
+                          } else {
+                            showToast('Error al eliminar la entrega',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                          }
                         }
                         isDeleteEnabled = true;
                       }
@@ -164,8 +166,8 @@ class _TaskFormState extends State<TaskForm> {
                       bool valid = false;
                       Task nuevaTask = Task();
                       var client = ApiClient();
-                      nuevaTask.id = widget.task.id;
                       if (widget.task != null) {
+                        nuevaTask.id = widget.task.id;
                         valid = await client.updTask(task: nuevaTask);
                         if (valid) {
                           showToast(

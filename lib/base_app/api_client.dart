@@ -48,13 +48,12 @@ class ApiClient {
       storedUserCredentials.userData =
           User.fromJson(jsonDecode(response.body)["usuario"]);
       saveUserCredentials();
-      print(storedUserCredentials.userData.toCompleteJson());
-      return true; // TODO cambiar por la logica comentada
-      // if (jsonDecode(response.body)["usuario"]["tipoUsu"] != "A") {
-      //   return true;
-      // }
-      // return false;
-
+      //print(storedUserCredentials.userData.toCompleteJson());
+      //return true; // TODO cambiar por la logica comentada
+      if (jsonDecode(response.body)["usuario"]["tipoUsu"] != "A") {
+        return true;
+      }
+      return false;
     }
     return false;
   }
@@ -255,7 +254,7 @@ class ApiClient {
   Future<List<Forum>> getForumByUser() async {
     var response = await http.get(
       // TODO cambiar endpoint
-      '$baseUrl/foros/byUser/${storedUserCredentials.userData.id}',
+      '$baseUrl/foros/byUser/${storedUserCredentials.userData.mail}',
       headers: authHeader,
     );
     print('getforumByUser.statusCode : ${response.statusCode}');
@@ -306,6 +305,8 @@ class ApiClient {
       return false;
     }
   }
+
+  Future<bool> addComentFormun({Forum foro, String message}) {}
 
   comForum(String forumId, String message) {}
 }

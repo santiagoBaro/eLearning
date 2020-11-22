@@ -1,11 +1,13 @@
 import 'package:elearning/base_app/api_client.dart';
+import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ForoForm extends StatefulWidget {
   final Forum form;
-  ForoForm({Key key, this.form}) : super(key: key);
+  final Course curso;
+  ForoForm({Key key, this.form, this.curso}) : super(key: key);
 
   @override
   _ForoFormState createState() => _ForoFormState();
@@ -13,7 +15,7 @@ class ForoForm extends StatefulWidget {
 
 class _ForoFormState extends State<ForoForm> {
   final _formKey = GlobalKey<FormState>();
-  DateTime selectedDate = DateTime.now();
+  // DateTime selectedDate = DateTime.now();
   final titleContrller = TextEditingController();
   final typeContrller = TextEditingController();
 
@@ -96,39 +98,41 @@ class _ForoFormState extends State<ForoForm> {
                     onPressed: () async {
                       if (isDeleteEnabled) {
                         isDeleteEnabled = false;
-                        bool valid = false;
-                        var client = ApiClient();
-                        valid = await client.delForum(foro: widget.form);
-                        if (valid) {
-                          showToast(
-                              'el foro ${widget.form.name ?? ""} fue eliminada correctamente',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
-                          Navigator.of(context).pop();
-                        } else {
-                          showToast('Error al eliminar el foro',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
+                        if (widget.form != null) {
+                          bool valid = false;
+                          var client = ApiClient();
+                          valid = await client.delForum(foro: widget.form);
+                          if (valid) {
+                            showToast(
+                                'el foro ${widget.form.name ?? ""} fue eliminada correctamente',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                            Navigator.of(context).pop();
+                          } else {
+                            showToast('Error al eliminar el foro',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                          }
                         }
                         isDeleteEnabled = true;
                       }
@@ -147,8 +151,8 @@ class _ForoFormState extends State<ForoForm> {
                       bool valid = false;
                       Forum nuevoForo = Forum();
                       var client = ApiClient();
-                      nuevoForo.id = widget.form.id;
                       if (widget.form != null) {
+                        nuevoForo.id = widget.form.id;
                         valid = await client.updForum(foro: nuevoForo);
                         if (valid) {
                           showToast(

@@ -32,7 +32,7 @@ class MessagePage extends StatelessWidget {
               ),
             ),
           ),
-          MessageFooter(),
+          // MessageFooter(),
         ],
       ),
     );
