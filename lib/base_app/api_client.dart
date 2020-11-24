@@ -40,17 +40,15 @@ class ApiClient {
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
-      storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
-      storedUserCredentials
-          .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
-      storedUserCredentials.image =
-          jsonDecode(response.body)["usuario"]["imagen"] ?? "";
-      storedUserCredentials.userData =
-          User.fromJson(jsonDecode(response.body)["usuario"]);
-      saveUserCredentials();
-      //print(storedUserCredentials.userData.toCompleteJson());
-      //return true; // TODO cambiar por la logica comentada
       if (jsonDecode(response.body)["usuario"]["tipoUsu"] != "A") {
+        storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
+        storedUserCredentials
+            .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
+        storedUserCredentials.image =
+            jsonDecode(response.body)["usuario"]["imagen"] ?? "";
+        storedUserCredentials.userData =
+            User.fromJson(jsonDecode(response.body)["usuario"]);
+        saveUserCredentials();
         return true;
       }
       return false;
@@ -66,10 +64,7 @@ class ApiClient {
       }),
       headers: {"Content-Type": "application/json"},
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   //* COURSES
@@ -97,11 +92,7 @@ class ApiClient {
       body: jsonEncode(course.toNestedJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return response.statusCode == 200;
   }
 
   //* CONTENT
@@ -127,33 +118,24 @@ class ApiClient {
       body: jsonEncode(content.toNestedJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   Future<bool> updContent({Content content, Course curso}) async {
     var response = await http.post(
-      '$baseUrl/libros/editarLibro/${curso.id}',
+      '$baseUrl/libros/editarLibro/${content.id}',
       body: jsonEncode(content.toNestedJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   Future<bool> delContent({Content content, Course curso}) async {
     var response = await http.post(
-      '$baseUrl/libros/editarLibro/${content.id}/${curso.id}',
+      '$baseUrl/libros/bajaLibro/${content.id}/${curso.id}',
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   //* BOOK
@@ -194,40 +176,30 @@ class ApiClient {
     return List<Task>();
   }
 
-  Future<bool> addTask({Task task}) async {
+  Future<bool> addTask({Task task, Course curso}) async {
     var response = await http.post(
-      '$baseUrl/login',
+      '$baseUrl/tareas/altaTarea/${curso.id}',
       body: jsonEncode(task.toJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   Future<bool> updTask({Task task}) async {
     var response = await http.post(
-      '$baseUrl/login',
+      '$baseUrl/tareas/editarTarea/${task.id}',
       body: jsonEncode(task.toJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
-  Future<bool> delTask({Task task}) async {
+  Future<bool> delTask({Task task, Course curso}) async {
     var response = await http.delete(
-      '$baseUrl/usuarios/${task.id}',
+      '$baseUrl/tareas/bajaTarea/${curso.id}/${task.id}',
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return response.statusCode == 200;
   }
 
   //* FORO
@@ -276,10 +248,7 @@ class ApiClient {
       body: jsonEncode(foro.toJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   Future<bool> updForum({Forum foro}) async {
@@ -288,10 +257,7 @@ class ApiClient {
       body: jsonEncode(foro.toJson()),
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
+    return response.statusCode == 200;
   }
 
   Future<bool> delForum({Forum foro, Course curso}) async {
@@ -299,14 +265,17 @@ class ApiClient {
       '$baseUrl/foros/bajaForo/${foro.id}/${curso.id}',
       headers: authHeader,
     );
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return response.statusCode == 200;
   }
 
-  Future<bool> addComentFormun({Forum foro, String message}) {}
+  Future<bool> addComentFormun({Forum foro, String message}) async {
+    var response = await http.post(
+      '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.userData.id}',
+      body: jsonEncode(foro.toJson()),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
 
   comForum(String forumId, String message) {}
 }

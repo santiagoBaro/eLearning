@@ -3,14 +3,13 @@ import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/hex_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ContentForm extends StatefulWidget {
   final Content content;
   final Course curso;
-  ContentForm({Key key, this.content, this.curso}) : super(key: key);
+  ContentForm({Key key, this.content, @required this.curso}) : super(key: key);
 
   @override
   _ContentFormState createState() => _ContentFormState();
@@ -165,7 +164,8 @@ class _ContentFormState extends State<ContentForm> {
                       var client = ApiClient();
                       if (widget.content != null) {
                         nuevoContent.id = widget.content.id;
-                        valid = await client.updContent(content: nuevoContent);
+                        valid = await client.updContent(
+                            content: nuevoContent, curso: widget.curso);
                         if (valid) {
                           showToast(
                               'el contenido ${nuevoContent.titulo} fue editado correctamente',
@@ -198,7 +198,8 @@ class _ContentFormState extends State<ContentForm> {
                               reverseCurve: Curves.fastOutSlowIn);
                         }
                       } else {
-                        valid = await client.addContent(content: nuevoContent);
+                        valid = await client.addContent(
+                            content: nuevoContent, curso: widget.curso);
                         if (valid) {
                           showToast(
                               'el contenido ${nuevoContent.titulo} fue agregado correctamente',

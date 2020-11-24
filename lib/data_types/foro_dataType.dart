@@ -21,9 +21,9 @@ class Forum {
         messages = fromJsonList(json['mensajes']);
 
   Map<String, dynamic> toJson() => {
-        '_id': id,
+        //'_id': id,
         'nombre': name,
-        'fecha': date,
+        //'fecha': date,
         'tipo': type,
       };
 }

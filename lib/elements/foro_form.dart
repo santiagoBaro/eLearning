@@ -2,12 +2,13 @@ import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ForoForm extends StatefulWidget {
   final Forum form;
   final Course curso;
-  ForoForm({Key key, this.form, this.curso}) : super(key: key);
+  ForoForm({Key key, this.form, @required this.curso}) : super(key: key);
 
   @override
   _ForoFormState createState() => _ForoFormState();
@@ -15,7 +16,6 @@ class ForoForm extends StatefulWidget {
 
 class _ForoFormState extends State<ForoForm> {
   final _formKey = GlobalKey<FormState>();
-  // DateTime selectedDate = DateTime.now();
   final titleContrller = TextEditingController();
   final typeContrller = TextEditingController();
 
@@ -58,7 +58,7 @@ class _ForoFormState extends State<ForoForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'entrega form',
+                  'foro form',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -74,7 +74,7 @@ class _ForoFormState extends State<ForoForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: typeContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'tipo'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -149,7 +149,11 @@ class _ForoFormState extends State<ForoForm> {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
                       bool valid = false;
-                      Forum nuevoForo = Forum();
+                      Forum nuevoForo = Forum(
+                        type: typeContrller.text,
+                        name: titleContrller.text,
+                        date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                      );
                       var client = ApiClient();
                       if (widget.form != null) {
                         nuevoForo.id = widget.form.id;
@@ -186,7 +190,8 @@ class _ForoFormState extends State<ForoForm> {
                               reverseCurve: Curves.fastOutSlowIn);
                         }
                       } else {
-                        valid = await client.addForum(foro: nuevoForo);
+                        valid = await client.addForum(
+                            foro: nuevoForo, curso: widget.curso);
                         if (valid) {
                           showToast(
                               'el foro ${nuevoForo.name} fue creada correctamente',

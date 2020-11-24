@@ -122,177 +122,65 @@ class _BookPageState extends State<BookPage> {
       //
       switch (book[index].type) {
         case ElementType.image:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                    child: ImageBookElement(imageUrl: book[index].elements[0])),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Center(
+                child: ImageBookElement(imageUrl: book[index].elements[0])),
           );
           break;
         case ElementType.list:
           var sublist = book[index].elements;
           sublist.removeAt(1);
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ListBookElement(
-                    title: book[index].elements[0], elements: sublist),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ListBookElement(
+                title: book[index].elements[0], elements: sublist),
           );
           break;
         case ElementType.multiple_choise:
           var sublist = book[index].elements;
           sublist.removeAt(1);
           sublist.removeAt(1);
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: MultiplechoiceBookElement(
-                  question: book[index].elements[1],
-                  answer: int.parse(book[index].elements[0]),
-                  options: sublist,
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: MultiplechoiceBookElement(
+              question: book[index].elements[1],
+              answer: int.parse(book[index].elements[0]),
+              options: sublist,
+            ),
           );
           break;
         case ElementType.paragraph:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ParagraphBookElement(text: book[index].elements[0]),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ParagraphBookElement(text: book[index].elements[0]),
           );
           break;
         case ElementType.question:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: QuestionBookElement(
-                  question: book[index].elements[0],
-                  id: book[index].id,
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: QuestionBookElement(
+              question: book[index].elements[0],
+              id: book[index].id,
+            ),
           );
           break;
         case ElementType.subtitle:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SubtitleBookElement(subTitle: book[index].elements[0]),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SubtitleBookElement(subTitle: book[index].elements[0]),
           );
           break;
         case ElementType.title:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TitleBookElement(title: book[index].elements[0]),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TitleBookElement(title: book[index].elements[0]),
           );
           break;
         case ElementType.video:
-          return Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: VideoBookElement(videoUrl: book[index].elements[0]),
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: ElevatedButton(
-                  child: Text('mod'),
-                  onPressed: () {
-                    _buildPopUp(element: book[index]);
-                  },
-                ),
-              ),
-            ],
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: VideoBookElement(videoUrl: book[index].elements[0]),
           );
           break;
         default:

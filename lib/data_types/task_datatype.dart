@@ -21,7 +21,7 @@ class Task {
         instructions = json['descripcion'];
 
   Map<String, dynamic> toJson() => {
-        '_id': id,
+        //'_id': id,
         'entregable': entregable,
         'titulo': titulo,
         'fechaLimite': date,

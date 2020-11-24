@@ -43,8 +43,10 @@ class CourseForumFormListing extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                  content:
-                                      ForoForm(form: snapshot.data[index]));
+                                  content: ForoForm(
+                                form: snapshot.data[index],
+                                curso: curso,
+                              ));
                             });
                       },
                       child: Padding(

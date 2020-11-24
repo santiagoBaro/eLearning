@@ -48,6 +48,7 @@ class ContentFormListing extends StatelessWidget {
                                   return AlertDialog(
                                     content: ContentForm(
                                       content: snapshot.data[index],
+                                      curso: curso,
                                     ),
                                   );
                                 });

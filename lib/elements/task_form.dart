@@ -2,6 +2,7 @@ import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class TaskForm extends StatefulWidget {
@@ -22,6 +23,19 @@ class _TaskFormState extends State<TaskForm> {
 
   bool isSubmitEnabled = true;
   bool isDeleteEnabled = true;
+
+  _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
 
   @override
   void initState() {
@@ -60,7 +74,7 @@ class _TaskFormState extends State<TaskForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'foro form',
+                  'entrega form',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -76,7 +90,7 @@ class _TaskFormState extends State<TaskForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: instructionsContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'descripcion'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -91,6 +105,16 @@ class _TaskFormState extends State<TaskForm> {
                     });
                   },
                   value: isEntrega,
+                ),
+                RaisedButton(
+                  onPressed: () => _selectDate(context), // Refer step 3
+                  child: Text(
+                    'Fecha de inicio - ' +
+                        DateFormat('yyyy-MM-dd').format(selectedDate),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  color: Color(0xFFFB6107),
                 ),
               ],
             ),
@@ -164,7 +188,12 @@ class _TaskFormState extends State<TaskForm> {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
                       bool valid = false;
-                      Task nuevaTask = Task();
+                      Task nuevaTask = Task(
+                        date: DateFormat('yyyy-MM-dd').format(selectedDate),
+                        entregable: isEntrega,
+                        instructions: instructionsContrller.text,
+                        titulo: titleContrller.text,
+                      );
                       var client = ApiClient();
                       if (widget.task != null) {
                         nuevaTask.id = widget.task.id;
@@ -201,7 +230,8 @@ class _TaskFormState extends State<TaskForm> {
                               reverseCurve: Curves.fastOutSlowIn);
                         }
                       } else {
-                        valid = await client.addTask(task: nuevaTask);
+                        valid = await client.addTask(
+                            task: nuevaTask, curso: widget.curso);
                         if (valid) {
                           showToast(
                               'la entrega ${nuevaTask.titulo} fue creada correctamente',

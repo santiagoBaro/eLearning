@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
@@ -90,6 +91,7 @@ class CoursePageBody extends StatelessWidget {
                 backgroundColor: Color(0xFFFB6107),
               ),
             ),
+            visible: storedUserCredentials.userData.tipoUsu == "D",
           ),
         ],
       ),
@@ -135,7 +137,8 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return AlertDialog(content: ContentForm());
+                                return AlertDialog(
+                                    content: ContentForm(curso: curso));
                               });
                         },
                         style: ButtonStyle(

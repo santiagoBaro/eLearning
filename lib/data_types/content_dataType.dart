@@ -33,7 +33,6 @@ class Content {
         "Libro": {
           "titulo": titulo,
           "color": color,
-          "_id": id,
         }
       };
 }
