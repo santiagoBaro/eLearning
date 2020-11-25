@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/firebase/upload_files.dart';
 import 'package:elearning/tools/visual_assets.dart';
@@ -6,13 +8,18 @@ import 'package:file_picker/file_picker.dart';
 import 'package:elearning/firebase/fire_storage_service.dart';
 import 'package:universal_html/prefer_universal/html.dart' as html;
 
-class PendingTaskCard extends StatelessWidget {
-  final Task task;
-  const PendingTaskCard({
-    Key key,
-    @required this.task,
-  }) : super(key: key);
+import 'package:firebase/firebase.dart' as fb;
 
+class PendingTaskCard extends StatefulWidget {
+  final Task task;
+  PendingTaskCard({Key key, @required this.task}) : super(key: key);
+
+  @override
+  _PendingTaskCardState createState() => _PendingTaskCardState();
+}
+
+class _PendingTaskCardState extends State<PendingTaskCard> {
+  fb.UploadTask _uploadTask;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,9 +51,30 @@ class PendingTaskCard extends StatelessWidget {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(task.titulo),
-                      Text(task.instructions),
-                      Text(task.date.split("T")[0]),
+                      Text(widget.task.titulo),
+                      Text(widget.task.instructions),
+                      Text(widget.task.date.split("T")[0]),
+                      StreamBuilder<fb.UploadTaskSnapshot>(
+                        stream: _uploadTask?.onStateChanged,
+                        builder: (context, snapshot) {
+                          final event = snapshot?.data;
+
+                          // Default as 0
+                          double progressPercent = event != null
+                              ? event.bytesTransferred / event.totalBytes * 100
+                              : 0;
+
+                          if (progressPercent == 100) {
+                            return Text('Successfully uploaded file 🎊');
+                          } else if (progressPercent == 0) {
+                            return SizedBox();
+                          } else {
+                            return LinearProgressIndicator(
+                              value: progressPercent,
+                            );
+                          }
+                        },
+                      ),
                       Row(
                         children: [
                           FlatButton(
@@ -54,15 +82,8 @@ class PendingTaskCard extends StatelessWidget {
                             child: Text('Cancelar'),
                           ),
                           FlatButton(
-                            onPressed: () async {
-                              uploadToStorage();
-                              // FireStorageService.uploadToStorage(
-                              //   context: context,
-                              //   file: file,
-                              //   fileName: "pruebita",
-                              //   type: fileType.image.toString(),
-                              // );
-                            },
+                            onPressed: () =>
+                                uploadImage(), //FireStorageService.uploadImage(),
                             child: Text('subir archivo'),
                           ),
                         ],
@@ -92,7 +113,7 @@ class PendingTaskCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    _buildDate(task.date),
+                    _buildDate(widget.task.date),
                     style: mainTextStyle,
                   ),
                   Text(
@@ -121,14 +142,14 @@ class PendingTaskCard extends StatelessWidget {
                   children: [
                     //* TASK NAME
                     Text(
-                      task.titulo,
+                      widget.task.titulo,
                       style: mainTextStyle,
                       overflow: TextOverflow.fade,
                     ),
                     //* COURSE NAME
                     Container(
                       child: Text(
-                        task.instructions,
+                        widget.task.instructions,
                         style: secondaryTextStyle,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
@@ -141,6 +162,37 @@ class PendingTaskCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  uploadToFirebase(File imageFile) async {
+    final filePath = 'images/${DateTime.now()}.png';
+    setState(() {
+      _uploadTask = fb
+          .storage()
+          .refFromURL('FIREBASE STORAGE URL HERE')
+          .child(filePath)
+          .put(imageFile);
+    });
+  }
+
+  uploadImage() async {
+    InputElement uploadInput = FileUploadInputElement();
+    uploadInput.click();
+
+    uploadInput.onChange.listen(
+      (changeEvent) {
+        final file = uploadInput.files.first;
+        final reader = FileReader();
+
+        reader.readAsDataUrl(file);
+
+        reader.onLoadEnd.listen(
+          (loadEndEvent) async {
+            uploadToFirebase(file);
+          },
+        );
+      },
     );
   }
 }
