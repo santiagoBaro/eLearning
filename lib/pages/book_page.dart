@@ -137,14 +137,14 @@ class _BookPageState extends State<BookPage> {
     return (BuildContext context, int index) {
       //
       switch (book[index].type) {
-        case ElementType.image:
+        case "image":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: Center(
                 child: ImageBookElement(imageUrl: book[index].elements[0])),
           );
           break;
-        case ElementType.list:
+        case "list":
           var sublist = book[index].elements;
           sublist.removeAt(1);
           return Padding(
@@ -153,7 +153,7 @@ class _BookPageState extends State<BookPage> {
                 title: book[index].elements[0], elements: sublist),
           );
           break;
-        case ElementType.multiple_choise:
+        case "multiple_choise":
           var sublist = book[index].elements;
           sublist.removeAt(1);
           sublist.removeAt(1);
@@ -166,13 +166,13 @@ class _BookPageState extends State<BookPage> {
             ),
           );
           break;
-        case ElementType.paragraph:
+        case "paragraph":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: ParagraphBookElement(text: book[index].elements[0]),
           );
           break;
-        case ElementType.question:
+        case "question":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: QuestionBookElement(
@@ -181,19 +181,19 @@ class _BookPageState extends State<BookPage> {
             ),
           );
           break;
-        case ElementType.subtitle:
+        case "subtitle":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: SubtitleBookElement(subTitle: book[index].elements[0]),
           );
           break;
-        case ElementType.title:
+        case "title":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: TitleBookElement(title: book[index].elements[0]),
           );
           break;
-        case ElementType.video:
+        case "video":
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: VideoBookElement(videoUrl: book[index].elements[0]),

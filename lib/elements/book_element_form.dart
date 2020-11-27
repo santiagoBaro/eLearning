@@ -22,7 +22,6 @@ class _BookElementFormState extends State<BookElementForm> {
     super.initState();
     if (widget.element != null) {
       contentContrller.text = widget.element.elements.join(',');
-      dropdownValue = widget.element.type;
     }
   }
 
