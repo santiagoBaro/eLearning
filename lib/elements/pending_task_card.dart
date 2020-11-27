@@ -41,21 +41,48 @@ class PendingTaskCard extends StatelessWidget {
                 return AlertDialog(
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(task.titulo),
-                      Text(task.instructions),
-                      Text(task.date.split("T")[0]),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFB6107),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            topRight: Radius.circular(8),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'alta entrega - ${task.titulo}',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(task.instructions),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(task.date.split("T")[0]),
+                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           FlatButton(
                             onPressed: () {},
                             child: Text('Cancelar'),
                           ),
-                          FlatButton(
-                            onPressed: () {
-                              getFile();
-                            },
-                            child: Text('subir archivo'),
+                          Visibility(
+                            visible: task.entregable,
+                            child: FlatButton(
+                              onPressed: () {
+                                getFile();
+                              },
+                              child: Text('subir archivo'),
+                            ),
                           ),
                         ],
                       ),
