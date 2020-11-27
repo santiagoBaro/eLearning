@@ -20,12 +20,12 @@ class Course {
   });
 
   Course.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        nombre = json['nombre'],
+      : id = json['_id'] ?? 0,
+        nombre = json['nombre'] ?? "",
         color = json['color'] ?? "0xFF005377",
-        creditos = json['creditos'],
-        fechaInicio = json['fechaInicio'],
-        descripcion = json['descripcion'];
+        creditos = json['creditos'] ?? 0,
+        fechaInicio = json['fechaInicio'] ?? "",
+        descripcion = json['descripcion'] ?? "";
 
   Map<String, dynamic> toJson() => {
         'nombre': nombre,

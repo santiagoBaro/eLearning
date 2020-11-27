@@ -18,13 +18,17 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints:
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height - 40),
       color: Colors.white12,
-      child: ListView(
-        children: [
-          Schedule(),
-          Calendar(),
-          UserTaskListing(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Schedule(),
+            Calendar(),
+            UserTaskListing(),
+          ],
+        ),
       ),
     );
   }

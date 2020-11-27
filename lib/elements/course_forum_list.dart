@@ -2,7 +2,6 @@ import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
-
 import 'notification_card.dart';
 
 class CourseFormListing extends StatelessWidget {

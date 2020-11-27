@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
@@ -9,8 +7,6 @@ import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/user_dataType.dart';
-import 'package:elearning/pages/book_page.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl = "http://burgerts.noip.me/SAPPIO-API-0.1";
@@ -44,8 +40,6 @@ class ApiClient {
         storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
         storedUserCredentials
             .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
-        storedUserCredentials.image =
-            jsonDecode(response.body)["usuario"]["imagen"] ?? "";
         storedUserCredentials.userData =
             User.fromJson(jsonDecode(response.body)["usuario"]);
         saveUserCredentials();
@@ -122,7 +116,7 @@ class ApiClient {
   }
 
   Future<bool> updContent({Content content, Course curso}) async {
-    var response = await http.post(
+    var response = await http.put(
       '$baseUrl/libros/editarLibro/${content.id}',
       body: jsonEncode(content.toNestedJson()),
       headers: authHeader,
@@ -139,7 +133,21 @@ class ApiClient {
   }
 
   //* BOOK
-  Future<List<BookElement>> getBook({Content content}) async {}
+  Future<List<BookElement>> getBookContent({Content content}) async {
+    var response = await http.get(
+      '$baseUrl/contenidos/libro/${content.id}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      List<BookElement> contentList = List<BookElement>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        contentList.add(BookElement.fromJson(jsonResponse[i]));
+      }
+      return contentList;
+    }
+    return List<BookElement>();
+  }
 
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
@@ -186,7 +194,7 @@ class ApiClient {
   }
 
   Future<bool> updTask({Task task}) async {
-    var response = await http.post(
+    var response = await http.put(
       '$baseUrl/tareas/editarTarea/${task.id}',
       body: jsonEncode(task.toJson()),
       headers: authHeader,
@@ -214,8 +222,6 @@ class ApiClient {
       for (var i = 0; i < jsonResponse.length; i++) {
         Forum instance = Forum.fromJson(jsonResponse[i]);
         contentList.add(instance);
-        print(instance.toJson());
-        print("message list lenght: ${instance.messages.length}");
       }
       print(contentList.length);
       return contentList;
@@ -225,8 +231,7 @@ class ApiClient {
 
   Future<List<Forum>> getForumByUser() async {
     var response = await http.get(
-      // TODO cambiar endpoint
-      '$baseUrl/foros/byUser/${storedUserCredentials.userData.mail}',
+      '$baseUrl/foros/byUsuario/${storedUserCredentials.userData.mail}',
       headers: authHeader,
     );
     print('getforumByUser.statusCode : ${response.statusCode}');
@@ -234,7 +239,8 @@ class ApiClient {
       var jsonResponse = json.decode(response.body);
       List<Forum> contentList = List<Forum>();
       for (var i = 0; i < jsonResponse.length; i++) {
-        contentList.add(Forum.fromJson(jsonResponse[i]));
+        Forum instance = Forum.fromJson(jsonResponse[i]);
+        contentList.add(instance);
       }
       print(contentList.length);
       return contentList;
@@ -252,7 +258,7 @@ class ApiClient {
   }
 
   Future<bool> updForum({Forum foro}) async {
-    var response = await http.post(
+    var response = await http.put(
       '$baseUrl/foros/editarForo/${foro.id}',
       body: jsonEncode(foro.toJson()),
       headers: authHeader,
@@ -269,9 +275,13 @@ class ApiClient {
   }
 
   Future<bool> addComentFormun({Forum foro, String message}) async {
+    var body = {
+      "titulo": storedUserCredentials.userData.mail,
+      "contenido": message,
+    };
     var response = await http.post(
       '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.userData.id}',
-      body: jsonEncode(foro.toJson()),
+      body: jsonEncode(body),
       headers: authHeader,
     );
     return response.statusCode == 200;

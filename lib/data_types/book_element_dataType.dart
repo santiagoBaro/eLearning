@@ -10,23 +10,18 @@ class BookElement {
   });
 
   BookElement.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        type = json['type'],
-        elements = fromJsonList(json['elements']);
+      : id = json['_id'] ?? 0,
+        type = json['type'] ?? "",
+        elements = json['contenido'].split(",");
 
   Map<String, dynamic> toJson() => {
-        '_id': id,
-        'type': type,
-        'colelementsor': elements,
+        'tipo': type,
+        'contenido': elements.join(","),
       };
 }
 
-List<String> fromJsonList(List<dynamic> json) {
-  List<String> stringList = List<String>();
-  for (var i = 0; i < json.length; i++) {
-    stringList.add(json[i]);
-  }
-  return stringList;
+List<String> fromJsonList(String string) {
+  return string.split(",");
 }
 
 enum ElementType {

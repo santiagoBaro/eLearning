@@ -35,21 +35,18 @@ class CourseCarrousel extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
-                      onTap: () {},
-                      child: InkWell(
-                        onTap: () => onElementSelected(
-                          CoursePage(
-                            curso: snapshot.data[index],
-                            onElementSelected: (Widget val) =>
-                                onElementSelected(val),
-                          ),
-                        ),
-                        child: CourseCard(
-                          name: snapshot.data[index].nombre,
-                          color: Colors.blueGrey,
+                      hoverColor: Colors.transparent,
+                      onTap: () => onElementSelected(
+                        CoursePage(
+                          curso: snapshot.data[index],
+                          onElementSelected: (Widget val) =>
+                              onElementSelected(val),
                         ),
                       ),
-                      //snapshot.data[index].nombre
+                      child: CourseCard(
+                        name: snapshot.data[index].nombre,
+                        color: Colors.blueGrey,
+                      ),
                     );
                   }),
             );

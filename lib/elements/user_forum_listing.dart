@@ -1,7 +1,6 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
-
 import 'notification_card.dart';
 
 class UserFormListing extends StatelessWidget {
@@ -22,7 +21,7 @@ class UserFormListing extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              return NotificationCard(foro: formRelleno);
+              return NotificationCard(foro: snapshot.data[index]);
             },
           );
         } else if (snapshot.hasError) {

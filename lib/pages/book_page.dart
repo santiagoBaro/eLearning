@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/elements/book_element_form.dart';
@@ -23,6 +24,7 @@ class _BookPageState extends State<BookPage> {
   // static IndexedScrollController controller =
   //     IndexedScrollController(initialIndex: 0);
   ScrollController primary_controller = ScrollController();
+  var client = ApiClient();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +35,25 @@ class _BookPageState extends State<BookPage> {
           Container(
             constraints: BoxConstraints(maxWidth: 800),
             height: (MediaQuery.of(context).size.height - 100),
-            child: ListView.builder(
-              shrinkWrap: true,
-              controller: primary_controller,
-              itemCount: testBook.length,
-              itemBuilder: itemBuilder(testBook),
+            child: FutureBuilder<List<BookElement>>(
+              future: client.getBookContent(content: widget.content),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<BookElement>> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data.length == 0) {
+                    return Center(child: Text("no hay contenido disponibles"));
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: itemBuilder(snapshot.data),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                return Center(child: CircularProgressIndicator());
+              },
             ),
           ),
 

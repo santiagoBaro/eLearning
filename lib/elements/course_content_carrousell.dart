@@ -37,16 +37,14 @@ class ContentCarrousell extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
-                      onTap: () {},
-                      child: InkWell(
-                        onTap: () => onElementSelected(
-                          BookPage(content: snapshot.data[index]),
-                        ),
-                        child: CourseContentCard(
-                          icon: Icons.cancel_outlined,
-                          name: snapshot.data[index].titulo,
-                          bkgColor: Colors.green[300],
-                        ),
+                      hoverColor: Colors.transparent,
+                      onTap: () => onElementSelected(
+                        BookPage(content: snapshot.data[index]),
+                      ),
+                      child: CourseContentCard(
+                        icon: Icons.cancel_outlined,
+                        name: snapshot.data[index].titulo,
+                        bkgColor: Colors.green[300],
                       ),
                     );
                   }),

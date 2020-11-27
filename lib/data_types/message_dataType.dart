@@ -16,11 +16,11 @@ class Message {
   });
 
   Message.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        titulo = json['titulo'],
-        contenido = json['contenido'],
-        user = User.fromJson(json['usuario']),
-        idForo = json['foro'];
+      : id = json['_id'] ?? 0,
+        titulo = json['titulo'] ?? "",
+        contenido = json['contenido'] ?? "",
+        user = User.fromJson(json['usuario']) ?? User(),
+        idForo = json['foro'] ?? 0;
 }
 
 List<Message> fromJsonList(List<dynamic> json) {

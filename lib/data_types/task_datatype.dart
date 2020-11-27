@@ -14,14 +14,13 @@ class Task {
   });
 
   Task.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        titulo = json['titulo'],
-        date = json['fechaLimite'],
-        entregable = json['entregable'],
-        instructions = json['descripcion'];
+      : id = json['_id'] ?? 0,
+        titulo = json['titulo'] ?? "",
+        date = json['fechaLimite'] ?? "",
+        entregable = json['entregable'] ?? false,
+        instructions = json['descripcion'] ?? "";
 
   Map<String, dynamic> toJson() => {
-        //'_id': id,
         'entregable': entregable,
         'titulo': titulo,
         'fechaLimite': date,

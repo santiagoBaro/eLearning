@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class MessageFooter extends StatefulWidget {
 }
 
 class _MessageFooterState extends State<MessageFooter> {
+  final messageContrller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,6 +27,7 @@ class _MessageFooterState extends State<MessageFooter> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: messageContrller,
                   textInputAction: TextInputAction.send,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -37,7 +41,15 @@ class _MessageFooterState extends State<MessageFooter> {
                 Icons.send,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (messageContrller.text != "") {
+                  var client = ApiClient();
+                  client.addComentFormun(
+                    foro: widget.foro,
+                    message: messageContrller.text,
+                  );
+                }
+              },
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
 import 'package:elearning/pages/message_page.dart';
+import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
@@ -237,7 +238,15 @@ class MsterFooter extends StatelessWidget {
                                 child: Text('Cancelar'),
                               ),
                               FlatButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  storedUserCredentials = logedOffUser;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TabbedLoginPage(),
+                                    ),
+                                  );
+                                },
                                 child: Text('Si'),
                               ),
                             ],

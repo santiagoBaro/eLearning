@@ -17,7 +17,7 @@ class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 102,
+      height: 110,
       constraints: BoxConstraints(
         minWidth: 300,
         maxWidth: 600,
@@ -48,10 +48,14 @@ class _NotificationCardState extends State<NotificationCard> {
               });
         },
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             NotificationCardHeader(foro: widget.foro),
-            NitificationCardBody(
-              foro: widget.foro,
+            Expanded(
+              child: NitificationCardBody(
+                foro: widget.foro,
+              ),
             ),
           ],
         ),
@@ -91,7 +95,7 @@ class NotificationCardHeader extends StatelessWidget {
           ),
           //* DATE
           Text(
-            _buildDate(foro.date),
+            _buildDate(foro.date ?? ""),
             style: courseNameTextStyle,
           ),
           SizedBox(width: 10),
@@ -115,8 +119,10 @@ class NitificationCardBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Text(
-          foro.messages[0].contenido ?? "",
+          _getMessage(foro),
           style: bodyTextStyle,
+          overflow: TextOverflow.ellipsis,
+          maxLines: null,
         ),
       ),
     );
@@ -141,6 +147,13 @@ String _buildDate(String date) {
   String base = date.split("T")[0];
   var elem = base.split("-");
   return "${elem[1]}/${elem[2]}";
+}
+
+String _getMessage(Forum foro) {
+  if (foro.messages == null || foro.messages.length == 0) {
+    return "";
+  }
+  return foro.messages[0].contenido;
 }
 
 Widget _buildPopUp({@required Forum foro}) {

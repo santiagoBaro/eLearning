@@ -14,14 +14,14 @@ class Content {
   });
 
   Content.fromNestedJson(Map<String, dynamic> json)
-      : id = json['"Libro"']['_id'],
-        color = json['"Libro"']['color'],
-        titulo = json['Libro']['titulo'];
+      : id = json['"Libro"']['_id'] ?? 0,
+        color = json['"Libro"']['color'] ?? "",
+        titulo = json['Libro']['titulo'] ?? "";
 
   Content.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        color = json['color'],
-        titulo = json['titulo'];
+      : id = json['_id'] ?? 0,
+        color = json['color'] ?? "",
+        titulo = json['titulo'] ?? "";
 
   Map<String, dynamic> toJson() => {
         '_id': id,
