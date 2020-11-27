@@ -11,13 +11,21 @@ class BookElement {
 
   BookElement.fromJson(Map<String, dynamic> json)
       : id = json['_id'] ?? 0,
-        type = json['type'] ?? "",
+        type = _getElementType(json['type']),
         elements = json['contenido'].split(",");
 
   Map<String, dynamic> toJson() => {
-        'tipo': type,
+        'tipo': type.toString(),
         'contenido': elements.join(","),
       };
+}
+
+ElementType _getElementType(String str) {
+  if (str == "") {
+    return ElementType.title;
+  }
+  ElementType elem = ElementType.values.firstWhere((e) => e.toString() == str);
+  return elem;
 }
 
 List<String> fromJsonList(String string) {
