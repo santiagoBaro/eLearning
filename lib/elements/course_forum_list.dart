@@ -16,7 +16,10 @@ class CourseFormListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Forum>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
-            return Text("no hay foros disponibles");
+            return Container(
+              child: Text("no hay foros disponibles"),
+              height: 100,
+            );
           }
           return ListView.builder(
             shrinkWrap: true,

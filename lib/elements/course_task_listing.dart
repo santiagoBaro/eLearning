@@ -16,7 +16,10 @@ class CourseTaskListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
-            return Text("no hay tareas pendentes");
+            return Container(
+              child: Text("no hay tareas pendentes"),
+              height: 100,
+            );
           }
           return ListView.builder(
             shrinkWrap: true,
