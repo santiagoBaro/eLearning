@@ -45,6 +45,7 @@ class _BookPageState extends State<BookPage> {
                   }
                   return ListView.builder(
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(8),
                     itemCount: snapshot.data.length,
                     itemBuilder: itemBuilder(snapshot.data),

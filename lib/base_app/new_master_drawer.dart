@@ -1,5 +1,6 @@
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/course_dataType.dart';
+import 'package:elearning/elements/user_form.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
@@ -207,15 +208,30 @@ class MsterFooter extends StatelessWidget {
       children: [
         FlatButton(
           color: myAppTheme['InfoColor'],
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                      content: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: 700,
+                      maxWidth: 500,
+                      minHeight: 200,
+                      minWidth: 200,
+                    ),
+                    child: UserForm(),
+                  ));
+                });
+          },
           child: Text(
             //* HELP BUTTONF
-            'Ayuda',
+            'info Usuario',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
             ),
-          ),
+          ), // UserForm
         ),
         FlatButton(
           //* LOG-OUT BUTTON

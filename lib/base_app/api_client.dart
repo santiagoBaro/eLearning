@@ -50,6 +50,29 @@ class ApiClient {
     return false;
   }
 
+  Future<bool> updUser({User user, String pass}) async {
+    var response = await http.put(
+      '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.userData.mail}',
+      body: jsonEncode(user.toNestedValidatedJson(pass)),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> updPass({String newPass, String oldPass}) async {
+    var body = {
+      "mail": storedUserCredentials.userData.mail,
+      "oldpass": oldPass,
+      "newpass": newPass,
+    };
+    var response = await http.put(
+      '$baseUrl/usuarios/cambiarPass/',
+      body: jsonEncode(body),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
   Future<bool> recoverPassword({String email}) async {
     var response = await http.post(
       '$baseUrl/recuperarContra',

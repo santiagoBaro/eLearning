@@ -65,7 +65,19 @@ class User {
           "tipoDocumento": tipoDocumento,
           "documento": documento
         },
-        "Imagen": {"_id": "", "strBase64": "", "nombre": ""}
+      };
+
+  Map<String, dynamic> toNestedValidatedJson(String pass) => {
+        "Usuario": {
+          "nombre": nombre,
+          "mail": mail,
+          "imagen": imagen,
+          "password": pass,
+          "direccion": direccion,
+          "descripcion": descripcion,
+          "tipoDocumento": tipoDocumento,
+          "documento": documento
+        },
       };
 }
 

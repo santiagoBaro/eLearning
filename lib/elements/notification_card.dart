@@ -176,6 +176,7 @@ Widget _buildPopUp({@required Forum foro}) {
               height: 500,
               width: 400,
               child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: foro.messages.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ForumMessage(
