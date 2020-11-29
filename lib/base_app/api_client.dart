@@ -172,6 +172,10 @@ class ApiClient {
     return List<BookElement>();
   }
 
+  Future<bool> addElement({BookElement element, Content content}) {}
+  Future<bool> updElement({BookElement element}) {}
+  Future<bool> delElement({BookElement element}) {}
+
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
@@ -309,6 +313,4 @@ class ApiClient {
     );
     return response.statusCode == 200;
   }
-
-  comForum(String forumId, String message) {}
 }

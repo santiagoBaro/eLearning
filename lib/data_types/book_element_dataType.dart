@@ -1,12 +1,14 @@
 class BookElement {
   int id;
   String type;
+  String stringElements;
   List<String> elements;
 
   BookElement({
     this.id,
     this.type,
     this.elements,
+    this.stringElements,
   });
 
   BookElement.fromJson(Map<String, dynamic> json)
@@ -15,8 +17,13 @@ class BookElement {
         elements = json['contenido'].split(",");
 
   Map<String, dynamic> toJson() => {
-        'tipo': type.toString(),
+        'tipo': type,
         'contenido': elements.join(","),
+      };
+
+  Map<String, dynamic> toStringJson() => {
+        'tipo': type,
+        'contenido': stringElements,
       };
 }
 
@@ -26,14 +33,12 @@ List<String> fromJsonList(String string) {
 
 enum ElementType {
   image,
-  audio,
   list,
-  multiple_choise,
+  multiple_choice,
   paragraph,
   question,
   title,
   subtitle,
-  table,
   video
 }
 

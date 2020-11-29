@@ -154,7 +154,7 @@ class _BookPageState extends State<BookPage> {
                 title: book[index].elements[0], elements: sublist),
           );
           break;
-        case "multiple_choise":
+        case "multiple_choice":
           var sublist = book[index].elements;
           sublist.removeAt(1);
           sublist.removeAt(1);

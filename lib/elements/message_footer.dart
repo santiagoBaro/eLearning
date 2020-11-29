@@ -16,6 +16,7 @@ class _MessageFooterState extends State<MessageFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       color: Colors.blueGrey,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

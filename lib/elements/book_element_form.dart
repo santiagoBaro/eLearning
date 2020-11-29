@@ -1,6 +1,15 @@
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/elements/element_forms.dart/image_element_form.dart';
+import 'package:elearning/elements/element_forms.dart/list_element_form.dart';
+import 'package:elearning/elements/element_forms.dart/multiple_choice_element_form.dart';
+import 'package:elearning/elements/element_forms.dart/question_element_form.dart';
+import 'package:elearning/elements/element_forms.dart/subtitle_element_form.dart';
+import 'package:elearning/elements/element_forms.dart/title_element_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+
+import 'element_forms.dart/paragraph_element_form.dart';
+import 'element_forms.dart/video_element_form.dart';
 
 class BookElementForm extends StatefulWidget {
   final BookElement element;
@@ -22,6 +31,38 @@ class _BookElementFormState extends State<BookElementForm> {
     super.initState();
     if (widget.element != null) {
       contentContrller.text = widget.element.elements.join(',');
+    }
+  }
+
+  Widget _buildForm({String type, BookElement element}) {
+    List<String> list = type.split(".");
+    type = list[1];
+    switch (type.toLowerCase()) {
+      case "image":
+        return ImageElementForm(element: element);
+        break;
+      case "list":
+        return ListElementForm(element: element);
+        break;
+      case "multiple_choice":
+        return MultipleChoiceElementForm(element: element);
+        break;
+      case "paragraph":
+        return ParagraphElementForm(element: element);
+        break;
+      case "question":
+        return QuestionElementForm(element: element);
+        break;
+      case "subtitle":
+        return SubtitleElementForm(element: element);
+        break;
+      case "title":
+        return TitleElementForm(element: element);
+        break;
+      case "video":
+        return VideoElementForm(element: element);
+        break;
+      default:
     }
   }
 
@@ -71,135 +112,11 @@ class _BookElementFormState extends State<BookElementForm> {
                 );
               }).toList(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: TextFormField(
-                controller: contentContrller,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'contenido'),
+            Container(
+              child: _buildForm(
+                type: dropdownValue.toString(),
+                element: widget.element,
               ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'cancel',
-                    style: TextStyle(
-                      color: Colors.black45,
-                    ),
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.grey[200])),
-                ),
-                Visibility(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (isDeleteEnabled) {
-                        isDeleteEnabled = false;
-                        bool valid = false;
-                        // var client = ApiClient();
-                        // valid = await client.delUser(user: widget.usuario);
-                        if (valid) {
-                          showToast(
-                              'el contenido {widget.content} fue eliminado',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
-                          Navigator.of(context).pop();
-                        } else {
-                          showToast('Error al eliminar contenido',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
-                        }
-                        isDeleteEnabled = true;
-                      }
-                    },
-                    child: Text('Delete'),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.redAccent)),
-                  ),
-                  visible: (widget.element != null),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState.validate() && isSubmitEnabled) {
-                      isSubmitEnabled = false;
-                      bool valid = false;
-                      // Content nuevoContent = Content(
-                      //   color: currentColor.toHex(),
-                      //   titulo: nombreContrller.text,
-                      // );
-                      // var client = ApiClient();
-                      // nuevoContent.id = widget.content.id;
-                      // valid = await client.updContent(content: nuevoContent);
-                      if (valid) {
-                        showToast(
-                            'el contenido {nuevoContent.titulo} fue editado correctamente',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                        Navigator.of(context).pop();
-                      } else {
-                        showToast('Error al modificar el elemento',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                      }
-
-                      isSubmitEnabled = true;
-                    }
-                  },
-                  child: Text('Submit'),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.greenAccent)),
-                ),
-              ],
             ),
           ],
         ),

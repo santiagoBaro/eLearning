@@ -109,8 +109,7 @@ class _TaskFormState extends State<TaskForm> {
                 RaisedButton(
                   onPressed: () => _selectDate(context), // Refer step 3
                   child: Text(
-                    'Fecha de inicio - ' +
-                        DateFormat('yyyy-MM-dd').format(selectedDate),
+                    DateFormat('yyyy-MM-dd').format(selectedDate),
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),

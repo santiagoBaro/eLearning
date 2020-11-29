@@ -147,29 +147,6 @@ class _UserFormState extends State<UserForm> {
                           MaterialStateProperty.all<Color>(Colors.grey[200])),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                              content: Container(
-                            constraints: BoxConstraints(
-                              maxHeight: 700,
-                              maxWidth: 500,
-                              minHeight: 200,
-                              minWidth: 200,
-                            ),
-                            child: ChangePassFormm(),
-                          ));
-                        });
-                  },
-                  child: Text('Modificar contrasena',
-                      style: TextStyle(color: Colors.white)),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.orangeAccent[200])),
-                ),
-                ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
@@ -226,6 +203,29 @@ class _UserFormState extends State<UserForm> {
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),
                 ),
               ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          content: Container(
+                        constraints: BoxConstraints(
+                          maxHeight: 700,
+                          maxWidth: 500,
+                          minHeight: 200,
+                          minWidth: 200,
+                        ),
+                        child: ChangePassFormm(),
+                      ));
+                    });
+              },
+              child: Text('Modificar contrasena',
+                  style: TextStyle(color: Colors.white)),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.orangeAccent[200])),
             ),
           ],
         ),

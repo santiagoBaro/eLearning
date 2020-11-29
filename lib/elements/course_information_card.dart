@@ -51,20 +51,7 @@ class CourseInformationCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ContactInfo(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Score(),
-                  ),
-                ],
-              ),
+              Score(),
               Container(
                 margin: EdgeInsets.only(left: 15.0),
                 decoration: BoxDecoration(
