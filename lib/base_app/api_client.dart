@@ -149,7 +149,7 @@ class ApiClient {
 
   Future<bool> delContent({Content content, Course curso}) async {
     var response = await http.post(
-      '$baseUrl/libros/bajaLibro/${content.id}/${curso.id}',
+      '$baseUrl/libros/bajaLibro/${content.id}',
       headers: authHeader,
     );
     return response.statusCode == 200;

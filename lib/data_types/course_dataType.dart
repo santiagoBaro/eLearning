@@ -38,10 +38,10 @@ class Course {
   Map<String, dynamic> toNestedJson() => {
         "Curso": {
           'nombre': nombre,
-          'color': color,
           'descripcion': descripcion,
           'creditos': creditos,
           'fechaInicio': fechaInicio,
+          'color': color,
         }
       };
 }
