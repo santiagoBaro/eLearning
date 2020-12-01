@@ -6,6 +6,7 @@ import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/data_types/task_datatype.dart';
+import 'package:elearning/data_types/task_score_dataType.dart';
 import 'package:elearning/data_types/user_dataType.dart';
 import 'package:http/http.dart' as http;
 
@@ -235,6 +236,24 @@ class ApiClient {
       headers: authHeader,
     );
     return response.statusCode == 200;
+  }
+
+  Future<List<TaskScore>> getTaskScoresByTask({Task tarea}) async {
+    var response = await http.get(
+      '$baseUrl/entregas/byTarea/${tarea.id}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      List<TaskScore> contentList = List<TaskScore>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        TaskScore instance = TaskScore.fromJson(jsonResponse[i]);
+        contentList.add(instance);
+      }
+      print(contentList.length);
+      return contentList;
+    }
+    return List<TaskScore>();
   }
 
   //* FORO

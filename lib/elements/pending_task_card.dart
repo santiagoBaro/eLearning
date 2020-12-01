@@ -1,5 +1,7 @@
 import 'package:elearning/base_app/firebase_upload_file.dart';
+import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/task_datatype.dart';
+import 'package:elearning/elements/score_task.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -77,8 +79,33 @@ class PendingTaskCard extends StatelessWidget {
                             child: Text('Cancelar'),
                           ),
                           Visibility(
-                            visible: task.entregable,
+                            visible: task.entregable &&
+                                storedUserCredentials.userData.tipoUsu == "E",
                             child: FirebaseUploadFileButton(),
+                          ),
+                          Visibility(
+                            visible:
+                                storedUserCredentials.userData.tipoUsu == "D",
+                            child: ElevatedButton(
+                              child: Text("Calificar"),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                          content: Container(
+                                        constraints: BoxConstraints(
+                                          maxHeight: 700,
+                                          maxWidth: 500,
+                                          minHeight: 200,
+                                          minWidth: 200,
+                                        ),
+                                        child: ScoreTasks(tarea: task),
+                                      ));
+                                    });
+                              },
+                            ),
+                            // ScoreTask
                           ),
                         ],
                       ),

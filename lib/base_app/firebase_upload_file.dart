@@ -36,7 +36,7 @@ class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
       final files = uploadInput.files;
       if (files.length == 1) {
         final file = files[0];
-        final reader = new FileReader();
+        final reader = new FileReader(); // reader.result
 
         reader.onLoadEnd.listen((e) {
           print("selecciono archivo");
