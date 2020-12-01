@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/firebase_upload_file.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
@@ -77,12 +78,7 @@ class PendingTaskCard extends StatelessWidget {
                           ),
                           Visibility(
                             visible: task.entregable,
-                            child: FlatButton(
-                              onPressed: () {
-                                getFile();
-                              },
-                              child: Text('subir archivo'),
-                            ),
+                            child: FirebaseUploadFileButton(),
                           ),
                         ],
                       ),

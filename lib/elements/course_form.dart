@@ -157,7 +157,7 @@ class _CursoFormState extends State<CursoForm> {
                       Course nuevoCurso = Course(
                         creditos: int.parse(creditosContrller.text),
                         nombre: nombreContrller.text,
-                        color: currentColor.toHex(),
+                        color: currentColor.toString(),
                         descripcion: descripcionContrller.text,
                         fechaInicio:
                             DateFormat('yyyy-MM-dd').format(selectedDate),

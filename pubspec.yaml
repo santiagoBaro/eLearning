@@ -45,6 +45,12 @@ dependencies:
   video_player: ^0.10.12+2
   flutter_colorpicker: ^0.3.4
 
+  firebase: ^7.3.2
+  firebase_core: "0.5.2+1"
+  firebase_storage: "^5.1.0"
+  universal_html: ^1.2.3
+  path_provider: ^1.6.24
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
