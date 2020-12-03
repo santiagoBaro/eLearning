@@ -1,15 +1,16 @@
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
-// import 'package:universal_html/prefer_universal/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'dart:html';
 import 'package:firebase/firebase.dart' as fb;
 
+import 'user_credentials_data_type.dart';
+
 class FirebaseUploadFileButton extends StatefulWidget {
-  FirebaseUploadFileButton({Key key}) : super(key: key);
+  final String direcorty;
+  final Function(String) fbUrl;
+  FirebaseUploadFileButton(
+      {Key key, @required this.direcorty, @required this.fbUrl})
+      : super(key: key);
 
   @override
   _FirebaseUploadFileButtonState createState() =>
@@ -17,14 +18,18 @@ class FirebaseUploadFileButton extends StatefulWidget {
 }
 
 class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
+  fb.UploadTask _uploadTask;
+
   Future<void> uploadFile(File file) async {
-    print("entro al upload file");
-    final filePath = 'images/${DateTime.now()}.png';
-    fb
-        .storage()
-        .refFromURL('gs://push-notifications-ee58a.appspot.com')
-        .child(filePath)
-        .put(file);
+    final filePath =
+        '${widget.direcorty}/${storedUserCredentials.userData.mail}${DateTime.now()}.png';
+    setState(() {
+      _uploadTask = fb
+          .storage()
+          .refFromURL('gs://push-notifications-ee58a.appspot.com')
+          .child(filePath)
+          .put(file);
+    });
   }
 
   Future<File> getFile() async {
@@ -49,11 +54,41 @@ class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        getFile();
-      },
-      child: Text("Subir Archivo"),
+    return Column(
+      children: [
+        ElevatedButton(
+          onPressed: () async {
+            getFile();
+          },
+          child: Text("Subir Archivo"),
+        ),
+        StreamBuilder<fb.UploadTaskSnapshot>(
+          stream: _uploadTask?.onStateChanged,
+          builder: (context, snapshot) {
+            final event = snapshot?.data;
+
+            // Default as 0
+            double progressPercent = event != null
+                ? event.bytesTransferred / event.totalBytes * 100
+                : 0;
+
+            if (progressPercent == 100) {
+              snapshot.data.ref.getDownloadURL().then((value) {
+                var url = value.toString();
+                widget.fbUrl(url);
+              });
+
+              return Text('Successfully uploaded file 🎊');
+            } else if (progressPercent == 0) {
+              return SizedBox();
+            } else {
+              return LinearProgressIndicator(
+                value: progressPercent,
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 }

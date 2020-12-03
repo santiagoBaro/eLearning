@@ -84,7 +84,7 @@ class _BookPageState extends State<BookPage> {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return _buildPopUp();
+                              return _buildPopUp(content: widget.content);
                             });
                       },
                       child: Text('Add Content'),
@@ -94,7 +94,10 @@ class _BookPageState extends State<BookPage> {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return _buildPopUp(element: testBook[4]);
+                              return _buildPopUp(
+                                element: testBook[4],
+                                content: widget.content,
+                              );
                             });
                       },
                       child: Text('Mod content'),
@@ -206,7 +209,7 @@ class _BookPageState extends State<BookPage> {
   }
 }
 
-Widget _buildPopUp({BookElement element}) {
+Widget _buildPopUp({BookElement element, @required Content content}) {
   return AlertDialog(
     content: Container(
       constraints: BoxConstraints(
@@ -215,7 +218,10 @@ Widget _buildPopUp({BookElement element}) {
         minHeight: 200,
         minWidth: 200,
       ),
-      child: BookElementForm(element: element),
+      child: BookElementForm(
+        element: element,
+        content: content,
+      ),
     ),
   );
 }

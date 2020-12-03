@@ -1,11 +1,15 @@
 import 'package:elearning/base_app/api_client.dart';
+import 'package:elearning/base_app/firebase_upload_file.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ImageElementForm extends StatefulWidget {
   final BookElement element;
-  ImageElementForm({Key key, this.element}) : super(key: key);
+  final Content content;
+  ImageElementForm({Key key, this.element, @required this.content})
+      : super(key: key);
 
   @override
   _ImageElementFormState createState() => _ImageElementFormState();
@@ -23,17 +27,13 @@ class _ImageElementFormState extends State<ImageElementForm> {
     return Container(
       child: Column(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              _getFile();
+          FirebaseUploadFileButton(
+            fbUrl: (value) async {
+              setState(() {
+                urlContrller.text = value;
+              });
             },
-            child: Text(
-              'subir imagen',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.blueAccent)),
+            direcorty: 'elementos/imagenes/',
           ),
           TextField(
             controller: urlContrller,
@@ -111,11 +111,13 @@ class _ImageElementFormState extends State<ImageElementForm> {
                     isSubmitEnabled = false;
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
-                        type: "image", elements: [urlContrller.text]);
+                        type: "image", stringElements: urlContrller.text);
                     var client = ApiClient();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
-                      valid = await client.updElement(element: nuevoElement);
+                      valid = await client.updElement(
+                        element: nuevoElement,
+                      );
                       if (valid) {
                         showToast(
                             'la entrega ${nuevoElement.type} fue editado correctamente',
@@ -148,7 +150,8 @@ class _ImageElementFormState extends State<ImageElementForm> {
                             reverseCurve: Curves.fastOutSlowIn);
                       }
                     } else {
-                      valid = await client.addElement(element: nuevoElement);
+                      valid = await client.addElement(
+                          element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
                             'el elemento ${nuevoElement.type} fue creado correctamente',

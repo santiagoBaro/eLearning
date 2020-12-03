@@ -1,4 +1,5 @@
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/elements/element_forms.dart/image_element_form.dart';
 import 'package:elearning/elements/element_forms.dart/list_element_form.dart';
 import 'package:elearning/elements/element_forms.dart/multiple_choice_element_form.dart';
@@ -13,7 +14,9 @@ import 'element_forms.dart/video_element_form.dart';
 
 class BookElementForm extends StatefulWidget {
   final BookElement element;
-  BookElementForm({Key key, this.element}) : super(key: key);
+  final Content content;
+  BookElementForm({Key key, this.element, @required this.content})
+      : super(key: key);
 
   @override
   _BookElementFormState createState() => _BookElementFormState();
@@ -39,28 +42,29 @@ class _BookElementFormState extends State<BookElementForm> {
     type = list[1];
     switch (type.toLowerCase()) {
       case "image":
-        return ImageElementForm(element: element);
+        return ImageElementForm(element: element, content: widget.content);
         break;
       case "list":
-        return ListElementForm(element: element);
+        return ListElementForm(element: element, content: widget.content);
         break;
       case "multiple_choice":
-        return MultipleChoiceElementForm(element: element);
+        return MultipleChoiceElementForm(
+            element: element, content: widget.content);
         break;
       case "paragraph":
-        return ParagraphElementForm(element: element);
+        return ParagraphElementForm(element: element, content: widget.content);
         break;
       case "question":
-        return QuestionElementForm(element: element);
+        return QuestionElementForm(element: element, content: widget.content);
         break;
       case "subtitle":
-        return SubtitleElementForm(element: element);
+        return SubtitleElementForm(element: element, content: widget.content);
         break;
       case "title":
-        return TitleElementForm(element: element);
+        return TitleElementForm(element: element, content: widget.content);
         break;
       case "video":
-        return VideoElementForm(element: element);
+        return VideoElementForm(element: element, content: widget.content);
         break;
       default:
     }

@@ -173,7 +173,15 @@ class ApiClient {
     return List<BookElement>();
   }
 
-  Future<bool> addElement({BookElement element, Content content}) {}
+  Future<bool> addElement({BookElement element, Content content}) async {
+    var response = await http.post(
+      '$baseUrl/contenidos/altaContenido/${content.id}',
+      body: jsonEncode(element.toStringJson()),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
   Future<bool> updElement({BookElement element}) {}
   Future<bool> delElement({BookElement element}) {}
 
@@ -254,6 +262,24 @@ class ApiClient {
       return contentList;
     }
     return List<TaskScore>();
+  }
+
+  Future<bool> scoreTask({int taskId, String mail, String nota}) async {
+    var response = await http.post(
+      '$baseUrl/entregas/calificarEntrega/$taskId/$nota',
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> submitTask({String url, Task tarea}) async {
+    var body = {"mailUser": storedUserCredentials.userData.mail, "link": url};
+    var response = await http.post(
+      '$baseUrl}/entregas/altaEntrega/${tarea.id}',
+      body: jsonEncode(body),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
   }
 
   //* FORO

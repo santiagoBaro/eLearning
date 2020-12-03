@@ -1,11 +1,14 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ListElementForm extends StatefulWidget {
   final BookElement element;
-  ListElementForm({Key key, this.element}) : super(key: key);
+  final Content content;
+  ListElementForm({Key key, this.element, @required this.content})
+      : super(key: key);
 
   @override
   _ListElementFormState createState() => _ListElementFormState();
@@ -104,7 +107,7 @@ class _ListElementFormState extends State<ListElementForm> {
                     String elem =
                         titleContrller.text + "," + optionsContrller.text;
                     BookElement nuevoElement =
-                        BookElement(type: "image", stringElements: elem);
+                        BookElement(type: "list", stringElements: elem);
                     var client = ApiClient();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
@@ -141,7 +144,8 @@ class _ListElementFormState extends State<ListElementForm> {
                             reverseCurve: Curves.fastOutSlowIn);
                       }
                     } else {
-                      valid = await client.addElement(element: nuevoElement);
+                      valid = await client.addElement(
+                          element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
                             'el elemento ${nuevoElement.type} fue creado correctamente',

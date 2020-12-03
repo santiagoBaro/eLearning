@@ -5,6 +5,7 @@ import 'package:elearning/base_app/firebase_download_file.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/task_score_dataType.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ScoreTasks extends StatefulWidget {
   final Task tarea;
@@ -76,7 +77,7 @@ class _ScoreTaskState extends State<ScoreTasks> {
                       ),
                     ),
                     Container(
-                      height: 300,
+                      height: 600,
                       width: 600,
                       child: ListView.builder(
                           shrinkWrap: true,
@@ -87,6 +88,12 @@ class _ScoreTaskState extends State<ScoreTasks> {
                               task: displayList[index],
                             );
                           }),
+                    ),
+                    ElevatedButton(
+                      child: Text("cancelar"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ],
                 );
@@ -128,65 +135,104 @@ class TaskScoreCard extends StatefulWidget {
 class _TaskScoreCardState extends State<TaskScoreCard> {
   final scoreController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   if (widget.task != null) {
-  //     scoreController.text = widget.task.score.toString();
-  //   }
-  // }
+  @override
+  void initState() {
+    super.initState();
+    if (widget.task != null && widget.task.score > 0) {
+      scoreController.text = widget.task.score.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(maxWidth: 600),
-      height: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(
-              widget.task.mailUser,
-              style: TextStyle(fontSize: 20),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 600),
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
             ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Visibility(
-                child: FirebaseDownloadButton(),
-                visible: widget.task.url != "",
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                widget.task.mailUser,
+                style: TextStyle(fontSize: 20),
               ),
-              Container(
-                width: 50,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: scoreController,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Visibility(
+                  child: FirebaseDownloadButton(
+                    url: widget.task.url,
+                  ),
+                  visible: widget.task.url != "",
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Save"),
-              )
-            ],
-          ),
-        ],
+                Container(
+                  width: 50,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: scoreController,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    var client = ApiClient();
+                    bool valid = false;
+                    valid = await client.scoreTask(
+                      taskId: widget.task.taskId,
+                      nota: scoreController.text,
+                      mail: widget.task.mailUser,
+                    );
+                    if (valid) {
+                      showToast('Se cargo la nota correctamente',
+                          context: context,
+                          animation: StyledToastAnimation.slideFromBottom,
+                          reverseAnimation: StyledToastAnimation.slideToBottom,
+                          startOffset: Offset(0.0, 3.0),
+                          reverseEndOffset: Offset(0.0, 3.0),
+                          position: StyledToastPosition.bottom,
+                          duration: Duration(seconds: 4),
+                          //Animation duration   animDuration * 2 <= duration
+                          animDuration: Duration(seconds: 1),
+                          curve: Curves.elasticOut,
+                          reverseCurve: Curves.fastOutSlowIn);
+                    } else {
+                      showToast('Error al cargar nota',
+                          context: context,
+                          animation: StyledToastAnimation.slideFromBottom,
+                          reverseAnimation: StyledToastAnimation.slideToBottom,
+                          startOffset: Offset(0.0, 3.0),
+                          reverseEndOffset: Offset(0.0, 3.0),
+                          position: StyledToastPosition.bottom,
+                          duration: Duration(seconds: 4),
+                          //Animation duration   animDuration * 2 <= duration
+                          animDuration: Duration(seconds: 1),
+                          curve: Curves.elasticOut,
+                          reverseCurve: Curves.fastOutSlowIn);
+                    }
+                  },
+                  child: Text("Save"),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

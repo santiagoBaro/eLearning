@@ -2,6 +2,7 @@ import 'package:elearning/data_types/user_dataType.dart';
 
 class TaskScore {
   int id;
+  int taskId;
   String mailUser;
   String url;
   double score;
@@ -10,11 +11,13 @@ class TaskScore {
     this.url,
     this.mailUser,
     this.id,
+    this.taskId,
   });
 
   TaskScore.fromJson(Map<String, dynamic> json)
       : url = json['linkEntrega'],
-        score = json['nota'] ?? 22,
+        score = json['nota'],
         id = json['id'],
+        taskId = json['idTarea'],
         mailUser = json['mailUsuario'];
 }

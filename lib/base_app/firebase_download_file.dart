@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:firebase/firebase.dart' as fb;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseDownloadButton extends StatefulWidget {
-  FirebaseDownloadButton({Key key}) : super(key: key);
+  final String url;
+  FirebaseDownloadButton({Key key, @required this.url}) : super(key: key);
 
   @override
   _FirebaseDownloadButtonState createState() => _FirebaseDownloadButtonState();
@@ -11,16 +13,7 @@ class FirebaseDownloadButton extends StatefulWidget {
 
 class _FirebaseDownloadButtonState extends State<FirebaseDownloadButton> {
   Future<void> downloadFileExample() async {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    File downloadToFile = File('${appDocDir.path}/download-logo.png');
-
-    // try {
-    //   await firebase_storage.FirebaseStorage.instance
-    //       .ref('uploads/logo.png')
-    //       .writeToFile(downloadToFile);
-    // } catch (e) {
-    //   // e.g, e.code == 'canceled'
-    // }
+    fb.storage().refFromURL(widget.url);
   }
 
   @override

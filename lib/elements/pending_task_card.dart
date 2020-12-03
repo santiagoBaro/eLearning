@@ -1,3 +1,4 @@
+import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/firebase_upload_file.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/task_datatype.dart';
@@ -81,7 +82,17 @@ class PendingTaskCard extends StatelessWidget {
                           Visibility(
                             visible: task.entregable &&
                                 storedUserCredentials.userData.tipoUsu == "E",
-                            child: FirebaseUploadFileButton(),
+                            child: FirebaseUploadFileButton(
+                              fbUrl: (value) async {
+                                var client = ApiClient();
+                                bool valid = false;
+                                if (value != null && value != "") {
+                                  valid = await client.submitTask(
+                                      tarea: task, url: value);
+                                }
+                              },
+                              direcorty: 'task/${task.id.toString()}/',
+                            ),
                           ),
                           Visibility(
                             visible:

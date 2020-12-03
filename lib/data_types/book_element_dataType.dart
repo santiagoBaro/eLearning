@@ -22,8 +22,11 @@ class BookElement {
       };
 
   Map<String, dynamic> toStringJson() => {
-        'tipo': type,
-        'contenido': stringElements,
+        "Contenido": {
+          "tipo": type,
+          "contenido": stringElements,
+          "archivo": "",
+        }
       };
 }
 

@@ -1,11 +1,15 @@
 import 'package:elearning/base_app/api_client.dart';
+import 'package:elearning/base_app/firebase_upload_file.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class VideoElementForm extends StatefulWidget {
   final BookElement element;
-  VideoElementForm({Key key, this.element}) : super(key: key);
+  final Content content;
+  VideoElementForm({Key key, this.element, @required this.content})
+      : super(key: key);
 
   @override
   _VideoElementFormState createState() => _VideoElementFormState();
@@ -23,17 +27,13 @@ class _VideoElementFormState extends State<VideoElementForm> {
     return Container(
       child: Column(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              _getFile();
+          FirebaseUploadFileButton(
+            fbUrl: (value) async {
+              setState(() {
+                urlContrller.text = value;
+              });
             },
-            child: Text(
-              'subir video',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.blueAccent)),
+            direcorty: 'elementos/videos/',
           ),
           TextField(
             controller: urlContrller,
@@ -111,7 +111,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                     isSubmitEnabled = false;
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
-                        type: "image", elements: [urlContrller.text]);
+                        type: "video", stringElements: urlContrller.text);
                     var client = ApiClient();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
@@ -148,7 +148,8 @@ class _VideoElementFormState extends State<VideoElementForm> {
                             reverseCurve: Curves.fastOutSlowIn);
                       }
                     } else {
-                      valid = await client.addElement(element: nuevoElement);
+                      valid = await client.addElement(
+                          element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
                             'el elemento ${nuevoElement.type} fue creado correctamente',

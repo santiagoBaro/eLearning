@@ -1,11 +1,14 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class TitleElementForm extends StatefulWidget {
   final BookElement element;
-  TitleElementForm({Key key, this.element}) : super(key: key);
+  final Content content;
+  TitleElementForm({Key key, this.element, @required this.content})
+      : super(key: key);
 
   @override
   _TitleElementFormState createState() => _TitleElementFormState();
@@ -97,7 +100,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                     isSubmitEnabled = false;
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
-                        type: "image", elements: [textContrller.text]);
+                        type: "title", stringElements: textContrller.text);
                     var client = ApiClient();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
@@ -134,7 +137,8 @@ class _TitleElementFormState extends State<TitleElementForm> {
                             reverseCurve: Curves.fastOutSlowIn);
                       }
                     } else {
-                      valid = await client.addElement(element: nuevoElement);
+                      valid = await client.addElement(
+                          element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
                             'el elemento ${nuevoElement.type} fue creado correctamente',
