@@ -366,7 +366,7 @@ class ApiClient {
   //* SCORE
   Future<double> getCourseScore({Course curso}) async {
     var response = await http.get(
-      '$baseUrl//inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
+      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {
