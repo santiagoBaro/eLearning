@@ -25,7 +25,7 @@ class BookElementForm extends StatefulWidget {
 class _BookElementFormState extends State<BookElementForm> {
   final _formKey = GlobalKey<FormState>();
   final contentContrller = TextEditingController();
-  ElementType dropdownValue = ElementType.title;
+  String dropdownValue = "title";
   bool isSubmitEnabled = true;
   bool isDeleteEnabled = true;
 
@@ -33,13 +33,11 @@ class _BookElementFormState extends State<BookElementForm> {
   void initState() {
     super.initState();
     if (widget.element != null) {
-      contentContrller.text = widget.element.elements.join(',');
+      dropdownValue = widget.element.type;
     }
   }
 
   Widget _buildForm({String type, BookElement element}) {
-    List<String> list = type.split(".");
-    type = list[1];
     switch (type.toLowerCase()) {
       case "image":
         return ImageElementForm(element: element, content: widget.content);
@@ -102,23 +100,40 @@ class _BookElementFormState extends State<BookElementForm> {
                 ),
               ),
             ),
-            DropdownButton<ElementType>(
+            DropdownButton<String>(
               value: dropdownValue,
-              onChanged: (ElementType newValue) {
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String newValue) {
                 setState(() {
                   dropdownValue = newValue;
                 });
               },
-              items: ElementType.values.map((ElementType classType) {
-                return DropdownMenuItem<ElementType>(
-                  value: classType,
-                  child: Text(classType.toString()),
+              items: <String>[
+                'image',
+                'list',
+                'multiple_choice',
+                'paragraph',
+                'question',
+                'title',
+                'subtitle',
+                'video'
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
                 );
               }).toList(),
             ),
             Container(
               child: _buildForm(
-                type: dropdownValue.toString(),
+                type: dropdownValue,
                 element: widget.element,
               ),
             ),

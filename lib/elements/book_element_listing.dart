@@ -25,7 +25,6 @@ class BookElementListing extends StatelessWidget {
           }
           return Container(
             height: 75,
-            width: 400,
             child: ListView.builder(
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),

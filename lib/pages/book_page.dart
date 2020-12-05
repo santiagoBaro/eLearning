@@ -79,35 +79,39 @@ class _BookPageState extends State<BookPage> {
                 ),
                 Visibility(
                   visible: storedUserCredentials.userData.tipoUsu == "D",
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFB6107),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFB6107),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'contenidos del libro',
-                              style: TextStyle(color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'contenidos del libro',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return _buildPopUp(content: widget.content);
-                                  });
-                            },
-                            child: Text('Add Content'),
-                          ),
-                        ],
+                            ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return _buildPopUp(
+                                          content: widget.content);
+                                    });
+                              },
+                              child: Text('Add Content'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
