@@ -56,7 +56,7 @@ class _BedeliasPageState extends State<BedeliasPage>
                         text: "Cursos",
                       ),
                       Tab(
-                        text: "Examenes",
+                        text: "Exámenes",
                       ),
                       Tab(
                         text: "Eventos",
@@ -84,7 +84,7 @@ class _BedeliasPageState extends State<BedeliasPage>
                         //* SECOND TAB PAGE
                         // EXAMEN
                         child: EnrollmentGridElement(
-                          title: 'Examenes',
+                          title: 'Exámenes',
                         ),
                       ),
                       Container(

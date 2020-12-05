@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firebase_download_file.dart';
 import 'package:elearning/base_app/firestore_connection.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/task_score_dataType.dart';
@@ -72,8 +71,7 @@ class _ScoreTaskState extends State<ScoreTasks> {
                           vertical: 8,
                         ),
                         child: TextField(
-                            decoration: InputDecoration(
-                                hintText: 'Enter a search term'),
+                            decoration: InputDecoration(hintText: 'Buscar..'),
                             onChanged: (text) => _filetList(text)),
                       ),
                     ),
@@ -91,7 +89,7 @@ class _ScoreTaskState extends State<ScoreTasks> {
                           }),
                     ),
                     ElevatedButton(
-                      child: Text("cancelar"),
+                      child: Text("Cancelar"),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -200,7 +198,7 @@ class _TaskScoreCardState extends State<TaskScoreCard> {
                       nota: int.parse(scoreController.text),
                     );
                     if (valid) {
-                      showToast('Se cargo la nota correctamente',
+                      showToast('Se cargó la nota correctamente',
                           context: context,
                           animation: StyledToastAnimation.slideFromBottom,
                           reverseAnimation: StyledToastAnimation.slideToBottom,
@@ -227,7 +225,7 @@ class _TaskScoreCardState extends State<TaskScoreCard> {
                           reverseCurve: Curves.fastOutSlowIn);
                     }
                   },
-                  child: Text("Save"),
+                  child: Text("Guardar"),
                 )
               ],
             ),

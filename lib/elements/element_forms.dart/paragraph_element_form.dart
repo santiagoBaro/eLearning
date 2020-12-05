@@ -35,7 +35,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
         children: [
           TextField(
             controller: textContrller,
-            decoration: InputDecoration(labelText: 'texto'),
+            decoration: InputDecoration(labelText: 'Texto'),
           ),
           SizedBox(height: 10),
           Row(
@@ -46,7 +46,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                   Navigator.of(context).pop();
                 },
                 child:
-                    Text('cancelar', style: TextStyle(color: Colors.black45)),
+                    Text('Cancelar', style: TextStyle(color: Colors.black45)),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -65,7 +65,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                         );
                         if (valid) {
                           showToast(
-                              'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',
+                              'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -98,7 +98,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                       isDeleteEnabled = true;
                     }
                   },
-                  child: Text('Delete'),
+                  child: Text('Eliminar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -118,7 +118,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                       valid = await client.updElement(element: nuevoElement);
                       if (valid) {
                         showToast(
-                            'la entrega ${nuevoElement.type} fue editado correctamente',
+                            'La entrega ${nuevoElement.type} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -152,7 +152,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                           element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
-                            'el elemento ${nuevoElement.type} fue creado correctamente',
+                            'El elemento ${nuevoElement.type} fue creado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -186,7 +186,7 @@ class _ParagraphElementFormState extends State<ParagraphElementForm> {
                     isSubmitEnabled = true;
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Enviar'),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.greenAccent)),

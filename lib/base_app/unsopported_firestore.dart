@@ -20,7 +20,7 @@ class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
       children: [
         ElevatedButton(
           onPressed: () {
-            showToast('el dispositivo no soporta esta funcionalidad',
+            showToast('El dispositivo no soporta esta funcionalidad',
                 context: context,
                 animation: StyledToastAnimation.slideFromBottom,
                 reverseAnimation: StyledToastAnimation.slideToBottom,
@@ -53,7 +53,7 @@ class _FirebaseDownloadButtonState extends State<FirebaseDownloadButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        showToast('el dispositivo no soporta esta funcionalidad',
+        showToast('El dispositivo no soporta esta funcionalidad',
             context: context,
             animation: StyledToastAnimation.slideFromBottom,
             reverseAnimation: StyledToastAnimation.slideToBottom,

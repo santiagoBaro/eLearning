@@ -2,7 +2,6 @@ import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:flutter/material.dart';
 
-import 'course_contact_info_element.dart';
 import 'course_score_element.dart';
 
 class CourseInformationCard extends StatelessWidget {

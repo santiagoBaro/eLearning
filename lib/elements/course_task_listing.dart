@@ -17,7 +17,7 @@ class CourseTaskListing extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Container(
-              child: Text("no hay tareas pendentes"),
+              child: Text("No hay tareas pendentes"),
               height: 100,
             );
           }

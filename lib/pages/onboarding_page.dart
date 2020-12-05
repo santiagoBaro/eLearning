@@ -66,7 +66,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 right: 20,
                               ),
                               child: Text(
-                                "La Mejor Manera De Aprender ",
+                                "La Mejor Manera de Aprender ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -108,7 +108,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 360.0),
                               child: Text(
-                                "No Importa El Lugar ",
+                                "No Importa el Lugar ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -150,7 +150,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 300.0),
                               child: Text(
-                                "Sigue El Progreso ",
+                                "Sigue el Progreso ",
                                 style: onboardingTextStyle,
                                 textAlign: TextAlign.center,
                               ),
@@ -215,7 +215,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Already have an account?',
+                      'Ya tienes una cuenta?',
                       style: tabbedLoginInputTextStyle,
                     ),
                     FlatButton(

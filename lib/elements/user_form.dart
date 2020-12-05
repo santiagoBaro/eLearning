@@ -61,7 +61,7 @@ class _UserFormState extends State<UserForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'user form',
+                  'Usuario',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -70,21 +70,21 @@ class _UserFormState extends State<UserForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'Nombre'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: mailController,
-                decoration: InputDecoration(labelText: 'mail'),
+                decoration: InputDecoration(labelText: 'Mail'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: directionContrller,
-                decoration: InputDecoration(labelText: 'direccion'),
+                decoration: InputDecoration(labelText: 'Dirección'),
               ),
             ),
             Visibility(
@@ -92,7 +92,7 @@ class _UserFormState extends State<UserForm> {
                 padding: const EdgeInsets.all(3.0),
                 child: TextFormField(
                   controller: careerController,
-                  decoration: InputDecoration(labelText: 'carrera'),
+                  decoration: InputDecoration(labelText: 'Carrera'),
                 ),
               ),
               visible: (widget.usuario.tipoUsu == "E"),
@@ -101,7 +101,7 @@ class _UserFormState extends State<UserForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: passwordContrller,
-                decoration: InputDecoration(labelText: 'contrasena'),
+                decoration: InputDecoration(labelText: 'Contraseña'),
               ),
             ),
             Row(
@@ -111,17 +111,17 @@ class _UserFormState extends State<UserForm> {
                     padding: const EdgeInsets.all(3.0),
                     child: TextFormField(
                       controller: documentController,
-                      decoration: InputDecoration(labelText: 'documento'),
+                      decoration: InputDecoration(labelText: 'Documento'),
                     ),
                   ),
                 ),
                 DropdownButton(
                     value: _value,
                     items: [
-                      DropdownMenuItem(child: Text("ci"), value: 'ci'),
+                      DropdownMenuItem(child: Text("CI"), value: 'ci'),
                       DropdownMenuItem(
-                          child: Text("pasaporte"), value: 'pasaporte'),
-                      DropdownMenuItem(child: Text("dni"), value: 'dni'),
+                          child: Text("Pasaporte"), value: 'pasaporte'),
+                      DropdownMenuItem(child: Text("DNI"), value: 'dni'),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -141,7 +141,7 @@ class _UserFormState extends State<UserForm> {
                     Navigator.of(context).pop();
                   },
                   child:
-                      Text('Cancel', style: TextStyle(color: Colors.black45)),
+                      Text('Cancelar', style: TextStyle(color: Colors.black45)),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -165,7 +165,7 @@ class _UserFormState extends State<UserForm> {
                           user: nuevo_usuario, pass: passwordContrller.text);
                       if (valid) {
                         showToast(
-                            'el usuario ${nuevo_usuario.nombre} fue editado correctamente',
+                            'El usuario ${nuevo_usuario.nombre} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -197,7 +197,7 @@ class _UserFormState extends State<UserForm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Submit'),
+                  child: Text('Enviar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),
@@ -221,7 +221,7 @@ class _UserFormState extends State<UserForm> {
                       ));
                     });
               },
-              child: Text('Modificar contrasena',
+              child: Text('Modificar contraseña',
                   style: TextStyle(color: Colors.white)),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(

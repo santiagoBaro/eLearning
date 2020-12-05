@@ -60,7 +60,7 @@ class OnboardingPageSlide extends StatelessWidget {
             width: 120,
             child: RaisedButton(
               child: Text(
-                "Sign Up",
+                "Registrarse",
                 style: TextStyle(
                   color: myAppTheme['HighlightTextColor'],
                   fontSize: 20,

@@ -3,7 +3,6 @@ import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/pages/bedelias_page.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:elearning/pages/landing_page.dart';
-import 'package:elearning/pages/messages_list_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:elearning/tools/visual_assets.dart';
@@ -346,7 +345,7 @@ class MsterFooter extends StatelessWidget {
                   return AlertDialog(
                     content: Column(
                       children: [
-                        Text('Seguro que quieres cerrar sesion?'),
+                        Text('Seguro que quieres cerrar sesión?'),
                         Row(
                           children: [
                             FlatButton(
@@ -365,7 +364,7 @@ class MsterFooter extends StatelessWidget {
                 });
           },
           child: Text(
-            'Cerrar Sesion',
+            'Cerrar Sesión',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,

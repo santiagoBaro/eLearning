@@ -58,7 +58,7 @@ class _ForoFormState extends State<ForoForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'foro form',
+                  'Foro',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -67,14 +67,14 @@ class _ForoFormState extends State<ForoForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: titleContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'Nombre'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: typeContrller,
-                decoration: InputDecoration(labelText: 'tipo'),
+                decoration: InputDecoration(labelText: 'Tipo'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -88,7 +88,7 @@ class _ForoFormState extends State<ForoForm> {
                     Navigator.of(context).pop();
                   },
                   child:
-                      Text('cancelar', style: TextStyle(color: Colors.black45)),
+                      Text('Cancelar', style: TextStyle(color: Colors.black45)),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -104,7 +104,7 @@ class _ForoFormState extends State<ForoForm> {
                           valid = await client.delForum(foro: widget.form);
                           if (valid) {
                             showToast(
-                                'el foro ${widget.form.name ?? ""} fue eliminada correctamente',
+                                'El foro ${widget.form.name ?? ""} fue eliminado correctamente',
                                 context: context,
                                 animation: StyledToastAnimation.slideFromBottom,
                                 reverseAnimation:
@@ -137,7 +137,7 @@ class _ForoFormState extends State<ForoForm> {
                         isDeleteEnabled = true;
                       }
                     },
-                    child: Text('Delete'),
+                    child: Text('Eliminar'),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -160,7 +160,7 @@ class _ForoFormState extends State<ForoForm> {
                         valid = await client.updForum(foro: nuevoForo);
                         if (valid) {
                           showToast(
-                              'el foro ${nuevoForo.name} fue editado correctamente',
+                              'El foro ${nuevoForo.name} fue editado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -194,7 +194,7 @@ class _ForoFormState extends State<ForoForm> {
                             foro: nuevoForo, curso: widget.curso);
                         if (valid) {
                           showToast(
-                              'el foro ${nuevoForo.name} fue creada correctamente',
+                              'El foro ${nuevoForo.name} fue creado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -228,7 +228,7 @@ class _ForoFormState extends State<ForoForm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Submit'),
+                  child: Text('Enviar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),

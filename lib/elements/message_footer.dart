@@ -54,7 +54,7 @@ class _MessageFooterState extends State<MessageFooter> {
                     message: messageContrller.text,
                   );
                   if (valid) {
-                    showToast('el mensaje fue entregado correctamente',
+                    showToast('El mensaje fue entregado correctamente',
                         context: context,
                         animation: StyledToastAnimation.slideFromBottom,
                         reverseAnimation: StyledToastAnimation.slideToBottom,
@@ -68,7 +68,7 @@ class _MessageFooterState extends State<MessageFooter> {
                         reverseCurve: Curves.fastOutSlowIn);
                     Navigator.of(context).pop();
                   } else {
-                    showToast('error al entregar el mensaje',
+                    showToast('Error al entregar el mensaje',
                         context: context,
                         animation: StyledToastAnimation.slideFromBottom,
                         reverseAnimation: StyledToastAnimation.slideToBottom,

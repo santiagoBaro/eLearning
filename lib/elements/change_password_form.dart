@@ -46,7 +46,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'foro form',
+                  'Cambiar contraseña',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -55,14 +55,14 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: oldPassContrller,
-                decoration: InputDecoration(labelText: 'contrasena actual'),
+                decoration: InputDecoration(labelText: 'Contraseña actual'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: newPass1Contrller,
-                decoration: InputDecoration(labelText: 'nueva contrasena'),
+                decoration: InputDecoration(labelText: 'Nueva contraseña'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -71,7 +71,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: newPass2Contrller,
-                decoration: InputDecoration(labelText: 'repita la contrasena'),
+                decoration: InputDecoration(labelText: 'Repita la contraseña'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -85,7 +85,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                     Navigator.of(context).pop();
                   },
                   child:
-                      Text('cancelar', style: TextStyle(color: Colors.black45)),
+                      Text('Cancelar', style: TextStyle(color: Colors.black45)),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -101,7 +101,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                             oldPass: oldPassContrller.text,
                             newPass: newPass1Contrller.text);
                         if (valid) {
-                          showToast('la contrasena fue editada correctamente',
+                          showToast('La contraseña fue editada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -116,7 +116,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                               reverseCurve: Curves.fastOutSlowIn);
                           Navigator.of(context).pop();
                         } else {
-                          showToast('Error al modificar la contrasena',
+                          showToast('Error al modificar la contraseña',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -131,7 +131,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                               reverseCurve: Curves.fastOutSlowIn);
                         }
                       } else {
-                        showToast('La nueva contrasena no coincide',
+                        showToast('La nueva contraseña no coincide',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -148,7 +148,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Submit'),
+                  child: Text('Enviar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),

@@ -1,8 +1,5 @@
 import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/foro_dataType.dart';
-import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/elements/task_form.dart';
 import 'package:flutter/material.dart';
 

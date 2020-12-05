@@ -31,7 +31,7 @@ class MessageHeader extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'ult. vez hoy a las 18:21',
+                    'Últ. vez hoy a las 18:21',
                     style: connectionTextStyle,
                   ),
                 ),

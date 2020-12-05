@@ -25,7 +25,7 @@ class ContactInfo extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text(
-                  'profesor:',
+                  'Profesor:',
                   style: informationTextStyle,
                 ),
                 SizedBox(width: 30),

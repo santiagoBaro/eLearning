@@ -9,7 +9,7 @@ class CourseContentCard extends StatelessWidget {
   final String targetIndex;
   const CourseContentCard({
     Key key,
-    this.name = 'Course Card',
+    this.name = 'Curso',
     this.icon = Icons.error_outline,
     this.currentIndex = '120',
     this.targetIndex = '145',
