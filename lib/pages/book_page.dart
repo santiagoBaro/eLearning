@@ -4,6 +4,7 @@ import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/elements/book_element_form.dart';
 import 'package:elearning/elements/book_element_listing.dart';
+import 'package:elearning/elements/book_index.dart';
 import 'package:elearning/elements/bool_elements/image_book_element.dart';
 import 'package:elearning/elements/bool_elements/list_book_element.dart';
 import 'package:elearning/elements/bool_elements/multiple_choice_book_element.dart';
@@ -119,6 +120,32 @@ class _BookPageState extends State<BookPage> {
                 Visibility(
                     visible: storedUserCredentials.userData.tipoUsu == "D",
                     child: BookElementListing(content: widget.content)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFB6107),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'contenidos del libro',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                BookIndex(content: widget.content),
               ],
             ),
           ),
