@@ -24,7 +24,6 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Schedule(),
             Calendar(),
             UserTaskListing(),
           ],

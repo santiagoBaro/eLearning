@@ -66,8 +66,10 @@ class _ListElementFormState extends State<ListElementForm> {
                       if (widget.element != null) {
                         bool valid = false;
                         var client = ApiClient();
-                        valid =
-                            await client.delElement(element: widget.element);
+                        valid = await client.delElement(
+                          element: widget.element,
+                          content: widget.content,
+                        );
                         if (valid) {
                           showToast(
                               'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',

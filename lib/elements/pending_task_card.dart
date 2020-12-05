@@ -1,5 +1,6 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/firebase_upload_file.dart';
+import 'package:elearning/base_app/firestore_connection.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/elements/score_task.dart';
@@ -8,9 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+
 class PendingTaskCard extends StatelessWidget {
+  final urlController = TextEditingController();
   final Task task;
-  const PendingTaskCard({
+  PendingTaskCard({
     Key key,
     @required this.task,
   }) : super(key: key);
@@ -84,11 +88,10 @@ class PendingTaskCard extends StatelessWidget {
                                 storedUserCredentials.userData.tipoUsu == "E",
                             child: FirebaseUploadFileButton(
                               fbUrl: (value) async {
-                                var client = ApiClient();
-                                bool valid = false;
                                 if (value != null && value != "") {
-                                  valid = await client.submitTask(
-                                      tarea: task, url: value);
+                                  urlController.text = value;
+                                  // valid = await client.submitTask(
+                                  //     tarea: task, url: urlController.text);
                                 }
                               },
                               direcorty: 'task/${task.id.toString()}/',
@@ -120,6 +123,55 @@ class PendingTaskCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: TextFormField(
+                          controller: urlController,
+                          decoration: InputDecoration(labelText: 'url'),
+                        ),
+                      ),
+                      ElevatedButton(
+                        child: Text("submit"),
+                        onPressed: () async {
+                          if (urlController.text != "") {
+                            var client = ApiClient();
+                            bool valid = false;
+                            valid = await client.submitTask(
+                                tarea: task, url: urlController.text);
+                            if (valid) {
+                              showToast('la tarea fue entregada correctamente',
+                                  context: context,
+                                  animation:
+                                      StyledToastAnimation.slideFromBottom,
+                                  reverseAnimation:
+                                      StyledToastAnimation.slideToBottom,
+                                  startOffset: Offset(0.0, 3.0),
+                                  reverseEndOffset: Offset(0.0, 3.0),
+                                  position: StyledToastPosition.bottom,
+                                  duration: Duration(seconds: 4),
+                                  //Animation duration   animDuration * 2 <= duration
+                                  animDuration: Duration(seconds: 1),
+                                  curve: Curves.elasticOut,
+                                  reverseCurve: Curves.fastOutSlowIn);
+                            } else {
+                              showToast('error al entregar la tarea',
+                                  context: context,
+                                  animation:
+                                      StyledToastAnimation.slideFromBottom,
+                                  reverseAnimation:
+                                      StyledToastAnimation.slideToBottom,
+                                  startOffset: Offset(0.0, 3.0),
+                                  reverseEndOffset: Offset(0.0, 3.0),
+                                  position: StyledToastPosition.bottom,
+                                  duration: Duration(seconds: 4),
+                                  //Animation duration   animDuration * 2 <= duration
+                                  animDuration: Duration(seconds: 1),
+                                  curve: Curves.elasticOut,
+                                  reverseCurve: Curves.fastOutSlowIn);
+                            }
+                          }
+                        },
+                      )
                     ],
                   ),
                 );

@@ -1,5 +1,5 @@
 import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firebase_upload_file.dart';
+import 'package:elearning/base_app/firestore_connection.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +68,10 @@ class _ImageElementFormState extends State<ImageElementForm> {
                       if (widget.element != null) {
                         bool valid = false;
                         var client = ApiClient();
-                        valid =
-                            await client.delElement(element: widget.element);
+                        valid = await client.delElement(
+                          element: widget.element,
+                          content: widget.content,
+                        );
                         if (valid) {
                           showToast(
                               'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',
