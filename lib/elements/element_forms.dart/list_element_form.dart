@@ -38,11 +38,11 @@ class _ListElementFormState extends State<ListElementForm> {
         children: [
           TextField(
             controller: titleContrller,
-            decoration: InputDecoration(labelText: 'title'),
+            decoration: InputDecoration(labelText: 'Title'),
           ),
           TextField(
             controller: optionsContrller,
-            decoration: InputDecoration(labelText: 'opciones [,]'),
+            decoration: InputDecoration(labelText: 'Opciones [,]'),
           ),
           SizedBox(height: 10),
           Row(
@@ -53,7 +53,7 @@ class _ListElementFormState extends State<ListElementForm> {
                   Navigator.of(context).pop();
                 },
                 child:
-                    Text('cancelar', style: TextStyle(color: Colors.black45)),
+                    Text('Cancelar', style: TextStyle(color: Colors.black45)),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -66,13 +66,11 @@ class _ListElementFormState extends State<ListElementForm> {
                       if (widget.element != null) {
                         bool valid = false;
                         var client = ApiClient();
-                        valid = await client.delElement(
-                          element: widget.element,
-                          content: widget.content,
-                        );
+                        valid =
+                            await client.delElement(element: widget.element);
                         if (valid) {
                           showToast(
-                              'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',
+                              'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -105,7 +103,7 @@ class _ListElementFormState extends State<ListElementForm> {
                       isDeleteEnabled = true;
                     }
                   },
-                  child: Text('Delete'),
+                  child: Text('Eliminar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -127,7 +125,7 @@ class _ListElementFormState extends State<ListElementForm> {
                       valid = await client.updElement(element: nuevoElement);
                       if (valid) {
                         showToast(
-                            'la entrega ${nuevoElement.type} fue editado correctamente',
+                            'La entrega ${nuevoElement.type} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -161,7 +159,7 @@ class _ListElementFormState extends State<ListElementForm> {
                           element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
-                            'el elemento ${nuevoElement.type} fue creado correctamente',
+                            'El elemento ${nuevoElement.type} fue creado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -195,7 +193,7 @@ class _ListElementFormState extends State<ListElementForm> {
                     isSubmitEnabled = true;
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Enviar'),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.greenAccent)),

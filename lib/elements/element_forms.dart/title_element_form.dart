@@ -35,7 +35,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
         children: [
           TextField(
             controller: textContrller,
-            decoration: InputDecoration(labelText: 'titulo'),
+            decoration: InputDecoration(labelText: 'Título'),
           ),
           SizedBox(height: 10),
           Row(
@@ -46,7 +46,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                   Navigator.of(context).pop();
                 },
                 child:
-                    Text('cancelar', style: TextStyle(color: Colors.black45)),
+                    Text('Cancelar', style: TextStyle(color: Colors.black45)),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -59,13 +59,11 @@ class _TitleElementFormState extends State<TitleElementForm> {
                       if (widget.element != null) {
                         bool valid = false;
                         var client = ApiClient();
-                        valid = await client.delElement(
-                          element: widget.element,
-                          content: widget.content,
-                        );
+                        valid =
+                            await client.delElement(element: widget.element);
                         if (valid) {
                           showToast(
-                              'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',
+                              'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -98,7 +96,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                       isDeleteEnabled = true;
                     }
                   },
-                  child: Text('Delete'),
+                  child: Text('Eliminar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -118,7 +116,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                       valid = await client.updElement(element: nuevoElement);
                       if (valid) {
                         showToast(
-                            'la entrega ${nuevoElement.type} fue editado correctamente',
+                            'La entrega ${nuevoElement.type} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -152,7 +150,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                           element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
-                            'el elemento ${nuevoElement.type} fue creado correctamente',
+                            'La elemento ${nuevoElement.type} fue creado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -186,7 +184,7 @@ class _TitleElementFormState extends State<TitleElementForm> {
                     isSubmitEnabled = true;
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Enviar'),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.greenAccent)),

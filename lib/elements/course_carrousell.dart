@@ -23,7 +23,7 @@ class CourseCarrousel extends StatelessWidget {
             return Container(
               height: 150,
               child: Center(
-                  child: Text('Todavia no tienes ningur curso disponible')),
+                  child: Text('Todavía no tienes ningún curso disponible')),
             );
           } else {
             return Container(

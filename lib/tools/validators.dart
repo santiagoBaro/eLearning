@@ -2,12 +2,12 @@ String emailValidator(String value) {
   if (value.contains('@') && value.contains('.com')) {
     return null;
   }
-  return 'invalid e-mail';
+  return 'Invalid e-mail';
 }
 
 String notEmptyValidator(String value) {
   if (value.isEmpty) {
-    return 'input cant be empty';
+    return 'Input cant be empty';
   }
   return null;
 }

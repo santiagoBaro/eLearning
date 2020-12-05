@@ -44,7 +44,7 @@ class MasterDrawer extends StatelessWidget {
                   (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data.length == 0) {
-                    return MasterSubtitle(text: "no hay cursos disponibles");
+                    return MasterSubtitle(text: "No hay cursos disponibles");
                   }
                   return ListView.builder(
                       shrinkWrap: true,
@@ -190,7 +190,7 @@ class MasterHeader extends StatelessWidget {
             onPressed: () => onElementSelected(LandingPage(
                 onElementSelected: (Widget val) => onElementSelected(val))),
             child: Text(
-              'Home',
+              'Inicio',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -232,7 +232,7 @@ class MsterFooter extends StatelessWidget {
           },
           child: Text(
             //* HELP BUTTONF
-            'info Usuario',
+            'Info Usuario',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -252,7 +252,7 @@ class MsterFooter extends StatelessWidget {
                       height: 150,
                       child: Column(
                         children: [
-                          Text('Seguro que quieres cerrar sesion?'),
+                          Text('Seguro que quieres cerrar sesión?'),
                           Row(
                             children: [
                               FlatButton(
@@ -280,7 +280,7 @@ class MsterFooter extends StatelessWidget {
                 });
           },
           child: Text(
-            'Cerrar Sesion',
+            'Cerrar Sesión',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,

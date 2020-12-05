@@ -197,7 +197,7 @@ class ElementTile extends StatelessWidget {
   final Function(Widget) onElementSelected;
   const ElementTile({
     Key key,
-    this.text = 'element  name',
+    this.text = 'Element name',
     this.onElementSelected,
   }) : super(key: key);
 
@@ -346,7 +346,7 @@ class MsterFooter extends StatelessWidget {
                   return AlertDialog(
                     content: Column(
                       children: [
-                        Text('Seguro que quieres cerrar sesion?'),
+                        Text('Seguro que quieres cerrar sesión?'),
                         Row(
                           children: [
                             FlatButton(
@@ -365,7 +365,7 @@ class MsterFooter extends StatelessWidget {
                 });
           },
           child: Text(
-            'Cerrar Sesion',
+            'Cerrar Sesión',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,

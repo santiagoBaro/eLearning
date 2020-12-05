@@ -128,7 +128,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                     children: [
                       Expanded(
                         child: Text(
-                          'contenidos del curso',
+                          'Contenidos del curso',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -144,7 +144,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.orangeAccent)),
-                        child: Text("agregar"),
+                        child: Text("Agregar"),
                       ),
                     ],
                   ),
@@ -166,7 +166,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                     children: [
                       Expanded(
                         child: Text(
-                          'eventos de curso',
+                          'Eventos de curso',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -182,7 +182,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.orangeAccent)),
-                        child: Text("agregar"),
+                        child: Text("Agregar"),
                       ),
                     ],
                   ),
@@ -204,7 +204,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                     children: [
                       Expanded(
                         child: Text(
-                          'foros del curso',
+                          'Foros del curso',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -220,7 +220,7 @@ Widget _buildPopUp(Course curso, BuildContext context) {
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.orangeAccent)),
-                        child: Text("agregar"),
+                        child: Text("Agregar"),
                       ),
                     ],
                   ),

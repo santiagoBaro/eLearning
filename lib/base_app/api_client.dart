@@ -76,7 +76,10 @@ class ApiClient {
 
   Future<bool> recoverPassword({String email}) async {
     var response = await http.post(
-      '$baseUrl/usuarios/recuperarContra/$email',
+      '$baseUrl/recuperarContra',
+      body: jsonEncode({
+        "mail": email,
+      }),
       headers: {"Content-Type": "application/json"},
     );
     return response.statusCode == 200;
@@ -180,9 +183,9 @@ class ApiClient {
   }
 
   Future<bool> updElement({BookElement element}) {}
-  Future<bool> delElement({BookElement element, Content content}) async {
+  Future<bool> delElement({BookElement element}) async {
     var response = await http.delete(
-      '$baseUrl/contenidos/bajaContenido/${content.id}/${element.id}',
+      '$baseUrl/contenidos/bajaContenido/${element.id}',
       headers: authHeader,
     );
     return response.statusCode == 200;
@@ -366,7 +369,7 @@ class ApiClient {
   //* SCORE
   Future<double> getCourseScore({Course curso}) async {
     var response = await http.get(
-      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
+      '$baseUrl//inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {

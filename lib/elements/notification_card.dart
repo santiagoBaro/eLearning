@@ -40,6 +40,7 @@ class _NotificationCardState extends State<NotificationCard> {
       ),
       child: InkWell(
         onTap: () {
+          //* LOG-OUT  BUTTON PRESSED POP-UP
           showDialog(
               context: context,
               builder: (BuildContext context) {

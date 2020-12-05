@@ -74,7 +74,7 @@ class _TaskFormState extends State<TaskForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'entrega form',
+                  'Entrega',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -83,14 +83,14 @@ class _TaskFormState extends State<TaskForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: titleContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'Nombre'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: instructionsContrller,
-                decoration: InputDecoration(labelText: 'descripcion'),
+                decoration: InputDecoration(labelText: 'Descripción'),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
@@ -126,7 +126,7 @@ class _TaskFormState extends State<TaskForm> {
                     Navigator.of(context).pop();
                   },
                   child:
-                      Text('cancelar', style: TextStyle(color: Colors.black45)),
+                      Text('Cancelar', style: TextStyle(color: Colors.black45)),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -142,7 +142,7 @@ class _TaskFormState extends State<TaskForm> {
                           valid = await client.delTask(task: widget.task);
                           if (valid) {
                             showToast(
-                                'la entrega ${widget.task.titulo ?? ""} fue eliminada correctamente',
+                                'La entrega ${widget.task.titulo ?? ""} fue eliminada correctamente',
                                 context: context,
                                 animation: StyledToastAnimation.slideFromBottom,
                                 reverseAnimation:
@@ -175,7 +175,7 @@ class _TaskFormState extends State<TaskForm> {
                         isDeleteEnabled = true;
                       }
                     },
-                    child: Text('Delete'),
+                    child: Text('Eliminar'),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -199,7 +199,7 @@ class _TaskFormState extends State<TaskForm> {
                         valid = await client.updTask(task: nuevaTask);
                         if (valid) {
                           showToast(
-                              'la entrega ${nuevaTask.titulo} fue editado correctamente',
+                              'La entrega ${nuevaTask.titulo} fue editada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -233,7 +233,7 @@ class _TaskFormState extends State<TaskForm> {
                             task: nuevaTask, curso: widget.curso);
                         if (valid) {
                           showToast(
-                              'la entrega ${nuevaTask.titulo} fue creada correctamente',
+                              'La entrega ${nuevaTask.titulo} fue creada correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -267,7 +267,7 @@ class _TaskFormState extends State<TaskForm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Submit'),
+                  child: Text('Enviar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),

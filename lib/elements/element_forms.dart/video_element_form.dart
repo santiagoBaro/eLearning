@@ -1,6 +1,5 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/firebase_upload_file.dart';
-import 'package:elearning/base_app/firestore_connection.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                   Navigator.of(context).pop();
                 },
                 child:
-                    Text('cancelar', style: TextStyle(color: Colors.black45)),
+                    Text('Cancelar', style: TextStyle(color: Colors.black45)),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey[200])),
@@ -69,13 +68,11 @@ class _VideoElementFormState extends State<VideoElementForm> {
                       if (widget.element != null) {
                         bool valid = false;
                         var client = ApiClient();
-                        valid = await client.delElement(
-                          element: widget.element,
-                          content: widget.content,
-                        );
+                        valid =
+                            await client.delElement(element: widget.element);
                         if (valid) {
                           showToast(
-                              'la elemento ${widget.element.type ?? ""} fue eliminado correctamente',
+                              'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -108,7 +105,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                       isDeleteEnabled = true;
                     }
                   },
-                  child: Text('Delete'),
+                  child: Text('Elimina'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -128,7 +125,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                       valid = await client.updElement(element: nuevoElement);
                       if (valid) {
                         showToast(
-                            'la entrega ${nuevoElement.type} fue editado correctamente',
+                            'La entrega ${nuevoElement.type} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -162,7 +159,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                           element: nuevoElement, content: widget.content);
                       if (valid) {
                         showToast(
-                            'el elemento ${nuevoElement.type} fue creado correctamente',
+                            'El elemento ${nuevoElement.type} fue creado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -196,7 +193,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                     isSubmitEnabled = true;
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Enviar'),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.greenAccent)),

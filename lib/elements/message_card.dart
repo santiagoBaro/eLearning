@@ -31,7 +31,7 @@ class MessageCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'ultimo mensaje',
+                        'Último mensaje',
                         style: messageTextStyle,
                       ),
                     ),

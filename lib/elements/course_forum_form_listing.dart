@@ -19,7 +19,7 @@ class CourseForumFormListing extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text("no hay foros disponibles")),
+              child: Center(child: Text("No hay foros disponibles")),
             );
           }
           return Container(

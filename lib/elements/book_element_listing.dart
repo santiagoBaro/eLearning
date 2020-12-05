@@ -20,11 +20,12 @@ class BookElementListing extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text("no hay contenido disponible")),
+              child: Center(child: Text("No hay contenido disponible")),
             );
           }
           return Container(
             height: 75,
+            width: 400,
             child: ListView.builder(
               shrinkWrap: true,
               padding: const EdgeInsets.all(8),

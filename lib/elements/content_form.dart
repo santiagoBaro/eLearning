@@ -61,7 +61,7 @@ class _ContentFormState extends State<ContentForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'content form',
+                  'Contenido',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -70,7 +70,7 @@ class _ContentFormState extends State<ContentForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: nombreContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'Nombre'),
               ),
             ),
             Padding(
@@ -93,7 +93,7 @@ class _ContentFormState extends State<ContentForm> {
                     Navigator.of(context).pop();
                   },
                   child: Text(
-                    'cancel',
+                    'Cancelar',
                     style: TextStyle(
                       color: Colors.black45,
                     ),
@@ -113,7 +113,7 @@ class _ContentFormState extends State<ContentForm> {
                             await client.delContent(content: widget.content);
                         if (valid) {
                           showToast(
-                              'el contenido ${widget.content.titulo ?? ""} fue eliminado',
+                              'El contenido ${widget.content.titulo ?? ""} fue eliminado',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -145,7 +145,7 @@ class _ContentFormState extends State<ContentForm> {
                         isDeleteEnabled = true;
                       }
                     },
-                    child: Text('Delete'),
+                    child: Text('Eliminar'),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.redAccent)),
@@ -168,7 +168,7 @@ class _ContentFormState extends State<ContentForm> {
                             content: nuevoContent, curso: widget.curso);
                         if (valid) {
                           showToast(
-                              'el contenido ${nuevoContent.titulo} fue editado correctamente',
+                              'El contenido ${nuevoContent.titulo} fue editado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -202,7 +202,7 @@ class _ContentFormState extends State<ContentForm> {
                             content: nuevoContent, curso: widget.curso);
                         if (valid) {
                           showToast(
-                              'el contenido ${nuevoContent.titulo} fue agregado correctamente',
+                              'El contenido ${nuevoContent.titulo} fue agregado correctamente',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -236,7 +236,7 @@ class _ContentFormState extends State<ContentForm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Submit'),
+                  child: Text('Enviar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),
