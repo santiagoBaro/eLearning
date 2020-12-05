@@ -76,7 +76,7 @@ class ApiClient {
 
   Future<bool> recoverPassword({String email}) async {
     var response = await http.post(
-      '$baseUrl/recuperarContra/$email',
+      '$baseUrl/usuarios/recuperarContra/$email',
       headers: {"Content-Type": "application/json"},
     );
     return response.statusCode == 200;
