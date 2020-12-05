@@ -1,25 +1,26 @@
 import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/task_datatype.dart';
-import 'package:elearning/elements/task_form.dart';
+import 'package:elearning/data_types/book_element_dataType.dart';
+import 'package:elearning/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 
-class CourseTaskFormListing extends StatelessWidget {
-  final Course curso;
-  const CourseTaskFormListing({Key key, @required this.curso})
-      : super(key: key);
+import 'book_element_form.dart';
+
+class BookElementListing extends StatelessWidget {
+  final Content content;
+  const BookElementListing({Key key, this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var client = ApiClient();
-    return FutureBuilder<List<Task>>(
-      future: client.getTasksByCourse(curso: curso),
-      builder: (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {
+    return FutureBuilder<List<BookElement>>(
+      future: client.getBookContent(content: content),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<BookElement>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text("no hay tareas pendentes")),
+              child: Center(child: Text("no hay contenido disponible")),
             );
           }
           return Container(
@@ -41,11 +42,10 @@ class CourseTaskFormListing extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return AlertDialog(
-                                  content: TaskForm(
-                                task: snapshot.data[index],
-                                curso: curso,
-                              ));
+                              return _buildPopUp(
+                                element: snapshot.data[index],
+                                content: content,
+                              );
                             });
                       },
                       child: Padding(
@@ -54,7 +54,7 @@ class CourseTaskFormListing extends StatelessWidget {
                           vertical: 15,
                         ),
                         child: Text(
-                          snapshot.data[index].titulo,
+                          index.toString(),
                           style: TextStyle(color: Colors.black45),
                         ),
                       ),
@@ -75,4 +75,21 @@ class CourseTaskFormListing extends StatelessWidget {
       },
     );
   }
+}
+
+Widget _buildPopUp({BookElement element, @required Content content}) {
+  return AlertDialog(
+    content: Container(
+      constraints: BoxConstraints(
+        maxHeight: 700,
+        maxWidth: 500,
+        minHeight: 200,
+        minWidth: 200,
+      ),
+      child: BookElementForm(
+        element: element,
+        content: content,
+      ),
+    ),
+  );
 }

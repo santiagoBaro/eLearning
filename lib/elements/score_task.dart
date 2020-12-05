@@ -195,9 +195,8 @@ class _TaskScoreCardState extends State<TaskScoreCard> {
                     var client = ApiClient();
                     bool valid = false;
                     valid = await client.scoreTask(
-                      taskId: widget.task.taskId,
-                      nota: scoreController.text,
-                      mail: widget.task.mailUser,
+                      id: widget.task.id,
+                      nota: int.parse(scoreController.text),
                     );
                     if (valid) {
                       showToast('Se cargo la nota correctamente',

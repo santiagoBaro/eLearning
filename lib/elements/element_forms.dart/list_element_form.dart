@@ -21,6 +21,17 @@ class _ListElementFormState extends State<ListElementForm> {
   bool isSubmitEnabled = true;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.element != null) {
+      titleContrller.text = widget.element.elements[0];
+      List<String> lista = widget.element.elements;
+      optionsContrller.text = lista.removeAt(0);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(

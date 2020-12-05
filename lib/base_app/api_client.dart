@@ -148,8 +148,8 @@ class ApiClient {
     return response.statusCode == 200;
   }
 
-  Future<bool> delContent({Content content, Course curso}) async {
-    var response = await http.post(
+  Future<bool> delContent({Content content}) async {
+    var response = await http.delete(
       '$baseUrl/libros/bajaLibro/${content.id}',
       headers: authHeader,
     );
@@ -264,9 +264,10 @@ class ApiClient {
     return List<TaskScore>();
   }
 
-  Future<bool> scoreTask({int taskId, String mail, String nota}) async {
-    var response = await http.post(
-      '$baseUrl/entregas/calificarEntrega/$taskId/$nota',
+  Future<bool> scoreTask({int id, int nota}) async {
+    var response = await http.put(
+      '$baseUrl/entregas/calificarEntrega/$id/$nota',
+      // $baseUrl/entregas/calificarEntrega/$id/nota
       headers: authHeader,
     );
     return response.statusCode == 200;

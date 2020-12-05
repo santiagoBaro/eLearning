@@ -14,6 +14,7 @@ class BookElement {
   BookElement.fromJson(Map<String, dynamic> json)
       : id = json['_id'] ?? 0,
         type = json['tipo'] ?? "",
+        stringElements = json['contenido'],
         elements = json['contenido'].split(",");
 
   Map<String, dynamic> toJson() => {
@@ -22,11 +23,9 @@ class BookElement {
       };
 
   Map<String, dynamic> toStringJson() => {
-        "Contenido": {
-          "tipo": type,
-          "contenido": stringElements,
-          "archivo": "",
-        }
+        "tipo": type,
+        "contenido": stringElements,
+        "archivo": "",
       };
 }
 

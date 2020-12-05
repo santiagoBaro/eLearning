@@ -109,11 +109,11 @@ class _ContentFormState extends State<ContentForm> {
                         isDeleteEnabled = false;
                         bool valid = false;
                         var client = ApiClient();
-                        valid = await client.delContent(
-                            content: widget.content, curso: widget.curso);
+                        valid =
+                            await client.delContent(content: widget.content);
                         if (valid) {
                           showToast(
-                              'el contenido ${widget.content ?? ""} fue eliminado',
+                              'el contenido ${widget.content.titulo ?? ""} fue eliminado',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:

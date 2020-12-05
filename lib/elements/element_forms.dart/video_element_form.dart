@@ -20,7 +20,14 @@ class _VideoElementFormState extends State<VideoElementForm> {
   bool isDeleteEnabled = true;
   bool isSubmitEnabled = true;
 
-  _getFile() {}
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.element != null) {
+      urlContrller.text = widget.element.stringElements;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -23,6 +23,21 @@ class _MultipleChoiceElementFormState extends State<MultipleChoiceElementForm> {
   bool isSubmitEnabled = true;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.element != null) {
+      if (widget.element.elements.length > 2) {
+        questionContrller.text = widget.element.elements[1];
+        optionsContrller.text = widget.element.elements[0];
+        List<String> lista = widget.element.elements;
+        lista = lista.removeAt(0) ?? List<String>();
+        optionsContrller.text = lista.removeAt(0);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(

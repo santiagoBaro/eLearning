@@ -1,7 +1,9 @@
 import 'package:elearning/base_app/api_client.dart';
+import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/book_element_dataType.dart';
 import 'package:elearning/data_types/content_dataType.dart';
 import 'package:elearning/elements/book_element_form.dart';
+import 'package:elearning/elements/book_element_listing.dart';
 import 'package:elearning/elements/bool_elements/image_book_element.dart';
 import 'package:elearning/elements/bool_elements/list_book_element.dart';
 import 'package:elearning/elements/bool_elements/multiple_choice_book_element.dart';
@@ -41,11 +43,10 @@ class _BookPageState extends State<BookPage> {
                   AsyncSnapshot<List<BookElement>> snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data.length == 0) {
-                    return Center(child: Text("no hay contenido disponibles"));
+                    return Center(child: Text("no hay contenido disponible"));
                   }
                   return ListView.builder(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(8),
                     itemCount: snapshot.data.length,
                     itemBuilder: itemBuilder(snapshot.data),
@@ -76,46 +77,44 @@ class _BookPageState extends State<BookPage> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FlatButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return _buildPopUp(content: widget.content);
-                            });
-                      },
-                      child: Text('Add Content'),
+                Visibility(
+                  visible: storedUserCredentials.userData.tipoUsu == "D",
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFB6107),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
+                      ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return _buildPopUp(
-                                element: testBook[4],
-                                content: widget.content,
-                              );
-                            });
-                      },
-                      child: Text('Mod content'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'contenidos del libro',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return _buildPopUp(content: widget.content);
+                                  });
+                            },
+                            child: Text('Add Content'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    FlatButton(onPressed: () {}, child: Text('Title 1')),
-                    FlatButton(onPressed: () {}, child: Text('Title 2'))
-                  ],
-                ),
-                Row(
-                  children: [
-                    FlatButton(onPressed: () {}, child: Text('Title 1')),
-                    FlatButton(onPressed: () {}, child: Text('Title 2'))
-                  ],
-                ),
+                Visibility(
+                    visible: storedUserCredentials.userData.tipoUsu == "D",
+                    child: BookElementListing(content: widget.content)),
               ],
             ),
           ),
@@ -145,12 +144,12 @@ class _BookPageState extends State<BookPage> {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: Center(
-                child: ImageBookElement(imageUrl: book[index].elements[0])),
+                child: ImageBookElement(imageUrl: book[index].stringElements)),
           );
           break;
         case "list":
           var sublist = book[index].elements;
-          sublist.removeAt(1);
+          sublist.removeAt(0);
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: ListBookElement(
@@ -159,8 +158,8 @@ class _BookPageState extends State<BookPage> {
           break;
         case "multiple_choice":
           var sublist = book[index].elements;
-          sublist.removeAt(1);
-          sublist.removeAt(1);
+          sublist.removeAt(0);
+          sublist.removeAt(0);
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: MultiplechoiceBookElement(
@@ -173,7 +172,7 @@ class _BookPageState extends State<BookPage> {
         case "paragraph":
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: ParagraphBookElement(text: book[index].elements[0]),
+            child: ParagraphBookElement(text: book[index].stringElements),
           );
           break;
         case "question":
@@ -188,19 +187,19 @@ class _BookPageState extends State<BookPage> {
         case "subtitle":
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: SubtitleBookElement(subTitle: book[index].elements[0]),
+            child: SubtitleBookElement(subTitle: book[index].stringElements),
           );
           break;
         case "title":
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: TitleBookElement(title: book[index].elements[0]),
+            child: TitleBookElement(title: book[index].stringElements),
           );
           break;
         case "video":
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: VideoBookElement(videoUrl: book[index].elements[0]),
+            child: VideoBookElement(videoUrl: book[index].stringElements),
           );
           break;
         default:

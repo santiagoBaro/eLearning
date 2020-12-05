@@ -20,6 +20,15 @@ class _TitleElementFormState extends State<TitleElementForm> {
   bool isSubmitEnabled = true;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.element != null) {
+      textContrller.text = widget.element.stringElements;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
