@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 const List<String> defaultList = [
   'Rempel, Huels and Nitzsche',
@@ -72,10 +73,34 @@ class _MultiplechoiceBookElementState extends State<MultiplechoiceBookElement> {
                       child: Text('${index.toString()}'),
                       onPressed: () {
                         //TODO enviar respuesta
-                        if (index == widget.answer) {
-                          // show the answer is correct
+                        if (index + 1 == widget.answer) {
+                          showToast('CORRECTO !!',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
                         } else {
-                          // show the answer wrong
+                          showToast('su respuesta no es correcta',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
                         }
                       },
                     ),

@@ -149,22 +149,24 @@ class _BookPageState extends State<BookPage> {
           break;
         case "list":
           var sublist = book[index].elements;
+          String title = book[index].elements[0];
           sublist.removeAt(0);
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: ListBookElement(
-                title: book[index].elements[0], elements: sublist),
+            child: ListBookElement(title: title, elements: sublist),
           );
           break;
         case "multiple_choice":
-          var sublist = book[index].elements;
+          String question = book[index].elements[0];
+          int answer = int.parse(book[index].elements[1]);
+          List<String> sublist = book[index].elements;
           sublist.removeAt(0);
           sublist.removeAt(0);
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: MultiplechoiceBookElement(
-              question: book[index].elements[1],
-              answer: int.parse(book[index].elements[0]),
+              question: question,
+              answer: answer,
               options: sublist,
             ),
           );

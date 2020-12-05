@@ -183,7 +183,13 @@ class ApiClient {
   }
 
   Future<bool> updElement({BookElement element}) {}
-  Future<bool> delElement({BookElement element}) {}
+  Future<bool> delElement({BookElement element}) async {
+    var response = await http.delete(
+      '$baseUrl/contenidos/bajaContenido/${element.id}',
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
 
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
@@ -358,5 +364,21 @@ class ApiClient {
       headers: authHeader,
     );
     return response.statusCode == 200;
+  }
+
+  //* SCORE
+  Future<double> getCourseScore({Course curso}) async {
+    var response = await http.get(
+      '$baseUrl//inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      try {
+        return double.parse(response.body);
+      } on Exception catch (e) {
+        print("getCourseScore return body error  => $e");
+      }
+    }
+    return 0;
   }
 }

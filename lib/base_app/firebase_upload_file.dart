@@ -21,8 +21,9 @@ class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
   fb.UploadTask _uploadTask;
 
   Future<void> uploadFile(File file) async {
+    String fileExt = file.type.split("/").last;
     final filePath =
-        '${widget.direcorty}/${storedUserCredentials.userData.mail}${DateTime.now()}.png';
+        '${widget.direcorty}/${storedUserCredentials.userData.mail}${DateTime.now()}.$fileExt';
     setState(() {
       _uploadTask = fb
           .storage()

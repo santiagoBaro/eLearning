@@ -1,10 +1,15 @@
+import 'package:elearning/base_app/api_client.dart';
+import 'package:elearning/data_types/course_dataType.dart';
 import 'package:flutter/material.dart';
 
 import 'course_contact_info_element.dart';
 import 'course_score_element.dart';
 
 class CourseInformationCard extends StatelessWidget {
-  const CourseInformationCard({Key key}) : super(key: key);
+  final Course curso;
+  CourseInformationCard({Key key, @required this.curso}) : super(key: key);
+
+  final client = ApiClient();
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +60,22 @@ class CourseInformationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: ContactInfo(),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Score(),
+                    child: FutureBuilder<double>(
+                      future: client.getCourseScore(curso: curso),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<double> snapshot) {
+                        if (snapshot.hasData) {
+                          return Score(score: snapshot.data);
+                        } else if (snapshot.hasError) {
+                          return Text("${snapshot.error}");
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    ),
+
+                    //Score(),
                   ),
                 ],
               ),

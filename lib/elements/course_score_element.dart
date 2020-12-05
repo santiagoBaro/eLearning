@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Score extends StatelessWidget {
-  const Score({Key key}) : super(key: key);
+  final double score;
+  const Score({Key key, this.score}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
+      // getCourseScore
       child: new Transform(
         child: new Row(
           children: [
@@ -13,7 +15,7 @@ class Score extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    '8.3',
+                    score.toString(),
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.white,

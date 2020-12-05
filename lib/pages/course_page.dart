@@ -24,7 +24,7 @@ class CoursePage extends StatelessWidget {
               curso: curso,
             ),
           ),
-          CourseInformationCard(),
+          CourseInformationCard(curso: curso),
         ],
       ),
     );
