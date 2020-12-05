@@ -76,10 +76,7 @@ class ApiClient {
 
   Future<bool> recoverPassword({String email}) async {
     var response = await http.post(
-      '$baseUrl/recuperarContra',
-      body: jsonEncode({
-        "mail": email,
-      }),
+      '$baseUrl/recuperarContra/$email',
       headers: {"Content-Type": "application/json"},
     );
     return response.statusCode == 200;
@@ -183,9 +180,9 @@ class ApiClient {
   }
 
   Future<bool> updElement({BookElement element}) {}
-  Future<bool> delElement({BookElement element}) async {
+  Future<bool> delElement({BookElement element, Content content}) async {
     var response = await http.delete(
-      '$baseUrl/contenidos/bajaContenido/${element.id}',
+      '$baseUrl/contenidos/bajaContenido/${content.id}/${element.id}',
       headers: authHeader,
     );
     return response.statusCode == 200;
