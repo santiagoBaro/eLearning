@@ -20,6 +20,7 @@ class _ImportantInformationSlideState extends State<ImportantInformationSlide> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 30),
             Calendar(),
             UserTaskListing(),
           ],
