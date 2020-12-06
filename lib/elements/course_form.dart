@@ -78,7 +78,7 @@ class _CursoFormState extends State<CursoForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'curso form',
+                  'Curso',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -87,7 +87,7 @@ class _CursoFormState extends State<CursoForm> {
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
                 controller: nombreContrller,
-                decoration: InputDecoration(labelText: 'nombre'),
+                decoration: InputDecoration(labelText: 'Nombre'),
               ),
             ),
             Padding(
@@ -95,7 +95,7 @@ class _CursoFormState extends State<CursoForm> {
               child: TextFormField(
                 controller: creditosContrller,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'creditos'),
+                decoration: InputDecoration(labelText: 'Créditos'),
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly
                 ],
@@ -107,7 +107,7 @@ class _CursoFormState extends State<CursoForm> {
                 controller: descripcionContrller,
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
-                decoration: InputDecoration(labelText: 'descripcion'),
+                decoration: InputDecoration(labelText: 'Descripción'),
               ),
             ),
             Padding(
@@ -143,7 +143,7 @@ class _CursoFormState extends State<CursoForm> {
                     selectedDate = DateFormat("yyyy-MM-dd")
                         .parse(widget.curso.fechaInicio);
                   },
-                  child: Text('revert changes',
+                  child: Text('Descartar cambios',
                       style: TextStyle(color: Colors.black45)),
                   style: ButtonStyle(
                       backgroundColor:
@@ -167,7 +167,7 @@ class _CursoFormState extends State<CursoForm> {
                       valid = await client.updCourse(course: nuevoCurso);
                       if (valid) {
                         showToast(
-                            'el curso ${nuevoCurso.nombre} fue editado correctamente',
+                            'El curso ${nuevoCurso.nombre} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:
@@ -200,7 +200,7 @@ class _CursoFormState extends State<CursoForm> {
                       isSubmitEnabled = true;
                     }
                   },
-                  child: Text('Update'),
+                  child: Text('Actualizar'),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.greenAccent)),

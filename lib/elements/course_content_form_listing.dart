@@ -23,7 +23,7 @@ class ContentFormListing extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text('Todavia no hay contenido disponible')),
+              child: Center(child: Text('Todavía no hay contenido disponible')),
             );
           } else {
             return Container(

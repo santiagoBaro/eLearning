@@ -14,7 +14,7 @@ class UserFormListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Forum>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
-            return Text("no hay foros disponibles");
+            return Text("No hay foros disponibles");
           }
           return ListView.builder(
             shrinkWrap: true,

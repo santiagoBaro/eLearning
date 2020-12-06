@@ -18,7 +18,7 @@ class BookIndex extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text("no hay contenido disponible")),
+              child: Center(child: Text("No hay contenido disponible")),
             );
           }
           // List<BookElement> displayList = snapshot.data;

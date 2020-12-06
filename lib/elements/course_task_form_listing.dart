@@ -19,7 +19,7 @@ class CourseTaskFormListing extends StatelessWidget {
           if (snapshot.data.length == 0) {
             return Container(
               height: 75,
-              child: Center(child: Text("no hay tareas pendentes")),
+              child: Center(child: Text("No hay tareas pendientes")),
             );
           }
           return Container(

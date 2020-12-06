@@ -80,7 +80,7 @@ class _FirebaseUploadFileButtonState extends State<FirebaseUploadFileButton> {
                 widget.fbUrl(url);
               });
 
-              return Text('Successfully uploaded file 🎊');
+              return Text('Archivo subido satisfactoriamente 🎊');
             } else if (progressPercent == 0) {
               return SizedBox();
             } else {

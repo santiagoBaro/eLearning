@@ -17,7 +17,7 @@ class CourseFormListing extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Container(
-              child: Text("no hay foros disponibles"),
+              child: Text("No hay foros disponibles"),
               height: 100,
             );
           }

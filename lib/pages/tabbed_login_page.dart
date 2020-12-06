@@ -69,12 +69,12 @@ class LoginTab extends StatelessWidget {
                 controller: usernameController,
                 style: tabbedLoginInputTextStyle,
                 decoration: InputDecoration(
-                  hintText: 'Username',
+                  hintText: 'Usuario',
                   contentPadding: const EdgeInsets.all(15),
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Please enter your username';
+                    return 'Por favor ingresa tu usuario';
                   }
                   return null;
                 },
@@ -99,12 +99,12 @@ class LoginTab extends StatelessWidget {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.transparent,
-                          hintText: 'Password',
+                          hintText: 'Contraseña',
                           contentPadding: const EdgeInsets.all(15),
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Por favor ingresa tu contraseña';
                           }
                           return null;
                         },
@@ -144,7 +144,7 @@ class LoginTab extends StatelessWidget {
                             ),
                           );
                         } else {
-                          showToast('mail o contrasena incorrectos',
+                          showToast('Mail o contraseña incorrectos',
                               context: context,
                               animation: StyledToastAnimation.slideFromBottom,
                               reverseAnimation:
@@ -177,7 +177,7 @@ class LoginTab extends StatelessWidget {
                   valid = await client.recoverPassword(
                       email: usernameController.text);
                   if (valid) {
-                    showToast('revise su correo',
+                    showToast('Revise su correo',
                         context: context,
                         animation: StyledToastAnimation.slideFromBottom,
                         reverseAnimation: StyledToastAnimation.slideToBottom,
@@ -206,7 +206,7 @@ class LoginTab extends StatelessWidget {
                 }
               },
               child: Text(
-                "Recover password",
+                "Recuperar contraseña",
                 style: hilightTextStyle,
               ),
             ),

@@ -81,12 +81,12 @@ class NotificationCardHeader extends StatelessWidget {
               children: [
                 //* FORUM TITLE
                 Text(
-                  foro.name ?? "nombre vacio",
+                  foro.name ?? "Nombre vacío",
                   style: courseNameTextStyle,
                 ),
                 //* FORUM TYPE
                 Text(
-                  foro.type ?? "tipo vacio",
+                  foro.type ?? "Tipo vacío",
                   style: userNameTextStyle,
                 ),
               ],

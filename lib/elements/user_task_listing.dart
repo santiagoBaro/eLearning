@@ -15,7 +15,7 @@ class UserTaskListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
-            return Text("no hay tareas pendentes");
+            return Text("No hay tareas pendentes");
           }
           return ListView.builder(
             shrinkWrap: true,

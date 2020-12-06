@@ -44,7 +44,7 @@ class _BookPageState extends State<BookPage> {
                   AsyncSnapshot<List<BookElement>> snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data.length == 0) {
-                    return Center(child: Text("no hay contenido disponible"));
+                    return Center(child: Text("No hay contenido disponible"));
                   }
                   return ListView.builder(
                     shrinkWrap: true,
@@ -96,7 +96,7 @@ class _BookPageState extends State<BookPage> {
                           children: [
                             Expanded(
                               child: Text(
-                                'contenidos del libro',
+                                'Contenidos del libro',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -109,7 +109,7 @@ class _BookPageState extends State<BookPage> {
                                           content: widget.content);
                                     });
                               },
-                              child: Text('Add Content'),
+                              child: Text('Agregar contenido'),
                             ),
                           ],
                         ),
@@ -136,7 +136,7 @@ class _BookPageState extends State<BookPage> {
                         children: [
                           Expanded(
                             child: Text(
-                              'contenidos del libro',
+                              'Contenidos del libro',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),

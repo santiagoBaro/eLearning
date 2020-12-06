@@ -5,7 +5,7 @@ class CourseCard extends StatelessWidget {
   final Color color;
   const CourseCard({
     Key key,
-    this.name = 'Course Card',
+    this.name = 'Curso',
     this.color = Colors.blueGrey,
   }) : super(key: key);
 

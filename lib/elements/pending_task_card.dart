@@ -1,5 +1,4 @@
 import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firebase_upload_file.dart';
 import 'package:elearning/base_app/firestore_connection.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/task_datatype.dart';
@@ -63,7 +62,7 @@ class PendingTaskCard extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'alta entrega - ${task.titulo}',
+                            'Alta entrega - ${task.titulo}',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -131,7 +130,7 @@ class PendingTaskCard extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        child: Text("submit"),
+                        child: Text("Enviar"),
                         onPressed: () async {
                           if (urlController.text != "") {
                             var client = ApiClient();
@@ -139,7 +138,7 @@ class PendingTaskCard extends StatelessWidget {
                             valid = await client.submitTask(
                                 tarea: task, url: urlController.text);
                             if (valid) {
-                              showToast('la tarea fue entregada correctamente',
+                              showToast('La tarea fue entregada correctamente',
                                   context: context,
                                   animation:
                                       StyledToastAnimation.slideFromBottom,
@@ -154,7 +153,7 @@ class PendingTaskCard extends StatelessWidget {
                                   curve: Curves.elasticOut,
                                   reverseCurve: Curves.fastOutSlowIn);
                             } else {
-                              showToast('error al entregar la tarea',
+                              showToast('Error al entregar la tarea',
                                   context: context,
                                   animation:
                                       StyledToastAnimation.slideFromBottom,
