@@ -12,7 +12,7 @@ import 'package:elearning/data_types/user_dataType.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl =
-    "http://node789-api-udelaronline.web.elasticloud.uy:11015/api";
+    "http://www.node789-api-udelaronline.web.elasticloud.uy:11015/api";
 var authHeader = {
   HttpHeaders.authorizationHeader: "Bearer ${storedUserCredentials.getToken()}",
   "Content-Type": "application/json"
@@ -38,13 +38,16 @@ class ApiClient {
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
-      if (jsonDecode(response.body)["tipo"] != "Alumno") {
+      if (jsonDecode(response.body)["tipo"] == "Alumno") {
         storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
         storedUserCredentials
-            .setName(jsonDecode(response.body)["nombre"] ?? "");
+            .setName(jsonDecode(response.body)["nombres"] ?? "");
         storedUserCredentials.userData =
             NetUser.fromJson(jsonDecode(response.body));
         saveUserCredentials();
+        print("======================");
+        print(storedUserCredentials.userData.toJson());
+        print("======================");
         return true;
       }
       return false;
