@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:elearning/data_types/net_user.dart';
 import 'package:elearning/data_types/user_dataType.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,14 +17,14 @@ Future<Null> saveUserCredentials() async {
 }
 
 final UserCredentials emptyUser = UserCredentials(
-  userData: User(),
+  userData: NetUser(),
   name: encrypter.encrypt("empty", iv: iv).base64,
   token: encrypter.encrypt("empty", iv: iv).base64,
   isNewUser: true,
 );
 
 final UserCredentials logedOffUser = UserCredentials(
-  userData: User(),
+  userData: NetUser(),
   name: encrypter.encrypt("empty", iv: iv).base64,
   token: encrypter.encrypt("empty", iv: iv).base64,
   isNewUser: false,
@@ -32,7 +33,7 @@ final UserCredentials logedOffUser = UserCredentials(
 class UserCredentials {
   String name;
   String token;
-  User userData;
+  NetUser userData;
   bool isNewUser;
 
   UserCredentials({

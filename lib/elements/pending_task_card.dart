@@ -82,44 +82,6 @@ class PendingTaskCard extends StatelessWidget {
                             onPressed: () {},
                             child: Text('Cancelar'),
                           ),
-                          Visibility(
-                            visible: task.entregable &&
-                                storedUserCredentials.userData.tipoUsu == "E",
-                            child: FirebaseUploadFileButton(
-                              fbUrl: (value) async {
-                                if (value != null && value != "") {
-                                  urlController.text = value;
-                                  // valid = await client.submitTask(
-                                  //     tarea: task, url: urlController.text);
-                                }
-                              },
-                              direcorty: 'task/${task.id.toString()}/',
-                            ),
-                          ),
-                          Visibility(
-                            visible:
-                                storedUserCredentials.userData.tipoUsu == "D",
-                            child: ElevatedButton(
-                              child: Text("Calificar"),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                          content: Container(
-                                        constraints: BoxConstraints(
-                                          maxHeight: 700,
-                                          maxWidth: 500,
-                                          minHeight: 200,
-                                          minWidth: 200,
-                                        ),
-                                        child: ScoreTasks(tarea: task),
-                                      ));
-                                    });
-                              },
-                            ),
-                            // ScoreTask
-                          ),
                         ],
                       ),
                       Padding(

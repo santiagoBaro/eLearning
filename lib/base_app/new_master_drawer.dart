@@ -151,7 +151,7 @@ class MasterHeader extends StatelessWidget {
                       children: [
                         //* USER'S NAME
                         Text(
-                          storedUserCredentials.userData.nombre,
+                          storedUserCredentials.userData.nombres,
                           overflow: TextOverflow.fade,
                           maxLines: 2,
                           style: TextStyle(
@@ -163,7 +163,7 @@ class MasterHeader extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            storedUserCredentials.userData.carrera,
+                            storedUserCredentials.userData.apellidos,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white70,

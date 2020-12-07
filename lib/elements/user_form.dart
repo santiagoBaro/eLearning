@@ -1,5 +1,6 @@
 import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/base_app/user_credentials_data_type.dart';
+import 'package:elearning/data_types/net_user.dart';
 import 'package:elearning/data_types/user_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'change_password_form.dart';
 
 class UserForm extends StatefulWidget {
-  final User usuario = storedUserCredentials.userData;
+  final NetUser usuario = storedUserCredentials.userData;
   UserForm({Key key}) : super(key: key);
 
   @override
@@ -16,13 +17,13 @@ class UserForm extends StatefulWidget {
 
 class _UserFormState extends State<UserForm> {
   final _formKey = GlobalKey<FormState>();
-  String _value = 'ci';
   final mailController = TextEditingController();
   final nameController = TextEditingController();
   final directionContrller = TextEditingController();
-  final careerController = TextEditingController();
+  final apellidosController = TextEditingController();
   final documentController = TextEditingController();
-  final passwordContrller = TextEditingController();
+  final telefonoController = TextEditingController();
+  final usernameController = TextEditingController();
 
   bool isSubmitEnabled = true;
   bool isDeleteEnabled = true;
@@ -31,12 +32,13 @@ class _UserFormState extends State<UserForm> {
   void initState() {
     super.initState();
     if (widget.usuario != null) {
-      mailController.text = widget.usuario.mail;
-      nameController.text = widget.usuario.nombre;
+      mailController.text = widget.usuario.email;
+      nameController.text = widget.usuario.nombres;
       directionContrller.text = widget.usuario.direccion;
-      careerController.text = widget.usuario.carrera;
-      documentController.text = widget.usuario.documento;
-      _value = widget.usuario.tipoDocumento.toLowerCase();
+      apellidosController.text = widget.usuario.apellidos;
+      documentController.text = widget.usuario.ci;
+      telefonoController.text = widget.usuario.telefono;
+      usernameController.text = widget.usuario.userName;
     }
   }
 
@@ -83,52 +85,37 @@ class _UserFormState extends State<UserForm> {
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
-                controller: directionContrller,
+                controller: apellidosController,
                 decoration: InputDecoration(labelText: 'Dirección'),
               ),
-            ),
-            Visibility(
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: TextFormField(
-                  controller: careerController,
-                  decoration: InputDecoration(labelText: 'Carrera'),
-                ),
-              ),
-              visible: (widget.usuario.tipoUsu == "E"),
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: TextFormField(
-                controller: passwordContrller,
+                controller: directionContrller,
+                decoration: InputDecoration(labelText: 'Dirección'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: TextFormField(
+                controller: telefonoController,
                 decoration: InputDecoration(labelText: 'Contraseña'),
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: TextFormField(
-                      controller: documentController,
-                      decoration: InputDecoration(labelText: 'Documento'),
-                    ),
-                  ),
-                ),
-                DropdownButton(
-                    value: _value,
-                    items: [
-                      DropdownMenuItem(child: Text("CI"), value: 'ci'),
-                      DropdownMenuItem(
-                          child: Text("Pasaporte"), value: 'pasaporte'),
-                      DropdownMenuItem(child: Text("DNI"), value: 'dni'),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _value = value;
-                      });
-                    }),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: TextFormField(
+                controller: documentController,
+                decoration: InputDecoration(labelText: 'Documento'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: TextFormField(
+                controller: usernameController,
+                decoration: InputDecoration(labelText: 'Documento'),
+              ),
             ),
             SizedBox(
               height: 10,
@@ -150,22 +137,22 @@ class _UserFormState extends State<UserForm> {
                   onPressed: () async {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
-                      User nuevo_usuario = User(
-                        nombre: nameController.text,
-                        mail: mailController.text,
+                      NetUser nuevo_usuario = NetUser(
+                        nombres: nameController.text,
+                        email: mailController.text,
                         direccion: directionContrller.text,
-                        carrera: careerController.text,
-                        documento: documentController.text,
-                        tipoDocumento: _value,
+                        ci: documentController.text,
+                        apellidos: apellidosController.text,
+                        telefono: telefonoController.text,
+                        userName: usernameController.text,
                       );
                       bool valid = false;
                       var client = ApiClient();
                       nuevo_usuario.id = widget.usuario.id;
-                      valid = await client.updUser(
-                          user: nuevo_usuario, pass: passwordContrller.text);
+                      valid = await client.updUser(user: nuevo_usuario);
                       if (valid) {
                         showToast(
-                            'El usuario ${nuevo_usuario.nombre} fue editado correctamente',
+                            'El usuario ${nuevo_usuario.nombres} fue editado correctamente',
                             context: context,
                             animation: StyledToastAnimation.slideFromBottom,
                             reverseAnimation:

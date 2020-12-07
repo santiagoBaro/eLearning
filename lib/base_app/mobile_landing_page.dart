@@ -26,20 +26,21 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Image.asset(
-                'assets/images/LogoSappio.png',
-                height: 40,
-              ),
-            ),
-            Text('Sappio'),
-          ],
-        ),
+        title: Text('UdelaR'),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.start,
+        //   mainAxisSize: MainAxisSize.min,
+        //   children: [
+        //     Padding(
+        //       padding: const EdgeInsets.only(top: 4.0),
+        //       child: Image.asset(
+        //         'assets/images/LogoSappio.png',
+        //         height: 40,
+        //       ),
+        //     ),
+        //     Text('UdelaR'),
+        //   ],
+        // ),
       ),
       drawer: Drawer(
         child: MasterDrawer(
