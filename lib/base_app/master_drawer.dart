@@ -19,7 +19,7 @@ class Master extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

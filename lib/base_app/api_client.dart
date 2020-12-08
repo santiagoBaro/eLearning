@@ -18,16 +18,14 @@ var authHeader = {
 };
 
 class ApiClient {
-  static ApiClient _singleton = ApiClient._internal();
+  static ApiClient _singleton;
 
-  factory ApiClient() {
+  static ApiClient getInstance() {
     if (_singleton == null) {
-      _singleton = ApiClient._internal();
+      _singleton = new ApiClient();
     }
     return _singleton;
   }
-
-  ApiClient._internal();
 
   //* AUTHENTICATION
   Future<bool> login({String username, String password}) async {
