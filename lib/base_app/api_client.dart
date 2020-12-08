@@ -11,6 +11,7 @@ import 'package:elearning/data_types/user_dataType.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl = "http://burgerts.noip.me/SAPPIO-API-0.1";
+
 var authHeader = {
   HttpHeaders.authorizationHeader: "Bearer ${storedUserCredentials.getToken()}",
   "Content-Type": "application/json"
