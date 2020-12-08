@@ -9,7 +9,7 @@ class BookIndex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return FutureBuilder<List<BookElement>>(
       future: client.getBookContent(content: content),
       builder:

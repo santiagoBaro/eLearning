@@ -131,7 +131,7 @@ class LoginTab extends StatelessWidget {
                       // //TODO do separate function with checks
                       if (_loginFormKey.currentState.validate()) {
                         bool valid = false;
-                        var client = ApiClient();
+                        ApiClient client = ApiClient.getInstance();
                         valid = await client.login(
                           username: usernameController.text,
                           password: passwordContrller.text,
@@ -173,7 +173,7 @@ class LoginTab extends StatelessWidget {
               onPressed: () async {
                 if (usernameController.text != "") {
                   bool valid = false;
-                  var client = ApiClient();
+                  ApiClient client = ApiClient.getInstance();
                   valid = await client.recoverPassword(
                       email: usernameController.text);
                   if (valid) {

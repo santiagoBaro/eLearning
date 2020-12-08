@@ -108,7 +108,7 @@ class _ContentFormState extends State<ContentForm> {
                       if (isDeleteEnabled) {
                         isDeleteEnabled = false;
                         bool valid = false;
-                        var client = ApiClient();
+                        ApiClient client = ApiClient.getInstance();
                         valid =
                             await client.delContent(content: widget.content);
                         if (valid) {
@@ -161,7 +161,7 @@ class _ContentFormState extends State<ContentForm> {
                         color: currentColor.toHex(),
                         titulo: nombreContrller.text,
                       );
-                      var client = ApiClient();
+                      ApiClient client = ApiClient.getInstance();
                       if (widget.content != null) {
                         nuevoContent.id = widget.content.id;
                         valid = await client.updContent(

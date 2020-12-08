@@ -15,7 +15,7 @@ class ContentFormListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return FutureBuilder<List<Content>>(
       future: client.getContentByCourse(curso: curso),
       builder: (BuildContext context, AsyncSnapshot<List<Content>> snapshot) {

@@ -27,7 +27,7 @@ class _BookPageState extends State<BookPage> {
   // static IndexedScrollController controller =
   //     IndexedScrollController(initialIndex: 0);
   ScrollController primary_controller = ScrollController();
-  var client = ApiClient();
+  ApiClient client = ApiClient.getInstance();
 
   @override
   Widget build(BuildContext context) {

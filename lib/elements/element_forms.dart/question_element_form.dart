@@ -58,7 +58,7 @@ class _QuestionElementFormState extends State<QuestionElementForm> {
                       isDeleteEnabled = false;
                       if (widget.element != null) {
                         bool valid = false;
-                        var client = ApiClient();
+                        ApiClient client = ApiClient.getInstance();
                         valid =
                             await client.delElement(element: widget.element);
                         if (valid) {
@@ -110,7 +110,7 @@ class _QuestionElementFormState extends State<QuestionElementForm> {
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
                         type: "question", stringElements: textContrller.text);
-                    var client = ApiClient();
+                    ApiClient client = ApiClient.getInstance();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
                       valid = await client.updElement(element: nuevoElement);

@@ -84,7 +84,7 @@ class PendingTaskCard extends StatelessWidget {
                                 storedUserCredentials.userData.tipoUsu == "E",
                             child: FirebaseUploadFileButton(
                               fbUrl: (value) async {
-                                var client = ApiClient();
+                                ApiClient client = ApiClient.getInstance();
                                 bool valid = false;
                                 if (value != null && value != "") {
                                   valid = await client.submitTask(

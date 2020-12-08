@@ -58,7 +58,7 @@ class _SubtitleElementFormState extends State<SubtitleElementForm> {
                       isDeleteEnabled = false;
                       if (widget.element != null) {
                         bool valid = false;
-                        var client = ApiClient();
+                        ApiClient client = ApiClient.getInstance();
                         valid =
                             await client.delElement(element: widget.element);
                         if (valid) {
@@ -110,7 +110,7 @@ class _SubtitleElementFormState extends State<SubtitleElementForm> {
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
                         type: "subtitle", stringElements: textContrller.text);
-                    var client = ApiClient();
+                    ApiClient client = ApiClient.getInstance();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
                       valid = await client.updElement(element: nuevoElement);

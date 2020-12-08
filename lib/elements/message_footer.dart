@@ -44,7 +44,7 @@ class _MessageFooterState extends State<MessageFooter> {
               ),
               onPressed: () {
                 if (messageContrller.text != "") {
-                  var client = ApiClient();
+                  ApiClient client = ApiClient.getInstance();
                   client.addComentFormun(
                     foro: widget.foro,
                     message: messageContrller.text,

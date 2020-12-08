@@ -11,7 +11,7 @@ class CourseCarrousel extends StatelessWidget {
     Key key,
     this.onElementSelected,
   }) : super(key: key);
-  var client = ApiClient();
+  ApiClient client = ApiClient.getInstance();
 
   @override
   Widget build(BuildContext context) {

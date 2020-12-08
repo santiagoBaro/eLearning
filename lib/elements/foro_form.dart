@@ -100,7 +100,7 @@ class _ForoFormState extends State<ForoForm> {
                         isDeleteEnabled = false;
                         if (widget.form != null) {
                           bool valid = false;
-                          var client = ApiClient();
+                          ApiClient client = ApiClient.getInstance();
                           valid = await client.delForum(foro: widget.form);
                           if (valid) {
                             showToast(
@@ -154,7 +154,7 @@ class _ForoFormState extends State<ForoForm> {
                         name: titleContrller.text,
                         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
                       );
-                      var client = ApiClient();
+                      ApiClient client = ApiClient.getInstance();
                       if (widget.form != null) {
                         nuevoForo.id = widget.form.id;
                         valid = await client.updForum(foro: nuevoForo);
