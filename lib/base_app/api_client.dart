@@ -43,8 +43,8 @@ class ApiClient {
         storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
         storedUserCredentials
             .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
-        storedUserCredentials.userData =
-            User.fromJson(jsonDecode(response.body)["usuario"]);
+        storedUserCredentials
+            .setUserData(User.fromJson(jsonDecode(response.body)["usuario"]));
         saveUserCredentials();
         return true;
       }
@@ -55,7 +55,7 @@ class ApiClient {
 
   Future<bool> updUser({User user, String pass}) async {
     var response = await http.put(
-      '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.userData.mail}',
+      '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.getUserData().mail}',
       body: jsonEncode(user.toNestedValidatedJson(pass)),
       headers: authHeader,
     );
@@ -64,7 +64,7 @@ class ApiClient {
 
   Future<bool> updPass({String newPass, String oldPass}) async {
     var body = {
-      "mail": storedUserCredentials.userData.mail,
+      "mail": storedUserCredentials.getUserData().mail,
       "oldpass": oldPass,
       "newpass": newPass,
     };
@@ -87,7 +87,7 @@ class ApiClient {
   //* COURSES
   Future<List<Course>> getCourseList() async {
     var response = await http.get(
-      '$baseUrl/cursos/obtenerCursosByUsuario/${storedUserCredentials.userData.mail}',
+      '$baseUrl/cursos/obtenerCursosByUsuario/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {
@@ -193,7 +193,7 @@ class ApiClient {
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
-      '$baseUrl/tareas/byUsuario/${storedUserCredentials.userData.mail}',
+      '$baseUrl/tareas/byUsuario/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
     print('getTasksByUser.statusCode : ${response.statusCode}');
@@ -279,7 +279,10 @@ class ApiClient {
   }
 
   Future<bool> submitTask({String url, Task tarea}) async {
-    var body = {"mailUser": storedUserCredentials.userData.mail, "link": url};
+    var body = {
+      "mailUser": storedUserCredentials.getUserData().mail,
+      "link": url
+    };
     var response = await http.post(
       '$baseUrl}/entregas/altaEntrega/${tarea.id}',
       body: jsonEncode(body),
@@ -309,7 +312,7 @@ class ApiClient {
 
   Future<List<Forum>> getForumByUser() async {
     var response = await http.get(
-      '$baseUrl/foros/byUsuario/${storedUserCredentials.userData.mail}',
+      '$baseUrl/foros/byUsuario/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
     print('getforumByUser.statusCode : ${response.statusCode}');
@@ -354,11 +357,11 @@ class ApiClient {
 
   Future<bool> addComentFormun({Forum foro, String message}) async {
     var body = {
-      "titulo": storedUserCredentials.userData.mail,
+      "titulo": storedUserCredentials.getUserData().mail,
       "contenido": message,
     };
     var response = await http.post(
-      '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.userData.id}',
+      '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.getUserData().id}',
       body: jsonEncode(body),
       headers: authHeader,
     );
@@ -368,7 +371,7 @@ class ApiClient {
   //* SCORE
   Future<double> getCourseScore({Course curso}) async {
     var response = await http.get(
-      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
+      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {

@@ -52,6 +52,18 @@ class UserCredentials {
     saveUserCredentials();
   }
 
+  setUserData(User userData) {
+    this.userData = userData;
+  }
+
+  User getUserData() {
+    if (this.userData == null) {
+      print("userData en storedUserCredentials es NULL");
+      this.userData = User();
+    }
+    return this.userData;
+  }
+
   String getNickname() {
     return encrypter.decrypt64(name, iv: iv);
   }
