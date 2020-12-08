@@ -17,9 +17,12 @@ var authHeader = {
 };
 
 class ApiClient {
-  static final ApiClient _singleton = ApiClient._internal();
+  static ApiClient _singleton = ApiClient._internal();
 
   factory ApiClient() {
+    if (_singleton == null) {
+      _singleton = ApiClient._internal();
+    }
     return _singleton;
   }
 
