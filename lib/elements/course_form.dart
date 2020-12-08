@@ -162,7 +162,7 @@ class _CursoFormState extends State<CursoForm> {
                         fechaInicio:
                             DateFormat('yyyy-MM-dd').format(selectedDate),
                       );
-                      var client = ApiClient();
+                      ApiClient client = ApiClient.getInstance();
                       nuevoCurso.id = widget.curso.id;
                       valid = await client.updCourse(course: nuevoCurso);
                       if (valid) {

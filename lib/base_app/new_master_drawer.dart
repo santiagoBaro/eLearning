@@ -15,7 +15,7 @@ class MasterDrawer extends StatelessWidget {
     Key key,
     @required this.onElementSelected,
   }) : super(key: key);
-  var client = ApiClient();
+  ApiClient client = ApiClient.getInstance();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

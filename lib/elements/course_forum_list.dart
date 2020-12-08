@@ -10,7 +10,7 @@ class CourseFormListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return FutureBuilder<List<Forum>>(
       future: client.getForumByCourse(curso: curso),
       builder: (BuildContext context, AsyncSnapshot<List<Forum>> snapshot) {

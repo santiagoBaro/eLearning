@@ -79,7 +79,9 @@ class PendingTaskCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             child: Text('Cancelar'),
                           ),
                           Visibility(
@@ -87,6 +89,11 @@ class PendingTaskCard extends StatelessWidget {
                                 storedUserCredentials.userData.tipoUsu == "E",
                             child: FirebaseUploadFileButton(
                               fbUrl: (value) async {
+<<<<<<< HEAD
+=======
+                                ApiClient client = ApiClient.getInstance();
+                                bool valid = false;
+>>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                                 if (value != null && value != "") {
                                   urlController.text = value;
                                   // valid = await client.submitTask(

@@ -9,7 +9,7 @@ class UserTaskListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return FutureBuilder<List<Task>>(
       future: client.getTasksByUser(),
       builder: (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {

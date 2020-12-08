@@ -138,7 +138,7 @@ class _TaskFormState extends State<TaskForm> {
                         isDeleteEnabled = false;
                         if (widget.task != null) {
                           bool valid = false;
-                          var client = ApiClient();
+                          ApiClient client = ApiClient.getInstance();
                           valid = await client.delTask(task: widget.task);
                           if (valid) {
                             showToast(
@@ -193,7 +193,7 @@ class _TaskFormState extends State<TaskForm> {
                         instructions: instructionsContrller.text,
                         titulo: titleContrller.text,
                       );
-                      var client = ApiClient();
+                      ApiClient client = ApiClient.getInstance();
                       if (widget.task != null) {
                         nuevaTask.id = widget.task.id;
                         valid = await client.updTask(task: nuevaTask);

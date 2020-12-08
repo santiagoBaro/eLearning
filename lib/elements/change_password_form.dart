@@ -95,7 +95,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
                       if (newPass1Contrller.text == newPass2Contrller.text) {
-                        var client = ApiClient();
+                        ApiClient client = ApiClient.getInstance();
                         var valid = false;
                         valid = await client.updPass(
                             oldPass: oldPassContrller.text,

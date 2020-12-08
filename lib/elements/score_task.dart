@@ -41,7 +41,7 @@ class _ScoreTaskState extends State<ScoreTasks> {
 
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
+    ApiClient client = ApiClient.getInstance();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -191,7 +191,7 @@ class _TaskScoreCardState extends State<TaskScoreCard> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    var client = ApiClient();
+                    ApiClient client = ApiClient.getInstance();
                     bool valid = false;
                     valid = await client.scoreTask(
                       id: widget.task.id,

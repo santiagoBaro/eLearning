@@ -75,11 +75,17 @@ class _MultipleChoiceElementFormState extends State<MultipleChoiceElementForm> {
                       isDeleteEnabled = false;
                       if (widget.element != null) {
                         bool valid = false;
+<<<<<<< HEAD
                         var client = ApiClient();
                         valid = await client.delElement(
                           element: widget.element,
                           content: widget.content,
                         );
+=======
+                        ApiClient client = ApiClient.getInstance();
+                        valid =
+                            await client.delElement(element: widget.element);
+>>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                         if (valid) {
                           showToast(
                               'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
@@ -134,7 +140,7 @@ class _MultipleChoiceElementFormState extends State<MultipleChoiceElementForm> {
                         optionsContrller.text;
                     BookElement nuevoElement = BookElement(
                         type: "multiple_choice", stringElements: elem);
-                    var client = ApiClient();
+                    ApiClient client = ApiClient.getInstance();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
                       valid = await client.updElement(element: nuevoElement);

@@ -159,7 +159,7 @@ class _UserFormState extends State<UserForm> {
                         tipoDocumento: _value,
                       );
                       bool valid = false;
-                      var client = ApiClient();
+                      ApiClient client = ApiClient.getInstance();
                       nuevo_usuario.id = widget.usuario.id;
                       valid = await client.updUser(
                           user: nuevo_usuario, pass: passwordContrller.text);

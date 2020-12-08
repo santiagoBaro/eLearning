@@ -47,9 +47,14 @@ class _MessageFooterState extends State<MessageFooter> {
               onPressed: () async {
                 canSubmit = false;
                 if (messageContrller.text != "") {
+<<<<<<< HEAD
                   var client = ApiClient();
                   bool valid = false;
                   valid = await client.addComentFormun(
+=======
+                  ApiClient client = ApiClient.getInstance();
+                  client.addComentFormun(
+>>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                     foro: widget.foro,
                     message: messageContrller.text,
                   );
