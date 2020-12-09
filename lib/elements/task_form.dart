@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/task_datatype.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/data_types/task_datatype.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -138,7 +138,7 @@ class _TaskFormState extends State<TaskForm> {
                         isDeleteEnabled = false;
                         if (widget.task != null) {
                           bool valid = false;
-                          ApiClient client = ApiClient.getInstance();
+                          var client = ApiClient();
                           valid = await client.delTask(task: widget.task);
                           if (valid) {
                             showToast(
@@ -193,7 +193,7 @@ class _TaskFormState extends State<TaskForm> {
                         instructions: instructionsContrller.text,
                         titulo: titleContrller.text,
                       );
-                      ApiClient client = ApiClient.getInstance();
+                      var client = ApiClient();
                       if (widget.task != null) {
                         nuevaTask.id = widget.task.id;
                         valid = await client.updTask(task: nuevaTask);

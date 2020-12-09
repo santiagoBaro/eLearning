@@ -1,7 +1,7 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/task_datatype.dart';
-import 'package:elearning/elements/task_form.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/data_types/task_datatype.dart';
+import 'package:pushnotifications/elements/task_form.dart';
 import 'package:flutter/material.dart';
 
 class CourseTaskFormListing extends StatelessWidget {
@@ -11,7 +11,7 @@ class CourseTaskFormListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiClient client = ApiClient.getInstance();
+    var client = ApiClient();
     return FutureBuilder<List<Task>>(
       future: client.getTasksByCourse(curso: curso),
       builder: (BuildContext context, AsyncSnapshot<List<Task>> snapshot) {

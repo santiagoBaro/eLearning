@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/base_app/desktop_landing_page.dart';
-import 'package:elearning/base_app/mobile_landing_page.dart';
-import 'package:elearning/pages/landing_page.dart';
-import 'package:elearning/pages/onboarding_page.dart';
-import 'package:elearning/pages/tabbed_login_page.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/base_app/desktop_landing_page.dart';
+import 'package:pushnotifications/base_app/mobile_landing_page.dart';
+import 'package:pushnotifications/pages/landing_page.dart';
+import 'package:pushnotifications/pages/onboarding_page.dart';
+import 'package:pushnotifications/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,5 +1,5 @@
-import 'package:elearning/elements/calendar_element.dart';
-import 'package:elearning/elements/user_task_listing.dart';
+import 'package:pushnotifications/elements/calendar_element.dart';
+import 'package:pushnotifications/elements/user_task_listing.dart';
 import 'package:flutter/material.dart';
 
 class ImportantInformationSlide extends StatefulWidget {

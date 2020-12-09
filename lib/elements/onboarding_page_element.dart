@@ -1,5 +1,5 @@
-import 'package:elearning/pages/tabbed_login_page.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/pages/tabbed_login_page.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPageSlide extends StatelessWidget {

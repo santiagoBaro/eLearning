@@ -1,8 +1,8 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firebase_upload_file.dart';
-import 'package:elearning/base_app/firestore_connection.dart';
-import 'package:elearning/data_types/book_element_dataType.dart';
-import 'package:elearning/data_types/content_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/firebase_upload_file.dart';
+import 'package:pushnotifications/base_app/firestore_connection.dart';
+import 'package:pushnotifications/data_types/book_element_dataType.dart';
+import 'package:pushnotifications/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -68,17 +68,11 @@ class _VideoElementFormState extends State<VideoElementForm> {
                       isDeleteEnabled = false;
                       if (widget.element != null) {
                         bool valid = false;
-<<<<<<< HEAD
                         var client = ApiClient();
                         valid = await client.delElement(
                           element: widget.element,
                           content: widget.content,
                         );
-=======
-                        ApiClient client = ApiClient.getInstance();
-                        valid =
-                            await client.delElement(element: widget.element);
->>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                         if (valid) {
                           showToast(
                               'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
@@ -128,7 +122,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
                     bool valid = false;
                     BookElement nuevoElement = BookElement(
                         type: "video", stringElements: urlContrller.text);
-                    ApiClient client = ApiClient.getInstance();
+                    var client = ApiClient();
                     if (widget.element != null) {
                       nuevoElement.id = widget.element.id;
                       valid = await client.updElement(element: nuevoElement);

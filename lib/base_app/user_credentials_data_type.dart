@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:elearning/data_types/user_dataType.dart';
+import 'package:pushnotifications/data_types/user_dataType.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,18 +50,6 @@ class UserCredentials {
   setToken(String newToken) {
     token = encrypter.encrypt(newToken, iv: iv).base64;
     saveUserCredentials();
-  }
-
-  setUserData(User userData) {
-    this.userData = userData;
-  }
-
-  User getUserData() {
-    if (this.userData == null) {
-      print("userData en storedUserCredentials es NULL");
-      this.userData = User();
-    }
-    return this.userData;
   }
 
   String getNickname() {

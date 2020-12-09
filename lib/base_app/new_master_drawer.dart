@@ -1,10 +1,10 @@
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/elements/user_form.dart';
-import 'package:elearning/pages/course_page.dart';
-import 'package:elearning/pages/landing_page.dart';
-import 'package:elearning/pages/tabbed_login_page.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/elements/user_form.dart';
+import 'package:pushnotifications/pages/course_page.dart';
+import 'package:pushnotifications/pages/landing_page.dart';
+import 'package:pushnotifications/pages/tabbed_login_page.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 import 'api_client.dart';
@@ -15,7 +15,7 @@ class MasterDrawer extends StatelessWidget {
     Key key,
     @required this.onElementSelected,
   }) : super(key: key);
-  ApiClient client = ApiClient.getInstance();
+  var client = ApiClient();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

@@ -1,11 +1,11 @@
-import 'package:elearning/data_types/book_element_dataType.dart';
-import 'package:elearning/data_types/content_dataType.dart';
-import 'package:elearning/elements/element_forms.dart/image_element_form.dart';
-import 'package:elearning/elements/element_forms.dart/list_element_form.dart';
-import 'package:elearning/elements/element_forms.dart/multiple_choice_element_form.dart';
-import 'package:elearning/elements/element_forms.dart/question_element_form.dart';
-import 'package:elearning/elements/element_forms.dart/subtitle_element_form.dart';
-import 'package:elearning/elements/element_forms.dart/title_element_form.dart';
+import 'package:pushnotifications/data_types/book_element_dataType.dart';
+import 'package:pushnotifications/data_types/content_dataType.dart';
+import 'package:pushnotifications/elements/element_forms.dart/image_element_form.dart';
+import 'package:pushnotifications/elements/element_forms.dart/list_element_form.dart';
+import 'package:pushnotifications/elements/element_forms.dart/multiple_choice_element_form.dart';
+import 'package:pushnotifications/elements/element_forms.dart/question_element_form.dart';
+import 'package:pushnotifications/elements/element_forms.dart/subtitle_element_form.dart';
+import 'package:pushnotifications/elements/element_forms.dart/title_element_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 

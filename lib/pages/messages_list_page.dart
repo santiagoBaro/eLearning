@@ -1,5 +1,5 @@
-import 'package:elearning/elements/message_card.dart';
-import 'package:elearning/elements/message_search_header.dart';
+import 'package:pushnotifications/elements/message_card.dart';
+import 'package:pushnotifications/elements/message_search_header.dart';
 import 'package:flutter/material.dart';
 
 class MessagesListPage extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/elements/course_body.dart';
-import 'package:elearning/elements/course_information_card.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/elements/course_body.dart';
+import 'package:pushnotifications/elements/course_information_card.dart';
 import 'package:flutter/material.dart';
 
 class CoursePage extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class CourseContentCard extends StatelessWidget {

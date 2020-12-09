@@ -1,5 +1,5 @@
-import 'package:elearning/elements/course_carrousell.dart';
-import 'package:elearning/elements/user_forum_listing.dart';
+import 'package:pushnotifications/elements/course_carrousell.dart';
+import 'package:pushnotifications/elements/user_forum_listing.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {

@@ -1,7 +1,10 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/app_builder.dart';
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'dart:io';
+
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/app_builder.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -131,10 +134,11 @@ class LoginTab extends StatelessWidget {
                       // //TODO do separate function with checks
                       if (_loginFormKey.currentState.validate()) {
                         bool valid = false;
-                        ApiClient client = ApiClient.getInstance();
+                        var client = ApiClient();
                         valid = await client.login(
                           username: usernameController.text,
                           password: passwordContrller.text,
+                          token: firebaseToken,
                         );
                         if (valid) {
                           Navigator.pushReplacement(
@@ -173,7 +177,7 @@ class LoginTab extends StatelessWidget {
               onPressed: () async {
                 if (usernameController.text != "") {
                   bool valid = false;
-                  ApiClient client = ApiClient.getInstance();
+                  var client = ApiClient();
                   valid = await client.recoverPassword(
                       email: usernameController.text);
                   if (valid) {

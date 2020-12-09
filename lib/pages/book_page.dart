@@ -1,18 +1,18 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/data_types/book_element_dataType.dart';
-import 'package:elearning/data_types/content_dataType.dart';
-import 'package:elearning/elements/book_element_form.dart';
-import 'package:elearning/elements/book_element_listing.dart';
-import 'package:elearning/elements/book_index.dart';
-import 'package:elearning/elements/bool_elements/image_book_element.dart';
-import 'package:elearning/elements/bool_elements/list_book_element.dart';
-import 'package:elearning/elements/bool_elements/multiple_choice_book_element.dart';
-import 'package:elearning/elements/bool_elements/paragraph_book_element.dart';
-import 'package:elearning/elements/bool_elements/question_book_element.dart';
-import 'package:elearning/elements/bool_elements/subtitle_book_element.dart';
-import 'package:elearning/elements/bool_elements/title_book_element.dart';
-import 'package:elearning/elements/bool_elements/video_book_element.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/data_types/book_element_dataType.dart';
+import 'package:pushnotifications/data_types/content_dataType.dart';
+import 'package:pushnotifications/elements/book_element_form.dart';
+import 'package:pushnotifications/elements/book_element_listing.dart';
+import 'package:pushnotifications/elements/book_index.dart';
+import 'package:pushnotifications/elements/bool_elements/image_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/list_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/multiple_choice_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/paragraph_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/question_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/subtitle_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/title_book_element.dart';
+import 'package:pushnotifications/elements/bool_elements/video_book_element.dart';
 import 'package:flutter/material.dart';
 
 class BookPage extends StatefulWidget {
@@ -27,7 +27,7 @@ class _BookPageState extends State<BookPage> {
   // static IndexedScrollController controller =
   //     IndexedScrollController(initialIndex: 0);
   ScrollController primary_controller = ScrollController();
-  ApiClient client = ApiClient.getInstance();
+  var client = ApiClient();
 
   @override
   Widget build(BuildContext context) {

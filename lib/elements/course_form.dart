@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/hex_color.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/data_types/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -162,7 +162,7 @@ class _CursoFormState extends State<CursoForm> {
                         fechaInicio:
                             DateFormat('yyyy-MM-dd').format(selectedDate),
                       );
-                      ApiClient client = ApiClient.getInstance();
+                      var client = ApiClient();
                       nuevoCurso.id = widget.curso.id;
                       valid = await client.updCourse(course: nuevoCurso);
                       if (valid) {

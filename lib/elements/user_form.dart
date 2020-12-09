@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/data_types/user_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/data_types/user_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -159,7 +159,7 @@ class _UserFormState extends State<UserForm> {
                         tipoDocumento: _value,
                       );
                       bool valid = false;
-                      ApiClient client = ApiClient.getInstance();
+                      var client = ApiClient();
                       nuevo_usuario.id = widget.usuario.id;
                       valid = await client.updUser(
                           user: nuevo_usuario, pass: passwordContrller.text);

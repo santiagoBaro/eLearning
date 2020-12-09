@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/pages/course_page.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/pages/course_page.dart';
 import 'package:flutter/material.dart';
 
 import 'course_card.dart';
@@ -11,7 +11,7 @@ class CourseCarrousel extends StatelessWidget {
     Key key,
     this.onElementSelected,
   }) : super(key: key);
-  ApiClient client = ApiClient.getInstance();
+  var client = ApiClient();
 
   @override
   Widget build(BuildContext context) {

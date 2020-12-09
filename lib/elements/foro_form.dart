@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/foro_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -100,7 +100,7 @@ class _ForoFormState extends State<ForoForm> {
                         isDeleteEnabled = false;
                         if (widget.form != null) {
                           bool valid = false;
-                          ApiClient client = ApiClient.getInstance();
+                          var client = ApiClient();
                           valid = await client.delForum(foro: widget.form);
                           if (valid) {
                             showToast(
@@ -154,7 +154,7 @@ class _ForoFormState extends State<ForoForm> {
                         name: titleContrller.text,
                         date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
                       );
-                      ApiClient client = ApiClient.getInstance();
+                      var client = ApiClient();
                       if (widget.form != null) {
                         nuevoForo.id = widget.form.id;
                         valid = await client.updForum(foro: nuevoForo);

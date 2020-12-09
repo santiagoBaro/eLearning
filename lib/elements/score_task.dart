@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firestore_connection.dart';
-import 'package:elearning/data_types/task_datatype.dart';
-import 'package:elearning/data_types/task_score_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/firestore_connection.dart';
+import 'package:pushnotifications/data_types/task_datatype.dart';
+import 'package:pushnotifications/data_types/task_score_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -41,7 +41,7 @@ class _ScoreTaskState extends State<ScoreTasks> {
 
   @override
   Widget build(BuildContext context) {
-    ApiClient client = ApiClient.getInstance();
+    var client = ApiClient();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -191,7 +191,7 @@ class _TaskScoreCardState extends State<TaskScoreCard> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    ApiClient client = ApiClient.getInstance();
+                    var client = ApiClient();
                     bool valid = false;
                     valid = await client.scoreTask(
                       id: widget.task.id,

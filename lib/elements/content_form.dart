@@ -1,7 +1,7 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/content_dataType.dart';
-import 'package:elearning/data_types/course_dataType.dart';
-import 'package:elearning/data_types/hex_color.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/content_dataType.dart';
+import 'package:pushnotifications/data_types/course_dataType.dart';
+import 'package:pushnotifications/data_types/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -108,7 +108,7 @@ class _ContentFormState extends State<ContentForm> {
                       if (isDeleteEnabled) {
                         isDeleteEnabled = false;
                         bool valid = false;
-                        ApiClient client = ApiClient.getInstance();
+                        var client = ApiClient();
                         valid =
                             await client.delContent(content: widget.content);
                         if (valid) {
@@ -161,7 +161,7 @@ class _ContentFormState extends State<ContentForm> {
                         color: currentColor.toHex(),
                         titulo: nombreContrller.text,
                       );
-                      ApiClient client = ApiClient.getInstance();
+                      var client = ApiClient();
                       if (widget.content != null) {
                         nuevoContent.id = widget.content.id;
                         valid = await client.updContent(

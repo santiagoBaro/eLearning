@@ -1,4 +1,4 @@
-import 'package:elearning/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -95,7 +95,7 @@ class _ChangePassFormmState extends State<ChangePassFormm> {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
                       if (newPass1Contrller.text == newPass2Contrller.text) {
-                        ApiClient client = ApiClient.getInstance();
+                        var client = ApiClient();
                         var valid = false;
                         valid = await client.updPass(
                             oldPass: oldPassContrller.text,

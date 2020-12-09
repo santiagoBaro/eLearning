@@ -1,12 +1,37 @@
-import 'package:elearning/base_app/app_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:pushnotifications/src/pages/homePage.dart';
+import 'package:pushnotifications/src/pages/messagePage.dart';
+import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
 
-void main() {
-  runApp(MyApp());
+import 'base_app/app_builder.dart';
+
+//
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    final pushProvider = new PushNotificationProvider();
+    pushProvider.initNotifications();
+
+    pushProvider.messagesStream.listen((data) {
+      // print('argument desde main: $argument');
+      // Navigator.pushNamed(context,'mensaje');
+      //navigatorKey.currentState.pushNamed('message', arguments: data);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     precacheImage(AssetImage("assets/images/LogoSappio.png"), context);

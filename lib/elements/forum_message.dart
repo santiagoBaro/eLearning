@@ -1,4 +1,4 @@
-import 'package:elearning/data_types/message_dataType.dart';
+import 'package:pushnotifications/data_types/message_dataType.dart';
 import 'package:flutter/material.dart';
 
 class ForumMessage extends StatelessWidget {

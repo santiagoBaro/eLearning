@@ -1,5 +1,5 @@
-import 'package:elearning/data_types/foro_dataType.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/data_types/foro_dataType.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 import 'forum_message.dart';

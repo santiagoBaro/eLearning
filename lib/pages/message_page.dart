@@ -1,6 +1,6 @@
-import 'package:elearning/elements/massage_header.dart';
-import 'package:elearning/elements/recivecd_message_bubble.dart';
-import 'package:elearning/elements/sent_message_bubble.dart';
+import 'package:pushnotifications/elements/massage_header.dart';
+import 'package:pushnotifications/elements/recivecd_message_bubble.dart';
+import 'package:pushnotifications/elements/sent_message_bubble.dart';
 import 'package:flutter/material.dart';
 
 class MessagePage extends StatelessWidget {

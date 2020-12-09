@@ -1,5 +1,5 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/foro_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/foro_dataType.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -47,14 +47,9 @@ class _MessageFooterState extends State<MessageFooter> {
               onPressed: () async {
                 canSubmit = false;
                 if (messageContrller.text != "") {
-<<<<<<< HEAD
                   var client = ApiClient();
                   bool valid = false;
                   valid = await client.addComentFormun(
-=======
-                  ApiClient client = ApiClient.getInstance();
-                  client.addComentFormun(
->>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                     foro: widget.foro,
                     message: messageContrller.text,
                   );

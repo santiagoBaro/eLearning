@@ -1,5 +1,5 @@
-import 'package:elearning/base_app/important_information.dart';
-import 'package:elearning/pages/landing_page.dart';
+import 'package:pushnotifications/base_app/important_information.dart';
+import 'package:pushnotifications/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import 'new_master_drawer.dart';

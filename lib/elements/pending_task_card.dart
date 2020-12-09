@@ -1,11 +1,10 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/base_app/firestore_connection.dart';
-import 'package:elearning/base_app/user_credentials_data_type.dart';
-import 'package:elearning/data_types/task_datatype.dart';
-import 'package:elearning/elements/score_task.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/base_app/firestore_connection.dart';
+import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:pushnotifications/data_types/task_datatype.dart';
+import 'package:pushnotifications/elements/score_task.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -79,9 +78,7 @@ class PendingTaskCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                            onPressed: () {},
                             child: Text('Cancelar'),
                           ),
                           Visibility(
@@ -89,11 +86,6 @@ class PendingTaskCard extends StatelessWidget {
                                 storedUserCredentials.userData.tipoUsu == "E",
                             child: FirebaseUploadFileButton(
                               fbUrl: (value) async {
-<<<<<<< HEAD
-=======
-                                ApiClient client = ApiClient.getInstance();
-                                bool valid = false;
->>>>>>> 937fc8044b6849ced62663c78cb9e16a9d78c946
                                 if (value != null && value != "") {
                                   urlController.text = value;
                                   // valid = await client.submitTask(
@@ -265,19 +257,6 @@ TextStyle mainTextStyle = TextStyle(
 TextStyle secondaryTextStyle = TextStyle(
   color: myAppTheme['PrimaryTextColor'],
 );
-
-Future<List<File>> getFile() async {
-  FilePickerResult result =
-      await FilePicker.platform.pickFiles(allowMultiple: true);
-
-  if (result != null) {
-    List<File> files = result.paths.map((path) => File(path)).toList();
-    return files;
-  } else {
-    // User canceled the picker
-    return List<File>();
-  }
-}
 
 String _buildDate(String date) {
   String base = date.split("T")[0];

@@ -1,6 +1,6 @@
-import 'package:elearning/base_app/api_client.dart';
-import 'package:elearning/data_types/book_element_dataType.dart';
-import 'package:elearning/data_types/content_dataType.dart';
+import 'package:pushnotifications/base_app/api_client.dart';
+import 'package:pushnotifications/data_types/book_element_dataType.dart';
+import 'package:pushnotifications/data_types/content_dataType.dart';
 import 'package:flutter/material.dart';
 
 import 'book_element_form.dart';
@@ -11,7 +11,7 @@ class BookElementListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiClient client = ApiClient.getInstance();
+    var client = ApiClient();
     return FutureBuilder<List<BookElement>>(
       future: client.getBookContent(content: content),
       builder:

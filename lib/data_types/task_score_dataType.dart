@@ -1,4 +1,4 @@
-import 'package:elearning/data_types/user_dataType.dart';
+import 'package:pushnotifications/data_types/user_dataType.dart';
 
 class TaskScore {
   int id;

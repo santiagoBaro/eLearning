@@ -1,5 +1,5 @@
-import 'package:elearning/elements/enrollment_grid_element.dart';
-import 'package:elearning/tools/visual_assets.dart';
+import 'package:pushnotifications/elements/enrollment_grid_element.dart';
+import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
 class BedeliasPage extends StatefulWidget {
