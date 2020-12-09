@@ -10,6 +10,7 @@ import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/task_score_dataType.dart';
 import 'package:elearning/data_types/user_dataType.dart';
 import 'package:http/http.dart' as http;
+import 'package:elearning/data_types/net_course.dart';
 
 const String baseUrl =
     "http://www.node789-api-udelaronline.web.elasticloud.uy:11015/api";
@@ -45,9 +46,6 @@ class ApiClient {
         storedUserCredentials.userData =
             NetUser.fromJson(jsonDecode(response.body));
         saveUserCredentials();
-        print("======================");
-        print(storedUserCredentials.userData.toJson());
-        print("======================");
         return true;
       }
       return false;
@@ -69,6 +67,38 @@ class ApiClient {
       return courseList;
     } else {
       return List<Course>();
+    }
+  }
+
+  Future<List<NetCourse>> getnetCourseList() async {
+    var response = await http.get(
+      '$baseUrl/curso/usuario/${storedUserCredentials.userData.id}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      var jsonResponse = json.decode(response.body);
+      print("LENGTH == ${jsonResponse.length}");
+      List<NetCourse> courseList = List<NetCourse>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        courseList.add(NetCourse.fromJson(jsonResponse[i]));
+      }
+      return courseList;
+    } else {
+      return List<NetCourse>();
+    }
+  }
+
+  Future<NetCourse> getCousreDetail({String id}) async {
+    var response = await http.get(
+      '$baseUrl/curso/$id',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      return NetCourse.fromJson(jsonResponse);
+    } else {
+      return NetCourse();
     }
   }
 

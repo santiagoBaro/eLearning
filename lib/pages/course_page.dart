@@ -2,9 +2,10 @@ import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/elements/course_body.dart';
 import 'package:elearning/elements/course_information_card.dart';
 import 'package:flutter/material.dart';
+import 'package:elearning/data_types/net_course.dart';
 
 class CoursePage extends StatelessWidget {
-  final Course curso;
+  final NetCourse curso;
   final Function(Widget) onElementSelected;
   const CoursePage({
     Key key,
@@ -21,10 +22,10 @@ class CoursePage extends StatelessWidget {
             height: (MediaQuery.of(context).size.height - 100),
             child: CoursePageBody(
               onElementSelected: (Widget val) => onElementSelected(val),
-              curso: curso,
+              cursoId: curso.id,
             ),
           ),
-          CourseInformationCard(curso: curso),
+          // CourseInformationCard(curso: ),
         ],
       ),
     );

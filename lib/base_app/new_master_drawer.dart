@@ -6,6 +6,7 @@ import 'package:elearning/pages/landing_page.dart';
 import 'package:elearning/pages/tabbed_login_page.dart';
 import 'package:elearning/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:elearning/data_types/net_course.dart';
 
 import 'api_client.dart';
 
@@ -36,10 +37,10 @@ class MasterDrawer extends StatelessWidget {
               text: "Cursos",
               icon: Icons.school,
             ),
-            FutureBuilder<List<Course>>(
-              future: client.getCourseList(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+            FutureBuilder<List<NetCourse>>(
+              future: client.getnetCourseList(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<NetCourse>> snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data.length == 0) {
                     return MasterSubtitle(text: "No hay cursos disponibles");

@@ -2,6 +2,8 @@ import 'package:elearning/base_app/user_credentials_data_type.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/elements/task_form.dart';
 import 'package:flutter/material.dart';
+import 'package:elearning/data_types/net_course.dart';
+import 'package:elearning/base_app/api_client.dart';
 
 import 'content_form.dart';
 import 'course_content_carrousell.dart';
@@ -11,43 +13,47 @@ import 'course_forum_form_listing.dart';
 import 'course_forum_list.dart';
 import 'course_header.dart';
 import 'course_section.dart';
+import 'course_section_listing.dart';
 import 'course_task_form_listing.dart';
 import 'course_task_listing.dart';
 import 'foro_form.dart';
 
 class CoursePageBody extends StatelessWidget {
   final Function(Widget) onElementSelected;
-  final Course curso;
+  final String cursoId;
   const CoursePageBody({
     Key key,
     this.onElementSelected,
-    @required this.curso,
+    @required this.cursoId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var client = ApiClient();
     return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Container(
-            constraints: BoxConstraints(
-              maxWidth: 700,
-            ),
-            child: Column(
-              children: [
-                CourseHeader(
-                  nombre: curso.nombre,
-                  grupo: curso.descripcion,
-                ),
-                CouseSection(curso: curso),
-                SizedBox(height: 20),
-                CouseSection(curso: curso),
-                SizedBox(height: 20),
-                CouseSection(curso: curso),
-              ],
-            ),
-          ),
-        ],
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: 700,
+        ),
+        child: FutureBuilder<NetCourse>(
+          future: client.getCousreDetail(id: cursoId),
+          builder: (BuildContext context, AsyncSnapshot<NetCourse> snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  CourseHeader(
+                    nombre: snapshot.data.nombre,
+                    grupo: snapshot.data.descripcion,
+                  ),
+                  CourseSectionListing(curso: snapshot.data),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }

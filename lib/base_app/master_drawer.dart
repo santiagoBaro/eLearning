@@ -29,35 +29,30 @@ class Master extends StatelessWidget {
           ),
           //* LIST OF ELEMENTS
           //* GROUP
-          InkWell(
-            onTap: () => onElementSelected(
-              CoursePage(curso: courseRelleno),
-            ),
-            child: MasterTitle(
-              text: "Cursos",
-              icon: Icons.school,
-            ),
+          MasterTitle(
+            text: "Cursos",
+            icon: Icons.school,
           ),
-          FutureBuilder<List<Course>>(
-            future: client.getCourseList(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                          onTap: () {},
-                          child: MasterSubtitle(
-                              text: snapshot.data[index].nombre));
-                    });
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return Center(child: CircularProgressIndicator());
-            },
-          ),
+          // FutureBuilder<List<Course>>(
+          //   future: client.getCourseList(),
+          //   builder:
+          //       (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+          //     if (snapshot.hasData) {
+          //       return ListView.builder(
+          //           padding: const EdgeInsets.all(8),
+          //           itemCount: snapshot.data.length,
+          //           itemBuilder: (BuildContext context, int index) {
+          //             return InkWell(
+          //                 onTap: () {},
+          //                 child: MasterSubtitle(
+          //                     text: snapshot.data[index].nombre));
+          //           });
+          //     } else if (snapshot.hasError) {
+          //       return Text("${snapshot.error}");
+          //     }
+          //     return Center(child: CircularProgressIndicator());
+          //   },
+          // ),
 
           // InkWell(
           //     onTap: () {}, child: MasterSubtitle(text: "matricular docente")),

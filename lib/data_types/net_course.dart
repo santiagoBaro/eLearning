@@ -25,33 +25,18 @@ class NetCourse {
         descripcion = json['descripcion'],
         nombre = json['nombre'],
         requiereMatriculacion = json['requiereMatriculacion'],
-        modalidad = json['modalidad'],
         salaVirtual = json['salaVirtual'],
+        secciones = parseSections(json['cursoSecciones']),
         actaCreada = json['actaCreada'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'descripcion': descripcion,
-        'nombre': nombre,
-        'requiereMatriculacion': requiereMatriculacion,
-        'modalidad': modalidad,
-        'salaVirtual': salaVirtual,
-        'actaCreada': actaCreada,
-      };
 }
 
-// actaCerrada: false
-// alumnos: null
-// comunicados: null
-// cursoId: "b1ecbcdf-e3fe-47a1-b536-55eed324aed3"
-// cursoSecciones: null
-// descripcion: "Una breve introduccion al campo de la estadistica"
-// docentes: null
-// modalidad: "Online"
-// modalidadId: 0
-// nombre: "Probabilidad y Estadistica"
-// requiereMatriculacion: false
-// salaVirtual: "zoom.com/asdasdasd"
-// secciones: null
-// templateCurso: null
-// templateCursoId: null
+List<NetSection> parseSections(List<dynamic> body) {
+  if (body != null) {
+    List<NetSection> courseList = List<NetSection>();
+    for (var i = 0; i < body.length; i++) {
+      courseList.add(NetSection.fromJson(body[i]));
+    }
+    return courseList;
+  }
+  return List<NetSection>();
+}

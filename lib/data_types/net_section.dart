@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class NetSection {
   String id;
   String nombre;
@@ -16,6 +14,9 @@ class NetSection {
     this.isDefaul,
     this.isVisible,
     this.nombre,
+    this.actividades,
+    this.foros,
+    this.materiales,
   });
 
   NetSection.fromJson(Map<String, dynamic> json)
@@ -23,23 +24,18 @@ class NetSection {
         nombre = json['seccionData']['nombre'] ?? "",
         descripcion = json['seccionData']['descripcion'] ?? "",
         isDefaul = json['seccionData']['isDefaul'],
-        isVisible = json['seccionData']['isVisible'];
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'nombre': nombre,
-        'descripcion': descripcion,
-        'isDefaul': isDefaul,
-        'isVisible': isVisible,
-      };
+        isVisible = json['seccionData']['isVisible'],
+        foros = parseForos(json['foroLista']),
+        materiales = parseMateriales(json['materialLista']),
+        actividades = parseActividades(json['actividadLista']);
 }
 
 class NetActividad {
   String id;
-  DateTime fechaRealizada;
-  DateTime fechaFinalizada;
+  String fechaRealizada;
+  String fechaFinalizada;
   String nombre;
-  int minutosExpiracion;
+  String minutosExpiracion;
   String fecha;
   String descripcion;
   String tipo;
@@ -51,6 +47,10 @@ class NetActividad {
     this.fechaRealizada,
     this.id,
     this.nombre,
+    this.fecha,
+    this.minutosExpiracion,
+    this.tipo,
+    this.url,
   });
 
   NetActividad.fromJson(Map<String, dynamic> json)
@@ -63,17 +63,34 @@ class NetActividad {
         nombre = json['actividad']['nombre'] ?? "",
         url = json['actividad']['url'] ?? "",
         minutosExpiracion = json['actividad']['minutosExpiracion'] ?? "";
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'descripcion': descripcion,
-        'nombre': nombre,
-        'fechaFinalizada': fechaFinalizada,
-        'fechaRealizada': fechaRealizada,
-      };
 }
 
-class NetForo {}
+List<NetActividad> parseActividades(List<dynamic> body) {
+  if (body != null) {
+    List<NetActividad> courseList = List<NetActividad>();
+    for (var i = 0; i < body.length; i++) {
+      courseList.add(NetActividad.fromJson(body[i]));
+    }
+    return courseList;
+  }
+  return List<NetActividad>();
+}
+
+class NetForo {
+  String id;
+  NetForo.fromJson(Map<String, dynamic> json) : id = json['id'];
+}
+
+List<NetForo> parseForos(List<dynamic> body) {
+  if (body != null) {
+    List<NetForo> courseList = List<NetForo>();
+    for (var i = 0; i < body.length; i++) {
+      courseList.add(NetForo.fromJson(body[i]));
+    }
+    return courseList;
+  }
+  return List<NetForo>();
+}
 
 class NetMaterial {
   String id;
@@ -83,7 +100,14 @@ class NetMaterial {
   String fileExt;
   String fileNom;
 
-  NetMaterial({this.file, this.id});
+  NetMaterial({
+    this.file,
+    this.id,
+    this.descripcion,
+    this.fileExt,
+    this.fileNom,
+    this.nombre,
+  });
 
   NetMaterial.fromJson(Map<String, dynamic> json)
       : id = json['materialId'],
@@ -92,9 +116,15 @@ class NetMaterial {
         fileNom = json['archivoNombre'],
         fileExt = json['fileExt'],
         file = json['archivoData'];
+}
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'file': file,
-      };
+List<NetMaterial> parseMateriales(List<dynamic> body) {
+  if (body != null) {
+    List<NetMaterial> courseList = List<NetMaterial>();
+    for (var i = 0; i < body.length; i++) {
+      courseList.add(NetMaterial.fromJson(body[i]));
+    }
+    return courseList;
+  }
+  return List<NetMaterial>();
 }

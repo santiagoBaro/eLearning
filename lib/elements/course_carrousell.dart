@@ -2,6 +2,7 @@ import 'package:elearning/base_app/api_client.dart';
 import 'package:elearning/data_types/course_dataType.dart';
 import 'package:elearning/pages/course_page.dart';
 import 'package:flutter/material.dart';
+import 'package:elearning/data_types/net_course.dart';
 
 import 'course_card.dart';
 
@@ -15,9 +16,9 @@ class CourseCarrousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Course>>(
-      future: client.getCourseList(),
-      builder: (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
+    return FutureBuilder<List<NetCourse>>(
+      future: client.getnetCourseList(),
+      builder: (BuildContext context, AsyncSnapshot<List<NetCourse>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Container(

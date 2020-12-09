@@ -1,15 +1,13 @@
-import 'package:elearning/data_types/course_dataType.dart';
 import 'package:flutter/material.dart';
+import 'package:elearning/data_types/net_section.dart';
 
-import 'course_content_carrousell.dart';
-import 'course_forum_list.dart';
-import 'course_task_listing.dart';
+import 'course_content_card.dart';
+import 'net_notification_card.dart';
+import 'net_pending_task_card.dart';
 
 class CouseSection extends StatelessWidget {
-  final Function(Widget) onElementSelected;
-  final Course curso;
-  const CouseSection({Key key, this.curso, this.onElementSelected})
-      : super(key: key);
+  final NetSection section;
+  const CouseSection({Key key, this.section}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +21,24 @@ class CouseSection extends StatelessWidget {
             child: Column(
               children: [
                 SectionHeader(
-                  nombre: curso.nombre,
-                  grupo: curso.descripcion,
+                  nombre: section.nombre,
+                  grupo: section.descripcion,
                 ),
                 //* CONTENT
                 Container(
                   height: 200,
-                  child: ContentCarrousell(
-                    curso: curso,
-                    onElementSelected: (Widget val) => onElementSelected(val),
-                  ),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: section.materiales.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CourseContentCard(
+                          icon: Icons.cancel_outlined,
+                          name: section.materiales[index].fileNom,
+                          bkgColor: Colors.green[300],
+                        );
+                      }),
                 ),
                 //* TASKS
                 Container(
@@ -44,7 +50,15 @@ class CouseSection extends StatelessWidget {
                   ),
                 ),
 
-                CourseTaskListing(curso: curso),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(8),
+                  itemCount: section.actividades.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return PendingTaskCard(task: section.actividades[index]);
+                  },
+                ),
 
                 //* FORUMS
                 Container(
@@ -55,7 +69,15 @@ class CouseSection extends StatelessWidget {
                     vertical: 20,
                   ),
                 ),
-                CourseFormListing(curso: curso),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(8),
+                  itemCount: section.foros.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return NotificationCard(foro: section.foros[index]);
+                  },
+                ),
               ],
             ),
           ),
