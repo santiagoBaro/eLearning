@@ -1,3 +1,4 @@
+import 'package:pushnotifications/base_app/api_client.dart';
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/pages/tabbed_login_page.dart';
 import 'package:gooey_carousel/gooey_carrousel.dart';
@@ -19,7 +20,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     super.initState();
     //
     storedUserCredentials = logedOffUser;
-    saveUserCredentials();
+    saveUserCredentials(storedUserCredentials);
   }
 
   @override
