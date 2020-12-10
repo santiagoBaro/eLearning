@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:elearning/data_types/net_section.dart';
 
@@ -33,10 +36,25 @@ class CouseSection extends StatelessWidget {
                       itemCount: section.materiales.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
-                        return CourseContentCard(
-                          icon: Icons.cancel_outlined,
-                          name: section.materiales[index].fileNom,
-                          bkgColor: Colors.green[300],
+                        return InkWell(
+                          onTap: () {
+                            String fileName =
+                                '${section.materiales[index].fileNom}.${section.materiales[index].fileExt}';
+                            var fileBase64 =
+                                base64Decode(section.materiales[index].file);
+
+                            new File(fileName)
+                                .writeAsBytes(fileBase64)
+                                .then((File file) {
+                              // Do something with the file.
+                            });
+                          },
+                          child: CourseContentCard(
+                            // icon: Icons.cancel_outlined,
+                            fileExt: section.materiales[index].fileExt,
+                            name: section.materiales[index].fileNom,
+                            bkgColor: Colors.green[300],
+                          ),
                         );
                       }),
                 ),

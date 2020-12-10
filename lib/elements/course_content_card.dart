@@ -5,15 +5,17 @@ class CourseContentCard extends StatelessWidget {
   final String name;
   final Color bkgColor;
   final IconData icon;
+  final String fileExt;
   final String currentIndex;
   final String targetIndex;
   const CourseContentCard({
     Key key,
-    this.name = 'Curso',
-    this.icon = Icons.error_outline,
-    this.currentIndex = '120',
-    this.targetIndex = '145',
+    this.name,
+    this.icon,
+    this.currentIndex,
+    this.targetIndex,
     this.bkgColor = Colors.grey,
+    this.fileExt,
   }) : super(key: key);
 
   @override
@@ -119,10 +121,9 @@ class CourseContentCard extends StatelessWidget {
                     ),
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Icon(
-                        icon,
-                        color: color,
-                        size: 30,
+                      child: Text(
+                        fileExt,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ),
