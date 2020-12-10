@@ -16,17 +16,9 @@ class CoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: (MediaQuery.of(context).size.height - 100),
-            child: CoursePageBody(
-              onElementSelected: (Widget val) => onElementSelected(val),
-              cursoId: curso.id,
-            ),
-          ),
-          // CourseInformationCard(curso: ),
-        ],
+      child: CoursePageBody(
+        onElementSelected: (Widget val) => onElementSelected(val),
+        cursoId: curso.id,
       ),
     );
   }

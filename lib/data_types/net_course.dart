@@ -27,16 +27,19 @@ class NetCourse {
         requiereMatriculacion = json['requiereMatriculacion'],
         salaVirtual = json['salaVirtual'],
         secciones = parseSections(json['cursoSecciones']),
-        actaCreada = json['actaCreada'];
+        actaCreada = json['actaCerrada'];
 }
 
 List<NetSection> parseSections(List<dynamic> body) {
+  print("parse de sections");
   if (body != null) {
     List<NetSection> courseList = List<NetSection>();
     for (var i = 0; i < body.length; i++) {
       courseList.add(NetSection.fromJson(body[i]));
     }
+    print("secciones length: ${courseList.length}");
     return courseList;
   }
+  print("Secciones: body vacio");
   return List<NetSection>();
 }

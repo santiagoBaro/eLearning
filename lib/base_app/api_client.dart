@@ -8,7 +8,6 @@ import 'package:elearning/data_types/foro_dataType.dart';
 import 'package:elearning/data_types/net_user.dart';
 import 'package:elearning/data_types/task_datatype.dart';
 import 'package:elearning/data_types/task_score_dataType.dart';
-import 'package:elearning/data_types/user_dataType.dart';
 import 'package:http/http.dart' as http;
 import 'package:elearning/data_types/net_course.dart';
 
@@ -66,6 +65,7 @@ class ApiClient {
       }
       return courseList;
     } else {
+      print("getCourseList == ${response.statusCode}");
       return List<Course>();
     }
   }
@@ -76,7 +76,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      print(response.body);
+      // print(response.body);
       var jsonResponse = json.decode(response.body);
       print("LENGTH == ${jsonResponse.length}");
       List<NetCourse> courseList = List<NetCourse>();
@@ -85,11 +85,13 @@ class ApiClient {
       }
       return courseList;
     } else {
+      print("getNetCourseList == ${response.statusCode}");
       return List<NetCourse>();
     }
   }
 
   Future<NetCourse> getCousreDetail({String id}) async {
+    print("getCousreDetail");
     var response = await http.get(
       '$baseUrl/curso/$id',
       headers: authHeader,
@@ -98,6 +100,7 @@ class ApiClient {
       var jsonResponse = json.decode(response.body);
       return NetCourse.fromJson(jsonResponse);
     } else {
+      print("getCourseDetail == ${response.statusCode}");
       return NetCourse();
     }
   }
