@@ -53,6 +53,7 @@ class ApiClient {
   }
 
   Future<List<Course>> getCourseList() async {
+    print("getCourseList");
     var response = await http.get(
       '$baseUrl/curso/usuario/${storedUserCredentials.userData.id}',
       headers: authHeader,
@@ -71,6 +72,7 @@ class ApiClient {
   }
 
   Future<List<NetCourse>> getnetCourseList() async {
+    print("getnetCourseList");
     var response = await http.get(
       '$baseUrl/curso/usuario/${storedUserCredentials.userData.id}',
       headers: authHeader,
