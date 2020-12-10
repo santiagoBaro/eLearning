@@ -9,6 +9,7 @@ import 'package:pushnotifications/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_client.dart';
+import 'package:flutter/services.dart';
 
 import 'tablet_landing_page.dart';
 
@@ -39,8 +40,25 @@ class _BaseAppState extends State<BaseApp> {
     } else {
       Map savedPreferences = jsonDecode(savedPreferencesString);
       storedUserCredentials = UserCredentials.fromJson(savedPreferences);
+      if (storedUserCredentials.getUserData() == null) {
+        storedUserCredentials = emptyUser;
+      } else if (storedUserCredentials.getUserData().mail == '') {
+        storedUserCredentials = emptyUser;
+      } else {
+        String title;
+        if (storedUserCredentials.getUserData().tipoUsu == 'E') {
+          title = "Sappio - Estudiante";
+        } else {
+          title = "Sappio - Docente";
+        }
+        SystemChrome.setApplicationSwitcherDescription(
+            ApplicationSwitcherDescription(
+          label: title,
+          primaryColor: Theme.of(context).primaryColor.value,
+        ));
+      }
     }
-    return;
+    return Future<Null>.sync(() => null);
   }
 
   Future<Null> logout() async {
