@@ -259,7 +259,7 @@ class MsterFooter extends StatelessWidget {
                               ),
                               FlatButton(
                                 onPressed: () {
-                                  storedUserCredentials = logedOffUser;
+                                  storedUserCredentials.clean();
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(

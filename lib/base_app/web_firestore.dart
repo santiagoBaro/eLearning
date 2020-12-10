@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:html';
 import 'dart:html' as html;
 import 'package:firebase/firebase.dart' as fb;
+import 'api_client.dart';
 
 import 'user_credentials_data_type.dart';
 

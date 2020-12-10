@@ -8,6 +8,7 @@ import 'package:pushnotifications/pages/onboarding_page.dart';
 import 'package:pushnotifications/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'api_client.dart';
 
 import 'tablet_landing_page.dart';
 

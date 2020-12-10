@@ -150,14 +150,14 @@ class _UserFormState extends State<UserForm> {
                   onPressed: () async {
                     if (_formKey.currentState.validate() && isSubmitEnabled) {
                       isSubmitEnabled = false;
-                      User nuevo_usuario = User(
-                        nombre: nameController.text,
-                        mail: mailController.text,
-                        direccion: directionContrller.text,
-                        carrera: careerController.text,
-                        documento: documentController.text,
-                        tipoDocumento: _value,
-                      );
+                      User nuevo_usuario = User();
+                      nuevo_usuario.nombre = nameController.text;
+                      nuevo_usuario.mail = mailController.text;
+                      nuevo_usuario.direccion = directionContrller.text;
+                      nuevo_usuario.carrera = careerController.text;
+                      nuevo_usuario.documento = documentController.text;
+                      nuevo_usuario.tipoDocumento = _value;
+
                       bool valid = false;
                       var client = ApiClient();
                       nuevo_usuario.id = widget.usuario.id;

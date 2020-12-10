@@ -10,14 +10,14 @@ import 'package:pushnotifications/data_types/task_score_dataType.dart';
 import 'package:http/http.dart' as http;
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/data_types/user_dataType.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'user_credentials_data_type.dart';
 
 const String baseUrl = "http://burgerts.noip.me/SAPPIO-API-0.1";
-var authHeader = {
-  HttpHeaders.authorizationHeader: "Bearer ${storedUserCredentials.getToken()}",
-  "Content-Type": "application/json"
-};
+UserCredentials storedUserCredentials = UserCredentials();
+
+var authHeader;
 
 class ApiClient {
   static final ApiClient _singleton = ApiClient._internal();
@@ -30,7 +30,6 @@ class ApiClient {
 
   //* AUTHENTICATION
   Future<bool> login({String username, String password, String token}) async {
-    print("usr: $username, pass: $password, tok: $token");
     var response = await http.post(
       '$baseUrl/login',
       body: jsonEncode(<String, String>{
@@ -45,9 +44,16 @@ class ApiClient {
         storedUserCredentials.setToken(jsonDecode(response.body)["token"]);
         storedUserCredentials
             .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
-        storedUserCredentials.userData =
-            User.fromJson(jsonDecode(response.body)["usuario"]);
-        saveUserCredentials();
+
+        storedUserCredentials.newUserData(jsonDecode(response.body)["usuario"]);
+
+        //    User.fromJson(jsonDecode(response.body)["usuario"]);
+        saveUserCredentials(storedUserCredentials);
+        authHeader = {
+          HttpHeaders.authorizationHeader:
+              "Bearer ${storedUserCredentials.getToken()}",
+          "Content-Type": "application/json"
+        };
         return true;
       }
       return false;
@@ -57,7 +63,7 @@ class ApiClient {
 
   Future<bool> updUser({User user, String pass}) async {
     var response = await http.put(
-      '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.userData.mail}',
+      '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.getUserData().mail}',
       body: jsonEncode(user.toNestedValidatedJson(pass)),
       headers: authHeader,
     );
@@ -88,8 +94,10 @@ class ApiClient {
 
   //* COURSES
   Future<List<Course>> getCourseList() async {
+    String url =
+        '$baseUrl/cursos/obtenerCursosByUsuario/${storedUserCredentials.getUserData().mail}';
     var response = await http.get(
-      '$baseUrl/cursos/obtenerCursosByUsuario/${storedUserCredentials.userData.mail}',
+      url,
       headers: authHeader,
     );
     if (response.statusCode == 200) {
@@ -105,7 +113,6 @@ class ApiClient {
   }
 
   Future<bool> updCourse({Course course}) async {
-    print(course.id);
     var response = await http.put(
       '$baseUrl/cursos/editarCurso/${course.id}',
       body: jsonEncode(course.toNestedJson()),
@@ -195,17 +202,15 @@ class ApiClient {
   //* TASKS
   Future<List<Task>> getTasksByUser() async {
     var response = await http.get(
-      '$baseUrl/tareas/byUsuario/${storedUserCredentials.userData.mail}',
+      '$baseUrl/tareas/byUsuario/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
-    print('getTasksByUser.statusCode : ${response.statusCode}');
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
       List<Task> contentList = List<Task>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(Task.fromJson(jsonResponse[i]));
       }
-      print(contentList.length);
       return contentList;
     }
     return List<Task>();
@@ -265,7 +270,6 @@ class ApiClient {
         TaskScore instance = TaskScore.fromJson(jsonResponse[i]);
         contentList.add(instance);
       }
-      print(contentList.length);
       return contentList;
     }
     return List<TaskScore>();
@@ -303,7 +307,6 @@ class ApiClient {
         Forum instance = Forum.fromJson(jsonResponse[i]);
         contentList.add(instance);
       }
-      print(contentList.length);
       return contentList;
     }
     return List<Forum>();
@@ -311,10 +314,9 @@ class ApiClient {
 
   Future<List<Forum>> getForumByUser() async {
     var response = await http.get(
-      '$baseUrl/foros/byUsuario/${storedUserCredentials.userData.mail}',
+      '$baseUrl/foros/byUsuario/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
-    print('getforumByUser.statusCode : ${response.statusCode}');
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
       List<Forum> contentList = List<Forum>();
@@ -322,7 +324,6 @@ class ApiClient {
         Forum instance = Forum.fromJson(jsonResponse[i]);
         contentList.add(instance);
       }
-      print(contentList.length);
       return contentList;
     }
     return List<Forum>();
@@ -360,7 +361,7 @@ class ApiClient {
       "contenido": message,
     };
     var response = await http.post(
-      '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.userData.id}',
+      '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.getUserData().id}',
       body: jsonEncode(body),
       headers: authHeader,
     );
@@ -370,7 +371,7 @@ class ApiClient {
   //* SCORE
   Future<double> getCourseScore({Course curso}) async {
     var response = await http.get(
-      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.userData.mail}',
+      '$baseUrl/inscripciones/getCalificacionFinal/${curso.id}/${storedUserCredentials.getUserData().mail}',
       headers: authHeader,
     );
     if (response.statusCode == 200) {
