@@ -10,12 +10,12 @@ class CourseContentCard extends StatelessWidget {
   final String targetIndex;
   const CourseContentCard({
     Key key,
-    this.name,
-    this.icon,
-    this.currentIndex,
-    this.targetIndex,
+    this.name = 'Curso',
+    this.icon = Icons.error_outline,
+    this.currentIndex = '120',
+    this.targetIndex = '145',
     this.bkgColor = Colors.grey,
-    this.fileExt,
+    this.fileExt = "pdf",
   }) : super(key: key);
 
   @override
@@ -71,6 +71,7 @@ class CourseContentCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     //* TITLE
+                    SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: Text(name,
@@ -78,21 +79,20 @@ class CourseContentCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: nameTextStyle),
                     ),
-                    SizedBox(height: 10),
                     //* INDEXES
-                    Row(
-                      children: [
-                        Text(
-                          currentIndex,
-                          style: indexTextStyle,
-                        ),
-                        SizedBox(width: 30),
-                        Text(
-                          targetIndex,
-                          style: indexTextStyle,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       currentIndex,
+                    //       style: indexTextStyle,
+                    //     ),
+                    //     SizedBox(width: 30),
+                    //     Text(
+                    //       targetIndex,
+                    //       style: indexTextStyle,
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               )
@@ -102,7 +102,7 @@ class CourseContentCard extends StatelessWidget {
           //* ICON
           Positioned(
             right: 20,
-            top: 30,
+            top: 40,
             child: Container(
               child: Stack(
                 children: [
@@ -111,19 +111,19 @@ class CourseContentCard extends StatelessWidget {
                     child: Icon(
                       Icons.brightness_1,
                       color: Colors.white,
-                      size: 40,
+                      size: 45,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 5,
-                      top: 5,
+                      left: 10,
+                      top: 12,
                     ),
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
                         fileExt,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ),

@@ -50,7 +50,6 @@ class CouseSection extends StatelessWidget {
                             });
                           },
                           child: CourseContentCard(
-                            // icon: Icons.cancel_outlined,
                             fileExt: section.materiales[index].fileExt,
                             name: section.materiales[index].fileNom,
                             bkgColor: Colors.green[300],
