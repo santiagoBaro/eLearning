@@ -138,7 +138,6 @@ class LoginTab extends StatelessWidget {
                         valid = await client.login(
                           username: usernameController.text,
                           password: passwordContrller.text,
-                          token: firebaseToken,
                         );
                         if (valid) {
                           Navigator.pushReplacement(

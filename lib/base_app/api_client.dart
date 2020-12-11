@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
 import 'package:pushnotifications/data_types/content_dataType.dart';
 import 'package:pushnotifications/data_types/user_dataType.dart';
 import 'package:pushnotifications/data_types/course_dataType.dart';
@@ -29,13 +30,13 @@ class ApiClient {
   ApiClient._internal();
 
   //* AUTHENTICATION
-  Future<bool> login({String username, String password, String token}) async {
+  Future<bool> login({String username, String password}) async {
     var response = await http.post(
       '$baseUrl/login',
       body: jsonEncode(<String, String>{
         "username": username,
         "password": password,
-        "token": token,
+        "token": firebaseToken,
       }),
       headers: {"Content-Type": "application/json"},
     );
