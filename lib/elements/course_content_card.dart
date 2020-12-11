@@ -76,6 +76,8 @@ class CourseContentCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     //* TITLE
+
+                    SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: SingleChildScrollView(
@@ -88,59 +90,10 @@ class CourseContentCard extends StatelessWidget {
                             style: nameTextStyle),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    //* INDEXES
-                    Row(
-                      children: [
-                        Text(
-                          currentIndex,
-                          style: indexTextStyle,
-                        ),
-                        SizedBox(width: 30),
-                        Text(
-                          targetIndex,
-                          style: indexTextStyle,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               )
             ],
-          ),
-
-          //* ICON
-          Positioned(
-            right: 20,
-            top: 30,
-            child: Container(
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.brightness_1,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                      top: 5,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(
-                        icon,
-                        color: color,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),
