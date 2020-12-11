@@ -27,7 +27,7 @@ class CourseForumFormListing extends StatelessWidget {
             width: 400,
             child: ListView.builder(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.all(8),
               itemCount: snapshot.data.length,
               scrollDirection: Axis.horizontal,

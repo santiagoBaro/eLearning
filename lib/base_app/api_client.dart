@@ -46,9 +46,9 @@ class ApiClient {
         storedUserCredentials
             .setName(jsonDecode(response.body)["usuario"]["nombre"] ?? "");
 
-        storedUserCredentials.newUserData(jsonDecode(response.body)["usuario"]);
+        storedUserCredentials.userData = User.fromJson(
+            jsonDecode(utf8.decode(response.body.codeUnits))["usuario"]);
 
-        //    User.fromJson(jsonDecode(response.body)["usuario"]);
         saveUserCredentials(storedUserCredentials);
         authHeader = {
           HttpHeaders.authorizationHeader:
@@ -102,7 +102,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Course> courseList = List<Course>();
       for (var i = 0; i < jsonResponse.length; i++) {
         courseList.add(Course.fromJson(jsonResponse[i]));
@@ -129,7 +129,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Content> contentList = List<Content>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(Content.fromJson(jsonResponse[i]));
@@ -172,7 +172,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<BookElement> contentList = List<BookElement>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(BookElement.fromJson(jsonResponse[i]));
@@ -207,7 +207,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Task> contentList = List<Task>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(Task.fromJson(jsonResponse[i]));
@@ -223,7 +223,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Task> contentList = List<Task>();
       for (var i = 0; i < jsonResponse.length; i++) {
         contentList.add(Task.fromJson(jsonResponse[i]));
@@ -265,7 +265,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<TaskScore> contentList = List<TaskScore>();
       for (var i = 0; i < jsonResponse.length; i++) {
         TaskScore instance = TaskScore.fromJson(jsonResponse[i]);
@@ -302,7 +302,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Forum> contentList = List<Forum>();
       for (var i = 0; i < jsonResponse.length; i++) {
         Forum instance = Forum.fromJson(jsonResponse[i]);
@@ -319,7 +319,7 @@ class ApiClient {
       headers: authHeader,
     );
     if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
       List<Forum> contentList = List<Forum>();
       for (var i = 0; i < jsonResponse.length; i++) {
         Forum instance = Forum.fromJson(jsonResponse[i]);

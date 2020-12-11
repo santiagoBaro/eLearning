@@ -31,7 +31,7 @@ class CoursePageBody extends StatelessWidget {
         children: [
           Container(
             constraints: BoxConstraints(
-              maxWidth: 700,
+              maxWidth: 750,
             ),
             child: Column(
               children: [
@@ -76,7 +76,7 @@ class CoursePageBody extends StatelessWidget {
             child: Positioned(
               right: 30,
               top: 30,
-              child: FloatingActionButton.extended(
+              child: FloatingActionButton(
                 onPressed: () {
                   showDialog(
                       context: context,
@@ -84,9 +84,12 @@ class CoursePageBody extends StatelessWidget {
                         return _buildPopUp(curso, context);
                       });
                 },
-                label: Text(_abMessage(context)),
-                icon: Icon(Icons.border_color),
+                //label: Text(_abMessage(context)),
+                //label: Text(""),
+                //icon: Icon(Icons.border_color),
+                child: Icon(Icons.border_color),
                 backgroundColor: Color(0xFFFB6107),
+                tooltip: _abMessage(context),
               ),
             ),
             visible: storedUserCredentials.userData.tipoUsu == "D",

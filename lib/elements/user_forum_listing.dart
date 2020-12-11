@@ -15,16 +15,18 @@ class UserFormListing extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Text("No hay foros disponibles");
+          } else {
+            ListView listMessages = ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(8),
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return NotificationCard(foro: snapshot.data[index]);
+              },
+            );
+            return listMessages;
           }
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(8),
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return NotificationCard(foro: snapshot.data[index]);
-            },
-          );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }

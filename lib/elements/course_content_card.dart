@@ -1,6 +1,12 @@
 import 'package:pushnotifications/tools/visual_assets.dart';
 import 'package:flutter/material.dart';
 
+ScrollController _scrollController = ScrollController();
+_scrollToBottom() {
+  _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 5), curve: Curves.linear);
+}
+
 class CourseContentCard extends StatelessWidget {
   final String name;
   final Color bkgColor;
@@ -18,6 +24,7 @@ class CourseContentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     Color color;
     if (icon == Icons.check_circle_outline) {
       color = myAppTheme['SuccessColor'];
@@ -71,10 +78,15 @@ class CourseContentCard extends StatelessWidget {
                     //* TITLE
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
-                      child: Text(name,
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.ellipsis,
-                          style: nameTextStyle),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        controller: _scrollController,
+                        reverse: true,
+                        child: Text(name,
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.ellipsis,
+                            style: nameTextStyle),
+                      ),
                     ),
                     SizedBox(height: 10),
                     //* INDEXES

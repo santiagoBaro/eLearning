@@ -229,6 +229,9 @@ class MasterHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController _scrollController = ScrollController();
+    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+        duration: Duration(seconds: 5), curve: Curves.linear);
     return Stack(
       children: [
         //* BACKGROUND IMAGE
@@ -275,12 +278,17 @@ class MasterHeader extends StatelessWidget {
                         //* USER'S TAG
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            storedUserCredentials.userData.carrera,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 18,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: _scrollController,
+                            reverse: true,
+                            child: Text(
+                              storedUserCredentials.userData.carrera,
+                              //overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         )

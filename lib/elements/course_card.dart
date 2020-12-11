@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+ScrollController _scrollController = ScrollController();
+_scrollToBottom() {
+  _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 5), curve: Curves.linear);
+}
+
 class CourseCard extends StatelessWidget {
   final String name;
   final Color color;
@@ -11,6 +17,7 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -49,13 +56,18 @@ class CourseCard extends StatelessWidget {
                   Expanded(
                     child: Container(
                       child: Center(
-                        child: Text(
-                          name,
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          controller: _scrollController,
+                          reverse: true,
+                          child: Text(
+                            name,
+                            textAlign: TextAlign.start,
+                            //overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

@@ -110,12 +110,19 @@ class MasterDrawer extends StatelessWidget {
   }
 }
 
+ScrollController _scrollController = ScrollController();
+_scrollToBottom() {
+  _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 5), curve: Curves.linear);
+}
+
 class MasterHeader extends StatelessWidget {
   final Function(Widget) onElementSelected;
   const MasterHeader({Key key, this.onElementSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     return Stack(
       children: [
         //* BACKGROUND IMAGE
@@ -162,12 +169,17 @@ class MasterHeader extends StatelessWidget {
                         //* USER'S TAG
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            storedUserCredentials.userData.carrera,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 18,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: _scrollController,
+                            reverse: true,
+                            child: Text(
+                              storedUserCredentials.userData.carrera,
+                              //overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         )
