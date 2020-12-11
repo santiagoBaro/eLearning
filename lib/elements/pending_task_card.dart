@@ -121,54 +121,63 @@ class PendingTaskCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: TextFormField(
-                          controller: urlController,
-                          decoration: InputDecoration(labelText: 'url'),
+                      Visibility(
+                        visible: task.entregable &&
+                            storedUserCredentials.userData.tipoUsu == "E",
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: TextFormField(
+                            controller: urlController,
+                            decoration: InputDecoration(labelText: 'url'),
+                          ),
                         ),
                       ),
-                      ElevatedButton(
-                        child: Text("Enviar"),
-                        onPressed: () async {
-                          if (urlController.text != "") {
-                            var client = ApiClient();
-                            bool valid = false;
-                            valid = await client.submitTask(
-                                tarea: task, url: urlController.text);
-                            if (valid) {
-                              showToast('La tarea fue entregada correctamente',
-                                  context: context,
-                                  animation:
-                                      StyledToastAnimation.slideFromBottom,
-                                  reverseAnimation:
-                                      StyledToastAnimation.slideToBottom,
-                                  startOffset: Offset(0.0, 3.0),
-                                  reverseEndOffset: Offset(0.0, 3.0),
-                                  position: StyledToastPosition.bottom,
-                                  duration: Duration(seconds: 4),
-                                  //Animation duration   animDuration * 2 <= duration
-                                  animDuration: Duration(seconds: 1),
-                                  curve: Curves.elasticOut,
-                                  reverseCurve: Curves.fastOutSlowIn);
-                            } else {
-                              showToast('Error al entregar la tarea',
-                                  context: context,
-                                  animation:
-                                      StyledToastAnimation.slideFromBottom,
-                                  reverseAnimation:
-                                      StyledToastAnimation.slideToBottom,
-                                  startOffset: Offset(0.0, 3.0),
-                                  reverseEndOffset: Offset(0.0, 3.0),
-                                  position: StyledToastPosition.bottom,
-                                  duration: Duration(seconds: 4),
-                                  //Animation duration   animDuration * 2 <= duration
-                                  animDuration: Duration(seconds: 1),
-                                  curve: Curves.elasticOut,
-                                  reverseCurve: Curves.fastOutSlowIn);
+                      Visibility(
+                        visible: task.entregable &&
+                            storedUserCredentials.userData.tipoUsu == "E",
+                        child: ElevatedButton(
+                          child: Text("Enviar"),
+                          onPressed: () async {
+                            if (urlController.text != "") {
+                              var client = ApiClient();
+                              bool valid = false;
+                              valid = await client.submitTask(
+                                  tarea: task, url: urlController.text);
+                              if (valid) {
+                                showToast(
+                                    'La tarea fue entregada correctamente',
+                                    context: context,
+                                    animation:
+                                        StyledToastAnimation.slideFromBottom,
+                                    reverseAnimation:
+                                        StyledToastAnimation.slideToBottom,
+                                    startOffset: Offset(0.0, 3.0),
+                                    reverseEndOffset: Offset(0.0, 3.0),
+                                    position: StyledToastPosition.bottom,
+                                    duration: Duration(seconds: 4),
+                                    //Animation duration   animDuration * 2 <= duration
+                                    animDuration: Duration(seconds: 1),
+                                    curve: Curves.elasticOut,
+                                    reverseCurve: Curves.fastOutSlowIn);
+                              } else {
+                                showToast('Error al entregar la tarea',
+                                    context: context,
+                                    animation:
+                                        StyledToastAnimation.slideFromBottom,
+                                    reverseAnimation:
+                                        StyledToastAnimation.slideToBottom,
+                                    startOffset: Offset(0.0, 3.0),
+                                    reverseEndOffset: Offset(0.0, 3.0),
+                                    position: StyledToastPosition.bottom,
+                                    duration: Duration(seconds: 4),
+                                    //Animation duration   animDuration * 2 <= duration
+                                    animDuration: Duration(seconds: 1),
+                                    curve: Curves.elasticOut,
+                                    reverseCurve: Curves.fastOutSlowIn);
+                              }
                             }
-                          }
-                        },
+                          },
+                        ),
                       )
                     ],
                   ),
