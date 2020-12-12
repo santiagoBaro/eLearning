@@ -141,9 +141,9 @@ class ApiClient {
   }
 
   Future<bool> scoreUserCourse(
-      {Course curso, String usrMail, double score}) async {
+      {Course curso, String usrMail, String score}) async {
     var response = await http.post(
-      '$baseUrl/inscripciones/calificacionFinal/${curso.id}/$usrMail/$score',
+      '$baseUrl/inscripciones/calificacionFinal/${curso.id}/$usrMail/${double.parse(score)}',
       headers: authHeader,
     );
     return response.statusCode == 200;

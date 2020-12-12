@@ -124,7 +124,8 @@ class Debouncer {
 
 class TaskUserCard extends StatefulWidget {
   final ScoreUser user;
-  TaskUserCard({Key key, this.user}) : super(key: key);
+  final Course curso;
+  TaskUserCard({Key key, this.user, this.curso}) : super(key: key);
 
   @override
   _TaskUserCardState createState() => _TaskUserCardState();
@@ -186,6 +187,10 @@ class _TaskUserCardState extends State<TaskUserCard> {
                   onPressed: () async {
                     var client = ApiClient();
                     bool valid = false;
+                    valid = await client.scoreUserCourse(
+                        score: scoreController.text,
+                        usrMail: widget.user.mail,
+                        curso: widget.curso);
                     // valid = await client.scoreTask(
                     //   id: widget.task.id,
                     //   nota: int.parse(scoreController.text),
