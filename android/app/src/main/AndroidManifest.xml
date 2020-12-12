@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name=".Application"
-        android:label="pushnotifications"
+        android:label="Sappio"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

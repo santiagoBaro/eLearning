@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:pushnotifications/base_app/api_client.dart';
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/pages/tabbed_login_page.dart';
@@ -31,6 +32,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    String title = "Sappio - Bienvenida";
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: title,
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
     return Scaffold(
       body: Container(
         color: myAppTheme['PrimaryBackgroundColor'],
@@ -225,6 +232,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         style: tabbedLoginInputTextStyle,
                       ),
                       onPressed: () {
+                        String title = "Sappio - Login";
+                        SystemChrome.setApplicationSwitcherDescription(
+                            ApplicationSwitcherDescription(
+                          label: title,
+                          primaryColor: Theme.of(context).primaryColor.value,
+                        ));
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

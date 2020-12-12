@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:pushnotifications/base_app/api_client.dart';
 import 'package:pushnotifications/base_app/app_builder.dart';
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
@@ -20,7 +21,6 @@ class _TabbedLoginPageState extends State<TabbedLoginPage>
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Material(
       child: Scaffold(
         body: Container(
@@ -96,6 +96,7 @@ class LoginTab extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: passwordContrller,
                         obscureText: true,
                         style: tabbedLoginInputTextStyle,
@@ -146,6 +147,18 @@ class LoginTab extends StatelessWidget {
                               builder: (context) => LandingPageLayoutBuilder(),
                             ),
                           );
+                          String title;
+                          if (storedUserCredentials.getUserData().tipoUsu ==
+                              'E') {
+                            title = "Sappio - Estudiante";
+                          } else {
+                            title = "Sappio - Docente";
+                          }
+                          SystemChrome.setApplicationSwitcherDescription(
+                              ApplicationSwitcherDescription(
+                            label: title,
+                            primaryColor: Theme.of(context).primaryColor.value,
+                          ));
                         } else {
                           showToast('Mail o contraseña incorrectos',
                               context: context,

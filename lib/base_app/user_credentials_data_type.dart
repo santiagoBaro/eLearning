@@ -14,17 +14,7 @@ final encrypter = Encrypter(AES(key));
 Future<Null> saveUserCredentials(UserCredentials storedUserCredentials) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.clear();
-  prefs.setString("Sapio", jsonEncode(storedUserCredentials));
-}
-
-Future<Null> loadUserCredentials() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String data = prefs.getString("Sapio");
-
-  storedUserCredentials.name = jsonDecode(data)["nickName"];
-  storedUserCredentials.token = jsonDecode(data)["token"];
-  storedUserCredentials.isNewUser = jsonDecode(data)["isNewUser"];
-  storedUserCredentials.userData = User.fromJson(jsonDecode(data)["user"]);
+  prefs.setString("Sappio", jsonEncode(storedUserCredentials));
 }
 
 UserCredentials emptyUser = UserCredentials(
@@ -70,7 +60,11 @@ class UserCredentials {
   }
 
   String getNickname() {
-    return encrypter.decrypt64(name, iv: iv);
+    try {
+      return encrypter.decrypt64(name, iv: iv);
+    } catch (e) {
+      return "";
+    }
   }
 
   String getToken() {
@@ -78,9 +72,6 @@ class UserCredentials {
   }
 
   User getUserData() {
-    if (userData == null) {
-      loadUserCredentials();
-    }
     return userData;
   }
 
@@ -88,13 +79,28 @@ class UserCredentials {
     name = json['nickName'];
     token = json['token'];
     isNewUser = json['isNewUser'];
+
+    Map<String, dynamic> jsonUserData = json['userData'];
+
+    userData = User();
+
+    userData.id = jsonUserData['_id'];
+    userData.nombre = jsonUserData['nombre'];
+    userData.mail = jsonUserData['mail'];
+    userData.direccion = jsonUserData['direccion'];
+    userData.imagen = jsonUserData['imagen'];
+    userData.descripcion = jsonUserData['descripcion'];
+    userData.carrera = jsonUserData['carrera'];
+    userData.tipoDocumento = jsonUserData['tipoDocumento'];
+    userData.documento = jsonUserData['documento'];
+    userData.tipoUsu = jsonUserData['tipoUsu'];
   }
 
   Map<String, dynamic> toJson() => {
         'nickName': name,
         'token': token,
         'isNewUser': isNewUser,
-        'user': userData.toJson()
+        'userData': userData.toJson()
       };
 
   void clean() {

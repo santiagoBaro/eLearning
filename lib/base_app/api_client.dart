@@ -11,8 +11,6 @@ import 'package:pushnotifications/data_types/task_datatype.dart';
 import 'package:pushnotifications/data_types/task_score_dataType.dart';
 import 'package:http/http.dart' as http;
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
-import 'package:pushnotifications/data_types/user_dataType.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'user_credentials_data_type.dart';
 
@@ -29,6 +27,14 @@ class ApiClient {
   }
 
   ApiClient._internal();
+
+  static setAuthHeader() {
+    authHeader = {
+      HttpHeaders.authorizationHeader:
+          "Bearer ${storedUserCredentials.getToken()}",
+      "Content-Type": "application/json"
+    };
+  }
 
   //* AUTHENTICATION
   Future<bool> login({String username, String password}) async {
@@ -51,11 +57,7 @@ class ApiClient {
             jsonDecode(utf8.decode(response.body.codeUnits))["usuario"]);
 
         saveUserCredentials(storedUserCredentials);
-        authHeader = {
-          HttpHeaders.authorizationHeader:
-              "Bearer ${storedUserCredentials.getToken()}",
-          "Content-Type": "application/json"
-        };
+        setAuthHeader();
         return true;
       }
       return false;
@@ -411,5 +413,17 @@ class ApiClient {
       }
     }
     return 0;
+  }
+
+  bool isUserDocente() {
+    bool toReturn = false;
+
+    print("Tipo Usu: '" + storedUserCredentials.getUserData().tipoUsu + "'");
+
+    if (storedUserCredentials.getUserData().tipoUsu == "D") {
+      toReturn = true;
+    }
+
+    return toReturn;
   }
 }
