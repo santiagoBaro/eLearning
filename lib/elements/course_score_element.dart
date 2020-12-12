@@ -22,7 +22,7 @@ class Score extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'prom: 7.2     ',
+                    'prom:  ',
                     style: TextStyle(
                       color: Colors.white54,
                     ),
