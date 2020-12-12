@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:pushnotifications/data_types/user_score.dart';
 import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
 import 'package:pushnotifications/data_types/content_dataType.dart';
 import 'package:pushnotifications/data_types/user_dataType.dart';
@@ -124,6 +125,32 @@ class ApiClient {
     return response.statusCode == 200;
   }
 
+  Future<List<ScoreUser>> userScoresCourse({Course course}) async {
+    var response = await http.get(
+      '$baseUrl/inscripciones/getCalificacionesCurso/${course.id}',
+      headers: authHeader,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
+      List<ScoreUser> contentList = List<ScoreUser>();
+      for (var i = 0; i < jsonResponse.length; i++) {
+        ScoreUser instance = ScoreUser.fromJson(jsonResponse[i]);
+        contentList.add(instance);
+      }
+      return contentList;
+    }
+    return List<ScoreUser>();
+  }
+
+  Future<bool> scoreUserCourse(
+      {Course curso, String usrMail, double score}) async {
+    var response = await http.post(
+      '$baseUrl/inscripciones/calificacionFinal/${curso.id}/$usrMail/$score',
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
   //* CONTENT
   Future<List<Content>> getContentByCourse({Course curso}) async {
     var response = await http.get(
@@ -194,6 +221,7 @@ class ApiClient {
   }
 
   Future<bool> updElement({BookElement element}) {}
+
   Future<bool> delElement({BookElement element, Content content}) async {
     var response = await http.delete(
       '$baseUrl/contenidos/bajaContenido/${content.id}/${element.id}',
