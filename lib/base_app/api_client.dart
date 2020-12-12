@@ -414,4 +414,16 @@ class ApiClient {
     }
     return 0;
   }
+
+  bool isUserDocente() {
+    bool toReturn = false;
+
+    print("Tipo Usu: '" + storedUserCredentials.getUserData().tipoUsu + "'");
+
+    if (storedUserCredentials.getUserData().tipoUsu == "D") {
+      toReturn = true;
+    }
+
+    return toReturn;
+  }
 }

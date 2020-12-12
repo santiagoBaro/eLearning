@@ -64,7 +64,7 @@ class CourseInformationCard extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: storedUserCredentials.userData.tipoUsu == "D",
+                visible: client.isUserDocente(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
