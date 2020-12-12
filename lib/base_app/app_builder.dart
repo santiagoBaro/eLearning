@@ -20,23 +20,21 @@ class BaseApp extends StatefulWidget {
   _BaseAppState createState() => _BaseAppState();
 }
 
-Widget baseWidget = LandingPage();
+//Widget baseWidget = LandingPage();
 
 class _BaseAppState extends State<BaseApp> {
   TextEditingController nameController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  //@override
+  //void initState() {
+  //  super.initState();
+  //}
 
   Future<Null> autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String savedPreferencesString = prefs.getString("Sapio");
+    final String savedPreferencesString = prefs.getString("Sappio");
     if (savedPreferencesString == null || savedPreferencesString == '') {
       storedUserCredentials = emptyUser;
-      print('enterd string == null : ' +
-          storedUserCredentials.isNewUser.toString());
     } else {
       Map savedPreferences = jsonDecode(savedPreferencesString);
       storedUserCredentials = UserCredentials.fromJson(savedPreferences);
@@ -45,6 +43,7 @@ class _BaseAppState extends State<BaseApp> {
       } else if (storedUserCredentials.getUserData().mail == '') {
         storedUserCredentials = emptyUser;
       } else {
+        ApiClient.setAuthHeader();
         String title;
         if (storedUserCredentials.getUserData().tipoUsu == 'E') {
           title = "Sappio - Estudiante";
@@ -63,7 +62,7 @@ class _BaseAppState extends State<BaseApp> {
 
   Future<Null> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("Sapio", logedOffUser.toJson().toString());
+    prefs.setString("Sappio", logedOffUser.toJson().toString());
 
     setState(() {
       storedUserCredentials = logedOffUser;
@@ -72,13 +71,25 @@ class _BaseAppState extends State<BaseApp> {
 
   Future<Null> loginUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("Sapio", nameController.text);
+    prefs.setString("Sappio", nameController.text);
 
     setState(() {
       storedUserCredentials.setName('newNickname');
       storedUserCredentials.setToken('newToken');
       storedUserCredentials.isNewUser = false;
     });
+
+    String title;
+    if (storedUserCredentials.getUserData().tipoUsu == 'E') {
+      title = "Sappio - Estudiante";
+    } else {
+      title = "Sappio - Docente";
+    }
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: title,
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
 
     nameController.clear();
   }
@@ -96,17 +107,20 @@ class _BaseAppState extends State<BaseApp> {
               child: CircularProgressIndicator(),
             ),
           );
-        }
-        if (storedUserCredentials.getNickname() == "empty") {
-          if (storedUserCredentials.isNewUser) {
-            //* IF THE USER IS NEW
-            return OnboardingPage();
+        } else {
+          if (storedUserCredentials.getNickname() == "empty") {
+            if (storedUserCredentials.isNewUser) {
+              //* IF THE USER IS NEW
+              return OnboardingPage();
+            } else {
+              //* IF IT IS NOT LOGGED IN, BUT NOT NEW
+              return TabbedLoginPage();
+            }
+          } else {
+            //* IF IT IS LOGGED IN
+            return LandingPageLayoutBuilder();
           }
-          //* IF IT IS NOT LOGGED IN, BUT NOT NEW
-          return TabbedLoginPage();
         }
-        //* IF IT IS LOGGED IN
-        return LandingPageLayoutBuilder();
       },
     );
   }

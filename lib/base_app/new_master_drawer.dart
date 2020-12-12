@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/data_types/course_dataType.dart';
 import 'package:pushnotifications/elements/user_form.dart';
@@ -271,6 +272,14 @@ class MsterFooter extends StatelessWidget {
                               ),
                               FlatButton(
                                 onPressed: () {
+                                  String title = "Sappio - Login";
+                                  SystemChrome
+                                      .setApplicationSwitcherDescription(
+                                          ApplicationSwitcherDescription(
+                                    label: title,
+                                    primaryColor:
+                                        Theme.of(context).primaryColor.value,
+                                  ));
                                   storedUserCredentials.clean();
                                   Navigator.pushReplacement(
                                     context,

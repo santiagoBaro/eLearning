@@ -24,18 +24,23 @@ class PushNotificationProvider {
   }
 
   initNotifications() async {
-    await _firebaseMessaging.requestNotificationPermissions();
-    var token = await _firebaseMessaging.getToken();
-    firebaseToken = token;
-    print('FMC Token:');
-    print(token);
+    try {
+      await _firebaseMessaging.requestNotificationPermissions();
+      var token = await _firebaseMessaging.getToken();
 
-    _firebaseMessaging.configure(
-      onMessage: onMessage,
-      onBackgroundMessage: onBackgroundMessage,
-      onLaunch: onLaunch,
-      onResume: onResume,
-    );
+      firebaseToken = token;
+      print('FMC Token:');
+      print(token);
+
+      _firebaseMessaging.configure(
+        onMessage: onMessage,
+        onBackgroundMessage: onBackgroundMessage,
+        onLaunch: onLaunch,
+        onResume: onResume,
+      );
+    } catch (e) {
+      //print("Error: " + e);
+    }
   }
 
   Future<dynamic> onMessage(Map<String, dynamic> message) {
