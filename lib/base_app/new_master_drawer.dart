@@ -260,7 +260,7 @@ class MsterFooter extends StatelessWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     content: Container(
-                      height: 150,
+                      height: 50,
                       child: Column(
                         children: [
                           Text('Seguro que quieres cerrar sesión?'),

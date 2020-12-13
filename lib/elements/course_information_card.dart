@@ -79,7 +79,7 @@ class CourseInformationCard extends StatelessWidget {
                       child: Text("Modificar Curso"),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey[200])),
+                              Colors.orangeAccent)),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -101,7 +101,7 @@ class CourseInformationCard extends StatelessWidget {
                       child: Text("Calificar Estudiantes"),
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey[200])),
+                              Colors.orangeAccent)),
                     ),
                   ],
                 ),
