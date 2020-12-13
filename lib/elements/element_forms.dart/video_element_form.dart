@@ -20,6 +20,7 @@ class _VideoElementFormState extends State<VideoElementForm> {
   final urlContrller = TextEditingController();
   bool isDeleteEnabled = true;
   bool isSubmitEnabled = true;
+  bool isWaiting = false;
 
   @override
   void initState() {
@@ -33,175 +34,202 @@ class _VideoElementFormState extends State<VideoElementForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: Stack(
         children: [
-          FirebaseUploadFileButton(
-            fbUrl: (value) async {
-              setState(() {
-                urlContrller.text = value;
-              });
-            },
-            direcorty: 'elementos/videos/',
-          ),
-          TextField(
-            controller: urlContrller,
-            decoration: InputDecoration(labelText: 'url'),
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
+              FirebaseUploadFileButton(
+                fbUrl: (value) async {
+                  setState(() {
+                    urlContrller.text = value;
+                  });
                 },
-                child:
-                    Text('Cancelar', style: TextStyle(color: Colors.black45)),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.grey[200])),
+                direcorty: 'elementos/videos/',
               ),
-              Visibility(
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (isDeleteEnabled) {
-                      isDeleteEnabled = false;
-                      if (widget.element != null) {
-                        bool valid = false;
-                        var client = ApiClient();
-                        valid = await client.delElement(
-                          element: widget.element,
-                          content: widget.content,
-                        );
-                        if (valid) {
-                          showToast(
-                              'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
-                          Navigator.of(context).pop();
-                        } else {
-                          showToast('Error al eliminar la entrega',
-                              context: context,
-                              animation: StyledToastAnimation.slideFromBottom,
-                              reverseAnimation:
-                                  StyledToastAnimation.slideToBottom,
-                              startOffset: Offset(0.0, 3.0),
-                              reverseEndOffset: Offset(0.0, 3.0),
-                              position: StyledToastPosition.bottom,
-                              duration: Duration(seconds: 4),
-                              //Animation duration   animDuration * 2 <= duration
-                              animDuration: Duration(seconds: 1),
-                              curve: Curves.elasticOut,
-                              reverseCurve: Curves.fastOutSlowIn);
+              TextField(
+                controller: urlContrller,
+                decoration: InputDecoration(labelText: 'url'),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Cancelar',
+                        style: TextStyle(color: Colors.black45)),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.grey[200])),
+                  ),
+                  Visibility(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          isWaiting = true;
+                        });
+                        if (isDeleteEnabled) {
+                          isDeleteEnabled = false;
+                          if (widget.element != null) {
+                            bool valid = false;
+                            var client = ApiClient();
+                            valid = await client.delElement(
+                              element: widget.element,
+                              content: widget.content,
+                            );
+                            if (valid) {
+                              showToast(
+                                  'El elemento ${widget.element.type ?? ""} fue eliminado correctamente',
+                                  context: context,
+                                  animation:
+                                      StyledToastAnimation.slideFromBottom,
+                                  reverseAnimation:
+                                      StyledToastAnimation.slideToBottom,
+                                  startOffset: Offset(0.0, 3.0),
+                                  reverseEndOffset: Offset(0.0, 3.0),
+                                  position: StyledToastPosition.bottom,
+                                  duration: Duration(seconds: 4),
+                                  //Animation duration   animDuration * 2 <= duration
+                                  animDuration: Duration(seconds: 1),
+                                  curve: Curves.elasticOut,
+                                  reverseCurve: Curves.fastOutSlowIn);
+                              Navigator.of(context).pop();
+                            } else {
+                              showToast('Error al eliminar la entrega',
+                                  context: context,
+                                  animation:
+                                      StyledToastAnimation.slideFromBottom,
+                                  reverseAnimation:
+                                      StyledToastAnimation.slideToBottom,
+                                  startOffset: Offset(0.0, 3.0),
+                                  reverseEndOffset: Offset(0.0, 3.0),
+                                  position: StyledToastPosition.bottom,
+                                  duration: Duration(seconds: 4),
+                                  //Animation duration   animDuration * 2 <= duration
+                                  animDuration: Duration(seconds: 1),
+                                  curve: Curves.elasticOut,
+                                  reverseCurve: Curves.fastOutSlowIn);
+                            }
+                          }
+                          isDeleteEnabled = true;
                         }
-                      }
-                      isDeleteEnabled = true;
-                    }
-                  },
-                  child: Text('Eliminar'),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.redAccent)),
-                ),
-                visible: (widget.element != null),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (isSubmitEnabled) {
-                    isSubmitEnabled = false;
-                    bool valid = false;
-                    BookElement nuevoElement = BookElement(
-                        type: "video", stringElements: urlContrller.text);
-                    var client = ApiClient();
-                    if (widget.element != null) {
-                      nuevoElement.id = widget.element.id;
-                      valid = await client.updElement(element: nuevoElement);
-                      if (valid) {
-                        showToast(
-                            'La entrega ${nuevoElement.type} fue editado correctamente',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                        Navigator.of(context).pop();
-                      } else {
-                        showToast('Error al modificar la entrega',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                      }
-                    } else {
-                      valid = await client.addElement(
-                          element: nuevoElement, content: widget.content);
-                      if (valid) {
-                        showToast(
-                            'El elemento ${nuevoElement.type} fue creado correctamente',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                        Navigator.of(context).pop();
-                      } else {
-                        showToast('Error al crear la entrega',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                      }
-                    }
+                        setState(() {
+                          isWaiting = false;
+                        });
+                      },
+                      child: Text('Eliminar'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.redAccent)),
+                    ),
+                    visible: (widget.element != null),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      setState(() {
+                        isWaiting = true;
+                      });
+                      if (isSubmitEnabled) {
+                        isSubmitEnabled = false;
+                        bool valid = false;
+                        BookElement nuevoElement = BookElement(
+                            type: "video", stringElements: urlContrller.text);
+                        var client = ApiClient();
+                        if (widget.element != null) {
+                          nuevoElement.id = widget.element.id;
+                          valid =
+                              await client.updElement(element: nuevoElement);
+                          if (valid) {
+                            showToast(
+                                'La entrega ${nuevoElement.type} fue editado correctamente',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                            Navigator.of(context).pop();
+                          } else {
+                            showToast('Error al modificar la entrega',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                          }
+                        } else {
+                          valid = await client.addElement(
+                              element: nuevoElement, content: widget.content);
+                          if (valid) {
+                            showToast(
+                                'El elemento ${nuevoElement.type} fue creado correctamente',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                            Navigator.of(context).pop();
+                          } else {
+                            showToast('Error al crear la entrega',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                          }
+                        }
 
-                    isSubmitEnabled = true;
-                  }
-                },
-                child: Text('Enviar'),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.greenAccent)),
+                        isSubmitEnabled = true;
+                      }
+                      setState(() {
+                        isWaiting = false;
+                      });
+                    },
+                    child: Text('Enviar'),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.greenAccent)),
+                  ),
+                ],
               ),
             ],
+          ),
+          Positioned.fill(
+            child: Visibility(
+              visible: isWaiting,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ),
         ],
       ),

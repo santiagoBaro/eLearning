@@ -25,6 +25,7 @@ class _CursoFormState extends State<CursoForm> {
   void changeColor(Color color) => setState(() => currentColor = color);
 
   bool isSubmitEnabled = true;
+  bool isWaiting = false;
 
   _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -62,150 +63,170 @@ class _CursoFormState extends State<CursoForm> {
       ),
       child: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFFB6107),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFB6107),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Curso',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Curso',
-                  style: TextStyle(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: TextFormField(
+                    controller: nombreContrller,
+                    decoration: InputDecoration(labelText: 'Nombre'),
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: TextFormField(
-                controller: nombreContrller,
-                decoration: InputDecoration(labelText: 'Nombre'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: TextFormField(
-                controller: creditosContrller,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Créditos'),
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: TextFormField(
-                controller: descripcionContrller,
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Descripción'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Container(
-                constraints: BoxConstraints(maxHeight: 120),
-                child: MaterialPicker(
-                  pickerColor: currentColor,
-                  onColorChanged: changeColor,
-                  enableLabel: true,
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: TextFormField(
+                    controller: creditosContrller,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(labelText: 'Créditos'),
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                  ),
                 ),
-              ),
-            ),
-            RaisedButton(
-              onPressed: () => _selectDate(context), // Refer step 3
-              child: Text(
-                'Fecha de inicio - ' +
-                    DateFormat('yyyy-MM-dd').format(selectedDate),
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              color: Color(0xFFFB6107),
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    nombreContrller.text = widget.curso.nombre;
-                    creditosContrller.text = widget.curso.creditos.toString();
-                    descripcionContrller.text = widget.curso.descripcion;
-                    selectedDate = DateFormat("yyyy-MM-dd")
-                        .parse(widget.curso.fechaInicio);
-                  },
-                  child: Text('Descartar cambios',
-                      style: TextStyle(color: Colors.black45)),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.grey[200])),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: TextFormField(
+                    controller: descripcionContrller,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(labelText: 'Descripción'),
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState.validate() && isSubmitEnabled) {
-                      isSubmitEnabled = false;
-                      bool valid = false;
-                      Course nuevoCurso = Course(
-                        creditos: int.parse(creditosContrller.text),
-                        nombre: nombreContrller.text,
-                        color: currentColor.toString(),
-                        descripcion: descripcionContrller.text,
-                        fechaInicio:
-                            DateFormat('yyyy-MM-dd').format(selectedDate),
-                      );
-                      var client = ApiClient();
-                      nuevoCurso.id = widget.curso.id;
-                      valid = await client.updCourse(course: nuevoCurso);
-                      if (valid) {
-                        showToast(
-                            'El curso ${nuevoCurso.nombre} fue editado correctamente',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                        Navigator.of(context).pop();
-                      } else {
-                        showToast('Error al modificar el curso',
-                            context: context,
-                            animation: StyledToastAnimation.slideFromBottom,
-                            reverseAnimation:
-                                StyledToastAnimation.slideToBottom,
-                            startOffset: Offset(0.0, 3.0),
-                            reverseEndOffset: Offset(0.0, 3.0),
-                            position: StyledToastPosition.bottom,
-                            duration: Duration(seconds: 4),
-                            //Animation duration   animDuration * 2 <= duration
-                            animDuration: Duration(seconds: 1),
-                            curve: Curves.elasticOut,
-                            reverseCurve: Curves.fastOutSlowIn);
-                      }
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    constraints: BoxConstraints(maxHeight: 120),
+                    child: MaterialPicker(
+                      pickerColor: currentColor,
+                      onColorChanged: changeColor,
+                      enableLabel: true,
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () => _selectDate(context), // Refer step 3
+                  child: Text(
+                    'Fecha de inicio - ' +
+                        DateFormat('yyyy-MM-dd').format(selectedDate),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  color: Color(0xFFFB6107),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        nombreContrller.text = widget.curso.nombre;
+                        creditosContrller.text =
+                            widget.curso.creditos.toString();
+                        descripcionContrller.text = widget.curso.descripcion;
+                        selectedDate = DateFormat("yyyy-MM-dd")
+                            .parse(widget.curso.fechaInicio);
+                      },
+                      child: Text('Descartar cambios',
+                          style: TextStyle(color: Colors.black45)),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.grey[200])),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          isWaiting = true;
+                        });
+                        if (_formKey.currentState.validate() &&
+                            isSubmitEnabled) {
+                          isSubmitEnabled = false;
+                          bool valid = false;
+                          Course nuevoCurso = Course(
+                            creditos: int.parse(creditosContrller.text),
+                            nombre: nombreContrller.text,
+                            color: currentColor.toString(),
+                            descripcion: descripcionContrller.text,
+                            fechaInicio:
+                                DateFormat('yyyy-MM-dd').format(selectedDate),
+                          );
+                          var client = ApiClient();
+                          nuevoCurso.id = widget.curso.id;
+                          valid = await client.updCourse(course: nuevoCurso);
+                          if (valid) {
+                            showToast(
+                                'El curso ${nuevoCurso.nombre} fue editado correctamente',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                            Navigator.of(context).pop();
+                          } else {
+                            showToast('Error al modificar el curso',
+                                context: context,
+                                animation: StyledToastAnimation.slideFromBottom,
+                                reverseAnimation:
+                                    StyledToastAnimation.slideToBottom,
+                                startOffset: Offset(0.0, 3.0),
+                                reverseEndOffset: Offset(0.0, 3.0),
+                                position: StyledToastPosition.bottom,
+                                duration: Duration(seconds: 4),
+                                //Animation duration   animDuration * 2 <= duration
+                                animDuration: Duration(seconds: 1),
+                                curve: Curves.elasticOut,
+                                reverseCurve: Curves.fastOutSlowIn);
+                          }
 
-                      isSubmitEnabled = true;
-                    }
-                  },
-                  child: Text('Actualizar'),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.greenAccent)),
+                          isSubmitEnabled = true;
+                        }
+                        setState(() {
+                          isWaiting = false;
+                        });
+                      },
+                      child: Text('Actualizar'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.greenAccent)),
+                    ),
+                  ],
                 ),
               ],
+            ),
+            Positioned.fill(
+              child: Visibility(
+                visible: isWaiting,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             ),
           ],
         ),
