@@ -81,6 +81,10 @@ class ApiClient {
     if (response.statusCode == 200) {
       if (jsonResponse["error"] == "NONE") {
         toReturn = true;
+        storedUserCredentials.userData.mail = user.mail;
+        storedUserCredentials.userData.nombre = user.nombre;
+        storedUserCredentials.userData.direccion = user.direccion;
+        storedUserCredentials.userData.documento = user.documento;
       } else {
         toReturn = false;
       }
