@@ -72,16 +72,14 @@ class User {
       };
 
   Map<String, dynamic> toNestedValidatedJson(String pass) => {
-        "Usuario": {
-          "nombre": nombre,
-          "mail": mail,
-          "imagen": imagen,
-          "password": pass,
-          "direccion": direccion,
-          "descripcion": descripcion,
-          "tipoDocumento": tipoDocumento,
-          "documento": documento
-        },
+        "nombre": nombre,
+        "mail": mail,
+        "imagen": imagen,
+        "password": pass,
+        "direccion": direccion,
+        "descripcion": descripcion,
+        "tipoDocumento": tipoDocumento,
+        "documento": documento
       };
 
   static User userFromJSon(Map<String, dynamic> json) {
