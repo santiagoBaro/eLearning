@@ -206,11 +206,7 @@ class PendingTaskCard extends StatelessWidget {
                   Text(
                     _buildDate(task.date),
                     style: mainTextStyle,
-                  ),
-                  Text(
-                    'Fri',
-                    style: secondaryTextStyle,
-                  ),
+                  )
                 ],
               ),
             ),
