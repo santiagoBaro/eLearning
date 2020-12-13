@@ -21,6 +21,14 @@ class Message {
         contenido = json['contenido'] ?? "",
         user = User.fromJson(json['usuario']) ?? User(),
         idForo = json['foro'] ?? 0;
+
+  Map<String, dynamic> toJson() => {
+        // '_id': id,
+        // 'usuario': user.id,
+        // 'foro': idForo.toString(),
+        'titulo': titulo,
+        'contenido': contenido,
+      };
 }
 
 List<Message> fromJsonList(List<dynamic> json) {

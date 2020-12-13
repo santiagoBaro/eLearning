@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:pushnotifications/data_types/message_dataType.dart';
 import 'package:pushnotifications/data_types/user_score.dart';
 import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
 import 'package:pushnotifications/data_types/content_dataType.dart';
@@ -394,6 +395,23 @@ class ApiClient {
     var response = await http.post(
       '$baseUrl/mensajes/altaMensaje/${foro.id}/${storedUserCredentials.getUserData().id}',
       body: jsonEncode(body),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> updMsg({Message mesage}) async {
+    var response = await http.put(
+      '$baseUrl/mensajes/${mesage.id}',
+      body: jsonEncode(mesage.toJson()),
+      headers: authHeader,
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> delMsg({Message mesage}) async {
+    var response = await http.delete(
+      '$baseUrl/mensajes/bajaMensaje/${mesage.id}/${mesage.idForo}',
       headers: authHeader,
     );
     return response.statusCode == 200;
