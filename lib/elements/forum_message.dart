@@ -100,6 +100,7 @@ class _ForumMessageState extends State<ForumMessage> {
                                                   curve: Curves.elasticOut,
                                                   reverseCurve:
                                                       Curves.fastOutSlowIn);
+                                              Navigator.of(context).pop();
                                             } else {
                                               showToast(
                                                   'Error al modificar mensaje',
