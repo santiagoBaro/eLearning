@@ -23,87 +23,60 @@ class MasterDrawer extends StatelessWidget {
       child: Container(
         constraints:
             BoxConstraints(minHeight: MediaQuery.of(context).size.height - 40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            //* HEADER
-            MasterHeader(
-              onElementSelected: (Widget val) => onElementSelected(val),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //* HEADER
+                MasterHeader(
+                  onElementSelected: (Widget val) => onElementSelected(val),
+                ),
+
+                MasterTitle(
+                  text: "Cursos",
+                  icon: Icons.school,
+                ),
+                FutureBuilder<List<Course>>(
+                  future: client.getCourseList(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Course>> snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data.length == 0) {
+                        return MasterSubtitle(
+                            text: "No hay cursos disponibles");
+                      }
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(8),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                                onTap: () => onElementSelected(
+                                      CoursePage(
+                                        curso: snapshot.data[index],
+                                        onElementSelected: (Widget val) =>
+                                            onElementSelected(val),
+                                      ),
+                                    ),
+                                child: MasterSubtitle(
+                                    text: snapshot.data[index].nombre));
+                          });
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ],
             ),
-
-            MasterTitle(
-              text: "Cursos",
-              icon: Icons.school,
+            Positioned(
+              child: MsterFooter(),
+              bottom: 20,
+              left: 20,
             ),
-            FutureBuilder<List<Course>>(
-              future: client.getCourseList(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data.length == 0) {
-                    return MasterSubtitle(text: "No hay cursos disponibles");
-                  }
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                            onTap: () => onElementSelected(
-                                  CoursePage(
-                                    curso: snapshot.data[index],
-                                    onElementSelected: (Widget val) =>
-                                        onElementSelected(val),
-                                  ),
-                                ),
-                            child: MasterSubtitle(
-                                text: snapshot.data[index].nombre));
-                      });
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return Center(child: CircularProgressIndicator());
-              },
-            ),
-
-            // InkWell(
-            //   onTap: () => onElementSelected(BedeliasPage()),
-            //   child: MasterTitle(
-            //     text: "Inscripciones",
-            //     icon: Icons.assignment,
-            //   ),
-            // ),
-            // MasterSubtitle(text: "curso"),
-            // MasterSubtitle(text: "examen"),
-            // MasterSubtitle(text: "evento"),
-
-            // InkWell(
-            //   onTap: () => onElementSelected(CoursePage(curso: courseRelleno)),
-            //   child: MasterTitle(
-            //     text: "Organizacion",
-            //     icon: Icons.domain,
-            //   ),
-            // ),
-            // MasterSubtitle(text: "bedelias"),
-            // MasterSubtitle(text: "inco"),
-            // MasterSubtitle(text: "decano"),
-            // MasterSubtitle(text: "concejo estudiantil"),
-
-            // MasterTitle(
-            //   text: "Consultas",
-            //   icon: Icons.help_outline,
-            // ),
-            // MasterSubtitle(text: "plan de estudio"),
-            // MasterSubtitle(text: "previaturas"),
-            // MasterSubtitle(text: "calendario lectivo"),
-            // MasterSubtitle(text: "escolaridad"),
-
-            SizedBox(height: 30),
-            //* FOOTER
-            MsterFooter(),
-            SizedBox(height: 15),
           ],
         ),
       ),
