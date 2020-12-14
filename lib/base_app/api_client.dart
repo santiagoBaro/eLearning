@@ -338,11 +338,13 @@ class ApiClient {
 
   Future<bool> submitTask({String url, Task tarea}) async {
     var body = {"mailUser": storedUserCredentials.userData.mail, "link": url};
+    print(body);
     var response = await http.post(
-      '$baseUrl}/entregas/altaEntrega/${tarea.id}',
+      '$baseUrl/entregas/altaEntrega/${tarea.id}',
       body: jsonEncode(body),
       headers: authHeader,
     );
+    print(response.body);
     return response.statusCode == 200;
   }
 
