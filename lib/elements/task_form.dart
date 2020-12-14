@@ -145,7 +145,8 @@ class _TaskFormState extends State<TaskForm> {
                             if (widget.task != null) {
                               bool valid = false;
                               var client = ApiClient();
-                              valid = await client.delTask(task: widget.task);
+                              valid = await client.delTask(
+                                  task: widget.task, curso: widget.curso);
                               if (valid) {
                                 showToast(
                                     'La entrega ${widget.task.titulo ?? ""} fue eliminada correctamente',

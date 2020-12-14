@@ -16,6 +16,8 @@ import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'user_credentials_data_type.dart';
 
 const String baseUrl = "http://burgerts.noip.me/SAPPIO-API-0.1";
+//const String baseUrl = "http://localhost:8080";
+
 UserCredentials storedUserCredentials = UserCredentials();
 
 var authHeader;
@@ -67,12 +69,30 @@ class ApiClient {
   }
 
   Future<bool> updUser({User user, String pass}) async {
+    bool toReturn = false;
     var response = await http.put(
       '$baseUrl/usuarios/editarPerfil/${storedUserCredentials.getUserData().mail}',
       body: jsonEncode(user.toNestedValidatedJson(pass)),
       headers: authHeader,
     );
-    return response.statusCode == 200;
+
+    var jsonResponse = json.decode(utf8.decode(response.body.codeUnits));
+
+    if (response.statusCode == 200) {
+      if (jsonResponse["error"] == "NONE") {
+        toReturn = true;
+        storedUserCredentials.userData.mail = user.mail;
+        storedUserCredentials.userData.nombre = user.nombre;
+        storedUserCredentials.userData.direccion = user.direccion;
+        storedUserCredentials.userData.documento = user.documento;
+      } else {
+        toReturn = false;
+      }
+    } else {
+      toReturn = false;
+    }
+
+    return toReturn;
   }
 
   Future<bool> updPass({String newPass, String oldPass}) async {
@@ -284,7 +304,7 @@ class ApiClient {
 
   Future<bool> delTask({Task task, Course curso}) async {
     var response = await http.delete(
-      '$baseUrl/tareas/bajaTarea/${curso.id}/${task.id}',
+      '$baseUrl/tareas/bajaTarea/${task.id}/${curso.id}',
       headers: authHeader,
     );
     return response.statusCode == 200;
@@ -384,6 +404,7 @@ class ApiClient {
       '$baseUrl/foros/bajaForo/${foro.id}/${curso.id}',
       headers: authHeader,
     );
+
     return response.statusCode == 200;
   }
 
@@ -435,8 +456,6 @@ class ApiClient {
 
   bool isUserDocente() {
     bool toReturn = false;
-
-    print("Tipo Usu: '" + storedUserCredentials.getUserData().tipoUsu + "'");
 
     if (storedUserCredentials.getUserData().tipoUsu == "D") {
       toReturn = true;
