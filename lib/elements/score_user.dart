@@ -83,6 +83,7 @@ class _ScoreUserState extends State<ScoreUserList> {
                           itemCount: displayList.length,
                           itemBuilder: (BuildContext context, int index) {
                             return TaskUserCard(
+                              curso: widget.curso,
                               user: displayList[index],
                             );
                           }),
@@ -133,6 +134,7 @@ class TaskUserCard extends StatefulWidget {
 
 class _TaskUserCardState extends State<TaskUserCard> {
   final scoreController = TextEditingController();
+  bool isWaiting = false;
 
   @override
   void initState() {
@@ -146,89 +148,107 @@ class _TaskUserCardState extends State<TaskUserCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 600),
-        height: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                widget.user.mail,
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: 50,
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    controller: scoreController,
-                  ),
+      child: Stack(
+        children: [
+          Container(
+            constraints: BoxConstraints(maxWidth: 600),
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    var client = ApiClient();
-                    bool valid = false;
-                    valid = await client.scoreUserCourse(
-                        score: scoreController.text,
-                        usrMail: widget.user.mail,
-                        curso: widget.curso);
-                    // valid = await client.scoreTask(
-                    //   id: widget.task.id,
-                    //   nota: int.parse(scoreController.text),
-                    // );
-                    if (valid) {
-                      showToast('Se cargó la nota correctamente',
-                          context: context,
-                          animation: StyledToastAnimation.slideFromBottom,
-                          reverseAnimation: StyledToastAnimation.slideToBottom,
-                          startOffset: Offset(0.0, 3.0),
-                          reverseEndOffset: Offset(0.0, 3.0),
-                          position: StyledToastPosition.bottom,
-                          duration: Duration(seconds: 4),
-                          //Animation duration   animDuration * 2 <= duration
-                          animDuration: Duration(seconds: 1),
-                          curve: Curves.elasticOut,
-                          reverseCurve: Curves.fastOutSlowIn);
-                    } else {
-                      showToast('Error al cargar nota',
-                          context: context,
-                          animation: StyledToastAnimation.slideFromBottom,
-                          reverseAnimation: StyledToastAnimation.slideToBottom,
-                          startOffset: Offset(0.0, 3.0),
-                          reverseEndOffset: Offset(0.0, 3.0),
-                          position: StyledToastPosition.bottom,
-                          duration: Duration(seconds: 4),
-                          //Animation duration   animDuration * 2 <= duration
-                          animDuration: Duration(seconds: 1),
-                          curve: Curves.elasticOut,
-                          reverseCurve: Curves.fastOutSlowIn);
-                    }
-                  },
-                  child: Text("Guardar"),
-                )
               ],
             ),
-          ],
-        ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    widget.user.mail,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 50,
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: scoreController,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          isWaiting = true;
+                          scoreController.text = scoreController.text;
+                        });
+                        var client = ApiClient();
+                        bool valid = false;
+                        valid = await client.scoreUserCourse(
+                            score: scoreController.text,
+                            usrMail: widget.user.mail,
+                            curso: widget.curso);
+                        if (valid) {
+                          showToast('Se cargó la nota correctamente',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                        } else {
+                          showToast('Error al cargar nota',
+                              context: context,
+                              animation: StyledToastAnimation.slideFromBottom,
+                              reverseAnimation:
+                                  StyledToastAnimation.slideToBottom,
+                              startOffset: Offset(0.0, 3.0),
+                              reverseEndOffset: Offset(0.0, 3.0),
+                              position: StyledToastPosition.bottom,
+                              duration: Duration(seconds: 4),
+                              //Animation duration   animDuration * 2 <= duration
+                              animDuration: Duration(seconds: 1),
+                              curve: Curves.elasticOut,
+                              reverseCurve: Curves.fastOutSlowIn);
+                        }
+                        setState(() {
+                          isWaiting = false;
+                          scoreController.text = scoreController.text;
+                        });
+                      },
+                      child: Text("Guardar"),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Visibility(
+              visible: isWaiting,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
