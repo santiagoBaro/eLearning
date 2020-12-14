@@ -43,10 +43,16 @@ class _TabbedLoginPageState extends State<TabbedLoginPage>
   }
 }
 
-class LoginTab extends StatelessWidget {
-  //const LoginTab({Key key}) : super(key: key);
+class LoginTab extends StatefulWidget {
+  LoginTab({Key key}) : super(key: key);
 
+  @override
+  _LoginTabState createState() => _LoginTabState();
+}
+
+class _LoginTabState extends State<LoginTab> {
   static final _loginFormKey = GlobalKey<FormState>();
+  bool isWaiting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +64,10 @@ class LoginTab extends StatelessWidget {
         key: _loginFormKey,
         child: Column(
           children: <Widget>[
+            Visibility(
+              visible: isWaiting,
+              child: LinearProgressIndicator(),
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
@@ -132,7 +142,9 @@ class LoginTab extends StatelessWidget {
                     padding: const EdgeInsets.all(15),
                     textColor: myAppTheme['PrimaryActionButtonColor'],
                     onPressed: () async {
-                      // //TODO do separate function with checks
+                      setState(() {
+                        isWaiting = true;
+                      });
                       if (_loginFormKey.currentState.validate()) {
                         bool valid = false;
                         var client = ApiClient();
@@ -175,6 +187,9 @@ class LoginTab extends StatelessWidget {
                               reverseCurve: Curves.fastOutSlowIn);
                         }
                       }
+                      setState(() {
+                        isWaiting = false;
+                      });
                     },
                   ),
                 ],
@@ -187,6 +202,9 @@ class LoginTab extends StatelessWidget {
             FlatButton(
               color: Colors.black,
               onPressed: () async {
+                setState(() {
+                  isWaiting = true;
+                });
                 if (usernameController.text != "") {
                   bool valid = false;
                   var client = ApiClient();
@@ -220,6 +238,9 @@ class LoginTab extends StatelessWidget {
                         reverseCurve: Curves.fastOutSlowIn);
                   }
                 }
+                setState(() {
+                  isWaiting = false;
+                });
               },
               child: Text(
                 "Recuperar contraseña",

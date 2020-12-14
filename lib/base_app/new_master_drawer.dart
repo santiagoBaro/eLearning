@@ -144,8 +144,20 @@ class MasterHeader extends StatelessWidget {
               child: Row(
                 children: [
                   //* USER'S IMAGE
-                  CircleAvatar(
-                    radius: 50,
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage((storedUserCredentials
+                                    .userData.tipoUsu ==
+                                "E")
+                            ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwVLdSDmgrZN7TkzbHJb8dD0_7ASUQuERL2A&usqp=CAU"
+                            : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 5,
