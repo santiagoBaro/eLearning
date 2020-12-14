@@ -61,7 +61,7 @@ class PendingTaskCard extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Alta entrega - ${task.titulo}',
+                            'Entregar - ${task.titulo}',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
