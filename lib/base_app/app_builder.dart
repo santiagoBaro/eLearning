@@ -1,12 +1,10 @@
 import 'dart:convert';
-
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/base_app/desktop_landing_page.dart';
 import 'package:pushnotifications/base_app/mobile_landing_page.dart';
-import 'package:pushnotifications/pages/landing_page.dart';
-import 'package:pushnotifications/pages/onboarding_page.dart';
-import 'package:pushnotifications/pages/tabbed_login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:pushnotifications/pages/login_page/login_page.dart';
+import 'package:pushnotifications/pages/onboarding/onboarding_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_client.dart';
 import 'package:flutter/services.dart';
@@ -114,7 +112,7 @@ class _BaseAppState extends State<BaseApp> {
               return OnboardingPage();
             } else {
               //* IF IT IS NOT LOGGED IN, BUT NOT NEW
-              return TabbedLoginPage();
+              return LoginPage();
             }
           } else {
             //* IF IT IS LOGGED IN

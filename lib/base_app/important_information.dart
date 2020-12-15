@@ -1,6 +1,6 @@
-import 'package:pushnotifications/elements/calendar_element.dart';
-import 'package:pushnotifications/elements/user_task_listing.dart';
 import 'package:flutter/material.dart';
+import 'package:pushnotifications/pages/shared_elements/calendar_element.dart';
+import 'package:pushnotifications/pages/shared_elements/user_task_listing.dart';
 
 class ImportantInformationSlide extends StatefulWidget {
   ImportantInformationSlide({Key key}) : super(key: key);

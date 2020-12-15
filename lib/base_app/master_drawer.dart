@@ -1,226 +1,92 @@
-import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
+import 'package:flutter/services.dart';
 import 'package:pushnotifications/data_types/course_dataType.dart';
-import 'package:pushnotifications/pages/bedelias_page.dart';
-import 'package:pushnotifications/pages/course_page.dart';
-import 'package:pushnotifications/pages/landing_page.dart';
-import 'package:flutter/material.dart';
-
+import 'package:pushnotifications/forms/user_form.dart';
+import 'package:pushnotifications/pages/course_page/course_page.dart';
+import 'package:pushnotifications/pages/landing_page/landing_page.dart';
+import 'package:pushnotifications/pages/login_page/login_page.dart';
 import 'package:pushnotifications/tools/visual_assets.dart';
+import 'package:flutter/material.dart';
 
 import 'api_client.dart';
 
-class Master extends StatelessWidget {
+class MasterDrawer extends StatelessWidget {
   final Function(Widget) onElementSelected;
-  const Master({
+  MasterDrawer({
     Key key,
     @required this.onElementSelected,
   }) : super(key: key);
-
+  var client = ApiClient();
   @override
   Widget build(BuildContext context) {
-    var client = ApiClient();
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //* HEADER
-          MasterHeader(
-            onElementSelected: (Widget val) => onElementSelected(val),
-          ),
-          //* LIST OF ELEMENTS
-          //* GROUP
-          InkWell(
-            onTap: () => onElementSelected(
-              CoursePage(curso: courseRelleno),
-            ),
-            child: MasterTitle(
-              text: "Cursos",
-              icon: Icons.school,
-            ),
-          ),
-          FutureBuilder<List<Course>>(
-            future: client.getCourseList(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                          onTap: () {},
-                          child: MasterSubtitle(
-                              text: snapshot.data[index].nombre));
-                    });
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return Center(child: CircularProgressIndicator());
-            },
-          ),
-
-          // InkWell(
-          //     onTap: () {}, child: MasterSubtitle(text: "matricular docente")),
-
-          SizedBox(height: 10),
-          GroupTile(
-            onElementSelected: (Widget val) =>
-                onElementSelected(BedeliasPage()),
-            name: 'Inscripciones',
-            icon: Icons.assignment,
-            children: [
-              'curso',
-              'examen',
-              'evento',
-              'competencia',
-            ],
-          ),
-          SizedBox(height: 10),
-          GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(val),
-            name: 'Organizacion',
-            icon: Icons.domain,
-            children: [
-              'bedelias',
-              'Inco',
-              'decano',
-              'consejo estudiantil',
-            ],
-          ),
-          SizedBox(height: 10),
-          GroupTile(
-            onElementSelected: (Widget val) => onElementSelected(val),
-            name: 'Consultas',
-            icon: Icons.help_outline,
-            children: [
-              'plan de estudio',
-              'previaturas',
-              'calendario lectivo',
-              'escolaridad'
-            ],
-          ),
-
-          SizedBox(height: 30),
-          //* FOOTER
-          MsterFooter(),
-        ],
-      ),
-    );
-  }
-}
-
-class GroupTile extends StatelessWidget {
-  final Widget redirect;
-  final String name;
-  final IconData icon;
-  final List<String> children;
-  final Function(Widget) onElementSelected;
-  const GroupTile({
-    Key key,
-    this.name = 'Group Name',
-    this.redirect,
-    this.icon,
-    this.children,
-    this.onElementSelected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          //* GROUP NAME
-          onTap: () => onElementSelected(Container()),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Row(
+      child: Container(
+        constraints:
+            BoxConstraints(minHeight: MediaQuery.of(context).size.height - 40),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 30,
-                  height: 30,
+                //* HEADER
+                MasterHeader(
+                  onElementSelected: (Widget val) => onElementSelected(val),
                 ),
-                Icon(
-                  icon,
-                  color: Colors.grey[600],
+
+                MasterTitle(
+                  text: "Cursos",
+                  icon: Icons.school,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  name,
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.grey[600],
-                  ),
+                FutureBuilder<List<Course>>(
+                  future: client.getCourseList(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Course>> snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data.length == 0) {
+                        return MasterSubtitle(
+                            text: "No hay cursos disponibles");
+                      }
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(8),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                                onTap: () => onElementSelected(
+                                      CoursePage(
+                                        curso: snapshot.data[index],
+                                        onElementSelected: (Widget val) =>
+                                            onElementSelected(val),
+                                      ),
+                                    ),
+                                child: MasterSubtitle(
+                                    text: snapshot.data[index].nombre));
+                          });
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 ),
               ],
             ),
-          ),
+            Positioned(
+              child: MsterFooter(),
+              bottom: 20,
+              left: 20,
+            ),
+          ],
         ),
-        Container(
-          height: 1,
-          margin: EdgeInsets.symmetric(
-            horizontal: 30,
-          ),
-          color: Colors.black12,
-        ),
-        //* LIST EL ELEMENTS
-        ElementTile(
-          onElementSelected: (Widget val) => onElementSelected(val),
-          text: children[0],
-        ),
-        ElementTile(
-          onElementSelected: (Widget val) => onElementSelected(val),
-          text: children[1],
-        ),
-        ElementTile(
-          onElementSelected: (Widget val) => onElementSelected(val),
-          text: children[2],
-        ),
-        ElementTile(
-          onElementSelected: (Widget val) => onElementSelected(val),
-          text: children[3],
-        ),
-      ],
+      ),
     );
   }
 }
 
-class ElementTile extends StatelessWidget {
-  final String text;
-  final Function(Widget) onElementSelected;
-  const ElementTile({
-    Key key,
-    this.text = 'element  name',
-    this.onElementSelected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onElementSelected(Container()),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 60,
-            height: 40,
-          ),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+ScrollController _scrollController = ScrollController();
+_scrollToBottom() {
+  _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 5), curve: Curves.linear);
 }
 
 class MasterHeader extends StatelessWidget {
@@ -229,9 +95,7 @@ class MasterHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _scrollController = ScrollController();
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        duration: Duration(seconds: 5), curve: Curves.linear);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     return Stack(
       children: [
         //* BACKGROUND IMAGE
@@ -252,8 +116,20 @@ class MasterHeader extends StatelessWidget {
               child: Row(
                 children: [
                   //* USER'S IMAGE
-                  CircleAvatar(
-                    radius: 50,
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage((storedUserCredentials
+                                    .userData.tipoUsu ==
+                                "E")
+                            ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwVLdSDmgrZN7TkzbHJb8dD0_7ASUQuERL2A&usqp=CAU"
+                            : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 5,
@@ -305,12 +181,13 @@ class MasterHeader extends StatelessWidget {
           bottom: 8,
           left: 100,
           child: FlatButton(
-            color: Colors.blueGrey,
-            onPressed: () => onElementSelected(LandingPage()),
+            color: Color(0xFFFB6107),
+            onPressed: () => onElementSelected(LandingPage(
+                onElementSelected: (Widget val) => onElementSelected(val))),
             child: Text(
-              'Home',
+              'Inicio',
               style: TextStyle(
-                color: Colors.black54,
+                color: Colors.white,
                 fontSize: 18,
               ),
             ),
@@ -332,15 +209,30 @@ class MsterFooter extends StatelessWidget {
       children: [
         FlatButton(
           color: myAppTheme['InfoColor'],
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                      content: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: 700,
+                      maxWidth: 500,
+                      minHeight: 200,
+                      minWidth: 200,
+                    ),
+                    child: UserForm(),
+                  ));
+                });
+          },
           child: Text(
             //* HELP BUTTONF
-            'Ayuda',
+            'Info Usuario',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
             ),
-          ),
+          ), // UserForm
         ),
         FlatButton(
           //* LOG-OUT BUTTON
@@ -351,22 +243,41 @@ class MsterFooter extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    content: Column(
-                      children: [
-                        Text('Seguro que quieres cerrar sesión?'),
-                        Row(
-                          children: [
-                            FlatButton(
-                              onPressed: () {},
-                              child: Text('Cancelar'),
-                            ),
-                            FlatButton(
-                              onPressed: () {},
-                              child: Text('Si'),
-                            ),
-                          ],
-                        ),
-                      ],
+                    content: Container(
+                      height: 50,
+                      child: Column(
+                        children: [
+                          Text('Seguro que quieres cerrar sesión?'),
+                          Row(
+                            children: [
+                              FlatButton(
+                                onPressed: () {},
+                                child: Text('Cancelar'),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  String title = "Sappio - Login";
+                                  SystemChrome
+                                      .setApplicationSwitcherDescription(
+                                          ApplicationSwitcherDescription(
+                                    label: title,
+                                    primaryColor:
+                                        Theme.of(context).primaryColor.value,
+                                  ));
+                                  storedUserCredentials.clean();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text('Si'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 });
@@ -380,18 +291,6 @@ class MsterFooter extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class CenterdText extends StatelessWidget {
-  final String text;
-  const CenterdText({Key key, this.text = 'Centerd Text'}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(text),
     );
   }
 }
@@ -453,20 +352,22 @@ class MasterSubtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 60,
-          height: 40,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey,
+    return Container(
+      height: 40,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 60,
           ),
-        ),
-      ],
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
-import 'package:pushnotifications/pages/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:pushnotifications/pages/landing_page/landing_page.dart';
 import 'important_information.dart';
-import 'new_master_drawer.dart';
+import 'master_drawer.dart';
 
 class TabletLandingPage extends StatefulWidget {
   TabletLandingPage({Key key}) : super(key: key);

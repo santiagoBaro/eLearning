@@ -1,7 +1,3 @@
-import 'dart:ui';
-
-import 'hex_color.dart';
-
 class Course {
   int id;
   String nombre;

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pushnotifications/src/pages/homePage.dart';
-import 'package:pushnotifications/src/pages/messagePage.dart';
-import 'package:pushnotifications/src/providers/pushNotificationProvider.dart';
-
 import 'base_app/app_builder.dart';
+import 'pages/onboarding/pushNotificationProvider.dart';
 
 //
 void main() => runApp(MyApp());
@@ -19,17 +16,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     final pushProvider = new PushNotificationProvider();
     pushProvider.initNotifications();
 
-    pushProvider.messagesStream.listen((data) {
-      // print('argument desde main: $argument');
-      // Navigator.pushNamed(context,'mensaje');
-      //navigatorKey.currentState.pushNamed('message', arguments: data);
-    });
+    pushProvider.messagesStream.listen((data) {});
   }
 
   @override

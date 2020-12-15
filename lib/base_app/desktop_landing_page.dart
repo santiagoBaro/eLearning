@@ -1,8 +1,8 @@
 import 'package:pushnotifications/base_app/important_information.dart';
-import 'package:pushnotifications/pages/landing_page.dart';
 import 'package:flutter/material.dart';
+import 'package:pushnotifications/pages/landing_page/landing_page.dart';
 
-import 'new_master_drawer.dart';
+import 'master_drawer.dart';
 
 class DesktopLandingPage extends StatefulWidget {
   DesktopLandingPage({Key key}) : super(key: key);
