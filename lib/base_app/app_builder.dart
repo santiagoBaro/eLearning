@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:pushnotifications/base_app/onboarding_page.dart';
+import 'package:pushnotifications/pages/onboarding/onboarding_page.dart';
 import 'package:pushnotifications/base_app/user_credentials_data_type.dart';
 import 'package:pushnotifications/base_app/desktop_landing_page.dart';
 import 'package:pushnotifications/base_app/mobile_landing_page.dart';

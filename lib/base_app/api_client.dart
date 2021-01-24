@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:pushnotifications/data_types/message_dataType.dart';
 import 'package:pushnotifications/data_types/user_score.dart';
-import 'package:pushnotifications/pages/onboarding/pushNotificationProvider.dart';
+import 'package:pushnotifications/base_app/pushNotificationProvider.dart';
 import 'package:pushnotifications/data_types/content_dataType.dart';
 import 'package:pushnotifications/data_types/user_dataType.dart';
 import 'package:pushnotifications/data_types/course_dataType.dart';

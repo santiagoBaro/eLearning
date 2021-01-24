@@ -20,12 +20,14 @@ class CourseCarrousel extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Course>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
+            //* EMPTY LIST
             return Container(
               height: 150,
               child: Center(
                   child: Text('Todavía no tienes ningún curso disponible')),
             );
           } else {
+            //* COURSE LISTING
             return Container(
               height: 140,
               child: ListView.builder(
@@ -52,6 +54,7 @@ class CourseCarrousel extends StatelessWidget {
             );
           }
         } else if (snapshot.hasError) {
+          //* ERROR
           return Text("${snapshot.error}");
         }
         return Center(child: CircularProgressIndicator());

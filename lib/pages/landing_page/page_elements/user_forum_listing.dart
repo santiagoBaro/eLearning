@@ -14,8 +14,10 @@ class UserFormListing extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Forum>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
+            //* EMPTY LIUST
             return Text("No hay foros disponibles");
           } else {
+            //* FORUM LIST
             ListView listMessages = ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -28,6 +30,7 @@ class UserFormListing extends StatelessWidget {
             return listMessages;
           }
         } else if (snapshot.hasError) {
+          //* ERROR
           return Text("${snapshot.error}");
         }
         return Center(child: CircularProgressIndicator());

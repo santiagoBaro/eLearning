@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'base_app/app_builder.dart';
-import 'pages/onboarding/pushNotificationProvider.dart';
+import 'base_app/pushNotificationProvider.dart';
 
 //
 void main() => runApp(MyApp());

@@ -43,6 +43,7 @@ class CourseCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  //* CARD HEADER COLOR
                   Container(
                     height: 20,
                     decoration: BoxDecoration(
@@ -53,6 +54,7 @@ class CourseCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //* COURSE NAME
                   Expanded(
                     child: Container(
                       child: Center(
@@ -63,7 +65,6 @@ class CourseCard extends StatelessWidget {
                           child: Text(
                             name,
                             textAlign: TextAlign.start,
-                            //overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

@@ -49,7 +49,7 @@ BoxDecoration shadowAppBarBoxDecorator = BoxDecoration(
       ),
     )
   ],
-  gradient: new LinearGradient(
+  gradient: LinearGradient(
     colors: [Colors.black54, Colors.black26],
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,

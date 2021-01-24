@@ -49,7 +49,7 @@ class _MoblieLandingPageState extends State<MoblieLandingPage> {
       endDrawer: Drawer(
         child: ImportantInformationSlide(),
       ),
-      body: _body,
+      body: SafeArea(child: _body),
     );
   }
 

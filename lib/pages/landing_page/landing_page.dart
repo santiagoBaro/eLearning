@@ -16,14 +16,17 @@ class LandingPage extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       child: Column(
         children: [
+          //* COURSE CARD CARROUSEL
           CourseCarrousel(
             onElementSelected: (Widget val) => onElementSelected(val),
           ),
+          //* SEPARATOR
           Container(
             margin: EdgeInsets.symmetric(horizontal: 45),
             height: 1,
             color: Colors.black12,
           ),
+          //* FORUM LISTING
           UserFormListing(),
         ],
       ),
